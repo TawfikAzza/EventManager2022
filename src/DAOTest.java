@@ -3,12 +3,7 @@ import bll.utils.DateUtil;
 import dal.ConnectionManager;
 import dal.db.EventDAO;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalField;
+
 import java.util.List;
 
 public class DAOTest {

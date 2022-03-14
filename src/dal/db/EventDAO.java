@@ -1,13 +1,9 @@
 package dal.db;
 
 import be.Events;
-import bll.utils.DateUtil;
 import dal.ConnectionManager;
 import dal.interfaces.IEventDAO;
-
-import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
