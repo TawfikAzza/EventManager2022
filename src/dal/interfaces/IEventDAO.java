@@ -5,9 +5,9 @@ import be.Events;
 import java.util.List;
 
 public interface IEventDAO {
-    public Events addEvent(Events event);
-    public void removeEvent(Events event);
-    public void updateEvent(Events event);
-    public List<Events> getAllEvents();
-    public Events getEvent(int id);
+    public Events addEvent(Events event) throws Exception;
+    public void removeEvent(Events event) throws Exception;
+    public void updateEvent(Events event) throws Exception;
+    public List<Events> getAllEvents() throws Exception;
+    public Events getEvent(int id) throws Exception;
 }
