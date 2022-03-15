@@ -5,13 +5,13 @@ import dal.DALController;
 
 import java.util.List;
 
-public class EventManager implements EventManagerFacade{
+public class EventManager {
 
     private DALController dalController;
     public EventManager() throws Exception {
         dalController = new DALController();
     }
-    @Override
+
     public List<Events> getAllEvents() throws Exception {
         return dalController.getAllEvents();
     }
