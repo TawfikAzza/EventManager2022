@@ -1,45 +1,48 @@
 package be;
 
+import bll.utils.DateUtil;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class Events {
-    private int eventId;
+    private int id;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private String nameEvent;
-    private String eventLocation;
+    private String name;
+    private String location;
     List<Participant> listParticipants;
-    private String eventDescription;
-    private String eventItinerary;
-
+    private String description;
+    private String itinerary;
+    private String strStartDate;
+    private String strEndDate;
     public Events(int eventId,String nameEvent, String eventLocation, String eventDescription, LocalDateTime startDate, LocalDateTime endDate, String eventItinerary) {
-        this.eventId=eventId;
+        this.id=eventId;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.nameEvent = nameEvent;
-        this.eventLocation = eventLocation;
-        this.eventDescription = eventDescription;
-        this.eventItinerary = eventItinerary;
+        this.name = nameEvent;
+        this.location = eventLocation;
+        this.description = eventDescription;
+        this.itinerary = eventItinerary;
     }
 
     public Events(String nameEvent, String eventLocation) {
-        this.nameEvent = nameEvent;
-        this.eventLocation = eventLocation;
+        this.name = nameEvent;
+        this.location = eventLocation;
     }
     public Events(int eventID, String nameEvent, String eventLocation) {
-        this.eventId=eventID;
-        this.nameEvent = nameEvent;
-        this.eventLocation = eventLocation;
+        this.id=eventID;
+        this.name = nameEvent;
+        this.location = eventLocation;
     }
 
     public int getId() {
-        return eventId;
+        return id;
     }
 
     public void setId(int eventId) {
-        this.eventId = eventId;
+        this.id = eventId;
     }
 
     public LocalDateTime getStartDate() {
@@ -59,19 +62,19 @@ public class Events {
     }
 
     public String getName() {
-        return nameEvent;
+        return name;
     }
 
     public void setName(String nameEvent) {
-        this.nameEvent = nameEvent;
+        this.name = nameEvent;
     }
 
     public String getLocation() {
-        return eventLocation;
+        return location;
     }
 
     public void setLocation(String eventLocation) {
-        this.eventLocation = eventLocation;
+        this.location = eventLocation;
     }
 
     public List<Participant> getListParticipants() {
@@ -83,18 +86,38 @@ public class Events {
     }
 
     public String getDescription() {
-        return eventDescription;
+        return description;
     }
 
     public void setDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
+        this.description = eventDescription;
     }
 
     public String getItinerary() {
-        return eventItinerary;
+        return itinerary;
     }
 
     public void setItinerary(String eventItinerary) {
-        this.eventItinerary = eventItinerary;
+        this.itinerary = eventItinerary;
+    }
+
+    public String getStrStartDate() {
+        this.strStartDate = DateUtil.formatDateGui(startDate);
+        return strStartDate;
+    }
+
+    public void setStrStartDate(String strStartDate) {
+        this.strStartDate = strStartDate;
+    }
+
+    public String getStrEndDate() {
+        if(endDate!=null) {
+            strEndDate=DateUtil.formatDateGui(endDate);
+        }
+        return strEndDate;
+    }
+
+    public void setStrEndDate(String strEndDate) {
+        this.strEndDate = strEndDate;
     }
 }
