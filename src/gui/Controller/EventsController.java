@@ -62,24 +62,32 @@ public class EventsController implements Initializable {
     }
 
     @FXML
-    void toggleLabels(ActionEvent event) {
+    private void toggleLabels() {
         for (Node n:topPane.getChildren()) {
-            System.out.println(n.getUserData());
+            if(n.toString().contains("label")) {
+                Label label = (Label) n;
+                if(label.getId()!=null)
+                    if(label.isVisible()) {
+                        label.setVisible(false);
+                    } else {
+                        label.setVisible(true);
+                    }
+            }
         }
-        txtName.setVisible(true);
-        txtDescription.setVisible(true);
-        txtLocation.setVisible(true);
-        txtStartDate.setVisible(true);
-        txtStartTime.setVisible(true);
-        txtEndDate.setVisible(true);
-        txtItinerary.setVisible(true);
-        lblName.setVisible(false);
-        lblDescription.setVisible(false);
-        lblLocation.setVisible(false);
-        lblStartDate.setVisible(false);
-        lblStartTime.setVisible(false);
-        lblEndDate.setVisible(false);
-        lblItinerary.setVisible(false);
+    }
+
+    private void toggleTextField() {
+        for (Node n:topPane.getChildren()) {
+            if(n.toString().contains("TextField")) {
+                TextField textField = (TextField) n;
+                if(textField.getId()!=null)
+                    if(textField.isVisible()) {
+                        textField.setVisible(false);
+                    } else {
+                        textField.setVisible(true);
+                    }
+            }
+        }
     }
     private CoordinatorModel coordinatorModel;
     public EventsController() {
@@ -91,7 +99,6 @@ public class EventsController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         updateTableView();
     }
 
@@ -134,5 +141,7 @@ public class EventsController implements Initializable {
     }
 
     public void toggleVisible(ActionEvent actionEvent) {
+       // toggleLabels();
+        toggleTextField();
     }
 }
