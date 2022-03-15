@@ -24,9 +24,11 @@ public class AdminDAO implements IAdminDAO {
         String password = coordinator.getPassword();
         int roleID = coordinator.getRoleID();
         String email = coordinator.getMail();
+        String fname = coordinator.getFirstName();
+        String lname = coordinator.getLastName();
 
         try (Connection connection = dbc.getConnection()) {
-            String sql = "INSERT INTO LoginUser(loginName, password, roleID, email) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO LoginUser(loginName, password, roleID, email, fname, lname) VALUES(?,?,?,?,?,?)";
 
             PreparedStatement ps = dbc.getConnection().prepareStatement(sql);
 
@@ -34,6 +36,8 @@ public class AdminDAO implements IAdminDAO {
             ps.setString(2, password);
             ps.setInt(3, roleID);
             ps.setString(4, email);
+            ps.setString(5, fname);
+            ps.setString(6, lname);
 
             ps.execute();
 
@@ -66,15 +70,19 @@ public class AdminDAO implements IAdminDAO {
         String password = coordinator.getPassword();;
         String email = coordinator.getMail();
         int userID = coordinator.getUserID();
+        String fname = coordinator.getFirstName();
+        String lname = coordinator.getLastName();
 
         try (Connection connection = dbc.getConnection()) {
-            String sql = "UPDATE LoginUser SET loginName = ?, password = ?, email = ? WHERE userID = ?";
+            String sql = "UPDATE LoginUser SET loginName = ?, password = ?, email = ? fname = ?, lname = ? WHERE userID = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
 
             ps.setString(1, loginName);
             ps.setString(2, password);
             ps.setString(3, email);
             ps.setInt(4, userID);
+            ps.setString(5, fname);
+            ps.setString(6, lname);
 
             ps.execute();
 
@@ -100,8 +108,10 @@ public class AdminDAO implements IAdminDAO {
                 String password = rs.getString("password");
                 int roleID = rs.getInt("roleID");
                 String email = rs.getString("email");
+                String fname = rs.getString("fname");
+                String lname = rs.getString("lname");
 
-                Coordinator coordinator = new Coordinator(userID, loginName, password, roleID, email);
+                Coordinator coordinator = new Coordinator(userID, loginName, password, roleID, email, fname, lname);
                 allCoordinators.add(coordinator);
             }
         }

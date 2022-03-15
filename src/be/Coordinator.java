@@ -9,4 +9,8 @@ public class Coordinator extends Users{
     public Coordinator(int userID, String loginName, String password, int roleID, String mail) {
         super(userID, loginName, password, roleID, mail);
     }
+
+    public Coordinator(int userID, String loginName, String password, int roleID, String mail, String firstName, String lastName) {
+        super(userID, loginName, password, roleID, mail, firstName, lastName);
+    }
 }
