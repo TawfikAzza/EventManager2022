@@ -4,8 +4,8 @@ import gui.Model.AdminModel;
 
 public abstract class Users {
     private int userID;
-    //private String firstName;
-    //private String lastName;
+    private String firstName;
+    private String lastName;
     private String mail;
     private String loginName;
     private String password;
@@ -23,8 +23,17 @@ public abstract class Users {
         this.loginName = loginName;
         this.password = password;
         this.roleID = roleID;
-        //this.firstName = firstName;
-        //this.lastName = lastName;
+        this.userID = userID;
+    }
+
+    public Users(int userID, String loginName, String password, int roleID, String mail, String firstName, String lastName) {
+        this.mail=mail;
+        this.loginName = loginName;
+        this.password = password;
+        this.roleID = roleID;
+        this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public int getUserID() {
@@ -35,7 +44,7 @@ public abstract class Users {
         this.userID = userID;
     }
 
-    /*public String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -50,8 +59,6 @@ public abstract class Users {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-     */
 
     public String getMail() {
         return mail;
