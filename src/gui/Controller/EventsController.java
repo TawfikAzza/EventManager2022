@@ -25,11 +25,15 @@ public class EventsController implements Initializable {
 
     private CoordinatorModel coordinatorModel;
     public EventsController() {
-        coordinatorModel = new CoordinatorModel();
+        try {
+            coordinatorModel = new CoordinatorModel();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        updateTableView();
     }
 
     private void updateTableView() {

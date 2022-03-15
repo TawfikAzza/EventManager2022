@@ -2,19 +2,19 @@ package dal.db;
 
 import be.Events;
 import dal.ConnectionManager;
-import dal.interfaces.IEventDAO;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventDAO implements IEventDAO {
+public class EventDAO {
     ConnectionManager cm;
 
     public EventDAO() throws Exception {
         cm = new ConnectionManager();
     }
-    @Override
+
     public Events addEvent(Events event) throws Exception{
         Events eventCreated=null;
         try (Connection con = cm.getConnection()) {
@@ -57,7 +57,7 @@ public class EventDAO implements IEventDAO {
         return eventCreated;
     }
 
-    @Override
+
     public void removeEvent(Events event) throws Exception {
         try (Connection con = cm.getConnection()) {
             String sql = "DELETE FROM EVENTS WHERE id=?";
@@ -67,7 +67,7 @@ public class EventDAO implements IEventDAO {
         }
     }
 
-    @Override
+
     public void updateEvent(Events event) throws Exception{
         try (Connection con = cm.getConnection()) {
             String sql = "UPDATE EVENTS SET name=?, location=?, description=?, startDate=?,endDate=?,itinerary=?"
@@ -92,7 +92,7 @@ public class EventDAO implements IEventDAO {
         }
     }
 
-    @Override
+
     public List<Events> getAllEvents() throws Exception {
         List<Events> allEvents = new ArrayList<>();
         try (Connection con = cm.getConnection()) {
@@ -122,7 +122,7 @@ public class EventDAO implements IEventDAO {
 
     }
 
-    @Override
+
     public Events getEvent(int id) throws Exception {
          Events eventSearched = null;
         try (Connection con = cm.getConnection()) {

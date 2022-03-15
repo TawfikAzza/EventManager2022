@@ -10,7 +10,7 @@ public class CoordinatorModel {
 
     private ObservableList<Events> allEvents = FXCollections.observableArrayList();
     private EventManagerFacade eventManagerFacade;
-    public CoordinatorModel() {
+    public CoordinatorModel() throws Exception {
         eventManagerFacade = new EventManager();
     }
     public ObservableList<Events> getAllEvents() throws Exception {
