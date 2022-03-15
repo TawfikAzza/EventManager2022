@@ -94,7 +94,10 @@ public class Events {
     }
 
     public String getItinerary() {
-        return itinerary;
+        if(itinerary!=null)
+            return itinerary;
+        else
+            return "No itinerary specified";
     }
 
     public void setItinerary(String eventItinerary) {
@@ -113,8 +116,9 @@ public class Events {
     public String getStrEndDate() {
         if(endDate!=null) {
             strEndDate=DateUtil.formatDateGui(endDate);
+            return strEndDate;
         }
-        return strEndDate;
+        return "No end date specified.";
     }
 
     public void setStrEndDate(String strEndDate) {

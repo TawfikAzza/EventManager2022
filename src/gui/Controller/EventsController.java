@@ -62,24 +62,53 @@ public class EventsController implements Initializable {
     }
 
     @FXML
-    void toggleLabels(ActionEvent event) {
+    private void toggleLabelsOn() {
         for (Node n:topPane.getChildren()) {
-            System.out.println(n.getUserData());
+            if(n.toString().contains("label")) {
+                Label label = (Label) n;
+                if(label.getId()!=null)
+                    if(!label.isVisible()) {
+                        label.setVisible(true);
+                    }
+            }
         }
-        txtName.setVisible(true);
-        txtDescription.setVisible(true);
-        txtLocation.setVisible(true);
-        txtStartDate.setVisible(true);
-        txtStartTime.setVisible(true);
-        txtEndDate.setVisible(true);
-        txtItinerary.setVisible(true);
-        lblName.setVisible(false);
-        lblDescription.setVisible(false);
-        lblLocation.setVisible(false);
-        lblStartDate.setVisible(false);
-        lblStartTime.setVisible(false);
-        lblEndDate.setVisible(false);
-        lblItinerary.setVisible(false);
+    }
+    @FXML
+    private void toggleLabelsOff() {
+        for (Node n:topPane.getChildren()) {
+            if(n.toString().contains("label")) {
+                Label label = (Label) n;
+                if(label.getId()!=null)
+                    if(label.isVisible()) {
+                        label.setVisible(false);
+                    }
+            }
+        }
+    }
+
+    @FXML
+    private void toggleTextFieldOn() {
+        for (Node n:topPane.getChildren()) {
+            if(n.toString().contains("TextField")) {
+                TextField textField = (TextField) n;
+                if(textField.getId()!=null)
+                    if(!textField.isVisible()) {
+                        textField.setVisible(true);
+                    }
+            }
+        }
+    }
+    @FXML
+    private void toggleTextFieldOff() {
+        for (Node n:topPane.getChildren()) {
+            if(n.toString().contains("TextField")) {
+                TextField textField = (TextField) n;
+                if(textField.getId()!=null)
+                    if(textField.isVisible()) {
+                        textField.setVisible(false);
+                    }
+            }
+        }
     }
     private CoordinatorModel coordinatorModel;
     public EventsController() {
@@ -91,7 +120,8 @@ public class EventsController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        toggleTextFieldOff();
+        toggleLabelsOff();
         updateTableView();
     }
 
@@ -129,10 +159,25 @@ public class EventsController implements Initializable {
     }
     public void displayEvent(MouseEvent mouseEvent) {
         if(tableEvents.getSelectionModel().getSelectedItem()!=null) {
-
+            Events event = tableEvents.getSelectionModel().getSelectedItem();
+            toggleLabelsOn();
+            setLabelText(event);
         }
     }
 
+
+
+    private void setLabelText(Events event) {
+        lblName.setText(event.getName());
+        lblLocation.setText(event.getLocation());
+        lblStartDate.setText(event.getStrStartDate().substring(0,9));
+        lblStartTime.setText(event.getStrStartDate().substring(10,event.getStrStartDate().length()));
+        lblDescription.setText(event.getDescription());
+        lblEndDate.setText(event.getStrEndDate());
+        lblItinerary.setText(event.getItinerary());
+    }
     public void toggleVisible(ActionEvent actionEvent) {
+       // toggleLabels();
+        //toggleTextField();
     }
 }
