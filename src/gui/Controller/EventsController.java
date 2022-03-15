@@ -1,19 +1,24 @@
 package gui.Controller;
 
 import be.Events;
-import bll.exception.EventManagerDAOException;
+import bll.exception.EventDAOException;
+import com.jfoenix.controls.JFXButton;
 import gui.Model.CoordinatorModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EventsController implements Initializable {
-
+    @FXML
+    private AnchorPane topPane;
     @FXML
     private TableColumn<Events, String> eventName;
     @FXML
@@ -22,7 +27,60 @@ public class EventsController implements Initializable {
     private TableView<Events> tableEvents;
     @FXML
     private TableColumn<Events, String> eventDate;
+    @FXML
+    private JFXButton btnAdd;
 
+    @FXML
+    private JFXButton btnDelete;
+
+    @FXML
+    private JFXButton btnEdit;
+
+    @FXML
+    private Label lblName,lblDescription,lblEndDate,lblItinerary,lblLocation,lblStartDate,lblStartTime;
+
+    @FXML
+    private Button testBtn;
+    @FXML
+    private TextField txtName,txtLocation,txtStartDate,txtStartTime,txtItinerary,txtEndDate,txtDescription;
+
+
+
+    @FXML
+    void addEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void deleteEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void editEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void toggleLabels(ActionEvent event) {
+        for (Node n:topPane.getChildren()) {
+            System.out.println(n.getUserData());
+        }
+        txtName.setVisible(true);
+        txtDescription.setVisible(true);
+        txtLocation.setVisible(true);
+        txtStartDate.setVisible(true);
+        txtStartTime.setVisible(true);
+        txtEndDate.setVisible(true);
+        txtItinerary.setVisible(true);
+        lblName.setVisible(false);
+        lblDescription.setVisible(false);
+        lblLocation.setVisible(false);
+        lblStartDate.setVisible(false);
+        lblStartTime.setVisible(false);
+        lblEndDate.setVisible(false);
+        lblItinerary.setVisible(false);
+    }
     private CoordinatorModel coordinatorModel;
     public EventsController() {
         try {
@@ -33,6 +91,7 @@ public class EventsController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         updateTableView();
     }
 
@@ -41,8 +100,39 @@ public class EventsController implements Initializable {
         eventDate.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
         try {
             tableEvents.getItems().addAll(coordinatorModel.getAllEvents());
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (EventDAOException e) {
+            displayError(e);
         }
+    }
+    private void displayError(Throwable t)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Something went wrong...");
+        alert.setHeaderText(t.getMessage());
+        alert.showAndWait();
+    }
+    private void hideLabels() {
+        txtName.setVisible(false);
+        txtDescription.setVisible(false);
+        txtLocation.setVisible(false);
+        txtStartDate.setVisible(false);
+        txtStartTime.setVisible(false);
+        txtEndDate.setVisible(false);
+        txtItinerary.setVisible(false);
+        lblName.setVisible(false);
+        lblDescription.setVisible(false);
+        lblLocation.setVisible(false);
+        lblStartDate.setVisible(false);
+        lblStartTime.setVisible(false);
+        lblEndDate.setVisible(false);
+        lblItinerary.setVisible(false);
+    }
+    public void displayEvent(MouseEvent mouseEvent) {
+        if(tableEvents.getSelectionModel().getSelectedItem()!=null) {
+
+        }
+    }
+
+    public void toggleVisible(ActionEvent actionEvent) {
     }
 }

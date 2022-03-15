@@ -17,7 +17,6 @@ public class DALController {
         return null;
     }
 
-
     public void removeEvent(Events event) throws Exception {
 
     }
