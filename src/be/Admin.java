@@ -7,7 +7,7 @@ public class Admin extends Users {
         super(loginName, password, roleID, mail);
     }
 
-    public Admin(int userID, String loginName, String password, int roleID, String mail, String firstName, String lastName) {
+    /*public Admin(int userID, String loginName, String password, int roleID, String mail, String firstName, String lastName) {
         super(userID, loginName, password, roleID, mail, firstName, lastName);
-    }
+    }*/
 }
