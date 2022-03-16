@@ -26,6 +26,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EventsController implements Initializable {
+
     @FXML
     private AnchorPane topPane;
     @FXML
@@ -39,7 +40,7 @@ public class EventsController implements Initializable {
     @FXML
     private TableColumn<Events, String> eventDate;
     @FXML
-    private JFXButton btnAdd;
+    private JFXButton btnAdd,btnAllParticipants;
 
     @FXML
     private JFXButton btnDelete;
@@ -240,5 +241,15 @@ public class EventsController implements Initializable {
         }
         txtDescription.setVisible(false);
         txtItinerary.setVisible(false);
+    }
+    @FXML
+    private void showAllParticipants(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EC-allParticipantsView.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+
+        stage.show();
     }
 }
