@@ -69,7 +69,7 @@
             <Label fx:id="lblStartDate" layoutX="130.0" layoutY="139.0" text="Label" />
             <Label fx:id="lblEndDate" layoutX="128.0" layoutY="185.0" text="Label" />
             <JFXButton fx:id="btnModifyEvent" buttonType="RAISED" layoutX="102.0" layoutY="469.0" onAction="#updateEvent" text="Confirm Changes" />
-            <JFXButton buttonType="RAISED" layoutX="111.0" layoutY="508.0" text="Add Participant" />
+            <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="508.0" text="Add Participant" />
             <Label layoutX="33.0" layoutY="139.0" text="Date">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -79,6 +79,7 @@
             <TextFlow fx:id="lblItinerary" layoutX="131.0" layoutY="369.0" prefHeight="79.0" prefWidth="142.0" />
             <TextArea fx:id="txtDescription" layoutX="129.0" layoutY="274.0" prefHeight="79.0" prefWidth="150.0" />
             <TextArea fx:id="txtItinerary" layoutX="131.0" layoutY="369.0" prefHeight="79.0" prefWidth="142.0" />
+            <JFXButton fx:id="btnAllParticipants" layoutX="175.0" layoutY="508.0" onAction="#showAllParticipants" text="All Participants" />
          </children>
       </AnchorPane>
       <VBox>
