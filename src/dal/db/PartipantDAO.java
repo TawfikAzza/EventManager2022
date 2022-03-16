@@ -1,12 +1,7 @@
 package dal.db;
-
-import be.Coordinator;
-import be.Events;
 import be.Participant;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 

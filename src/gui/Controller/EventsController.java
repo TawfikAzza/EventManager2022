@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -21,6 +22,8 @@ import java.util.ResourceBundle;
 public class EventsController implements Initializable {
     @FXML
     private AnchorPane topPane;
+    @FXML
+    private BorderPane borderPane;
     @FXML
     private TableColumn<Events, String> eventName;
     @FXML

@@ -21,18 +21,14 @@ public class DALController {
 
     }
 
-
     public void updateEvent(Events event) throws Exception {
 
     }
-
-
     public List<Events> getAllEvents() throws Exception {
         return eventDAO.getAllEvents();
     }
-
-
     public Events getEvent(int id) throws Exception {
         return null;
     }
+
 }

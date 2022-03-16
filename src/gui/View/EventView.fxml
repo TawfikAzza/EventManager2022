@@ -8,15 +8,24 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.EventsController">
-   <center>
-      <AnchorPane fx:id="topPane" BorderPane.alignment="TOP_CENTER">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.EventsController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="270.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" prefWidth="221.800048828125" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="363.199951171875" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <AnchorPane fx:id="topPane" GridPane.columnIndex="1">
          <children>
             <JFXButton fx:id="btnEdit" buttonType="RAISED" layoutX="36.0" layoutY="469.0" onAction="#editEvent" text="Edit Event" />
             <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="209.0" layoutY="469.0" onAction="#deleteEvent" text="Delete Event" />
@@ -71,36 +80,33 @@
             <TextFlow fx:id="lblItinerary" layoutX="71.0" layoutY="382.0" prefHeight="79.0" prefWidth="142.0" />
          </children>
       </AnchorPane>
-   </center>
-   <left>
-      <VBox BorderPane.alignment="CENTER">
+      <VBox>
          <children>
             <TableView fx:id="tableEvents" onMouseClicked="#displayEvent" prefHeight="285.0" prefWidth="232.0">
-              <columns>
-                <TableColumn fx:id="eventName" prefWidth="83.19998168945312" text="Event" />
-                <TableColumn fx:id="eventDate" prefWidth="60.0" text="Date" />
+               <columns>
+                  <TableColumn fx:id="eventName" prefWidth="83.19998168945312" text="Event" />
+                  <TableColumn fx:id="eventDate" prefWidth="60.0" text="Date" />
                   <TableColumn fx:id="numParticipants" prefWidth="99.2000732421875" text="Participants" />
-              </columns>
+               </columns>
+               <VBox.margin>
+                  <Insets left="25.0" right="20.0" top="50.0" />
+               </VBox.margin>
+            </TableView>
+            <JFXButton fx:id="btnAdd" onAction="#addEvent" text="Create New Event">
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
-            </TableView>
-            <JFXButton fx:id="btnAdd" onAction="#addEvent" text="Create New Event" />
+            </JFXButton>
          </children>
-         <BorderPane.margin>
-            <Insets top="50.0" />
-         </BorderPane.margin>
       </VBox>
-   </left>
-   <right>
-      <VBox BorderPane.alignment="CENTER">
+      <VBox prefHeight="627.0" prefWidth="200.0" GridPane.columnIndex="2">
          <children>
             <Label text="Type of tickets:">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <ListView prefHeight="117.0" prefWidth="124.0" />
+            <ListView prefHeight="118.0" prefWidth="208.0" />
             <Label text="Name:">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -117,9 +123,9 @@
             <ListView prefHeight="72.0" prefWidth="177.0" />
             <JFXButton buttonType="RAISED" text="Edit Team Management" />
          </children>
-         <BorderPane.margin>
-            <Insets right="25.0" top="50.0" />
-         </BorderPane.margin>
+         <GridPane.margin>
+            <Insets left="20.0" right="25.0" top="50.0" />
+         </GridPane.margin>
       </VBox>
-   </right>
-</BorderPane>
+   </children>
+</GridPane>
