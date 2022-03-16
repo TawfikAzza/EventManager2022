@@ -28,4 +28,14 @@ public class MainController {
 
         stage.show();
     }
+
+    public void openParticipantMg(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EC-allParticipantsView.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+
+        stage.show();
+    }
 }
