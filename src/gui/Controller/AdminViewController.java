@@ -1,9 +1,12 @@
 package gui.Controller;
 
 import be.Coordinator;
+import be.Events;
+import bll.exception.EventDAOException;
 import bll.utils.CurrentEventCoordinator;
 import dal.interfaces.IAdminDAO;
 import gui.Model.AdminModel;
+import gui.Model.EventModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,48 +26,54 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class AdminViewController implements Initializable {
+    public TableColumn<Events, LocalDateTime> tableColumnEventDate;
     @FXML
     private TableColumn<Coordinator, String> tableColumnFirstName;
     @FXML
     private TableColumn<Coordinator, String> tableColumnLastName;
     @FXML
-    private TableColumn<Event, String> tableColumnEventName;
+    private TableColumn<Events, String> tableColumnEventName;
     @FXML
     private TableColumn<Coordinator, String> tableColumnNumberOfEvents;
     @FXML
-    private TableColumn<Event, String> tableColumnNumberOfCoordinators;
+    private TableColumn<Events, String> tableColumnNumberOfCoordinators;
     @FXML
-    private TableView<Event> eventTableView;
+    private TableView<Events> eventTableView;
     @FXML
     private TableView<Coordinator> coordinatorTableView;
     @FXML
     private Button newCoordinatorBtn;
 
     private AdminModel adminModel;
+    private EventModel eventmodel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             this.adminModel = new AdminModel();
-        }
-        catch (IOException e) {
+            this.eventmodel = new EventModel();
+
+        ObservableList<Coordinator> obsListCoordinator = FXCollections.observableArrayList();
+        obsListCoordinator.addAll(adminModel.getAllCoordinators());
+        this.coordinatorTableView.setItems(obsListCoordinator);
+        ObservableList<Events> obsListEvent = FXCollections.observableArrayList();
+        obsListEvent.addAll(eventmodel.getAllEvents());
+        this.eventTableView.setItems(obsListEvent);
+        this.initTables();
+        } catch (Exception | EventDAOException e) {
             e.printStackTrace();
         }
-        ObservableList<Coordinator> obsList = FXCollections.observableArrayList();
-        obsList.addAll(adminModel.getAllCoordinators());
-        this.coordinatorTableView.setItems(obsList);
-        this.initTables();
     }
 
     private void initTables() {
-        //left side
-        //this.tableColumnEventName.setCellValueFactory(new PropertyValueFactory<>("Event Name"));
+        this.tableColumnEventName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        this.tableColumnEventDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         //this.tableColumnNumberOfCoordinators.setCellValueFactory(new PropertyValueFactory<>("Number of Events"));
 
-        //right side
         this.tableColumnFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         this.tableColumnLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         //this.tableColumnNumberOfEvents.setCellValueFactory(new PropertyValueFactory<>());
