@@ -1,9 +1,11 @@
 import be.Events;
+import be.Participant;
 import bll.utils.DateUtil;
-import dal.ConnectionManager;
 import dal.db.EventDAO;
+import dal.db.ParticipantDAO;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOTest {
@@ -12,7 +14,22 @@ public class DAOTest {
         //getAllEvents();
         //getEvent();
         //removeEvent();
-        updateEvent();
+       // updateEvent();
+//addParticipant();
+        getAllParticipants();
+    }
+    public static void getAllParticipants() throws Exception {
+        ParticipantDAO participantDAO = new ParticipantDAO();
+        List<Participant> participantList = new ArrayList<>();
+        participantList = participantDAO.getAllParticipants();
+        for (Participant participant:participantList) {
+            System.out.println("Name: "+participant.getFname());
+        }
+    }
+    public static void addParticipant() throws Exception {
+        Participant participant = new Participant(0, "Christian", "Hesberg", "chri5287@easv365.dk", "85698741");
+        ParticipantDAO partipantDAO = new ParticipantDAO();
+        partipantDAO.addParticipant(participant);
     }
     public static void addEvent() throws Exception {
         EventDAO eventDAO = new EventDAO();

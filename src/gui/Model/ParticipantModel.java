@@ -25,7 +25,8 @@ public class ParticipantModel {
     }
 
     public ObservableList<Participant> getAllParticipants() throws Exception {
-        participantObservableList.setAll(participantLogic.getAllParticipants());
+        participantObservableList.clear();
+        participantObservableList.addAll(participantLogic.getAllParticipants());
         return participantObservableList;
     }
 

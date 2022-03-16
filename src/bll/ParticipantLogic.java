@@ -1,17 +1,15 @@
 package bll;
 
 import be.Participant;
-import bll.exception.EventDAOException;
-import bll.exception.EventManagerDAOException;
-import dal.db.PartipantDAO;
+import dal.db.ParticipantDAO;
 
 import java.util.ArrayList;
 
 public class ParticipantLogic {
-    PartipantDAO databaseParticipant;
+    ParticipantDAO databaseParticipant;
 
     public ParticipantLogic() throws Exception {
-        this.databaseParticipant = new PartipantDAO();
+        this.databaseParticipant = new ParticipantDAO();
     }
 
     public ArrayList<Participant> getAllParticipants() throws Exception {

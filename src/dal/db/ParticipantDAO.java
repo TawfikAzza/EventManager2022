@@ -5,9 +5,9 @@ import dal.ConnectionManager;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class PartipantDAO {
+public class ParticipantDAO {
     ConnectionManager cm;
-    public PartipantDAO() throws Exception {
+    public ParticipantDAO() throws Exception {
         cm = new ConnectionManager();
     }
     public ArrayList<Participant> getAllParticipants() throws Exception
@@ -17,7 +17,7 @@ public class PartipantDAO {
         try (Connection con = cm.getConnection()) {
             String sql ="SELECT * FROM Participant";
             PreparedStatement pstmt = con.prepareStatement(sql);
-            ResultSet rs =pstmt.executeQuery(sql);
+            ResultSet rs = pstmt.executeQuery();
 
             while(rs.next())
             {
