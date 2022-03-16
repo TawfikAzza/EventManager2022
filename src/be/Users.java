@@ -26,6 +26,15 @@ public abstract class Users {
         this.userID = userID;
     }
 
+    public Users(String loginName, String password, int roleID, String mail, String firstName, String lastName) {
+        this.mail=mail;
+        this.loginName = loginName;
+        this.password = password;
+        this.roleID = roleID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Users(int userID, String loginName, String password, int roleID, String mail, String firstName, String lastName) {
         this.mail=mail;
         this.loginName = loginName;

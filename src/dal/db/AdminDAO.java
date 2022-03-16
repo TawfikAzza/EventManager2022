@@ -74,15 +74,15 @@ public class AdminDAO implements IAdminDAO {
         String lname = coordinator.getLastName();
 
         try (Connection connection = dbc.getConnection()) {
-            String sql = "UPDATE LoginUser SET loginName = ?, password = ?, email = ? fname = ?, lname = ? WHERE userID = ?";
+            String sql = "UPDATE LoginUser SET loginName = ?, password = ?, email = ?, fname = ?, lname = ? WHERE userID = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
 
             ps.setString(1, loginName);
             ps.setString(2, password);
             ps.setString(3, email);
-            ps.setInt(4, userID);
-            ps.setString(5, fname);
-            ps.setString(6, lname);
+            ps.setString(4, fname);
+            ps.setString(5, lname);
+            ps.setInt(6, userID);
 
             ps.execute();
 
