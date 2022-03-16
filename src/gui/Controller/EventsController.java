@@ -143,8 +143,7 @@ public class EventsController implements Initializable {
             displayError(e);
         }
     }
-    private void displayError(Throwable t)
-    {
+    private void displayError(Throwable t) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Something went wrong...");
         alert.setHeaderText(t.getMessage());

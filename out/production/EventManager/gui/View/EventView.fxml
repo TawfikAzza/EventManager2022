@@ -16,7 +16,7 @@
 
 <BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.EventsController">
    <center>
-      <AnchorPane fx:id="topPane" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="topPane" BorderPane.alignment="TOP_CENTER">
          <children>
             <JFXButton fx:id="btnEdit" buttonType="RAISED" layoutX="36.0" layoutY="469.0" onAction="#editEvent" text="Edit Event" />
             <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="209.0" layoutY="469.0" onAction="#deleteEvent" text="Delete Event" />
