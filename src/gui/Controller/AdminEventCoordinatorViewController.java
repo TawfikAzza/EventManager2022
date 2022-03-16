@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -55,6 +52,23 @@ public class AdminEventCoordinatorViewController implements Initializable {
     }
 
     public void handleDeleteClick(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Warning. Deleting a coordinator cannot be undone. Deleting a coordinator will remove him from the system completely.");
+        alert.show();
+        alert.setResultConverter(buttonType -> {
+            if(buttonType==ButtonType.OK)
+            {
+                adminModel.deleteEventCoordinator(CurrentEventCoordinator.getInstance());
+                CurrentEventCoordinator.setInstance(null);
+                try {
+                    setScene("/gui/View/AdminView.fxml");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        });
+
     }
 
     public void handleBack(ActionEvent actionEvent) throws IOException {
