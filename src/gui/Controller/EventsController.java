@@ -2,6 +2,7 @@ package gui.Controller;
 
 import be.Events;
 import bll.exception.EventDAOException;
+import bll.utils.DateUtil;
 import com.jfoenix.controls.JFXButton;
 import gui.Model.CoordinatorModel;
 import javafx.event.ActionEvent;
@@ -48,80 +49,13 @@ public class EventsController implements Initializable {
     @FXML
     private Button testBtn;
     @FXML
-    private TextField txtName,txtLocation,txtStartDate,txtStartTime,txtItinerary,txtEndDate,txtDescription;
-
-
-
+    private TextField txtName,txtLocation,txtStartDate,txtStartTime,txtEndDate;
     @FXML
-    void addEvent(ActionEvent event) {
+    private TextArea txtDescription,txtItinerary;
 
-    }
+    private Events currentEvent;
 
-    @FXML
-    void deleteEvent(ActionEvent event) {
 
-    }
-
-    @FXML
-    void editEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void toggleLabelsOn() {
-        for (Node n:topPane.getChildren()) {
-            if(n.toString().contains("label")) {
-                Label label = (Label) n;
-                if(label.getId()!=null)
-                    if(!label.isVisible()) {
-                        label.setVisible(true);
-                    }
-            }
-        }
-        lblDescription.setVisible(true);
-        lblItinerary.setVisible(true);
-        lblDescriptionTicket.setVisible(true);
-    }
-    @FXML
-    private void toggleLabelsOff() {
-        for (Node n:topPane.getChildren()) {
-            if(n.toString().contains("label")) {
-                Label label = (Label) n;
-                if(label.getId()!=null)
-                    if(label.isVisible()) {
-                        label.setVisible(false);
-                    }
-            }
-        }
-        lblDescription.setVisible(false);
-        lblItinerary.setVisible(false);
-        lblDescriptionTicket.setVisible(false);
-    }
-
-    @FXML
-    private void toggleTextFieldOn() {
-        for (Node n:topPane.getChildren()) {
-            if(n.toString().contains("TextField")) {
-                TextField textField = (TextField) n;
-                if(textField.getId()!=null)
-                    if(!textField.isVisible()) {
-                        textField.setVisible(true);
-                    }
-            }
-        }
-    }
-    @FXML
-    private void toggleTextFieldOff() {
-        for (Node n:topPane.getChildren()) {
-            if(n.toString().contains("TextField")) {
-                TextField textField = (TextField) n;
-                if(textField.getId()!=null)
-                    if(textField.isVisible()) {
-                        textField.setVisible(false);
-                    }
-            }
-        }
-    }
     private CoordinatorModel coordinatorModel;
     public EventsController() {
         try {
@@ -173,6 +107,7 @@ public class EventsController implements Initializable {
     public void displayEvent(MouseEvent mouseEvent) {
         if(tableEvents.getSelectionModel().getSelectedItem()!=null) {
             Events event = tableEvents.getSelectionModel().getSelectedItem();
+            toggleTextFieldOff();
             toggleLabelsOn();
             setLabelText(event);
         }
@@ -205,11 +140,93 @@ public class EventsController implements Initializable {
         lblDescriptionTicket.getChildren().clear();
         lblDescriptionTicket.getChildren().add(eventDescriptionTicket);
     }
+
     public void toggleVisible(ActionEvent actionEvent) {
-       // toggleLabels();
-        //toggleTextField();
+
     }
 
     public void updateEvent(ActionEvent actionEvent) {
+        currentEvent.setName(txtName.getText());
+        currentEvent.setDescription(txtDescription.getText());
+        currentEvent.setStartDate(DateUtil.parseDateTime(txtStartDate.getText()));
+    }
+    @FXML
+    void addEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void deleteEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void editEvent(ActionEvent event) {
+        if(tableEvents.getSelectionModel().getSelectedIndex()!=-1) {
+            toggleLabelsOff();
+            currentEvent=tableEvents.getSelectionModel().getSelectedItem();
+            setTextFieldText(currentEvent);
+            toggleTextFieldOn();
+        }
+    }
+
+    @FXML
+    private void toggleLabelsOn() {
+        for (Node n:topPane.getChildren()) {
+            if(n.toString().contains("label")) {
+                Label label = (Label) n;
+                if(label.getId()!=null)
+                    if(!label.isVisible()) {
+                        label.setVisible(true);
+                    }
+            }
+        }
+        lblDescription.setVisible(true);
+        lblItinerary.setVisible(true);
+        lblDescriptionTicket.setVisible(true);
+    }
+    @FXML
+    private void toggleLabelsOff() {
+        for (Node n:topPane.getChildren()) {
+            if(n.toString().contains("label")) {
+                Label label = (Label) n;
+                if(label.getId()!=null)
+                    if(label.isVisible()) {
+                        label.setVisible(false);
+                    }
+            }
+        }
+        lblDescription.setVisible(false);
+        lblItinerary.setVisible(false);
+        lblDescriptionTicket.setVisible(false);
+    }
+
+    @FXML
+    private void toggleTextFieldOn() {
+        for (Node n:topPane.getChildren()) {
+            if(n.toString().contains("TextField")) {
+                TextField textField = (TextField) n;
+                if(textField.getId()!=null)
+                    if(!textField.isVisible()) {
+                        textField.setVisible(true);
+                    }
+            }
+        }
+        txtDescription.setVisible(true);
+        txtItinerary.setVisible(true);
+    }
+    @FXML
+    private void toggleTextFieldOff() {
+        for (Node n:topPane.getChildren()) {
+            if(n.toString().contains("TextField")) {
+                TextField textField = (TextField) n;
+                if(textField.getId()!=null)
+                    if(textField.isVisible()) {
+                        textField.setVisible(false);
+                    }
+            }
+        }
+        txtDescription.setVisible(false);
+        txtItinerary.setVisible(false);
     }
 }
