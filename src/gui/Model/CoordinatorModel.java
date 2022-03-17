@@ -2,11 +2,9 @@ package gui.Model;
 
 import be.Coordinator;
 import be.Events;
-import be.Users;
 import bll.AdminLogic;
 import bll.EventManager;
 import bll.exception.AdminLogicException;
-import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,5 +28,10 @@ public class CoordinatorModel {
         allCoordinator.clear();
         allCoordinator.addAll(adminManager.getAllCoordinators());
         return allCoordinator;
+    }
+
+
+    public Events createEvent(Events event) throws EventManagerException {
+        return eventManager.createEvent(event);
     }
 }
