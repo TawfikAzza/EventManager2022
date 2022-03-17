@@ -52,11 +52,11 @@ public class NewEventController implements Initializable {
 
 
     @FXML
-    private void createEvent(ActionEvent event) {
+    private void createEvent(ActionEvent event) throws EventManagerException {
         if(!checkFields())
             return;
         Events eventCreated = new Events(0,txtName.getText(),txtLocation.getText(),txtDescription.getText(),getStartDate(),getEndDate(),txtItinerary.getText());
-
+        eventCreated = coordinatorModel.createEvent(eventCreated);
 
     }
     @FXML
