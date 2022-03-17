@@ -6,6 +6,11 @@
     -fx-border-radius: 50;
     -fx-background-radius: 50;
 }
+.button:hover
+{
+    -fx-background-color: #8395C6;
+    -fx-cursor: hand;
+}
 .textArea
 {
     -fx-background-radius: 50;
@@ -15,4 +20,25 @@
     -fx-prompt-text-fill: #6A6A6A;
 
 }
-.textArea
+/* Design Ideas
+
+ALMOST anything that can be rounded should be, if Google does why shouldn't we? xD
+
+Also the font that should be used is Roboto-Light
+
+
+Color guide:
+Root background color: #FAFAFA
+Black text color: #151515
+White text color: #FAFAFA (This should be used if the background of a button or pane makes it harder to read)
+Button background color: #A7BAEC
+Button border color: #5E709F
+TextArea background color: #DEDEDE
+TextArea border color: #C4C4C4
+TextArea prompt text: #6A6A6A
+
++This color should be used for something, question is... What?+
+Secondary color: #FF7878
+Secondary border color: #AB3A3A
+
+*/
