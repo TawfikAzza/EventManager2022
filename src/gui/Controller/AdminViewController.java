@@ -56,13 +56,8 @@ public class AdminViewController implements Initializable {
         try {
             this.adminModel = new AdminModel();
             this.eventmodel = new EventModel();
-
-        ObservableList<Coordinator> obsListCoordinator = FXCollections.observableArrayList();
-        obsListCoordinator.addAll(adminModel.getAllCoordinators());
-        this.coordinatorTableView.setItems(obsListCoordinator);
-        ObservableList<Events> obsListEvent = FXCollections.observableArrayList();
-        obsListEvent.addAll(eventmodel.getAllEvents());
-        this.eventTableView.setItems(obsListEvent);
+        this.coordinatorTableView.setItems(adminModel.getCoordinatorObservableList());
+        this.eventTableView.setItems(eventmodel.getEventsObservableList());
         this.initTables();
         } catch (Exception | EventDAOException e) {
             e.printStackTrace();
