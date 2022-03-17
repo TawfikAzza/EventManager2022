@@ -1,9 +1,9 @@
 package bll.exception;
 
-public class EventManagerDAOException extends Throwable {
+public class EventManagerException extends Throwable {
     private String message;
 
-    public EventManagerDAOException(String message, Exception e) {
+    public EventManagerException(String message, Exception e) {
         this.message = message;
         e.printStackTrace();
     }

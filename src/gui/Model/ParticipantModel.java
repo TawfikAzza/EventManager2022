@@ -1,17 +1,17 @@
 package gui.Model;
 
 import be.Participant;
-import bll.ParticipantLogic;
+import bll.ParticipantManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class ParticipantModel {
 
-    private ParticipantLogic participantLogic;
+    private ParticipantManager participantLogic;
     private ObservableList<Participant> participantObservableList;
 
     public ParticipantModel() throws Exception {
-        participantLogic = new ParticipantLogic();
+        participantLogic = new ParticipantManager();
         participantObservableList = FXCollections.observableArrayList();
     }
 

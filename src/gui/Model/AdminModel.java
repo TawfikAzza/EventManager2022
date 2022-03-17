@@ -2,6 +2,7 @@ package gui.Model;
 
 import be.Coordinator;
 import bll.AdminLogic;
+import bll.exception.AdminLogicException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ public class AdminModel {
 
     private AdminLogic logic;
 
-    public AdminModel() throws IOException {
+    public AdminModel() throws AdminLogicException {
         this.logic = new AdminLogic();
     }
 

@@ -1,7 +1,9 @@
 package gui.Controller;
 
 import be.Events;
+import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
+import bll.exception.EventManagerException;
 import bll.utils.DateUtil;
 import com.jfoenix.controls.JFXButton;
 import gui.Model.CoordinatorModel;
@@ -66,8 +68,8 @@ public class EventsController implements Initializable {
     public EventsController() {
         try {
             coordinatorModel = new CoordinatorModel();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (EventManagerException | AdminLogicException e) {
+            displayError(e);
         }
     }
     @Override
@@ -82,7 +84,7 @@ public class EventsController implements Initializable {
         eventDate.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
         try {
             tableEvents.getItems().addAll(coordinatorModel.getAllEvents());
-        } catch (EventDAOException e) {
+        } catch (EventManagerException e) {
             displayError(e);
         }
     }

@@ -1,6 +1,7 @@
 package bll;
 
 import be.Coordinator;
+import bll.exception.AdminLogicException;
 import dal.db.AdminDAO;
 import dal.interfaces.IAdminDAO;
 
@@ -11,8 +12,12 @@ public class AdminLogic {
 
     private IAdminDAO adminDAO;
 
-    public AdminLogic() throws IOException {
-        this.adminDAO = new AdminDAO();
+    public AdminLogic() throws AdminLogicException {
+        try {
+            this.adminDAO = new AdminDAO();
+        } catch (IOException e) {
+            throw new AdminLogicException("Failed to initialize Admin Logic class!",e);
+        }
     }
 
     public void addEventCoordinator(Coordinator coordinator)

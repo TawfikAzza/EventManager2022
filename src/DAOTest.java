@@ -16,7 +16,7 @@ public class DAOTest {
         //removeEvent();
        // updateEvent();
 //addParticipant();
-        getAllParticipants();
+       // getAllParticipants();
     }
     public static void getAllParticipants() throws Exception {
         ParticipantDAO participantDAO = new ParticipantDAO();
@@ -27,7 +27,7 @@ public class DAOTest {
         }
     }
     public static void addParticipant() throws Exception {
-        Participant participant = new Participant(0, "Christian", "Hesberg", "chri5287@easv365.dk", "85698741");
+        Participant participant = new Participant(0, "Mani", "Danivalsson", "mani6969@easv365.dk", "63258741");
         ParticipantDAO partipantDAO = new ParticipantDAO();
         partipantDAO.addParticipant(participant);
     }

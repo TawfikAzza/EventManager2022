@@ -5,10 +5,10 @@ import dal.db.ParticipantDAO;
 
 import java.util.ArrayList;
 
-public class ParticipantLogic {
+public class ParticipantManager {
     ParticipantDAO databaseParticipant;
 
-    public ParticipantLogic() throws Exception {
+    public ParticipantManager() throws Exception {
         this.databaseParticipant = new ParticipantDAO();
     }
 
