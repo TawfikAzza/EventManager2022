@@ -3,6 +3,7 @@ package gui.Model;
 import be.Events;
 import bll.EventManager;
 import bll.exception.EventDAOException;
+import bll.exception.EventManagerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -13,13 +14,13 @@ public class EventModel {
     ObservableList<Events> eventsObservableList;
     private EventManager eventManager;
 
-    public EventModel() throws Exception, EventDAOException {
+    public EventModel() throws Exception, EventDAOException, EventManagerException {
         this.eventManager = new EventManager();
         this.eventsObservableList = FXCollections.observableArrayList();
         refresh();
     }
 
-    public List<Events> getAllEvents() throws EventDAOException {
+    public List<Events> getAllEvents() throws EventManagerException {
         return eventManager.getAllEvents();
     }
 
@@ -32,7 +33,7 @@ public class EventModel {
         this.eventsObservableList.remove(0, this.eventsObservableList.size());
     }
 
-    public void refresh() throws EventDAOException {
+    public void refresh() throws EventManagerException {
         this.deleteAll();
         this.eventsObservableList.addAll(getAllEvents());
     }

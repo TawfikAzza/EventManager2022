@@ -17,7 +17,7 @@ public class CoordinatorModel {
     private ObservableList<Coordinator> allCoordinator = FXCollections.observableArrayList();
     private EventManager eventManager;
     private AdminLogic adminManager;
-    public CoordinatorModel() throws EventManagerException, AdminLogicException {
+    public CoordinatorModel() throws EventManagerException, AdminLogicException, Exception {
         eventManager = new EventManager();
         adminManager = new AdminLogic();
     }

@@ -1,6 +1,7 @@
 package gui.Controller;
 
 import be.Coordinator;
+import bll.exception.AdminLogicException;
 import bll.utils.CurrentEventCoordinator;
 import gui.Model.AdminModel;
 import javafx.event.ActionEvent;
@@ -42,7 +43,7 @@ public class EditEventCoordinatorViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             this.adminModel = new AdminModel();
-        } catch (IOException e) {
+        } catch (AdminLogicException e) {
             e.printStackTrace();
         }
         setFields(CurrentEventCoordinator.getInstance());

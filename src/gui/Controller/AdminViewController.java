@@ -2,7 +2,9 @@ package gui.Controller;
 
 import be.Coordinator;
 import be.Events;
+import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
+import bll.exception.EventManagerException;
 import bll.utils.CurrentEventCoordinator;
 import dal.interfaces.IAdminDAO;
 import gui.Model.AdminModel;
@@ -59,7 +61,7 @@ public class AdminViewController implements Initializable {
         this.coordinatorTableView.setItems(adminModel.getCoordinatorObservableList());
         this.eventTableView.setItems(eventmodel.getEventsObservableList());
         this.initTables();
-        } catch (Exception | EventDAOException e) {
+        } catch (Exception | EventDAOException | AdminLogicException | EventManagerException e) {
             e.printStackTrace();
         }
     }

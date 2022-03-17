@@ -1,6 +1,7 @@
 package gui.Controller;
 
 import be.Coordinator;
+import bll.exception.AdminLogicException;
 import gui.Model.AdminModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,7 +42,7 @@ public class AddEventCoordinatorViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             this.adminModel = new AdminModel();
-        } catch (IOException e) {
+        } catch (AdminLogicException e) {
             e.printStackTrace();
         }
     }
