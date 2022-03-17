@@ -1,20 +1,21 @@
 package bll;
 
 import be.Events;
-import bll.exception.EventDAOException;
-
 import bll.exception.EventManagerException;
 import dal.db.EventDAO;
-import dal.interfaces.IEventDAO;
 
 import java.util.List;
 
 public class EventManager {
 
+    private EventDAO eventDAO;
+    public EventManager() throws EventManagerException {
 
-    private IEventDAO eventDAO;
-    public EventManager() throws Exception {
-        eventDAO = new EventDAO();
+        try {
+            eventDAO = new EventDAO();
+        } catch (Exception e) {
+            throw new EventManagerException("Failed to initialize Event Manager class!",e);
+        }
     }
 
     public List<Events> getAllEvents() throws EventManagerException {
