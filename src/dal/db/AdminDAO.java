@@ -1,5 +1,6 @@
 package dal.db;
 
+import be.Admin;
 import be.Coordinator;
 import be.Users;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -124,6 +125,40 @@ public class AdminDAO implements IAdminDAO {
             throwables.printStackTrace();
         }
         return allCoordinators;
+    }
+
+    public ArrayList<Admin> getAllAdmins()
+    {
+        ArrayList<Admin> allAdmins = new ArrayList<>();
+
+        try (Connection connection = dbc.getConnection()) {
+            String sql ="SELECT * FROM LoginUser WHERE roleID = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, 1);
+
+            statement.execute();
+
+            ResultSet rs = statement.getResultSet();
+
+            while(rs.next())
+            {
+                int userID = rs.getInt("userID");
+                String loginName = rs.getString("loginName");
+                String password = rs.getString("password");
+                int roleID = rs.getInt("roleID");
+                String email = rs.getString("email");
+                String fname = rs.getString("fname");
+                String lname = rs.getString("lname");
+
+                Admin admin = new Admin(userID, loginName, password, roleID, email, fname, lname);
+                allAdmins.add(admin);
+            }
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return allAdmins;
     }
 
     public ArrayList<String> getAccountTypes(){

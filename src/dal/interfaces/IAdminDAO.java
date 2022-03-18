@@ -1,5 +1,6 @@
 package dal.interfaces;
 
+import be.Admin;
 import be.Coordinator;
 import be.Users;
 
@@ -15,6 +16,8 @@ public interface IAdminDAO {
     void updateEventCoordinator(Coordinator coordinator);
 
     ArrayList<Coordinator> getAllCoordinators();
+
+    ArrayList<Admin> getAllAdmins();
 
     ArrayList<String> getAccountTypes();
 

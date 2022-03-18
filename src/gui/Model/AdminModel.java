@@ -1,5 +1,6 @@
 package gui.Model;
 
+import be.Admin;
 import be.Coordinator;
 import be.Users;
 import bll.AdminLogic;
@@ -10,12 +11,14 @@ import javafx.collections.ObservableList;
 public class AdminModel {
 
     ObservableList<Coordinator> coordinatorObservableList;
+    ObservableList<Admin> adminObservableList;
     ObservableList<String> accountTypesObsList;
     private AdminLogic logic;
 
     public AdminModel() throws AdminLogicException {
         this.coordinatorObservableList = FXCollections.observableArrayList();
         this.accountTypesObsList = FXCollections.observableArrayList();
+        this.adminObservableList = FXCollections.observableArrayList();
         this.logic = new AdminLogic();
         refresh();
     }
@@ -43,12 +46,17 @@ public class AdminModel {
         return accountTypesObsList;
     }
 
+    public ObservableList<Admin> getAdminObservableList() {
+        return adminObservableList;
+    }
+
     public void deleteAll(){
         this.coordinatorObservableList.remove(0, this.coordinatorObservableList.size());
     }
 
     public void refresh() {
         this.deleteAll();
+        this.adminObservableList.addAll(logic.getAllAdmins());
         this.coordinatorObservableList.addAll(logic.getAllCoordinators());
         this.accountTypesObsList.addAll(logic.getAccountTypes());
     }

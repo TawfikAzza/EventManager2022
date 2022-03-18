@@ -61,6 +61,7 @@ public class AdminViewController implements Initializable {
             this.eventmodel = new EventModel();
         this.coordinatorTableView.setItems(adminModel.getCoordinatorObservableList());
         this.eventTableView.setItems(eventmodel.getEventsObservableList());
+        this.adminTableView.setItems(adminModel.getAdminObservableList());
         this.initTables();
         } catch (Exception | EventDAOException | AdminLogicException | EventManagerException e) {
             e.printStackTrace();
@@ -68,6 +69,9 @@ public class AdminViewController implements Initializable {
     }
 
     private void initTables() {
+        this.tableColumnFirstNameAdmin.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        this.tableColumnLastNameAdmin.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+
         this.tableColumnEventName.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.tableColumnEventDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         //this.tableColumnNumberOfCoordinators.setCellValueFactory(new PropertyValueFactory<>("Number of Events"));
