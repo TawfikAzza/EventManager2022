@@ -11,7 +11,7 @@ public class Main extends Application {
         Font roboto =
             Font.loadFont(getClass()
                 .getResourceAsStream("/fonts/Roboto-Regular.ttf"), 12);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/MainWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EventView.fxml"));
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
         Parent root = loader.load();

@@ -1,5 +1,6 @@
 package gui.Controller;
 
+import be.Admin;
 import be.Coordinator;
 import bll.exception.AdminLogicException;
 import gui.Model.AdminModel;
@@ -10,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -21,6 +23,8 @@ import java.util.ResourceBundle;
 public class AddEventCoordinatorViewController implements Initializable {
     private AdminModel adminModel;
 
+    @FXML
+    private ChoiceBox<String> accountTypeChoiceBox;
     @FXML
     private PasswordField passwordField;
     @FXML
@@ -42,6 +46,7 @@ public class AddEventCoordinatorViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             this.adminModel = new AdminModel();
+            this.accountTypeChoiceBox.setItems(adminModel.getAccountTypes());
         } catch (AdminLogicException e) {
             e.printStackTrace();
         }
@@ -57,10 +62,18 @@ public class AddEventCoordinatorViewController implements Initializable {
         String email = emailTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
+        String role = accountTypeChoiceBox.getValue();
 
-        Coordinator coordinator = new Coordinator(loginName, password,2, email,firstName, lastName);
         if(confirmPassword()) {
-            adminModel.addEventCoordinator(coordinator);
+            if (role.equals("Admin")) {
+                Admin admin = new Admin(loginName, password, 1, email, firstName, lastName);
+                adminModel.addLoginUser(admin);
+            }
+            if(role.equals("Event Coordinator"))
+            {
+                Coordinator coordinator = new Coordinator(loginName, password, 2, email, firstName, lastName);
+                adminModel.addLoginUser(coordinator);
+            }
             switchScene();
         }
         else {

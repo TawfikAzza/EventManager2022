@@ -1,6 +1,7 @@
 package dal.db;
 
 import be.Coordinator;
+import be.Users;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
 import dal.interfaces.IAdminDAO;
@@ -19,13 +20,13 @@ public class AdminDAO implements IAdminDAO {
     }
 
     @Override
-    public void addEventCoordinator(Coordinator coordinator) {
-        String loginName = coordinator.getLoginName();
-        String password = coordinator.getPassword();
-        int roleID = coordinator.getRoleID();
-        String email = coordinator.getMail();
-        String fname = coordinator.getFirstName();
-        String lname = coordinator.getLastName();
+    public void addLoginUser(Users user) {
+        String loginName = user.getLoginName();
+        String password = user.getPassword();
+        int roleID = user.getRoleID();
+        String email = user.getMail();
+        String fname = user.getFirstName();
+        String lname = user.getLastName();
 
         try (Connection connection = dbc.getConnection()) {
             String sql = "INSERT INTO LoginUser(loginName, password, roleID, email, fname, lname) VALUES(?,?,?,?,?,?)";
@@ -96,10 +97,14 @@ public class AdminDAO implements IAdminDAO {
         ArrayList<Coordinator> allCoordinators = new ArrayList<>();
 
         try (Connection connection = dbc.getConnection()) {
-            String sql ="SELECT * FROM LoginUser";
-            Statement statement = connection.createStatement();
+            String sql ="SELECT * FROM LoginUser WHERE roleID = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
 
-            ResultSet rs =statement.executeQuery(sql);
+            statement.setInt(1, 2);
+
+            statement.execute();
+
+            ResultSet rs = statement.getResultSet();
 
             while(rs.next())
             {
@@ -119,6 +124,32 @@ public class AdminDAO implements IAdminDAO {
             throwables.printStackTrace();
         }
         return allCoordinators;
+    }
+
+    public ArrayList<String> getAccountTypes(){
+        ArrayList<String> accountTypes = new ArrayList<>();
+
+        try (Connection connection = dbc.getConnection()) {
+            String sql = "SELECT roleName FROM UserRoles";
+
+            Statement statement = connection.createStatement();
+
+            ResultSet rs =statement.executeQuery(sql);
+
+            while(rs.next())
+            {
+                String accountType = rs.getString("roleName");
+                accountTypes.add(accountType);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return accountTypes;
+    }
+
+    private int checkUserRole(Users user)
+    {
+        return user.getRoleID();
     }
 
 }

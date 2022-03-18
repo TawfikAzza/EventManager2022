@@ -1,29 +1,28 @@
 package gui.Model;
 
 import be.Coordinator;
+import be.Users;
 import bll.AdminLogic;
 import bll.exception.AdminLogicException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class AdminModel {
 
     ObservableList<Coordinator> coordinatorObservableList;
+    ObservableList<String> accountTypesObsList;
     private AdminLogic logic;
 
     public AdminModel() throws AdminLogicException {
         this.coordinatorObservableList = FXCollections.observableArrayList();
+        this.accountTypesObsList = FXCollections.observableArrayList();
         this.logic = new AdminLogic();
         refresh();
     }
 
-    public void addEventCoordinator(Coordinator coordinator)
+    public void addLoginUser(Users user)
     {
-        logic.addEventCoordinator(coordinator);
+        logic.addLoginUser(user);
     }
 
     public void deleteEventCoordinator(Coordinator coordinator)
@@ -35,14 +34,13 @@ public class AdminModel {
         logic.updateEventCoordinator(coordinator);
     }
 
-    public ArrayList<Coordinator> getAllCoordinators()
-    {
-        return logic.getAllCoordinators();
-    }
-
     public ObservableList<Coordinator> getCoordinatorObservableList()
     {
         return coordinatorObservableList;
+    }
+
+    public ObservableList<String> getAccountTypes(){
+        return accountTypesObsList;
     }
 
     public void deleteAll(){
@@ -51,7 +49,15 @@ public class AdminModel {
 
     public void refresh() {
         this.deleteAll();
-        this.coordinatorObservableList.addAll(getAllCoordinators());
+        this.coordinatorObservableList.addAll(logic.getAllCoordinators());
+        this.accountTypesObsList.addAll(logic.getAccountTypes());
     }
+
+        /*public ArrayList<Coordinator> getAllCoordinators()
+    {
+        return logic.getAllCoordinators();
+    }
+
+     */
 
 }
