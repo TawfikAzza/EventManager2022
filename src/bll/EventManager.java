@@ -33,4 +33,8 @@ public class EventManager {
             throw new EventManagerException("Error while creating the Event in database",e);
         }
     }
+
+    public void deleteEvent(Events event) throws Exception {
+        eventDAO.removeEvent(event);
+    }
 }
