@@ -6,20 +6,18 @@ import be.Events;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
+import bll.utils.CurrentAdmin;
 import bll.utils.CurrentEventCoordinator;
+import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
 import gui.Model.EventModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -82,7 +80,8 @@ public class AdminViewController implements Initializable {
     }
 
     public void handleNewClick(ActionEvent actionEvent) throws IOException {
-        setScene("/gui/View/AddEventCoordinatorView.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AddEventCoordinatorView.fxml"));
+        SceneSetter.setScene(adminTableView, loader);
     }
 
     public void handleCoordinatorClick(MouseEvent mouseEvent) throws IOException {
@@ -91,7 +90,20 @@ public class AdminViewController implements Initializable {
         {
             if(mouseEvent.getClickCount()==2) {
                 CurrentEventCoordinator.setInstance(coordinator);
-                setScene("/gui/View/AdminEventCoordinatorView.fxml");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+                SceneSetter.setScene(adminTableView, loader);
+            }
+        }
+    }
+
+    public void handleAdminClick(MouseEvent mouseEvent) throws IOException {
+        Admin admin = adminTableView.getSelectionModel().getSelectedItem();
+        if(admin!=null)
+        {
+            if(mouseEvent.getClickCount()==2) {
+                CurrentAdmin.setInstance(admin);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
+                SceneSetter.setScene(adminTableView, loader);
             }
         }
     }
@@ -117,16 +129,5 @@ public class AdminViewController implements Initializable {
         });
 
     }
-    }
-
-    private void setScene(String url) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
-        Parent root = loader.load();
-
-        Scene scene = new Scene(root);
-        Stage primaryStage = (Stage) newCoordinatorBtn.getScene().getWindow();
-        primaryStage.setScene(scene);
-
-        primaryStage.show();
     }
 }

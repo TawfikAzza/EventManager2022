@@ -81,7 +81,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TableView fx:id="adminTableView" onMouseClicked="#handleCoordinatorClick" prefHeight="318.0" prefWidth="340.0">
+            <TableView fx:id="adminTableView" onMouseClicked="#handleAdminClick" prefHeight="318.0" prefWidth="340.0">
                <columns>
                   <TableColumn fx:id="tableColumnFirstNameAdmin" prefWidth="78.39998948574066" text="First Name" />
                   <TableColumn fx:id="tableColumnLastNameAdmin" prefWidth="75.0" text="Last Name" />

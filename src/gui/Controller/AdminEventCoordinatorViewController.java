@@ -3,6 +3,7 @@ package gui.Controller;
 import be.Coordinator;
 import bll.exception.AdminLogicException;
 import bll.utils.CurrentEventCoordinator;
+import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -49,7 +50,8 @@ public class AdminEventCoordinatorViewController implements Initializable {
     }
 
     public void handleEditClick(ActionEvent actionEvent) throws IOException {
-        setScene("/gui/View/EditEventCoordinatorView.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EditEventCoordinatorView.fxml"));
+        SceneSetter.setScene(nameLabel, loader);
     }
 
     public void handleDeleteClick(ActionEvent actionEvent) {
@@ -62,7 +64,8 @@ public class AdminEventCoordinatorViewController implements Initializable {
                 adminModel.deleteEventCoordinator(CurrentEventCoordinator.getInstance());
                 CurrentEventCoordinator.setInstance(null);
                 try {
-                    setScene("/gui/View/AdminView.fxml");
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+                    SceneSetter.setScene(nameLabel, loader);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -73,17 +76,8 @@ public class AdminEventCoordinatorViewController implements Initializable {
     }
 
     public void handleBack(ActionEvent actionEvent) throws IOException {
-        setScene("/gui/View/AdminView.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+        SceneSetter.setScene(nameLabel, loader);
     }
 
-    private void setScene(String url) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
-        Parent root = loader.load();
-
-        Scene scene = new Scene(root);
-        Stage primaryStage = (Stage) editButton.getScene().getWindow();
-        primaryStage.setScene(scene);
-
-        primaryStage.show();
-    }
 }
