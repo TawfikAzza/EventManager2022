@@ -29,6 +29,7 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="120.0000061035156" minHeight="10.0" prefHeight="104.80000000000001" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="136.79997558593755" minHeight="10.0" prefHeight="100.19999999999999" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="136.79997558593755" minHeight="10.0" prefHeight="100.19999999999999" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="194.39999999999998" minHeight="4.999975585937477" prefHeight="174.39999999999998" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="48.19998779296873" minHeight="0.0" prefHeight="18.000036621093727" vgrow="SOMETIMES" />
   </rowConstraints>
@@ -73,7 +74,7 @@
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Ticket's vailable" GridPane.rowIndex="8">
+      <Label text="Ticket's available" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -98,17 +99,24 @@
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </GridPane.margin>
       </TextArea>
-      <HBox GridPane.columnIndex="1" GridPane.rowIndex="8">
+      <HBox GridPane.columnIndex="1" GridPane.rowIndex="9">
          <children>
-            <TextField />
+            <VBox>
+               <children>
+                  <Label text="Name:" />
+                  <TextField fx:id="txtNameTicket" />
+                  <Label text="Benefit:" />
+                  <TextArea fx:id="txtTicketDesciption" prefHeight="104.0" prefWidth="82.0" />
+               </children>
+            </VBox>
             <VBox minWidth="35.0" prefHeight="51.0" prefWidth="50.0">
                <children>
-                  <Button mnemonicParsing="false" text="&gt;&gt;">
+                  <Button mnemonicParsing="false" onAction="#addTicket" text="&gt;&gt;">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="&lt;&lt;">
+                  <Button mnemonicParsing="false" onAction="#removeTicket" text="&lt;&lt;">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -128,12 +136,12 @@
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </GridPane.margin>
       </HBox>
-      <JFXButton fx:id="btnBack" onAction="#goBack" text="&lt;&lt; Back" GridPane.rowIndex="9">
+      <JFXButton fx:id="btnBack" onAction="#goBack" text="&lt;&lt; Back" GridPane.rowIndex="10">
          <GridPane.margin>
             <Insets left="15.0" />
          </GridPane.margin>
       </JFXButton>
-      <JFXButton fx:id="btnCreate" onAction="#createEvent" text="Create Event" GridPane.columnIndex="1" GridPane.rowIndex="9">
+      <JFXButton fx:id="btnCreate" onAction="#createEvent" text="Create Event" GridPane.columnIndex="1" GridPane.rowIndex="10">
          <GridPane.margin>
             <Insets left="100.0" />
          </GridPane.margin>

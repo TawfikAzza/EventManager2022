@@ -134,5 +134,11 @@ public class NewEventController implements Initializable {
         startComboMinute.getItems().addAll(arrayMinutes);
         endComboMinute.getItems().addAll(arrayMinutes);
     }
+
+    public void addTicket(ActionEvent actionEvent) {
+    }
+
+    public void removeTicket(ActionEvent actionEvent) {
+    }
 }
 
