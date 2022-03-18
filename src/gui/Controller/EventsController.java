@@ -79,7 +79,7 @@ public class EventsController implements Initializable {
         updateTableView();
     }
 
-    private void updateTableView() {
+    public void updateTableView() {
         eventName.setCellValueFactory(new PropertyValueFactory<>("name"));
         eventDate.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
         try {
@@ -163,6 +163,8 @@ public class EventsController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/NewEventView.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
+        NewEventController newEventController = loader.getController();
+        newEventController.setEventsController(this);
         Scene scene = new Scene(root);
         stage = (Stage) btnAdd.getScene().getWindow();
         stage.setScene(scene);

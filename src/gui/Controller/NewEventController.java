@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -41,6 +42,7 @@ public class NewEventController implements Initializable {
     private TextField txtName;
 
     private CoordinatorModel coordinatorModel;
+    private EventsController eventsController;
 
     public NewEventController() throws EventManagerException, AdminLogicException {
             coordinatorModel = new CoordinatorModel();
@@ -50,14 +52,18 @@ public class NewEventController implements Initializable {
         fillComboBox();
     }
 
-
+    public void setEventsController(EventsController eventsController){
+        this.eventsController = eventsController;
+    }
     @FXML
     private void createEvent(ActionEvent event) throws EventManagerException {
         if(!checkFields())
             return;
         Events eventCreated = new Events(0,txtName.getText(),txtLocation.getText(),txtDescription.getText(),getStartDate(),getEndDate(),txtItinerary.getText());
         eventCreated = coordinatorModel.createEvent(eventCreated);
-
+        eventsController.updateTableView();
+        Stage stage = (Stage) btnBack.getScene().getWindow();
+        stage.close();
     }
     @FXML
     private LocalDateTime getStartDate() {
