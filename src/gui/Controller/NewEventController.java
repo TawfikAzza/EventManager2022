@@ -11,10 +11,7 @@ import gui.Model.CoordinatorModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -34,17 +31,20 @@ public class NewEventController implements Initializable {
     @FXML
     private DatePicker txtStartDate,txtEndDate;
     @FXML
-    private TextArea txtDescription,txtItinerary;
+    private TextArea txtDescription,txtItinerary,txtTicketDesciption;
 
     @FXML
     private TextField txtLocation;
 
     @FXML
-    private TextField txtName;
+    private TextField txtName,txtNameTicket;
+    @FXML
+    private ListView<Ticket> lstTickets;
 
     private CoordinatorModel coordinatorModel;
     private EventsController eventsController;
     private RootLayoutEvenController rootLayoutEvenController;
+    private Events currentEvent;
     public NewEventController() throws EventManagerException, AdminLogicException {
             coordinatorModel = new CoordinatorModel();
     }
@@ -81,6 +81,9 @@ public class NewEventController implements Initializable {
     @FXML
     void goBack(ActionEvent event) {
 
+    }
+    public void setCurrentEvent(Events event){
+        this.currentEvent = event;
     }
 
     private boolean checkFields() {
@@ -138,10 +141,25 @@ public class NewEventController implements Initializable {
 
     public void addTicket(ActionEvent actionEvent) {
         Ticket ticket = null;
+        if(txtNameTicket.getText().equals(""))
+            return;
+        if(txtTicketDesciption.getText().equals(""))
+            return;
+        ticket = new Ticket(0,txtNameTicket.getText(),txtTicketDesciption.getText());
+        for (Ticket ticket1:lstTickets.getItems()) {
+            if(ticket.getType().equals(ticket1.getType()))
+                return;
+        }
+
+        lstTickets.getItems().add(ticket);
 
     }
 
     public void removeTicket(ActionEvent actionEvent) {
+        if(lstTickets.getSelectionModel().getSelectedIndex()==-1)
+            return;
+        lstTickets.getItems().remove(lstTickets.getSelectionModel().getSelectedIndex());
+
     }
 
     public void setMainApp(RootLayoutEvenController rootLayoutEvenController) {

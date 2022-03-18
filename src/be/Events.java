@@ -13,6 +13,7 @@ public class Events {
     private String name;
     private String location;
     List<Participant> listParticipants;
+    List<Ticket> ticketAvailable;
     private String description;
     private String itinerary;
     private String strStartDate;

@@ -126,7 +126,7 @@
                   <Insets top="5.0" />
                </padding>
             </VBox>
-            <ListView prefHeight="200.0" prefWidth="200.0">
+            <ListView fx:id="lstTickets" prefHeight="200.0" prefWidth="200.0">
                <HBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </HBox.margin>
