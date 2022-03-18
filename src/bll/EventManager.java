@@ -44,4 +44,13 @@ public class EventManager {
             throw new EventManagerException("Error while creating the Event in database",e);
         }
     }
+
+    public void updateEvent(Events event) throws EventManagerException {
+        try {
+            eventDAO.updateEvent(event);
+            ticketDAO.addEventTicket(event);
+        } catch (Exception e) {
+            throw new EventManagerException("Error while creating the Event in database",e);
+        }
+    }
 }

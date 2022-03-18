@@ -6,6 +6,7 @@ import be.Ticket;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
+import bll.utils.DateUtil;
 import com.jfoenix.controls.JFXButton;
 import gui.Model.CoordinatorModel;
 import javafx.event.ActionEvent;
@@ -54,9 +55,15 @@ public class NewEventController implements Initializable {
     private EventsController eventsController;
     private RootLayoutEvenController rootLayoutEvenController;
     private Events currentEvent;
+    private String operationType="creation";
     public NewEventController() throws EventManagerException, AdminLogicException {
             coordinatorModel = new CoordinatorModel();
     }
+
+    public void setOperationType(String operationType) {
+        this.operationType=operationType;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fillComboBox();
@@ -69,14 +76,29 @@ public class NewEventController implements Initializable {
     private void createEvent(ActionEvent event) throws EventManagerException, IOException {
         if(!checkFields())
             return;
-        Events eventCreated = new Events(0,txtName.getText(),txtLocation.getText(),txtDescription.getText(),getStartDate(),getEndDate(),txtItinerary.getText());
-        if(lstTickets.getItems().size()>0) {
-            for (Ticket ticket : lstTickets.getItems())
-                eventCreated.getTicketAvailable().add(ticket);
+            if(operationType.equals("creation")) {
+            Events eventCreated = new Events(0,txtName.getText(),txtLocation.getText(),txtDescription.getText(),getStartDate(),getEndDate(),txtItinerary.getText());
+            if(lstTickets.getItems().size()>0) {
+                for (Ticket ticket : lstTickets.getItems())
+                    eventCreated.getTicketAvailable().add(ticket);
+            }
+            eventCreated = coordinatorModel.createEvent(eventCreated);
+            goBack();
         }
-        eventCreated = coordinatorModel.createEvent(eventCreated);
-        goBack();
-        System.out.println("finished");
+            if(operationType.equals("modification")) {
+                currentEvent.getTicketAvailable().clear();
+                for(Ticket ticket:lstTickets.getItems())
+                    currentEvent.getTicketAvailable().add(ticket);
+
+                currentEvent.setName(txtName.getText());
+                currentEvent.setStartDate(getStartDate());
+                currentEvent.setEndDate(getEndDate());
+                currentEvent.setDescription(txtDescription.getText());
+                currentEvent.setItinerary(txtItinerary.getText());
+                currentEvent.setLocation(txtLocation.getText());
+                coordinatorModel.updateEvent(currentEvent);
+                goBack();
+            }
     }
 
     @FXML
@@ -103,8 +125,6 @@ public class NewEventController implements Initializable {
 
         return startComboHour.getValue() != null
                 && startComboMinute.getValue() != null
-                && endComboHour.getValue() != null
-                && endComboMinute.getValue() != null
                 && txtStartDate.getValue() != null
                 && !txtDescription.getText().equals("")
                 && !txtLocation.getText().equals("")
@@ -153,6 +173,8 @@ public class NewEventController implements Initializable {
         endComboHour.getItems().addAll(arrayHours);
         startComboMinute.getItems().addAll(arrayMinutes);
         endComboMinute.getItems().addAll(arrayMinutes);
+
+
     }
 
     public void addTicket(ActionEvent actionEvent) {
@@ -197,5 +219,48 @@ public class NewEventController implements Initializable {
         primaryStage.show();
     }
 
+    public void setValue(Events event) {
+
+        txtName.setText(event.getName());
+        for (int i = 0; i < startComboHour.getItems().size(); i++) {
+            if(event.getStrStartDate().substring(11,13).equals(startComboHour.getItems().get(i))) {
+                startComboHour.getSelectionModel().select(i);
+                break;
+            }
+        }
+        for (int i = 0; i < startComboMinute.getItems().size(); i++) {
+            if(event.getStrStartDate().substring(14,16).equals(startComboMinute.getItems().get(i))) {
+                startComboMinute.getSelectionModel().select(i);
+                break;
+            }
+        }
+        txtStartDate.setValue(DateUtil.parseDate(event.getStrStartDate().substring(0,10)));
+        if(!(event.getEndDate() ==null)) {
+            for (int i = 0; i < endComboHour.getItems().size(); i++) {
+                if(event.getStrEndDate().substring(11,13).equals(endComboHour.getItems().get(i))) {
+                    endComboHour.getSelectionModel().select(i);
+                    break;
+                }
+            }
+            for (int i = 0; i < endComboMinute.getItems().size(); i++) {
+                if(event.getStrEndDate().substring(14,16).equals(endComboMinute.getItems().get(i))) {
+                    endComboMinute.getSelectionModel().select(i);
+                    break;
+                }
+            }
+            txtEndDate.setValue(DateUtil.parseDate(event.getStrStartDate().substring(0,10)));
+        }
+        if(!event.getItinerary().equals("")) {
+            txtItinerary.setText(event.getItinerary());
+        }
+
+        txtDescription.setText(event.getDescription());
+        txtLocation.setText(event.getLocation());
+        for(Ticket ticket:event.getTicketAvailable()){
+           lstTickets.getItems().add(ticket);
+        }
+        btnCreate.setText("Update Event");
+        currentEvent=event;
+    }
 }
 

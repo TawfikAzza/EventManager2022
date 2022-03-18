@@ -34,4 +34,8 @@ public class CoordinatorModel {
     public Events createEvent(Events event) throws EventManagerException {
         return eventManager.createEvent(event);
     }
+
+    public void updateEvent(Events event) throws EventManagerException {
+        eventManager.updateEvent(event);
+    }
 }

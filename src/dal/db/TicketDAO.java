@@ -19,6 +19,13 @@ public class TicketDAO {
     }
     public void addEventTicket(Events event) throws Exception {
         try (Connection con = cm.getConnection()) {
+            String sqlDelete = "DELETE FROM TicketType Where eventID=?";
+
+            PreparedStatement pstmt = con.prepareStatement(sqlDelete);
+            pstmt.setInt(1,event.getId());
+            pstmt.execute();
+        }
+        try (Connection con = cm.getConnection()) {
             String sqlInsert = "INSERT INTO TicketType VALUES (?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(sqlInsert);
             for (Ticket ticket:event.getTicketAvailable()) {
@@ -30,26 +37,5 @@ public class TicketDAO {
            pstmt.executeBatch();
         }
     }
-    public ArrayList<Participant> getAllParticipants() throws Exception
-    {
-        ArrayList<Participant> allParticipants = new ArrayList<>();
 
-        try (Connection con = cm.getConnection()) {
-            String sql ="SELECT * FROM Participant";
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            ResultSet rs = pstmt.executeQuery();
-
-            while(rs.next())
-            {
-                Participant participant = new Participant(rs.getInt("id"),
-                        rs.getString("fname"),
-                        rs.getString("lname"),
-                        rs.getString("phoneNumber"),
-                        rs.getString("email"));
-                allParticipants.add(participant);
-            }
-        }
-
-        return allParticipants;
-    }
 }
