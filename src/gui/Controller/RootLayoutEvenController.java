@@ -3,6 +3,7 @@ package gui.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -46,7 +47,9 @@ public class RootLayoutEvenController {
         EventsController controller = loader.getController();
         controller.setMainApp(this);
     }
-
+    public void setCenter(GridPane gridPane) {
+        topPane.setCenter(gridPane);
+    }
     @FXML
     void manageParticipants(ActionEvent event) {
 

@@ -4,6 +4,7 @@ import bll.utils.DateUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Events {
@@ -12,8 +13,8 @@ public class Events {
     private LocalDateTime endDate;
     private String name;
     private String location;
-    List<Participant> listParticipants;
-    List<Ticket> ticketAvailable;
+    List<Participant> listParticipants = new ArrayList<>();
+    List<Ticket> ticketAvailable = new ArrayList<>();
     private String description;
     private String itinerary;
     private String strStartDate;
@@ -37,6 +38,8 @@ public class Events {
         this.name = nameEvent;
         this.location = eventLocation;
     }
+
+
 
     public int getId() {
         return id;
@@ -80,6 +83,14 @@ public class Events {
 
     public List<Participant> getListParticipants() {
         return listParticipants;
+    }
+    public List<Ticket> getTicketAvailable() {
+        return ticketAvailable;
+    }
+
+    public void setTicketAvailable(List<Ticket> ticketAvailable) {
+
+        this.ticketAvailable = ticketAvailable;
     }
 
     public void setListParticipants(List<Participant> listParticipants) {

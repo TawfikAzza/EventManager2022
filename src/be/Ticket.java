@@ -34,4 +34,9 @@ public class Ticket {
     public void setBenefit(String benefit) {
         this.benefit = benefit;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s",type);
+    }
 }

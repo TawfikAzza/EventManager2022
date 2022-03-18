@@ -1,6 +1,7 @@
 package dal.db;
 
 import be.Events;
+import be.Ticket;
 import dal.ConnectionManager;
 import dal.interfaces.IEventDAO;
 
@@ -96,35 +97,94 @@ public class EventDAO implements IEventDAO {
         }
     }
 
-
+    /**
+     * This one is a method which took several years of my life...
+     * Do not modify it without paying close attention at the way the method retrieve results from the query
+     * Also, if you ask yourself why I used a temporary List of ticket instead of using the one I built....
+     * Well, let's just say that Jeppe will have a lot of questions from me if I remember to ask him...
+     * */
     @Override
     public List<Events> getAllEvents() throws Exception {
         List<Events> allEvents = new ArrayList<>();
+        List<Ticket> ticketList = new ArrayList<>();
         try (Connection con = cm.getConnection()) {
-            String sql = "SELECT * FROM EVENTS";
+            String sql = "SELECT EVENTS.id,events.name,events.location,events.description,events.startDate,events.endDate," +
+                        "events.itinerary, TicketType.id as ticketID, TicketType.typeName " +
+                        " as nameTicket, TicketType.benefit as ticketBenefit " +
+                        " FROM EVENTS INNER JOIN TicketType ON EVENTS.id = TicketType.eventID";
             PreparedStatement pstmt = con.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
+            int idEvent = 0;
+            int currentEvent = -1;
+            boolean flagFirst=false;
+            String name=null;
+            String location = null;
+            String description=null;
+            LocalDateTime startDate=null;
+            LocalDateTime endDate=null;
+            String itinerary=null;
+
             while(rs.next())
             {
-                Events event= new Events(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("location")
-                );
-                event.setDescription(rs.getString("description"));
-                event.setStartDate(rs.getObject("startDate", LocalDateTime.class));
+                idEvent= rs.getInt("id");
+                if(!flagFirst) {
+                    currentEvent=idEvent;
+                    flagFirst=true;
+                }
+                if(idEvent!=currentEvent) {
+                    Events event= new Events(
+                            currentEvent,
+                            name,
+                            location
+                    );
+                    event.setDescription(location);
+                    event.setStartDate(startDate);
+                    if(endDate!=null) {
+                        event.setEndDate(endDate);
+                    }
+                    if(itinerary!=null) {
+                        event.setItinerary(itinerary);
+                    }
+                    List<Ticket> tickets = new ArrayList<>(ticketList);
+                    event.setTicketAvailable(tickets);
+
+                    allEvents.add(event);
+                    ticketList.clear();
+
+                }
+
+                ticketList.add(new Ticket(rs.getInt("ticketID")
+                                        ,rs.getString("nameTicket")
+                                        ,rs.getString("ticketBenefit")));
+
+                name=rs.getString("name");
+                location = rs.getString("location");
+                description=rs.getString("description");
+                startDate=rs.getObject("startDate", LocalDateTime.class);
                 if(rs.getObject("endDate",LocalDateTime.class)!=null) {
-                    event.setEndDate(rs.getObject("endDate",LocalDateTime.class));
+                   endDate=rs.getObject("endDate",LocalDateTime.class);
                 }
                 if(rs.getString("itinerary")!=null) {
-                    event.setItinerary(rs.getString("itinerary"));
+                    itinerary=rs.getString("itinerary");
                 }
-                allEvents.add(event);
+
+                currentEvent=idEvent;
             }
+
+            Events event = new Events(currentEvent,name,location);
+            event.setStartDate(startDate);
+            event.setDescription(description);
+            if(endDate!=null) {
+                event.setEndDate(endDate);
+            }
+            if(itinerary!=null) {
+                event.setItinerary(itinerary);
+            }
+            List<Ticket> tickets = new ArrayList<>(ticketList);
+            event.setTicketAvailable(tickets);
+            allEvents.add(event);
         }
-
         return allEvents;
-
     }
 
 

@@ -1,6 +1,7 @@
 package gui.Controller;
 
 import be.Events;
+import be.Ticket;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
@@ -60,7 +61,8 @@ public class EventsController implements Initializable {
     private TextField txtName,txtLocation,txtStartDate,txtStartTime,txtEndDate;
     @FXML
     private TextArea txtDescription,txtItinerary;
-
+    @FXML
+    private ListView<Ticket> lstTickets;
     private Events currentEvent;
 
     private RootLayoutEvenController rootLayoutEvenController;
@@ -118,10 +120,20 @@ public class EventsController implements Initializable {
             toggleTextFieldOff();
             toggleLabelsOn();
             setLabelText(event);
+            setListView();
         }
     }
 
+    private void setListView() {
 
+            lstTickets.getItems().clear();
+
+        for (Ticket ticket:tableEvents.getSelectionModel().getSelectedItem().getTicketAvailable()) {
+
+            lstTickets.getItems().add(ticket);
+        }
+
+    }
     private void setTextFieldText(Events event) {
         txtName.setText(event.getName());
         txtLocation.setText(event.getLocation());

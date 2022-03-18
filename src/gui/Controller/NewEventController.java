@@ -10,10 +10,16 @@ import com.jfoenix.controls.JFXButton;
 import gui.Model.CoordinatorModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -40,6 +46,9 @@ public class NewEventController implements Initializable {
     private TextField txtName,txtNameTicket;
     @FXML
     private ListView<Ticket> lstTickets;
+    @FXML
+    private GridPane gridPaneNewEvent;
+
 
     private CoordinatorModel coordinatorModel;
     private EventsController eventsController;
@@ -57,15 +66,19 @@ public class NewEventController implements Initializable {
         this.eventsController = eventsController;
     }
     @FXML
-    private void createEvent(ActionEvent event) throws EventManagerException {
+    private void createEvent(ActionEvent event) throws EventManagerException, IOException {
         if(!checkFields())
             return;
         Events eventCreated = new Events(0,txtName.getText(),txtLocation.getText(),txtDescription.getText(),getStartDate(),getEndDate(),txtItinerary.getText());
+        if(lstTickets.getItems().size()>0) {
+            for (Ticket ticket : lstTickets.getItems())
+                eventCreated.getTicketAvailable().add(ticket);
+        }
         eventCreated = coordinatorModel.createEvent(eventCreated);
-        eventsController.updateTableView();
-        Stage stage = (Stage) btnBack.getScene().getWindow();
-        stage.close();
+        goBack();
+        System.out.println("finished");
     }
+
     @FXML
     private LocalDateTime getStartDate() {
         int startHour = Integer.parseInt(startComboHour.getValue());
@@ -87,6 +100,7 @@ public class NewEventController implements Initializable {
     }
 
     private boolean checkFields() {
+
         return startComboHour.getValue() != null
                 && startComboMinute.getValue() != null
                 && endComboHour.getValue() != null
@@ -94,7 +108,9 @@ public class NewEventController implements Initializable {
                 && txtStartDate.getValue() != null
                 && !txtDescription.getText().equals("")
                 && !txtLocation.getText().equals("")
-                && !txtName.getText().equals("");
+                && !txtName.getText().equals("")
+                && !(lstTickets.getItems().size()==0);
+
     }
 
     private void fillComboBox(){
@@ -152,7 +168,6 @@ public class NewEventController implements Initializable {
         }
 
         lstTickets.getItems().add(ticket);
-
     }
 
     public void removeTicket(ActionEvent actionEvent) {
@@ -165,5 +180,22 @@ public class NewEventController implements Initializable {
     public void setMainApp(RootLayoutEvenController rootLayoutEvenController) {
         this.rootLayoutEvenController=rootLayoutEvenController;
     }
+    private void goBack() throws IOException {
+        FXMLLoader loaderPage = new FXMLLoader();
+        loaderPage.setLocation(getClass().getResource("/gui/View/EventView.fxml"));
+        GridPane eventOverview = (GridPane) loaderPage.load();
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/RootLayoutEvent.fxml"));
+        Parent root = loader.load();
+
+        RootLayoutEvenController rootLayoutEvenController = loader.getController();
+        rootLayoutEvenController.setCenter(eventOverview);
+        Scene scene = new Scene(root);
+        Stage primaryStage = (Stage) btnBack.getScene().getWindow();
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
 }
 
