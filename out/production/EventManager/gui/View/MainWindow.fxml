@@ -22,9 +22,9 @@
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <!--
-                  To use SceneBuilder add: "@../../../Resources" to the front of the url otherwise the application will freak out :)
+                     To use SceneBuilder add: "@../../../Resources" to the front of the url otherwise the application will freak out :)
                   -->
-                  <Image url="/Images/Logo.png" />
+                  <Image url="@../../../Resources/Images/Logo.png" />
                </image>
             </ImageView>
             
@@ -44,7 +44,7 @@
                   <Insets bottom="11.0" top="16.0" />
                </VBox.margin>
             </PasswordField>
-            <Button mnemonicParsing="false" text="Submit" textFill="#fafafa" />
+            <Button fx:id="SubmitButton" mnemonicParsing="false" onAction="#SubmitLogin" text="Submit" textFill="#fafafa" />
          </children>
       </VBox>
    </children>
