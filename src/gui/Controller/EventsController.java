@@ -63,7 +63,7 @@ public class EventsController implements Initializable {
 
     private Events currentEvent;
 
-
+    private RootLayoutEvenController rootLayoutEvenController;
     private CoordinatorModel coordinatorModel;
     public EventsController() {
         try {
@@ -255,5 +255,9 @@ public class EventsController implements Initializable {
         stage.setScene(scene);
 
         stage.show();
+    }
+
+    public void setMainApp(RootLayoutEvenController rootLayoutEvenController) {
+        this.rootLayoutEvenController=rootLayoutEvenController;
     }
 }

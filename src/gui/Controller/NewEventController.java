@@ -2,6 +2,7 @@ package gui.Controller;
 
 
 import be.Events;
+import be.Ticket;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
@@ -43,7 +44,7 @@ public class NewEventController implements Initializable {
 
     private CoordinatorModel coordinatorModel;
     private EventsController eventsController;
-
+    private RootLayoutEvenController rootLayoutEvenController;
     public NewEventController() throws EventManagerException, AdminLogicException {
             coordinatorModel = new CoordinatorModel();
     }
@@ -136,9 +137,15 @@ public class NewEventController implements Initializable {
     }
 
     public void addTicket(ActionEvent actionEvent) {
+        Ticket ticket = null;
+
     }
 
     public void removeTicket(ActionEvent actionEvent) {
+    }
+
+    public void setMainApp(RootLayoutEvenController rootLayoutEvenController) {
+        this.rootLayoutEvenController=rootLayoutEvenController;
     }
 }
 
