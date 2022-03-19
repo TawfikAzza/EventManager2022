@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="topPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.RootLayoutEvenController">
+    <left>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#addEvent" prefHeight="102.0" prefWidth="100.0" text="Add an Event" />
+                <Button mnemonicParsing="false" onAction="#manageEvent" prefHeight="102.0" prefWidth="100.0" text="Manage Events" />
+                <Button mnemonicParsing="false" onAction="#manageParticipants" prefHeight="102.0" prefWidth="100.0" text="Participants" />
+            </children>
+        </VBox>
+    </left>
+</BorderPane>
