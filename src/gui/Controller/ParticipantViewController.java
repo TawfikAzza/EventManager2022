@@ -63,7 +63,7 @@ public class ParticipantViewController implements Initializable {
         for (Participant participant:allParticipants) {
             System.out.println(participant.getFname().toLowerCase(Locale.ROOT).contains(query.getText().toLowerCase(Locale.ROOT)));
             if(participant.getFname().toLowerCase(Locale.ROOT).contains(query.getText().toLowerCase(Locale.ROOT))
-                || participant.getLname().contains(query.getText())
+                || participant.getLname().toLowerCase(Locale.ROOT).contains(query.getText().toLowerCase(Locale.ROOT))
                 || participant.getPhoneNumber().contains(query.getText())) {
                 searchedParticipants.add(participant);
             }
