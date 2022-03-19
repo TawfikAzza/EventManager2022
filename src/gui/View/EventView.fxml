@@ -28,8 +28,8 @@
    <children>
       <AnchorPane fx:id="topPane" GridPane.columnIndex="1">
          <children>
-            <JFXButton fx:id="btnEdit" buttonType="RAISED" layoutX="36.0" layoutY="469.0" onAction="#editEvent" text="Edit Event" />
-            <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="209.0" layoutY="469.0" onAction="#deleteEvent" text="Delete Event" />
+            <JFXButton fx:id="btnEdit" buttonType="RAISED" layoutX="51.0" layoutY="469.0" onAction="#editEvent" text="Edit Event" />
+            <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="180.0" layoutY="469.0" onAction="#deleteEvent" text="Delete Event" />
             <TextField fx:id="txtName" layoutX="128.0" layoutY="44.0" />
             <TextField fx:id="txtLocation" layoutX="129.0" layoutY="88.0" />
             <Label fx:id="lblName" layoutX="128.0" layoutY="48.0" text="Label" />
@@ -68,7 +68,6 @@
             <Label fx:id="lblLocation" layoutX="128.0" layoutY="92.0" text="Label" />
             <Label fx:id="lblStartDate" layoutX="130.0" layoutY="139.0" text="Label" />
             <Label fx:id="lblEndDate" layoutX="130.0" layoutY="185.0" text="Label" />
-            <JFXButton fx:id="btnModifyEvent" buttonType="RAISED" layoutX="102.0" layoutY="469.0" onAction="#updateEvent" text="Confirm Changes" />
             <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="508.0" text="Add Participant" />
             <Label fx:id="startDateLabel" layoutX="33.0" layoutY="139.0" text="Date">
                <font>
