@@ -9,11 +9,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.Locale;
@@ -29,10 +27,14 @@ public class ParticipantViewController implements Initializable {
     private TextField query;
     @FXML
     private TableView<Participant> tableParticipant;
+    @FXML
+    private Label lblMail,lblName,lblPhoneNumber;
+
 
     private RootLayoutEvenController rootLayoutEvenController;
     private ParticipantModel participantModel;
     private ObservableList<Participant> allParticipants;
+    private Participant currentParticipant;
 
     public ParticipantViewController() {
         try {
@@ -71,7 +73,8 @@ public class ParticipantViewController implements Initializable {
         for (Participant participant:allParticipants) {
             if(participant.getFname().toLowerCase(Locale.ROOT).contains(query.getText().toLowerCase(Locale.ROOT))
                 || participant.getLname().toLowerCase(Locale.ROOT).contains(query.getText().toLowerCase(Locale.ROOT))
-                || participant.getPhoneNumber().toLowerCase(Locale.ROOT).contains(query.getText().toLowerCase(Locale.ROOT))) {
+                || participant.getPhoneNumber().toLowerCase(Locale.ROOT).contains(query.getText().toLowerCase(Locale.ROOT))
+                || participant.getEmail().toLowerCase(Locale.ROOT).contains(query.getText().toLowerCase(Locale.ROOT))) {
                 searchedParticipants.add(participant);
             }
 
@@ -86,5 +89,18 @@ public class ParticipantViewController implements Initializable {
 
     public void setMainApp(RootLayoutEvenController rootLayoutEvenController) {
         this.rootLayoutEvenController=rootLayoutEvenController;
+    }
+    private void setLabelParticipant(Participant participant) {
+        if(participant==null)
+            return;
+        lblName.setText(participant.getFname()+" "+participant.getLname());
+        lblMail.setText(participant.getEmail());
+        lblPhoneNumber.setText(participant.getPhoneNumber());
+    }
+    public void displayParticipant(MouseEvent mouseEvent) {
+        if(tableParticipant.getSelectionModel().getSelectedIndex()==-1)
+            return;
+        currentParticipant = tableParticipant.getSelectionModel().getSelectedItem();
+        setLabelParticipant(currentParticipant);
     }
 }

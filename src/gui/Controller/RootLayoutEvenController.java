@@ -3,7 +3,6 @@ package gui.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -12,8 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class RootLayoutEvenController {
-    private GridPane eventManager;
-    private Stage primarySTage;
     @FXML
     private BorderPane topPane;
 

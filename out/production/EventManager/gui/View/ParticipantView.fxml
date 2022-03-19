@@ -32,7 +32,7 @@
                   <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#searchParticipant" text="Search" />
                </children>
             </HBox>
-            <TableView fx:id="tableParticipant" prefHeight="188.0" prefWidth="253.0">
+            <TableView fx:id="tableParticipant" onMouseClicked="#displayParticipant" prefHeight="188.0" prefWidth="253.0">
               <columns>
                 <TableColumn fx:id="columnFname" prefWidth="73.59997862577438" text="First Name" />
                 <TableColumn fx:id="columnLname" prefWidth="79.199951171875" text="Last Name" />
@@ -43,12 +43,12 @@
       </VBox>
       <AnchorPane prefHeight="231.0" prefWidth="171.0" GridPane.columnIndex="1">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Label" />
-            <Label layoutX="100.0" layoutY="14.0" text="Label" />
-            <Label layoutX="14.0" layoutY="58.0" text="Label" />
-            <Label layoutX="100.0" layoutY="58.0" text="Label" />
-            <Label layoutX="14.0" layoutY="124.0" text="Label" />
-            <Label layoutX="100.0" layoutY="124.0" text="Label" />
+            <Label layoutX="14.0" layoutY="14.0" text="Name:" />
+            <Label fx:id="lblName" layoutX="100.0" layoutY="14.0" />
+            <Label layoutX="14.0" layoutY="58.0" text="mail:" />
+            <Label fx:id="lblMail" layoutX="100.0" layoutY="58.0" />
+            <Label layoutX="10.0" layoutY="124.0" text="Phone number:" />
+            <Label fx:id="lblPhoneNumber" layoutX="100.0" layoutY="124.0" />
          </children>
       </AnchorPane>
    </children>
