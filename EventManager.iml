@@ -12,5 +12,6 @@
     <orderEntry type="library" name="microsoft.sqlserver.mssql.jdbc" level="project" />
     <orderEntry type="library" name="jfoenix" level="project" />
     <orderEntry type="library" name="google.zxing.javase" level="project" />
+    <orderEntry type="library" name="apache.poi" level="project" />
   </component>
 </module>

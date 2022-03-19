@@ -87,9 +87,9 @@ public class ParticipantDAO {
         ArrayList<String> eventsOfOneParticipant = new ArrayList<>();
 
         try (Connection con = cm.getConnection()) {
-            String sql ="SELECT e.name FROM Events e" +
-                    "INNER JOIN EventParticipant ep ON  ep.idEvent = e.id" +
-                    "INNER JOIN Participant p ON p.id = ep.idParticipant" +
+            String sql ="SELECT e.name FROM Events e " +
+                    "INNER JOIN EventParticipant ep ON  ep.idEvent = e.id " +
+                    "INNER JOIN Participant p ON p.id = ep.idParticipant " +
                     "WHERE p.id = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, idParticipant);
@@ -107,7 +107,7 @@ public class ParticipantDAO {
         }
 
         return eventsOfOneParticipant;
-    }
+    } // this method returns all the events which the particular participant has the ticket (parameter is participant´s id)
 
 
 

@@ -36,7 +36,6 @@ public class ParticipantModel {
     public ObservableList<String> participantsShowEventsbyId (int idParticipant) throws SQLServerException {
         showEventsByPartId = FXCollections.observableArrayList();
         showEventsByPartId.setAll(participantLogic.participantsShowEventsbyId(idParticipant));
-        System.out.println( "gay1: " + participantLogic.participantsShowEventsbyId(1)); // TO DELETE
         return showEventsByPartId;
     }
 
