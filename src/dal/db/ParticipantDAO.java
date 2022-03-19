@@ -107,7 +107,7 @@ public class ParticipantDAO {
         }
 
         return eventsOfOneParticipant;
-    }
+    } // this method returns all the events which the particular participant has the ticket (parameter is participant´s id)
 
 
 

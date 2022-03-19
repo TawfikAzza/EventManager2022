@@ -1,13 +1,18 @@
 package dal.db;
 
 import be.Events;
+import be.Participant;
 import be.Ticket;
 import dal.ConnectionManager;
 import dal.interfaces.IEventDAO;
+import javafx.event.Event;
+import org.apache.poi.ss.usermodel.Row;
 
+import java.lang.reflect.Array;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class EventDAO implements IEventDAO {
@@ -218,4 +223,72 @@ public class EventDAO implements IEventDAO {
 
         return eventSearched;
     }
+
+    public String[][] getParticipantsForEventById (int idOfEvent) {
+            //int counter = 1;
+            int row = 0;
+            int column = 0;
+            String[][] finalArray = new String[getNumberOfRow(idOfEvent)][4];
+
+
+        try (Connection con = cm.getConnection()) {
+            String sql ="SELECT p.fname, p.lname, p.phoneNumber, tt.typeName FROM Participant p " +
+                    "JOIN EventParticipant ep ON ep.idParticipant = p.id " +
+                    "JOIN Events e ON e.id = ep.idEvent " +
+                    "INNER JOIN TicketType tt ON tt.id = ep.typeTicket " +
+                    "WHERE e.id = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, idOfEvent);
+            ResultSet rs = pstmt.executeQuery();
+
+
+            while(rs.next())
+            {
+                String fName = rs.getString("fname");
+                String lName = rs.getString("lname");
+                String phoneNumber = String.valueOf(rs.getInt("phoneNumber"));
+                String typeTicket = rs.getString("typeName");
+                finalArray[column][row] = fName;
+                finalArray[column][row + 1] = lName;
+                finalArray[column][row + 2] = phoneNumber;
+                finalArray[column][row + 3] = typeTicket;
+                column++;
+                row = 0;
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return finalArray;
+    } // this method returns 2D array of result which is used in FileManager to print all participants for the event in Excel sheet
+
+
+    public int getNumberOfRow (int id) {
+
+        int number = 0;
+
+        try (Connection con = cm.getConnection()) {
+            String sql ="SELECT COUNT(*) AS numberRow FROM Participant p " +
+                    "JOIN EventParticipant ep ON ep.idParticipant = p.id " +
+                    "JOIN Events e ON e.id = ep.idEvent " +
+                    "INNER JOIN TicketType tt ON tt.id = ep.typeTicket " +
+                    "WHERE e.id = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+
+            while(rs.next())
+            {
+                number = rs.getInt("numberRow");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("number of items: " + number);
+        return number;
+    } // this private method returns the number of rows in order to create a 2D array in getParticipantsForEventById method
+
 }
