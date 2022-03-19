@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="BorderPain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ECallParticipantsController">
+<BorderPane id="BorderPain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="730.0" styleClass="anchor" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ECallParticipantsController">
    <left>
       <BorderPane prefHeight="482.0" prefWidth="319.0" BorderPane.alignment="CENTER">
          <center>
-            <TableView fx:id="tableViewPartName" onMouseClicked="#toShowCurrentParticipants" prefHeight="405.0" prefWidth="293.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableViewPartName" onMouseClicked="#toShowCurrentParticipants" prefHeight="405.0" prefWidth="293.0" styleClass="shadow" stylesheets="@CSS/Style.css" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="tableColumnFName" prefWidth="75.0" text="First name" />
                 <TableColumn fx:id="tableColumnLName" prefWidth="116.7999267578125" text="Last Name" />
@@ -31,7 +31,7 @@
          <top>
             <Pane prefHeight="54.0" prefWidth="319.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" layoutX="42.0" layoutY="6.0" prefHeight="43.0" prefWidth="236.0" text="All participants">
+                  <Label alignment="CENTER" layoutX="42.0" layoutY="6.0" prefHeight="43.0" prefWidth="236.0" text="All participants" textFill="#3823b8">
                      <font>
                         <Font name="System Bold" size="29.0" />
                      </font>
@@ -50,7 +50,7 @@
       </BorderPane>
    </left>
    <right>
-      <AnchorPane prefHeight="482.0" prefWidth="362.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="482.0" prefWidth="362.0" styleClass="anchor01" stylesheets="@CSS/Style.css" BorderPane.alignment="CENTER">
          <children>
             <GridPane alignment="CENTER" layoutX="58.0" layoutY="170.0" AnchorPane.topAnchor="25.0">
               <columnConstraints>
@@ -124,7 +124,7 @@
                   </Label>
                </children>
             </GridPane>
-            <ListView fx:id="listViewEvents" layoutX="58.0" layoutY="213.0" prefHeight="246.0" prefWidth="195.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="213.0" />
+            <ListView fx:id="listViewEvents" layoutX="58.0" layoutY="213.0" prefHeight="246.0" prefWidth="195.0" styleClass="shadow" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="213.0" />
          </children>
       </AnchorPane>
    </right>

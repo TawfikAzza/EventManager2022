@@ -26,7 +26,7 @@
          <graphic>
             <ImageView fitHeight="115.0" fitWidth="134.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@/R1.png" />
+                  <Image url="@../../../resources/Images/R1.png" />
                </image>
             </ImageView>
          </graphic>
@@ -37,7 +37,7 @@
          <graphic>
             <ImageView fitHeight="117.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                <image>
-                  <Image url="@/admin.png" />
+                  <Image url="@../../../resources/Images/admin.png" />
                </image>
             </ImageView>
          </graphic>
@@ -51,7 +51,7 @@
                   <!--
                      To use SceneBuilder add: "@../../../Resources" to the front of the url otherwise the application will freak out :)
                   -->
-                  <Image url="@/Logo.png" />
+                  <Image url="@../../../resources/Images/Logo.png" />
                </image>
             </ImageView>
             
