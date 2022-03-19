@@ -111,7 +111,8 @@ public class EventDAO implements IEventDAO {
             String sql = "SELECT EVENTS.id,events.name,events.location,events.description,events.startDate,events.endDate," +
                         "events.itinerary, TicketType.id as ticketID, TicketType.typeName " +
                         " as nameTicket, TicketType.benefit as ticketBenefit " +
-                        " FROM EVENTS INNER JOIN TicketType ON EVENTS.id = TicketType.eventID";
+                        " FROM EVENTS INNER JOIN TicketType ON EVENTS.id = TicketType.eventID" +
+                    " order by id";
             PreparedStatement pstmt = con.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             int idEvent = 0;

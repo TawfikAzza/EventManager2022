@@ -17,9 +17,15 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldListCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
+import javax.xml.validation.Schema;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -67,6 +73,8 @@ public class NewEventController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fillComboBox();
+        lstTickets.setEditable(true);
+        lstTickets.setCellFactory(lv -> new TicketListCell());
     }
 
     public void setEventsController(EventsController eventsController){
@@ -89,6 +97,7 @@ public class NewEventController implements Initializable {
                 currentEvent.getTicketAvailable().clear();
                 for(Ticket ticket:lstTickets.getItems())
                     currentEvent.getTicketAvailable().add(ticket);
+
 
                 currentEvent.setName(txtName.getText());
                 currentEvent.setStartDate(getStartDate());
@@ -261,6 +270,56 @@ public class NewEventController implements Initializable {
         }
         btnCreate.setText("Update Event");
         currentEvent=event;
+    }
+
+    public class TicketListCell extends ListCell<Ticket> {
+        private final TextField textField = new TextField();
+
+        public TicketListCell() {
+            textField.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+                if (e.getCode() == KeyCode.ESCAPE) {
+                    cancelEdit();
+                }
+            });
+            textField.setOnAction(e -> {
+                getItem().setType(textField.getText());
+                setText(textField.getText());
+                setContentDisplay(ContentDisplay.TEXT_ONLY);
+            });
+            setGraphic(textField);
+        }
+
+        @Override
+        protected void updateItem(Ticket ticket, boolean empty) {
+            super.updateItem(ticket, empty);
+            if (isEditing()) {
+                textField.setText(ticket.getType());
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            } else {
+                setContentDisplay(ContentDisplay.TEXT_ONLY);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(ticket.getType());
+                }
+            }
+        }
+
+        @Override
+        public void startEdit() {
+            super.startEdit();
+            textField.setText(getItem().getType());
+            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            textField.requestFocus();
+            textField.selectAll();
+        }
+
+        @Override
+        public void cancelEdit() {
+            super.cancelEdit();
+            setText(getItem().getType());
+            setContentDisplay(ContentDisplay.TEXT_ONLY);
+        }
     }
 }
 
