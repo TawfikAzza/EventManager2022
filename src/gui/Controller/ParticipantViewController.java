@@ -2,6 +2,8 @@ package gui.Controller;
 
 import be.Participant;
 import gui.Model.ParticipantModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,6 +45,12 @@ public class ParticipantViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         allParticipants = FXCollections.observableArrayList();
         updateTable();
+        query.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                searchParticipant(new ActionEvent());
+            }
+        });
     }
 
     public void updateTable() {
@@ -61,10 +69,9 @@ public class ParticipantViewController implements Initializable {
         ObservableList<Participant> searchedParticipants = FXCollections.observableArrayList();
 
         for (Participant participant:allParticipants) {
-            System.out.println(participant.getFname().toLowerCase(Locale.ROOT).contains(query.getText().toLowerCase(Locale.ROOT)));
             if(participant.getFname().toLowerCase(Locale.ROOT).contains(query.getText().toLowerCase(Locale.ROOT))
                 || participant.getLname().toLowerCase(Locale.ROOT).contains(query.getText().toLowerCase(Locale.ROOT))
-                || participant.getPhoneNumber().contains(query.getText())) {
+                || participant.getPhoneNumber().toLowerCase(Locale.ROOT).contains(query.getText().toLowerCase(Locale.ROOT))) {
                 searchedParticipants.add(participant);
             }
 
