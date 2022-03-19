@@ -14,69 +14,97 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<GridPane fx:id="gridPaneNewEvent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.NewEventController">
+<GridPane fx:id="gridPaneNewEvent" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="600.0" styleClass="anchor" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.NewEventController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="149.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="441.0" minWidth="10.0" prefWidth="441.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="120.0000061035156" minHeight="10.0" prefHeight="104.80000000000001" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="136.79997558593755" minHeight="10.0" prefHeight="100.19999999999999" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="194.39999999999998" minHeight="4.999975585937477" prefHeight="174.39999999999998" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="48.19998779296873" minHeight="0.0" prefHeight="18.000036621093727" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="173.0" minHeight="4.999975585937477" prefHeight="156.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="57.0" minHeight="0.0" prefHeight="57.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Event Name:">
+      <Label text="Event Name:" textFill="#3823b8">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
       </Label>
-      <Label text="Event Location:" GridPane.rowIndex="1">
+      <Label text="Event Location:" textFill="#3823b8" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
       </Label>
-      <Label text="Event's Date:" GridPane.rowIndex="2">
+      <Label text="Event's Date:" textFill="#3823b8" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
       </Label>
-      <Label text="Event's end Date:" GridPane.rowIndex="4">
+      <Label text="Event's end Date:" textFill="#3823b8" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
       </Label>
-      <Label text="Event's Description:" GridPane.rowIndex="6">
+      <Label text="Event's Description:" textFill="#3823b8" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
       </Label>
-      <Label text="Event's end time:" GridPane.rowIndex="5">
+      <Label text="Event's end time:" textFill="#3823b8" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
       </Label>
-      <Label text="Event's start time:" GridPane.rowIndex="3">
+      <Label text="Event's start time:" textFill="#3823b8" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
       </Label>
-      <Label text="Itinerary:" GridPane.rowIndex="7">
+      <Label text="Itinerary:" textFill="#3823b8" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
       </Label>
-      <Label text="Ticket's available" GridPane.rowIndex="8">
+      <Label text="Ticket's available" textFill="#3823b8" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
       </Label>
       <TextField fx:id="txtName" GridPane.columnIndex="1">
          <GridPane.margin>
@@ -88,12 +116,12 @@
             <Insets left="15.0" right="15.0" />
          </GridPane.margin>
       </TextField>
-      <TextArea fx:id="txtDescription" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+      <TextArea fx:id="txtDescription" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" stylesheets="@CSS/Style.css" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </GridPane.margin>
       </TextArea>
-      <TextArea fx:id="txtItinerary" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+      <TextArea fx:id="txtItinerary" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" stylesheets="@CSS/Style.css" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </GridPane.margin>
@@ -102,9 +130,15 @@
          <children>
             <VBox>
                <children>
-                  <Label text="Name:" />
+                  <Label text="Name:" textFill="#3823b8">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <TextField fx:id="txtNameTicket" />
-                  <Label text="Benefit:" />
+                  <Label text="Benefit:" textFill="#3823b8">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <TextArea fx:id="txtTicketDesciption" prefHeight="104.0" prefWidth="82.0" />
                </children>
             </VBox>
@@ -125,7 +159,7 @@
                   <Insets top="5.0" />
                </padding>
             </VBox>
-            <ListView fx:id="lstTickets" prefHeight="200.0" prefWidth="200.0">
+            <ListView fx:id="lstTickets" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" stylesheets="@CSS/Style.css">
                <HBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </HBox.margin>
@@ -135,7 +169,7 @@
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </GridPane.margin>
       </HBox>
-      <JFXButton fx:id="btnBack" onAction="#goBack" text="&lt;&lt; Back" GridPane.rowIndex="9">
+      <JFXButton fx:id="btnBack" onAction="#goBack" text="&lt;&lt; Back" GridPane.columnIndex="1" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets left="15.0" />
          </GridPane.margin>

@@ -34,8 +34,8 @@
       <TextField fx:id="emailTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <TextField fx:id="firstNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <TextField fx:id="lastNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Button fx:id="backButton" mnemonicParsing="false" onAction="#backClick" text="&lt;- Back" GridPane.rowIndex="7" />
-      <Button fx:id="newEventCoordinatorButton" mnemonicParsing="false" onAction="#addNewEventCoordinatorClick" prefHeight="26.0" prefWidth="183.0" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <Button fx:id="backButton" mnemonicParsing="false" onAction="#backClick" stylesheets="@CSS/Style.css" text="&lt;- Back" GridPane.rowIndex="7" />
+      <Button fx:id="newEventCoordinatorButton" mnemonicParsing="false" onAction="#addNewEventCoordinatorClick" prefHeight="26.0" prefWidth="183.0" stylesheets="@CSS/Style.css" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="7" />
       <Label text="Password" GridPane.rowIndex="4" />
       <PasswordField fx:id="passwordField" prefHeight="26.0" prefWidth="154.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Label text="Confirm Password" GridPane.rowIndex="5" />
