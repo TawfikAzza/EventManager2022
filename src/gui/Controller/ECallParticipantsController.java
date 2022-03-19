@@ -56,9 +56,7 @@ public class ECallParticipantsController implements Initializable {
         labelFName.setText(chosenParticipant.getFname());
         labelLName.setText(chosenParticipant.getLname());
         labelTelNumber.setText(chosenParticipant.getPhoneNumber());
-        //listViewEvents.setItems(participantModel.participantsShowEventsbyId(chosenParticipant.getId()));
-        System.out.println( "gay: " + participantModel.participantsShowEventsbyId(chosenParticipant.getId())); // TO DELETE
-        System.out.println( "size: " + participantModel.participantsShowEventsbyId(chosenParticipant.getId()).size()); // TO DELETE
+        listViewEvents.setItems(participantModel.participantsShowEventsbyId(chosenParticipant.getId()));
     }
 
 
