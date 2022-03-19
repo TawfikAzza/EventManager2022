@@ -51,7 +51,16 @@ public class RootLayoutEvenController {
         topPane.setCenter(gridPane);
     }
     @FXML
-    void manageParticipants(ActionEvent event) {
+    void manageParticipants(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/gui/View/ParticipantView.fxml"));
+        GridPane eventOverview = (GridPane) loader.load();
 
+        // Set person overview into the center of root layout.
+        topPane.setCenter(eventOverview);
+
+        // Give the controller access to the main app.
+        ParticipantViewController controller = loader.getController();
+        controller.setMainApp(this);
     }
 }
