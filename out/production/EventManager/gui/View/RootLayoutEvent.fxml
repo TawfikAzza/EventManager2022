@@ -15,7 +15,7 @@
                <graphic>
                   <ImageView fitHeight="51.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../resources/Images/addevent.png" />
+                        <Image url="@/Images/addevent.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -26,7 +26,7 @@
                <graphic>
                   <ImageView fitHeight="56.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../resources/Images/managelogo01.png" />
+                        <Image url="@/Images/managelogo01.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -37,7 +37,7 @@
                <graphic>
                   <ImageView fitHeight="69.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../resources/Images/participants.png" />
+                        <Image url="@/Images/participants.png" />
                      </image>
                   </ImageView>
                </graphic>
