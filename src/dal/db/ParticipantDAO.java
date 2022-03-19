@@ -1,5 +1,6 @@
 package dal.db;
 import be.Participant;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
 
 import java.sql.*;
@@ -81,5 +82,34 @@ public class ParticipantDAO {
 
         }
     }
+
+    public ArrayList<String> participantsShowEventsbyId (int idParticipant) throws SQLServerException {
+        ArrayList<String> eventsOfOneParticipant = new ArrayList<>();
+
+        try (Connection con = cm.getConnection()) {
+            String sql ="SELECT e.name FROM Events e" +
+                    "INNER JOIN EventParticipant ep ON  ep.idEvent = e.id" +
+                    "INNER JOIN Participant p ON p.id = ep.idParticipant" +
+                    "WHERE p.id = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, idParticipant);
+            ResultSet rs = pstmt.executeQuery();
+
+
+            while(rs.next())
+            {
+                String nameOfEvent = rs.getString("name");
+                eventsOfOneParticipant.add(nameOfEvent);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return eventsOfOneParticipant;
+    }
+
+
+
 
 }

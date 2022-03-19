@@ -2,13 +2,17 @@ package gui.Model;
 
 import be.Participant;
 import bll.ParticipantManager;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 
 public class ParticipantModel {
 
     private ParticipantManager participantLogic;
     private ObservableList<Participant> participantObservableList;
+    private ObservableList<String> showEventsByPartId;
 
     public ParticipantModel() throws Exception {
         participantLogic = new ParticipantManager();
@@ -25,9 +29,15 @@ public class ParticipantModel {
     }
 
     public ObservableList<Participant> getAllParticipants() throws Exception {
-        participantObservableList.clear();
-        participantObservableList.addAll(participantLogic.getAllParticipants());
+        participantObservableList.setAll(participantLogic.getAllParticipants());
         return participantObservableList;
+    }
+
+    public ObservableList<String> participantsShowEventsbyId (int idParticipant) throws SQLServerException {
+        showEventsByPartId = FXCollections.observableArrayList();
+        showEventsByPartId.setAll(participantLogic.participantsShowEventsbyId(idParticipant));
+        System.out.println( "gay1: " + participantLogic.participantsShowEventsbyId(1)); // TO DELETE
+        return showEventsByPartId;
     }
 
 }
