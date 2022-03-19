@@ -263,7 +263,7 @@ public class EventDAO implements IEventDAO {
             String sql ="SELECT p.fname, p.lname, p.phoneNumber, tt.typeName FROM Participant p " +
                     "JOIN EventParticipant ep ON ep.idParticipant = p.id " +
                     "JOIN Events e ON e.id = ep.idEvent " +
-                    "INNER JOIN TicketType tt ON tt.id = ep.typeTicket " +
+                    "INNER JOIN TicketType tt ON tt.id = ep.ticketID " +
                     "WHERE e.id = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, idOfEvent);
@@ -301,7 +301,7 @@ public class EventDAO implements IEventDAO {
             String sql ="SELECT COUNT(*) AS numberRow FROM Participant p " +
                     "JOIN EventParticipant ep ON ep.idParticipant = p.id " +
                     "JOIN Events e ON e.id = ep.idEvent " +
-                    "INNER JOIN TicketType tt ON tt.id = ep.typeTicket " +
+                    "INNER JOIN TicketType tt ON tt.id = ep.ticketID " +
                     "WHERE e.id = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, id);
