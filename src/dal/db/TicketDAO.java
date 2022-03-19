@@ -41,10 +41,7 @@ public class TicketDAO {
             ticketListReceived.put(ticket.getId(),ticket);
             mapTicket.put(ticket.getId(),0);
         }
-        for (Map.Entry entry:mapTicket.entrySet()) {
-            int index = (Integer)entry.getKey();
-            System.out.println("ID : "+index);
-        }
+
 
         try (Connection con = cm.getConnection()) {
             String sqlSelect = "SELECT * FROM TicketType WHERE eventID=?";
