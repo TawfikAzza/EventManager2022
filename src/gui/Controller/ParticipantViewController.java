@@ -1,6 +1,10 @@
 package gui.Controller;
 
+import be.Events;
 import be.Participant;
+import bll.exception.AdminLogicException;
+import bll.exception.EventManagerException;
+import gui.Model.CoordinatorModel;
 import gui.Model.ParticipantModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,6 +18,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -29,17 +35,19 @@ public class ParticipantViewController implements Initializable {
     private TableView<Participant> tableParticipant;
     @FXML
     private Label lblMail,lblName,lblPhoneNumber;
-
+    @FXML
+    private ListView<Events> lstEventParticipant;
 
     private RootLayoutEvenController rootLayoutEvenController;
     private ParticipantModel participantModel;
     private ObservableList<Participant> allParticipants;
     private Participant currentParticipant;
-
+    private CoordinatorModel coordinatorModel;
     public ParticipantViewController() {
         try {
+            coordinatorModel = new CoordinatorModel();
             participantModel = new ParticipantModel();
-        } catch (Exception e) {
+        } catch (Exception | AdminLogicException | EventManagerException e) {
             e.printStackTrace();
         }
     }
@@ -97,10 +105,29 @@ public class ParticipantViewController implements Initializable {
         lblMail.setText(participant.getEmail());
         lblPhoneNumber.setText(participant.getPhoneNumber());
     }
+    private void setListViewEvents(Participant participant) {
+        List<Events> listEvents = new ArrayList<>();
+        try {
+            lstEventParticipant.getItems().clear();
+            listEvents = coordinatorModel.getParticipantEvent(participant);
+            System.out.println("size: "+listEvents.size());
+            lstEventParticipant.getItems().addAll(listEvents);
+        } catch (EventManagerException e) {
+            displayError(e);
+        }
+    }
     public void displayParticipant(MouseEvent mouseEvent) {
         if(tableParticipant.getSelectionModel().getSelectedIndex()==-1)
             return;
         currentParticipant = tableParticipant.getSelectionModel().getSelectedItem();
         setLabelParticipant(currentParticipant);
+        setListViewEvents(currentParticipant);
+    }
+
+    private void displayError(Throwable t) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Something went wrong...");
+        alert.setHeaderText(t.getMessage());
+        alert.showAndWait();
     }
 }

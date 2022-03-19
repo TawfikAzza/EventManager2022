@@ -1,6 +1,7 @@
 package bll;
 
 import be.Events;
+import be.Participant;
 import bll.exception.EventManagerException;
 import dal.db.EventDAO;
 import dal.db.TicketDAO;
@@ -51,6 +52,14 @@ public class EventManager {
             ticketDAO.updateEventTicket(event);
         } catch (Exception e) {
             throw new EventManagerException("Error while creating the Event in database",e);
+        }
+    }
+
+    public List<Events> getParticipantEvent(Participant participant) throws EventManagerException {
+        try {
+            return eventDAO.getParticipantEvent(participant);
+        } catch (Exception e) {
+            throw new EventManagerException("Error while retrieving the events list in database",e);
         }
     }
 }
