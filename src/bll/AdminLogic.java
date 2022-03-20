@@ -27,14 +27,14 @@ public class AdminLogic {
         adminDAO.addLoginUser(user);
     }
 
-    public void deleteEventCoordinator(Coordinator coordinator)
+    public void deleteUser(Users user)
     {
-        adminDAO.deleteEventCoordinator(coordinator);
+        adminDAO.deleteUser(user);
     }
 
-    public void updateEventCoordinator(Coordinator coordinator)
+    public void editUser(Users user)
     {
-        adminDAO.updateEventCoordinator(coordinator);
+        adminDAO.editUser(user);
     }
 
     public ArrayList<Coordinator> getAllCoordinators()
@@ -51,12 +51,4 @@ public class AdminLogic {
         return adminDAO.getAccountTypes();
     }
 
-    public void deleteAdmin(Admin admin) {
-        adminDAO.deleteAdmin(admin);
-    }
-
-    public void editAdmin(Admin admin)
-    {
-        adminDAO.editAdmin(admin);
-    }
 }

@@ -11,9 +11,9 @@ public interface IAdminDAO {
 
     void addLoginUser(Users user);
 
-    void deleteEventCoordinator(Coordinator coordinator);
+    void deleteUser(Users user);
 
-    void updateEventCoordinator(Coordinator coordinator);
+    void editUser(Users user);
 
     ArrayList<Coordinator> getAllCoordinators();
 
@@ -21,7 +21,4 @@ public interface IAdminDAO {
 
     ArrayList<String> getAccountTypes();
 
-    void deleteAdmin(Admin admin);
-
-    void editAdmin(Admin admin);
 }

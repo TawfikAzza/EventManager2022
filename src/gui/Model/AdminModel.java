@@ -28,22 +28,13 @@ public class AdminModel {
         logic.addLoginUser(user);
     }
 
-    public void deleteEventCoordinator(Coordinator coordinator)
+    public void deleteUser(Users user)
     {
-        logic.deleteEventCoordinator(coordinator);
+        logic.deleteUser(user);
     }
-    public void updateEventCoordinator(Coordinator coordinator)
+    public void editUser(Users user)
     {
-        logic.updateEventCoordinator(coordinator);
-    }
-
-    public void deleteAdmin(Admin admin){
-        logic.deleteAdmin(admin);
-    }
-
-    public void editAdmin(Admin admin)
-    {
-        logic.editAdmin(admin);
+        logic.editUser(user);
     }
 
     public ObservableList<Coordinator> getCoordinatorObservableList()

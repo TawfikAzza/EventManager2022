@@ -50,8 +50,8 @@ public class AdminDAO implements IAdminDAO {
     }
 
     @Override
-    public void deleteEventCoordinator(Coordinator coordinator) {
-        int userID = coordinator.getUserID();
+    public void deleteUser(Users user) {
+        int userID = user.getUserID();
 
         try (Connection connection = dbc.getConnection()) {
             String sql = "DELETE FROM LoginUser WHERE userID = ?";
@@ -66,14 +66,14 @@ public class AdminDAO implements IAdminDAO {
         }
     }
 
-    public void updateEventCoordinator(Coordinator coordinator) {
+    public void editUser(Users user) {
 
-        String loginName = coordinator.getLoginName();
-        String password = coordinator.getPassword();;
-        String email = coordinator.getMail();
-        int userID = coordinator.getUserID();
-        String fname = coordinator.getFirstName();
-        String lname = coordinator.getLastName();
+        String loginName = user.getLoginName();
+        String password = user.getPassword();;
+        String email = user.getMail();
+        int userID = user.getUserID();
+        String fname = user.getFirstName();
+        String lname = user.getLastName();
 
         try (Connection connection = dbc.getConnection()) {
             String sql = "UPDATE LoginUser SET loginName = ?, password = ?, email = ?, fname = ?, lname = ? WHERE userID = ?";
@@ -181,51 +181,6 @@ public class AdminDAO implements IAdminDAO {
         }
         return accountTypes;
     }
-
-    @Override
-    public void deleteAdmin(Admin admin) {
-        int userID = admin.getUserID();
-
-        try (Connection connection = dbc.getConnection()) {
-            String sql = "DELETE FROM LoginUser WHERE userID = ?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-
-            ps.setInt(1, userID);
-
-            ps.execute();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    public void editAdmin(Admin admin) {
-
-        String loginName = admin.getLoginName();
-        String password = admin.getPassword();;
-        String email = admin.getMail();
-        int userID = admin.getUserID();
-        String fname = admin.getFirstName();
-        String lname = admin.getLastName();
-
-        try (Connection connection = dbc.getConnection()) {
-            String sql = "UPDATE LoginUser SET loginName = ?, password = ?, email = ?, fname = ?, lname = ? WHERE userID = ?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-
-            ps.setString(1, loginName);
-            ps.setString(2, password);
-            ps.setString(3, email);
-            ps.setString(4, fname);
-            ps.setString(5, lname);
-            ps.setInt(6, userID);
-
-            ps.execute();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
     private int checkUserRole(Users user)
     {
         return user.getRoleID();
