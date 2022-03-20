@@ -46,8 +46,8 @@ public class EventModel {
         this.eventsObservableList.addAll(getAllEvents());
     }
 
- /*   public void exportExcelFile (int idOfEvent) throws IOException {
-        fileManager.exportExcelFile(idOfEvent);
-    }*/
+    public void exportExcelFile (int idOfEvent) throws IOException {
+       // fileManager.exportExcelFile(idOfEvent);
+    }
 
 }
