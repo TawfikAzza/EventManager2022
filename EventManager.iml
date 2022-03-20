@@ -14,6 +14,6 @@
     <orderEntry type="library" name="google.zxing.javase" level="project" />
     <orderEntry type="library" name="apache.poi" level="project" />
     <orderEntry type="library" name="apache.poi.ooxml.schemas" level="project" />
-    <orderEntry type="library" name="poi-ooxml-5.2.1" level="project" />
+    <orderEntry type="library" name="apache.poi.ooxml" level="project" />
   </component>
 </module>

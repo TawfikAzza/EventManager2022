@@ -47,7 +47,7 @@ public class EventModel {
     }
 
     public void exportExcelFile (int idOfEvent) throws IOException {
-       // fileManager.exportExcelFile(idOfEvent);
+        fileManager.exportExcelFile(idOfEvent);
     }
 
 }

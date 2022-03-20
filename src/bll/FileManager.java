@@ -1,10 +1,16 @@
 package bll;
 
 import dal.db.EventDAO;
+
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class FileManager {
 
@@ -14,11 +20,11 @@ public class FileManager {
         databaseEvent = new EventDAO();
     }
 
-    /*public void toShowResult () {
+    public void toShowResult () {
         String[][] arraytoPrint = databaseEvent.getParticipantsForEventById(7);
         System.out.println("Array: " + Arrays.deepToString(arraytoPrint));
-    }*/
-/*
+    }
+
     public void exportExcelFile (int idOfEvent) {
         String[][] multiArrayParticipants = databaseEvent.getParticipantsForEventById(idOfEvent);
 
@@ -60,7 +66,8 @@ public class FileManager {
         }
 
 //"Participants.xlsx"
-        try (FileOutputStream outputStream = new FileOutputStream("/excelTestExporter/Participants.xlsx")) {
+        File file = new File("resources/Participants.xlsx");
+        try (FileOutputStream outputStream = new FileOutputStream(file)) {
             workbook.write(outputStream);
             outputStream.close();
             workbook.close();
@@ -72,6 +79,6 @@ public class FileManager {
         }
 
     }
-*/
+
 
 }
