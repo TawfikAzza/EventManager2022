@@ -137,8 +137,8 @@ public class ParticipantViewController implements Initializable {
         alert.showAndWait();
     }
 
-    @FXML
+ /*   @FXML
     void toGenerateExcelFile(ActionEvent event) throws IOException {       // FILEMANAGER
         eventModel.exportExcelFile(7);
-    }
+    }*/
 }

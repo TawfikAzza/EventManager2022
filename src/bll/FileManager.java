@@ -2,8 +2,6 @@ package bll;
 
 import dal.db.EventDAO;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,7 +18,7 @@ public class FileManager {
         String[][] arraytoPrint = databaseEvent.getParticipantsForEventById(7);
         System.out.println("Array: " + Arrays.deepToString(arraytoPrint));
     }*/
-
+/*
     public void exportExcelFile (int idOfEvent) {
         String[][] multiArrayParticipants = databaseEvent.getParticipantsForEventById(idOfEvent);
 
@@ -74,6 +72,6 @@ public class FileManager {
         }
 
     }
-
+*/
 
 }
