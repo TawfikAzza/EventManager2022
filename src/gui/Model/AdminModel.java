@@ -37,6 +37,15 @@ public class AdminModel {
         logic.updateEventCoordinator(coordinator);
     }
 
+    public void deleteAdmin(Admin admin){
+        logic.deleteAdmin(admin);
+    }
+
+    public void editAdmin(Admin admin)
+    {
+        logic.editAdmin(admin);
+    }
+
     public ObservableList<Coordinator> getCoordinatorObservableList()
     {
         return coordinatorObservableList;

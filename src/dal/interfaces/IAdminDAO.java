@@ -21,4 +21,7 @@ public interface IAdminDAO {
 
     ArrayList<String> getAccountTypes();
 
+    void deleteAdmin(Admin admin);
+
+    void editAdmin(Admin admin);
 }

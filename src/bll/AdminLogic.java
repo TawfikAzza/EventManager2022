@@ -51,4 +51,12 @@ public class AdminLogic {
         return adminDAO.getAccountTypes();
     }
 
+    public void deleteAdmin(Admin admin) {
+        adminDAO.deleteAdmin(admin);
+    }
+
+    public void editAdmin(Admin admin)
+    {
+        adminDAO.editAdmin(admin);
+    }
 }
