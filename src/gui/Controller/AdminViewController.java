@@ -1,38 +1,37 @@
 package gui.Controller;
 
+import be.Admin;
 import be.Coordinator;
 import be.Events;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
+import bll.utils.CurrentAdmin;
 import bll.utils.CurrentEventCoordinator;
-import dal.interfaces.IAdminDAO;
+import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
 import gui.Model.EventModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class AdminViewController implements Initializable {
-    public TableColumn<Events, LocalDateTime> tableColumnEventDate;
+    @FXML
+    private TableView<Admin> adminTableView;
+    @FXML
+    private TableColumn<Admin, String> tableColumnFirstNameAdmin;
+    @FXML
+    private TableColumn<Admin, String> tableColumnLastNameAdmin;
+    @FXML
+    private TableColumn<Events, LocalDateTime> tableColumnEventDate;
     @FXML
     private TableColumn<Coordinator, String> tableColumnFirstName;
     @FXML
@@ -60,6 +59,7 @@ public class AdminViewController implements Initializable {
             this.eventmodel = new EventModel();
         this.coordinatorTableView.setItems(adminModel.getCoordinatorObservableList());
         this.eventTableView.setItems(eventmodel.getEventsObservableList());
+        this.adminTableView.setItems(adminModel.getAdminObservableList());
         this.initTables();
         } catch (Exception | EventDAOException | AdminLogicException | EventManagerException e) {
             e.printStackTrace();
@@ -67,6 +67,9 @@ public class AdminViewController implements Initializable {
     }
 
     private void initTables() {
+        this.tableColumnFirstNameAdmin.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        this.tableColumnLastNameAdmin.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+
         this.tableColumnEventName.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.tableColumnEventDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         //this.tableColumnNumberOfCoordinators.setCellValueFactory(new PropertyValueFactory<>("Number of Events"));
@@ -77,7 +80,8 @@ public class AdminViewController implements Initializable {
     }
 
     public void handleNewClick(ActionEvent actionEvent) throws IOException {
-        setScene("/gui/View/AddEventCoordinatorView.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AddEventCoordinatorView.fxml"));
+        SceneSetter.setScene(adminTableView, loader);
     }
 
     public void handleCoordinatorClick(MouseEvent mouseEvent) throws IOException {
@@ -86,19 +90,44 @@ public class AdminViewController implements Initializable {
         {
             if(mouseEvent.getClickCount()==2) {
                 CurrentEventCoordinator.setInstance(coordinator);
-                setScene("/gui/View/AdminEventCoordinatorView.fxml");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+                SceneSetter.setScene(adminTableView, loader);
             }
         }
     }
 
-    private void setScene(String url) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
-        Parent root = loader.load();
+    public void handleAdminClick(MouseEvent mouseEvent) throws IOException {
+        Admin admin = adminTableView.getSelectionModel().getSelectedItem();
+        if(admin!=null)
+        {
+            if(mouseEvent.getClickCount()==2) {
+                CurrentAdmin.setInstance(admin);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
+                SceneSetter.setScene(adminTableView, loader);
+            }
+        }
+    }
 
-        Scene scene = new Scene(root);
-        Stage primaryStage = (Stage) newCoordinatorBtn.getScene().getWindow();
-        primaryStage.setScene(scene);
+    public void handleDeleteEvent(ActionEvent actionEvent) {
+        Events event = eventTableView.getSelectionModel().getSelectedItem();
+        if(event!=null)
+        {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Warning. Deleting an event cannot be undone. Deleting an event will remove it from the system completely.");
+            alert.show();
+            alert.setResultConverter(buttonType -> {
+                if(buttonType== ButtonType.OK)
+                {
+                    try {
+                        eventmodel.deleteEvent(event);
+                        eventmodel.refresh();
+                    } catch (Exception | EventManagerException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return null;
+        });
 
-        primaryStage.show();
+    }
     }
 }

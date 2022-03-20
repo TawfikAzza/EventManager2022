@@ -225,7 +225,7 @@ public class EventDAO implements IEventDAO {
         return eventSearched;
     }
 
-    public List<Events> getParticipantEvent(Participant participant) throws Exception {
+    public List<Events> getParticipantEvent(Participant participant) throws SQLServerException {
         List<Events> participantEvents = new ArrayList<>();
         try (Connection con = cm.getConnection()) {
             String sql="SELECT e.id as eventID, e.name as eventName, e.location as eventLocation, e.description as eventDescription, " +
@@ -249,6 +249,8 @@ public class EventDAO implements IEventDAO {
                 participantEvents.add(event);
             }
 
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return participantEvents;
     }

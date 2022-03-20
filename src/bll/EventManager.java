@@ -5,6 +5,7 @@ import be.Participant;
 import bll.exception.EventManagerException;
 import dal.db.EventDAO;
 import dal.db.TicketDAO;
+import dal.interfaces.IEventDAO;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class EventManager {
      * Do think twice before changing any of the methods in this class.
      *
      * */
-    private EventDAO eventDAO;
+    private IEventDAO eventDAO;
     private TicketDAO ticketDAO;
     public EventManager() throws EventManagerException {
 
@@ -54,6 +55,9 @@ public class EventManager {
             throw new EventManagerException("Error while creating the Event in database",e);
         }
     }
+
+    public void deleteEvent(Events event) throws Exception {
+        eventDAO.removeEvent(event);}
 
     public List<Events> getParticipantEvent(Participant participant) throws EventManagerException {
         try {

@@ -20,6 +20,10 @@ public class EventModel {
         refresh();
     }
 
+    public void deleteEvent(Events event) throws Exception {
+        eventManager.deleteEvent(event);
+    }
+
     public List<Events> getAllEvents() throws EventManagerException {
         return eventManager.getAllEvents();
     }
@@ -37,4 +41,5 @@ public class EventModel {
         this.deleteAll();
         this.eventsObservableList.addAll(getAllEvents());
     }
+
 }

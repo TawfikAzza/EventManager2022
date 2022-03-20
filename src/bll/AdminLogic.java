@@ -1,5 +1,6 @@
 package bll;
 
+import be.Admin;
 import be.Coordinator;
 import be.Users;
 import bll.exception.AdminLogicException;
@@ -39,6 +40,11 @@ public class AdminLogic {
     public ArrayList<Coordinator> getAllCoordinators()
     {
         return adminDAO.getAllCoordinators();
+    }
+
+    public ArrayList<Admin> getAllAdmins()
+    {
+        return adminDAO.getAllAdmins();
     }
 
     public ArrayList<String> getAccountTypes(){
