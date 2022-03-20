@@ -2,12 +2,15 @@ package gui.Model;
 
 import be.Coordinator;
 import be.Events;
+import be.Participant;
 import bll.AdminLogic;
 import bll.EventManager;
 import bll.exception.AdminLogicException;
 import bll.exception.EventManagerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class CoordinatorModel {
 
@@ -37,5 +40,9 @@ public class CoordinatorModel {
 
     public void updateEvent(Events event) throws EventManagerException {
         eventManager.updateEvent(event);
+    }
+
+    public List<Events> getParticipantEvent(Participant participant) throws  EventManagerException {
+        return eventManager.getParticipantEvent(participant);
     }
 }

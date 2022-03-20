@@ -1,5 +1,6 @@
 package bll;
 
+import be.Admin;
 import be.Coordinator;
 import be.Users;
 import bll.exception.AdminLogicException;
@@ -26,19 +27,24 @@ public class AdminLogic {
         adminDAO.addLoginUser(user);
     }
 
-    public void deleteEventCoordinator(Coordinator coordinator)
+    public void deleteUser(Users user)
     {
-        adminDAO.deleteEventCoordinator(coordinator);
+        adminDAO.deleteUser(user);
     }
 
-    public void updateEventCoordinator(Coordinator coordinator)
+    public void editUser(Users user)
     {
-        adminDAO.updateEventCoordinator(coordinator);
+        adminDAO.editUser(user);
     }
 
     public ArrayList<Coordinator> getAllCoordinators()
     {
         return adminDAO.getAllCoordinators();
+    }
+
+    public ArrayList<Admin> getAllAdmins()
+    {
+        return adminDAO.getAllAdmins();
     }
 
     public ArrayList<String> getAccountTypes(){

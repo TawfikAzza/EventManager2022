@@ -1,8 +1,10 @@
 package gui.Controller;
 
+import be.Admin;
 import be.Coordinator;
 import be.Users;
 import bll.exception.AdminLogicException;
+import bll.utils.CurrentAdmin;
 import bll.utils.CurrentEventCoordinator;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
@@ -21,7 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EditEventCoordinatorViewController implements Initializable {
+public class EditAdminViewController implements Initializable {
     private AdminModel adminModel;
 
     @FXML
@@ -48,27 +50,27 @@ public class EditEventCoordinatorViewController implements Initializable {
         } catch (AdminLogicException e) {
             e.printStackTrace();
         }
-        setFields(CurrentEventCoordinator.getInstance());
+        setFields(CurrentAdmin.getInstance());
     }
 
     public void backClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
         SceneSetter.setScene(firstNameTextField, loader);
     }
 
-    public void editEventCoordinatorClick(ActionEvent actionEvent) throws IOException {
+    public void editAdmin(ActionEvent actionEvent) throws IOException {
         String loginName = loginNameTextField.getText();
         String password = passwordField.getText();
         String email = emailTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
-        int ID = CurrentEventCoordinator.getInstance().getUserID();
+        int ID = CurrentAdmin.getInstance().getUserID();
 
-        Coordinator coordinator = new Coordinator(ID, loginName, password,2, email,firstName, lastName);
+        Admin admin = new Admin(ID, loginName, password,2, email,firstName, lastName);
         if(confirmPassword()) {
-            adminModel.editUser(coordinator);
-            CurrentEventCoordinator.setInstance(coordinator);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+            adminModel.editUser(admin);
+            CurrentAdmin.setInstance(admin);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
             SceneSetter.setScene(firstNameTextField, loader);
         }
         else {

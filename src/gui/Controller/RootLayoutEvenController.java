@@ -3,7 +3,6 @@ package gui.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -12,8 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class RootLayoutEvenController {
-    private GridPane eventManager;
-    private Stage primarySTage;
     @FXML
     private BorderPane topPane;
 
@@ -61,6 +58,19 @@ public class RootLayoutEvenController {
 
         // Give the controller access to the main app.
         ParticipantViewController controller = loader.getController();
+        controller.setMainApp(this);
+    }
+
+    public void sellTicket(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/gui/View/SellTicketView.fxml"));
+        GridPane eventOverview = (GridPane) loader.load();
+
+        // Set person overview into the center of root layout.
+        topPane.setCenter(eventOverview);
+
+        // Give the controller access to the main app.
+        SellTicketViewController controller = loader.getController();
         controller.setMainApp(this);
     }
 }

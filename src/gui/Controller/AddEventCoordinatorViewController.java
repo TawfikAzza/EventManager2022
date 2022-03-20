@@ -3,6 +3,7 @@ package gui.Controller;
 import be.Admin;
 import be.Coordinator;
 import bll.exception.AdminLogicException;
+import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,7 +54,8 @@ public class AddEventCoordinatorViewController implements Initializable {
     }
 
     public void backClick(ActionEvent actionEvent) throws IOException {
-        switchScene();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+        SceneSetter.setScene(accountTypeChoiceBox, loader);
     }
 
     public void addNewEventCoordinatorClick(ActionEvent actionEvent) throws IOException {
@@ -74,7 +76,8 @@ public class AddEventCoordinatorViewController implements Initializable {
                 Coordinator coordinator = new Coordinator(loginName, password, 2, email, firstName, lastName);
                 adminModel.addLoginUser(coordinator);
             }
-            switchScene();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+            SceneSetter.setScene(accountTypeChoiceBox, loader);
         }
         else {
             System.out.println("Passwords do not match");
@@ -87,16 +90,5 @@ public class AddEventCoordinatorViewController implements Initializable {
         String confirmation = confirmPasswordField.getText();
 
         return password.equals(confirmation);
-    }
-
-    private void switchScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
-        Parent root = loader.load();
-
-        Scene scene = new Scene(root);
-        Stage primaryStage = (Stage) backButton.getScene().getWindow();
-        primaryStage.setScene(scene);
-
-        primaryStage.show();
     }
 }

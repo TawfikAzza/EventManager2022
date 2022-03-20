@@ -1,5 +1,6 @@
 package dal.db;
 
+import be.Admin;
 import be.Coordinator;
 import be.Users;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -49,8 +50,8 @@ public class AdminDAO implements IAdminDAO {
     }
 
     @Override
-    public void deleteEventCoordinator(Coordinator coordinator) {
-        int userID = coordinator.getUserID();
+    public void deleteUser(Users user) {
+        int userID = user.getUserID();
 
         try (Connection connection = dbc.getConnection()) {
             String sql = "DELETE FROM LoginUser WHERE userID = ?";
@@ -65,14 +66,14 @@ public class AdminDAO implements IAdminDAO {
         }
     }
 
-    public void updateEventCoordinator(Coordinator coordinator) {
+    public void editUser(Users user) {
 
-        String loginName = coordinator.getLoginName();
-        String password = coordinator.getPassword();;
-        String email = coordinator.getMail();
-        int userID = coordinator.getUserID();
-        String fname = coordinator.getFirstName();
-        String lname = coordinator.getLastName();
+        String loginName = user.getLoginName();
+        String password = user.getPassword();;
+        String email = user.getMail();
+        int userID = user.getUserID();
+        String fname = user.getFirstName();
+        String lname = user.getLastName();
 
         try (Connection connection = dbc.getConnection()) {
             String sql = "UPDATE LoginUser SET loginName = ?, password = ?, email = ?, fname = ?, lname = ? WHERE userID = ?";
@@ -126,6 +127,40 @@ public class AdminDAO implements IAdminDAO {
         return allCoordinators;
     }
 
+    public ArrayList<Admin> getAllAdmins()
+    {
+        ArrayList<Admin> allAdmins = new ArrayList<>();
+
+        try (Connection connection = dbc.getConnection()) {
+            String sql ="SELECT * FROM LoginUser WHERE roleID = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, 1);
+
+            statement.execute();
+
+            ResultSet rs = statement.getResultSet();
+
+            while(rs.next())
+            {
+                int userID = rs.getInt("userID");
+                String loginName = rs.getString("loginName");
+                String password = rs.getString("password");
+                int roleID = rs.getInt("roleID");
+                String email = rs.getString("email");
+                String fname = rs.getString("fname");
+                String lname = rs.getString("lname");
+
+                Admin admin = new Admin(userID, loginName, password, roleID, email, fname, lname);
+                allAdmins.add(admin);
+            }
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return allAdmins;
+    }
+
     public ArrayList<String> getAccountTypes(){
         ArrayList<String> accountTypes = new ArrayList<>();
 
@@ -146,7 +181,6 @@ public class AdminDAO implements IAdminDAO {
         }
         return accountTypes;
     }
-
     private int checkUserRole(Users user)
     {
         return user.getRoleID();

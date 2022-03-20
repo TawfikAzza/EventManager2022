@@ -136,4 +136,9 @@ public class Events {
     public void setStrEndDate(String strEndDate) {
         this.strEndDate = strEndDate;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s",getName(),getStrStartDate());
+    }
 }
