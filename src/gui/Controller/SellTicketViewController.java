@@ -49,6 +49,8 @@ public class SellTicketViewController implements Initializable {
     private RootLayoutEvenController rootLayoutEvenController;
     private ObservableList<Participant> allParticipants;
 
+    //TODO: Create the page to add/modify/delete a Participant in the db.
+
     public SellTicketViewController() {
         try {
             coordinatorModel = new CoordinatorModel();
