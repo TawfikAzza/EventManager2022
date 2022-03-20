@@ -1,6 +1,8 @@
 package dal.interfaces;
 
 import be.Events;
+import be.Participant;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.util.List;
 
@@ -14,4 +16,6 @@ public interface IEventDAO {
     List<Events> getAllEvents() throws Exception;
 
     Events getEvent(int id) throws Exception;
+
+    List<Events> getParticipantEvent(Participant participant) throws SQLServerException;
 }
