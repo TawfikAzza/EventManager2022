@@ -3,8 +3,10 @@ package gui.Controller;
 import be.Events;
 import be.Participant;
 import bll.exception.AdminLogicException;
+import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import gui.Model.CoordinatorModel;
+import gui.Model.EventModel;
 import gui.Model.ParticipantModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -17,6 +19,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +29,7 @@ import java.util.ResourceBundle;
 public class ParticipantViewController implements Initializable {
 
     @FXML
-    private Button btnSearch;
+    private Button btnSearch, btnGenerateFile;
     @FXML
     private TableColumn<Participant, String> columnFname,columnPhone,columnLname;
     @FXML
@@ -43,13 +46,17 @@ public class ParticipantViewController implements Initializable {
     private ObservableList<Participant> allParticipants;
     private Participant currentParticipant;
     private CoordinatorModel coordinatorModel;
-    public ParticipantViewController() {
+
+    private EventModel eventModel;  // FILEMANAGER
+
+    public ParticipantViewController() throws EventDAOException, Exception, EventManagerException {
         try {
             coordinatorModel = new CoordinatorModel();
             participantModel = new ParticipantModel();
         } catch (Exception | AdminLogicException | EventManagerException e) {
             e.printStackTrace();
         }
+        eventModel = new EventModel(); // FILEMANAGER + exceptions
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -128,5 +135,10 @@ public class ParticipantViewController implements Initializable {
         alert.setTitle("Something went wrong...");
         alert.setHeaderText(t.getMessage());
         alert.showAndWait();
+    }
+
+    @FXML
+    void toGenerateExcelFile(ActionEvent event) throws IOException {       // FILEMANAGER
+        eventModel.exportExcelFile(7);
     }
 }

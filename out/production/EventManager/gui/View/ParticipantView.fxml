@@ -58,5 +58,6 @@
             <ListView fx:id="lstEventParticipant" prefHeight="205.0" prefWidth="205.0" />
          </children>
       </VBox>
+      <Button fx:id="btnGenerateFile" mnemonicParsing="false" onAction="#toGenerateExcelFile" text="Generate Excel file" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>
