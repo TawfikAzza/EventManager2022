@@ -10,10 +10,11 @@ import java.io.IOException;
 
 public class MainController {
     public void openEventMgr(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EventView.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EventView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/RootLayoutEvent.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,800,600);
         stage.setScene(scene);
 
         stage.show();
@@ -30,4 +31,6 @@ public class MainController {
     }
 
 
+    public void SubmitLogin(ActionEvent actionEvent) {
+    }
 }

@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 
 public class DateUtil {
     /** The date pattern that is used for conversion. Change as you wish. */
-    private static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    private static final String DATE_PATTERN = "dd/MM/yyyy";
     private static final String DATE_PATTERN_GUI = "dd/MM/yyyy HH:mm";
 
     /** The date formatter. */
@@ -39,7 +39,13 @@ public class DateUtil {
             return null;
         }
     }
-
+    public static LocalDate parseDate(String dateString) {
+        try {
+            return DATE_FORMATTER.parse(dateString, LocalDate::from);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
     public static boolean validDate(String dateString) {
         // Try to parse the String.
         return DateUtil.parseDateTime(dateString) != null;

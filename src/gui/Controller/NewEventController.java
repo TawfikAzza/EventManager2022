@@ -2,19 +2,31 @@ package gui.Controller;
 
 
 import be.Events;
+import be.Ticket;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
+import bll.utils.DateUtil;
 import com.jfoenix.controls.JFXButton;
 import gui.Model.CoordinatorModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldListCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
+import javax.xml.validation.Schema;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,33 +44,72 @@ public class NewEventController implements Initializable {
     @FXML
     private DatePicker txtStartDate,txtEndDate;
     @FXML
-    private TextArea txtDescription,txtItinerary;
+    private TextArea txtDescription,txtItinerary,txtTicketDesciption;
 
     @FXML
     private TextField txtLocation;
 
     @FXML
-    private TextField txtName;
+    private TextField txtName,txtNameTicket;
+    @FXML
+    private ListView<Ticket> lstTickets;
+    @FXML
+    private GridPane gridPaneNewEvent;
+
 
     private CoordinatorModel coordinatorModel;
-
+    private EventsController eventsController;
+    private RootLayoutEvenController rootLayoutEvenController;
+    private Events currentEvent;
+    private String operationType="creation";
     public NewEventController() throws EventManagerException, AdminLogicException {
             coordinatorModel = new CoordinatorModel();
     }
+
+    public void setOperationType(String operationType) {
+        this.operationType=operationType;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fillComboBox();
+        lstTickets.setEditable(true);
+        lstTickets.setCellFactory(lv -> new TicketListCell());
     }
 
-
+    public void setEventsController(EventsController eventsController){
+        this.eventsController = eventsController;
+    }
     @FXML
-    private void createEvent(ActionEvent event) throws EventManagerException {
+    private void createEvent(ActionEvent event) throws EventManagerException, IOException {
         if(!checkFields())
             return;
-        Events eventCreated = new Events(0,txtName.getText(),txtLocation.getText(),txtDescription.getText(),getStartDate(),getEndDate(),txtItinerary.getText());
-        eventCreated = coordinatorModel.createEvent(eventCreated);
+            if(operationType.equals("creation")) {
+            Events eventCreated = new Events(0,txtName.getText(),txtLocation.getText(),txtDescription.getText(),getStartDate(),getEndDate(),txtItinerary.getText());
+            if(lstTickets.getItems().size()>0) {
+                for (Ticket ticket : lstTickets.getItems())
+                    eventCreated.getTicketAvailable().add(ticket);
+            }
+            eventCreated = coordinatorModel.createEvent(eventCreated);
+            goBack();
+        }
+            if(operationType.equals("modification")) {
+                currentEvent.getTicketAvailable().clear();
+                for(Ticket ticket:lstTickets.getItems())
+                    currentEvent.getTicketAvailable().add(ticket);
 
+
+                currentEvent.setName(txtName.getText());
+                currentEvent.setStartDate(getStartDate());
+                currentEvent.setEndDate(getEndDate());
+                currentEvent.setDescription(txtDescription.getText());
+                currentEvent.setItinerary(txtItinerary.getText());
+                currentEvent.setLocation(txtLocation.getText());
+                coordinatorModel.updateEvent(currentEvent);
+                goBack();
+            }
     }
+
     @FXML
     private LocalDateTime getStartDate() {
         int startHour = Integer.parseInt(startComboHour.getValue());
@@ -75,16 +126,20 @@ public class NewEventController implements Initializable {
     void goBack(ActionEvent event) {
 
     }
+    public void setCurrentEvent(Events event){
+        this.currentEvent = event;
+    }
 
     private boolean checkFields() {
+
         return startComboHour.getValue() != null
                 && startComboMinute.getValue() != null
-                && endComboHour.getValue() != null
-                && endComboMinute.getValue() != null
                 && txtStartDate.getValue() != null
                 && !txtDescription.getText().equals("")
                 && !txtLocation.getText().equals("")
-                && !txtName.getText().equals("");
+                && !txtName.getText().equals("")
+                && !(lstTickets.getItems().size()==0);
+
     }
 
     private void fillComboBox(){
@@ -127,6 +182,144 @@ public class NewEventController implements Initializable {
         endComboHour.getItems().addAll(arrayHours);
         startComboMinute.getItems().addAll(arrayMinutes);
         endComboMinute.getItems().addAll(arrayMinutes);
+
+
+    }
+
+    public void addTicket(ActionEvent actionEvent) {
+        Ticket ticket = null;
+        if(txtNameTicket.getText().equals(""))
+            return;
+        if(txtTicketDesciption.getText().equals(""))
+            return;
+        ticket = new Ticket(0,txtNameTicket.getText(),txtTicketDesciption.getText());
+        for (Ticket ticket1:lstTickets.getItems()) {
+            if(ticket.getType().equals(ticket1.getType()))
+                return;
+        }
+
+        lstTickets.getItems().add(ticket);
+    }
+
+    public void removeTicket(ActionEvent actionEvent) {
+        if(lstTickets.getSelectionModel().getSelectedIndex()==-1)
+            return;
+        lstTickets.getItems().remove(lstTickets.getSelectionModel().getSelectedIndex());
+
+    }
+
+    public void setMainApp(RootLayoutEvenController rootLayoutEvenController) {
+        this.rootLayoutEvenController=rootLayoutEvenController;
+    }
+    private void goBack() throws IOException {
+        FXMLLoader loaderPage = new FXMLLoader();
+        loaderPage.setLocation(getClass().getResource("/gui/View/EventView.fxml"));
+        GridPane eventOverview = (GridPane) loaderPage.load();
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/RootLayoutEvent.fxml"));
+        Parent root = loader.load();
+
+        RootLayoutEvenController rootLayoutEvenController = loader.getController();
+        rootLayoutEvenController.setCenter(eventOverview);
+        Scene scene = new Scene(root);
+        Stage primaryStage = (Stage) btnBack.getScene().getWindow();
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void setValue(Events event) {
+
+        txtName.setText(event.getName());
+        for (int i = 0; i < startComboHour.getItems().size(); i++) {
+            if(event.getStrStartDate().substring(11,13).equals(startComboHour.getItems().get(i))) {
+                startComboHour.getSelectionModel().select(i);
+                break;
+            }
+        }
+        for (int i = 0; i < startComboMinute.getItems().size(); i++) {
+            if(event.getStrStartDate().substring(14,16).equals(startComboMinute.getItems().get(i))) {
+                startComboMinute.getSelectionModel().select(i);
+                break;
+            }
+        }
+        txtStartDate.setValue(DateUtil.parseDate(event.getStrStartDate().substring(0,10)));
+        if(!(event.getEndDate() ==null)) {
+            for (int i = 0; i < endComboHour.getItems().size(); i++) {
+                if(event.getStrEndDate().substring(11,13).equals(endComboHour.getItems().get(i))) {
+                    endComboHour.getSelectionModel().select(i);
+                    break;
+                }
+            }
+            for (int i = 0; i < endComboMinute.getItems().size(); i++) {
+                if(event.getStrEndDate().substring(14,16).equals(endComboMinute.getItems().get(i))) {
+                    endComboMinute.getSelectionModel().select(i);
+                    break;
+                }
+            }
+            txtEndDate.setValue(DateUtil.parseDate(event.getStrStartDate().substring(0,10)));
+        }
+        if(!event.getItinerary().equals("")) {
+            txtItinerary.setText(event.getItinerary());
+        }
+
+        txtDescription.setText(event.getDescription());
+        txtLocation.setText(event.getLocation());
+        for(Ticket ticket:event.getTicketAvailable()){
+           lstTickets.getItems().add(ticket);
+        }
+        btnCreate.setText("Update Event");
+        currentEvent=event;
+    }
+
+    public class TicketListCell extends ListCell<Ticket> {
+        private final TextField textField = new TextField();
+
+        public TicketListCell() {
+            textField.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+                if (e.getCode() == KeyCode.ESCAPE) {
+                    cancelEdit();
+                }
+            });
+            textField.setOnAction(e -> {
+                getItem().setType(textField.getText());
+                setText(textField.getText());
+                setContentDisplay(ContentDisplay.TEXT_ONLY);
+            });
+            setGraphic(textField);
+        }
+
+        @Override
+        protected void updateItem(Ticket ticket, boolean empty) {
+            super.updateItem(ticket, empty);
+            if (isEditing()) {
+                textField.setText(ticket.getType());
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            } else {
+                setContentDisplay(ContentDisplay.TEXT_ONLY);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(ticket.getType());
+                }
+            }
+        }
+
+        @Override
+        public void startEdit() {
+            super.startEdit();
+            textField.setText(getItem().getType());
+            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            textField.requestFocus();
+            textField.selectAll();
+        }
+
+        @Override
+        public void cancelEdit() {
+            super.cancelEdit();
+            setText(getItem().getType());
+            setContentDisplay(ContentDisplay.TEXT_ONLY);
+        }
     }
 }
 

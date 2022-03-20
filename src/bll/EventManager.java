@@ -1,18 +1,28 @@
 package bll;
 
 import be.Events;
+import be.Participant;
 import bll.exception.EventManagerException;
 import dal.db.EventDAO;
+import dal.db.TicketDAO;
+import dal.interfaces.IEventDAO;
 
 import java.util.List;
 
 public class EventManager {
-
-    private EventDAO eventDAO;
+    /**
+     * Warning: this class turn out to be clase to a facade for the procedure to create events involve the ccreation of multiple
+     * values in the database which need to be executed in a certain way.
+     * Do think twice before changing any of the methods in this class.
+     *
+     * */
+    private IEventDAO eventDAO;
+    private TicketDAO ticketDAO;
     public EventManager() throws EventManagerException {
 
         try {
             eventDAO = new EventDAO();
+            ticketDAO = new TicketDAO();
         } catch (Exception e) {
             throw new EventManagerException("Failed to initialize Event Manager class!",e);
         }
@@ -28,13 +38,32 @@ public class EventManager {
 
     public Events createEvent(Events event) throws EventManagerException{
         try {
-            return eventDAO.addEvent(event);
+            Events eventCreated = eventDAO.addEvent(event);
+            event.setId(eventCreated.getId());
+            ticketDAO.addEventTicket(event);
+            return event;
+        } catch (Exception e) {
+            throw new EventManagerException("Error while creating the Event in database",e);
+        }
+    }
+
+    public void updateEvent(Events event) throws EventManagerException {
+        try {
+            eventDAO.updateEvent(event);
+            ticketDAO.updateEventTicket(event);
         } catch (Exception e) {
             throw new EventManagerException("Error while creating the Event in database",e);
         }
     }
 
     public void deleteEvent(Events event) throws Exception {
-        eventDAO.removeEvent(event);
+        eventDAO.removeEvent(event);}
+
+    public List<Events> getParticipantEvent(Participant participant) throws EventManagerException {
+        try {
+            return eventDAO.getParticipantEvent(participant);
+        } catch (Exception e) {
+            throw new EventManagerException("Error while retrieving the events list in database",e);
+        }
     }
 }

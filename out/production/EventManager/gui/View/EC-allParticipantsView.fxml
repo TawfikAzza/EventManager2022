@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,12 +14,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane fx:controller="gui.Controller.ECallParticipantsController" id="BorderPain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane id="BorderPain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="730.0" styleClass="anchor" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ECallParticipantsController">
    <left>
       <BorderPane prefHeight="482.0" prefWidth="319.0" BorderPane.alignment="CENTER">
          <center>
-            <TableView fx:id="tableViewPartName" prefHeight="405.0" prefWidth="293.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableViewPartName" onMouseClicked="#toShowCurrentParticipants" prefHeight="405.0" prefWidth="293.0" styleClass="shadow" stylesheets="@CSS/Style.css" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="tableColumnFName" prefWidth="75.0" text="First name" />
                 <TableColumn fx:id="tableColumnLName" prefWidth="116.7999267578125" text="Last Name" />
@@ -30,7 +29,14 @@
             </TableView>
          </center>
          <top>
-            <Pane prefHeight="54.0" prefWidth="319.0" BorderPane.alignment="CENTER" />
+            <Pane prefHeight="54.0" prefWidth="319.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" layoutX="42.0" layoutY="6.0" prefHeight="43.0" prefWidth="236.0" text="All participants" textFill="#3823b8">
+                     <font>
+                        <Font name="System Bold" size="29.0" />
+                     </font>
+                  </Label>
+               </children></Pane>
          </top>
          <left>
             <Pane prefHeight="81.0" prefWidth="18.0" BorderPane.alignment="CENTER" />
@@ -44,7 +50,7 @@
       </BorderPane>
    </left>
    <right>
-      <AnchorPane prefHeight="482.0" prefWidth="362.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="482.0" prefWidth="362.0" styleClass="anchor01" stylesheets="@CSS/Style.css" BorderPane.alignment="CENTER">
          <children>
             <GridPane alignment="CENTER" layoutX="58.0" layoutY="170.0" AnchorPane.topAnchor="25.0">
               <columnConstraints>
@@ -118,15 +124,7 @@
                   </Label>
                </children>
             </GridPane>
-            <BorderPane layoutY="296.0" prefHeight="186.0" prefWidth="362.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
-               <center>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </AnchorPane>
-               </center>
-            </BorderPane>
+            <ListView fx:id="listViewEvents" layoutX="58.0" layoutY="213.0" prefHeight="246.0" prefWidth="195.0" styleClass="shadow" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="213.0" />
          </children>
       </AnchorPane>
    </right>

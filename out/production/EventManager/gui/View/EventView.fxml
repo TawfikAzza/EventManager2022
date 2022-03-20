@@ -26,65 +26,64 @@
       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <AnchorPane fx:id="topPane" GridPane.columnIndex="1">
+      <AnchorPane fx:id="topPane" styleClass="anchor" stylesheets="@CSS/Style.css" GridPane.columnIndex="1">
          <children>
-            <JFXButton fx:id="btnEdit" buttonType="RAISED" layoutX="36.0" layoutY="469.0" onAction="#editEvent" text="Edit Event" />
-            <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="209.0" layoutY="469.0" onAction="#deleteEvent" text="Delete Event" />
+            <JFXButton fx:id="btnEdit" buttonType="RAISED" layoutX="40.0" layoutY="469.0" onAction="#editEvent" prefHeight="27.0" prefWidth="97.0" text="Edit Event" />
+            <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="175.0" layoutY="469.0" onAction="#deleteEvent" prefHeight="27.0" prefWidth="97.0" text="Delete Event" />
             <TextField fx:id="txtName" layoutX="128.0" layoutY="44.0" />
             <TextField fx:id="txtLocation" layoutX="129.0" layoutY="88.0" />
             <Label fx:id="lblName" layoutX="128.0" layoutY="48.0" text="Label" />
-            <Label layoutX="33.0" layoutY="48.0" text="Name:">
+            <Label fx:id="nameLabel" layoutX="33.0" layoutY="48.0" text="Name:">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="33.0" layoutY="92.0" text="Location">
+            <Label fx:id="locationLabel" layoutX="33.0" layoutY="92.0" text="Location">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="88.0" layoutY="139.0" text="From">
+            <Label fx:id="fromLabel" layoutX="88.0" layoutY="139.0" text="From">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="txtStartDate" layoutX="130.0" layoutY="135.0" />
-            <Label layoutX="112.0" layoutY="235.0" text="Description">
+            <TextField fx:id="txtStartDate" layoutX="130.0" layoutY="135.0" prefHeight="26.0" prefWidth="62.0" />
+            <Label fx:id="descriptionLabel" layoutX="112.0" layoutY="235.0" text="Description">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="105.0" layoutY="185.0" text="to">
+            <Label fx:id="endDateLabel" layoutX="105.0" layoutY="185.0" text="to">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="122.0" layoutY="351.0" text="Itinerary">
+            <Label fx:id="itineraryLabel" layoutX="122.0" layoutY="351.0" text="Itinerary">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="txtEndDate" layoutX="128.0" layoutY="181.0" />
+            <TextField fx:id="txtEndDate" layoutX="130.0" layoutY="181.0" prefHeight="26.0" prefWidth="62.0" />
             <Label fx:id="lblLocation" layoutX="128.0" layoutY="92.0" text="Label" />
             <Label fx:id="lblStartDate" layoutX="130.0" layoutY="139.0" text="Label" />
-            <Label fx:id="lblEndDate" layoutX="128.0" layoutY="185.0" text="Label" />
-            <JFXButton fx:id="btnModifyEvent" buttonType="RAISED" layoutX="102.0" layoutY="469.0" onAction="#updateEvent" text="Confirm Changes" />
-            <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="508.0" text="Add Participant" />
-            <Label layoutX="33.0" layoutY="139.0" text="Date">
+            <Label fx:id="lblEndDate" layoutX="130.0" layoutY="185.0" text="Label" />
+            <JFXButton buttonType="RAISED" layoutX="39.0" layoutY="508.0" text="Add Participant" />
+            <Label fx:id="startDateLabel" layoutX="33.0" layoutY="139.0" text="Date">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TextFlow fx:id="lblDescription" layoutX="131.0" layoutY="278.0" prefHeight="72.0" prefWidth="142.0" />
-            <TextFlow fx:id="lblItinerary" layoutX="131.0" layoutY="369.0" prefHeight="79.0" prefWidth="142.0" />
-            <TextArea fx:id="txtDescription" layoutX="129.0" layoutY="274.0" prefHeight="79.0" prefWidth="150.0" />
-            <TextArea fx:id="txtItinerary" layoutX="131.0" layoutY="369.0" prefHeight="79.0" prefWidth="142.0" />
+            <TextFlow fx:id="lblItinerary" layoutX="47.0" layoutY="369.0" prefHeight="79.0" prefWidth="226.0" />
+            <TextArea fx:id="txtItinerary" layoutX="47.0" layoutY="369.0" prefHeight="79.0" prefWidth="226.0" styleClass="shadow" stylesheets="@CSS/Style.css" />
             <JFXButton fx:id="btnAllParticipants" layoutX="175.0" layoutY="508.0" onAction="#showAllParticipants" text="All Participants" />
+            <TextArea fx:id="txtDescription" layoutX="47.0" layoutY="254.0" prefHeight="87.0" prefWidth="226.0" />
+            <TextFlow fx:id="lblDescription" layoutX="47.0" layoutY="255.0" maxHeight="-Infinity" prefHeight="87.0" prefWidth="226.0" styleClass="shadow" stylesheets="@CSS/Style.css" />
          </children>
       </AnchorPane>
       <VBox>
          <children>
-            <TableView fx:id="tableEvents" onMouseClicked="#displayEvent" prefHeight="285.0" prefWidth="232.0">
+            <TableView fx:id="tableEvents" onMouseClicked="#displayEvent" prefHeight="285.0" prefWidth="232.0" styleClass="shadow" stylesheets="@CSS/Style.css">
                <columns>
                   <TableColumn fx:id="eventName" prefWidth="83.19998168945312" text="Event" />
                   <TableColumn fx:id="eventDate" prefWidth="60.0" text="Date" />
@@ -108,7 +107,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <ListView prefHeight="118.0" prefWidth="208.0" />
+            <ListView fx:id="lstTickets" prefHeight="118.0" prefWidth="208.0" styleClass="shadow" stylesheets="@CSS/Style.css" />
             <Label text="Name:">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -121,9 +120,6 @@
                </font>
             </Label>
             <TextFlow fx:id="lblDescriptionTicket" prefHeight="72.0" prefWidth="142.0" />
-            <Label text="Other event coordinators:" />
-            <ListView prefHeight="72.0" prefWidth="177.0" />
-            <JFXButton buttonType="RAISED" text="Edit Team Management" />
          </children>
          <GridPane.margin>
             <Insets left="20.0" right="25.0" top="50.0" />

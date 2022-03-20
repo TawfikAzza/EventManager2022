@@ -1,6 +1,7 @@
 package bll;
 
 import be.Participant;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.ParticipantDAO;
 
 import java.util.ArrayList;
@@ -14,5 +15,8 @@ public class ParticipantManager {
 
     public ArrayList<Participant> getAllParticipants() throws Exception {
         return databaseParticipant.getAllParticipants();
+    }
+    public ArrayList<String> participantsShowEventsbyId (int idParticipant) throws SQLServerException {
+        return databaseParticipant.participantsShowEventsbyId(idParticipant);
     }
 }

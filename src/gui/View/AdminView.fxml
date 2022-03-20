@@ -11,7 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="969.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AdminViewController">
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="887.0" styleClass="anchor" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AdminViewController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -28,10 +29,10 @@
          <children>
             <Label text="Event Coordinators">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <TableView fx:id="coordinatorTableView" onMouseClicked="#handleCoordinatorClick" prefHeight="318.0" prefWidth="340.0">
+            <TableView fx:id="coordinatorTableView" onMouseClicked="#handleCoordinatorClick" prefHeight="318.0" prefWidth="340.0" styleClass="shadow">
               <columns>
                 <TableColumn fx:id="tableColumnFirstName" prefWidth="78.39998948574066" text="First Name" />
                   <TableColumn fx:id="tableColumnLastName" prefWidth="75.0" text="Last Name" />
@@ -54,10 +55,10 @@
          <children>
             <Label text="Events">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <TableView fx:id="eventTableView" prefHeight="318.0" prefWidth="280.0">
+            <TableView fx:id="eventTableView" prefHeight="318.0" prefWidth="280.0" styleClass="shadow">
               <columns>
                 <TableColumn fx:id="tableColumnEventName" prefWidth="216.79999387264252" text="Event Name" />
                   <TableColumn fx:id="tableColumnEventDate" prefWidth="63.20001220703125" text="Event Date" />

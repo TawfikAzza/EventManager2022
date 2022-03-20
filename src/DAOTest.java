@@ -1,14 +1,20 @@
 import be.Events;
 import be.Participant;
+import bll.exception.EventDAOException;
+import bll.exception.EventManagerException;
 import bll.utils.DateUtil;
 import dal.db.EventDAO;
 import dal.db.ParticipantDAO;
+import gui.Model.EventModel;
+import javafx.event.Event;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DAOTest {
+
+
     public static void main(String[] args) throws Exception {
         //addEvent();
         //getAllEvents();
@@ -69,4 +75,5 @@ public class DAOTest {
         EventDAO eventDAO = new EventDAO();
         eventDAO.updateEvent(eventTest);
     }
+
 }

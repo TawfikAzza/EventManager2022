@@ -1,6 +1,7 @@
 package gui.Controller;
 
 import be.Events;
+import be.Ticket;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
@@ -19,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -60,10 +62,11 @@ public class EventsController implements Initializable {
     private TextField txtName,txtLocation,txtStartDate,txtStartTime,txtEndDate;
     @FXML
     private TextArea txtDescription,txtItinerary;
-
+    @FXML
+    private ListView<Ticket> lstTickets;
     private Events currentEvent;
 
-
+    private RootLayoutEvenController rootLayoutEvenController;
     private CoordinatorModel coordinatorModel;
     public EventsController() {
         try {
@@ -79,7 +82,7 @@ public class EventsController implements Initializable {
         updateTableView();
     }
 
-    private void updateTableView() {
+    public void updateTableView() {
         eventName.setCellValueFactory(new PropertyValueFactory<>("name"));
         eventDate.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
         try {
@@ -118,15 +121,25 @@ public class EventsController implements Initializable {
             toggleTextFieldOff();
             toggleLabelsOn();
             setLabelText(event);
+            setListView();
         }
     }
 
+    private void setListView() {
 
+            lstTickets.getItems().clear();
+
+        for (Ticket ticket:tableEvents.getSelectionModel().getSelectedItem().getTicketAvailable()) {
+
+            lstTickets.getItems().add(ticket);
+        }
+
+    }
     private void setTextFieldText(Events event) {
         txtName.setText(event.getName());
         txtLocation.setText(event.getLocation());
         txtStartDate.setText(event.getStrStartDate());
-       // txtStartTime.setText(event.getStrStartDate().substring(10,event.getStrStartDate().length()));
+
         txtDescription.setText(event.getDescription());
         txtEndDate.setText(event.getStrEndDate());
         txtItinerary.setText(event.getItinerary());
@@ -136,6 +149,7 @@ public class EventsController implements Initializable {
         lblLocation.setText(event.getLocation());
         lblStartDate.setText(event.getStrStartDate());
         //lblStartTime.setText(event.getStrStartDate().substring(10,event.getStrStartDate().length()));
+        //System.out.println(event.getStrStartDate().substring(0,10));
         Text eventDescription = new Text(event.getDescription());
         lblDescription.getChildren().clear();
         lblDescription.getChildren().add(eventDescription);
@@ -163,6 +177,8 @@ public class EventsController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/NewEventView.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
+        NewEventController newEventController = loader.getController();
+        newEventController.setEventsController(this);
         Scene scene = new Scene(root);
         stage = (Stage) btnAdd.getScene().getWindow();
         stage.setScene(scene);
@@ -176,13 +192,29 @@ public class EventsController implements Initializable {
     }
 
     @FXML
-    void editEvent(ActionEvent event) {
+    void editEvent(ActionEvent event) throws IOException {
         if(tableEvents.getSelectionModel().getSelectedIndex()!=-1) {
             toggleLabelsOff();
             currentEvent=tableEvents.getSelectionModel().getSelectedItem();
             setTextFieldText(currentEvent);
             toggleTextFieldOn();
         }
+        FXMLLoader loaderPage = new FXMLLoader();
+        loaderPage.setLocation(getClass().getResource("/gui/View/NewEventView.fxml"));
+        GridPane eventOverview = (GridPane) loaderPage.load();
+        NewEventController newEventController = loaderPage.getController();
+        newEventController.setOperationType("modification");
+        newEventController.setValue(currentEvent);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/RootLayoutEvent.fxml"));
+        Parent root = loader.load();
+
+        RootLayoutEvenController rootLayoutEvenController = loader.getController();
+        rootLayoutEvenController.setCenter(eventOverview);
+        Scene scene = new Scene(root,800,600);
+        Stage primaryStage = (Stage) btnAdd.getScene().getWindow();
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     @FXML
@@ -253,5 +285,9 @@ public class EventsController implements Initializable {
         stage.setScene(scene);
 
         stage.show();
+    }
+
+    public void setMainApp(RootLayoutEvenController rootLayoutEvenController) {
+        this.rootLayoutEvenController=rootLayoutEvenController;
     }
 }
