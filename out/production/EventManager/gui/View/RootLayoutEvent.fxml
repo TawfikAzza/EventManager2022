@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="topPane" prefHeight="602.0" prefWidth="116.0" styleClass="anchor" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.RootLayoutEvenController">
+<BorderPane fx:id="topPane" prefHeight="619.0" prefWidth="116.0" styleClass="anchor" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.RootLayoutEvenController">
     <left>
         <VBox prefHeight="347.0" prefWidth="106.0" BorderPane.alignment="CENTER">
             <children>
@@ -54,6 +54,11 @@
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin></Button>
+            <Button mnemonicParsing="false" onAction="#sellTicket" prefHeight="106.0" prefWidth="113.0" text="Sell a Ticket">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </Button>
             </children>
         </VBox>
     </left>
