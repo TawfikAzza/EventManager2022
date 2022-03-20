@@ -110,7 +110,6 @@ public class ParticipantViewController implements Initializable {
         try {
             lstEventParticipant.getItems().clear();
             listEvents = coordinatorModel.getParticipantEvent(participant);
-            System.out.println("size: "+listEvents.size());
             lstEventParticipant.getItems().addAll(listEvents);
         } catch (EventManagerException e) {
             displayError(e);

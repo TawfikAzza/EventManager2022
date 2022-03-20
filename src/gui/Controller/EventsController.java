@@ -113,7 +113,7 @@ public class EventsController implements Initializable {
         lblEndDate.setVisible(false);
         lblItinerary.setVisible(false);
         lblDescriptionTicket.setVisible(false);
-        lblNameTicket.setVisible(false);
+
     }
     public void displayEvent(MouseEvent mouseEvent) {
         if(tableEvents.getSelectionModel().getSelectedItem()!=null) {
@@ -140,9 +140,9 @@ public class EventsController implements Initializable {
         txtLocation.setText(event.getLocation());
         txtStartDate.setText(event.getStrStartDate());
 
-        txtDescription.setText(event.getDescription());
+
         txtEndDate.setText(event.getStrEndDate());
-        txtItinerary.setText(event.getItinerary());
+
     }
     private void setLabelText(Events event) {
         lblName.setText(event.getName());
@@ -157,33 +157,11 @@ public class EventsController implements Initializable {
         Text eventItinerary = new Text(event.getItinerary());
         lblItinerary.getChildren().clear();
         lblItinerary.getChildren().add(eventItinerary);
-        lblNameTicket.setText(event.getName());
-        Text eventDescriptionTicket = new Text(event.getDescription());
-        lblDescriptionTicket.getChildren().clear();
-        lblDescriptionTicket.getChildren().add(eventDescriptionTicket);
+
     }
 
     public void toggleVisible(ActionEvent actionEvent) {
 
-    }
-
-    public void updateEvent(ActionEvent actionEvent) {
-        currentEvent.setName(txtName.getText());
-        currentEvent.setDescription(txtDescription.getText());
-        currentEvent.setStartDate(DateUtil.parseDateTime(txtStartDate.getText()));
-    }
-    @FXML
-    void addEvent(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/NewEventView.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        NewEventController newEventController = loader.getController();
-        newEventController.setEventsController(this);
-        Scene scene = new Scene(root);
-        stage = (Stage) btnAdd.getScene().getWindow();
-        stage.setScene(scene);
-
-        stage.show();
     }
 
     @FXML
@@ -193,12 +171,9 @@ public class EventsController implements Initializable {
 
     @FXML
     void editEvent(ActionEvent event) throws IOException {
-        if(tableEvents.getSelectionModel().getSelectedIndex()!=-1) {
-            toggleLabelsOff();
-            currentEvent=tableEvents.getSelectionModel().getSelectedItem();
-            setTextFieldText(currentEvent);
-            toggleTextFieldOn();
-        }
+        if(tableEvents.getSelectionModel().getSelectedIndex()==-1)
+            return;
+        currentEvent=tableEvents.getSelectionModel().getSelectedItem();
         FXMLLoader loaderPage = new FXMLLoader();
         loaderPage.setLocation(getClass().getResource("/gui/View/NewEventView.fxml"));
         GridPane eventOverview = (GridPane) loaderPage.load();
@@ -212,7 +187,7 @@ public class EventsController implements Initializable {
         RootLayoutEvenController rootLayoutEvenController = loader.getController();
         rootLayoutEvenController.setCenter(eventOverview);
         Scene scene = new Scene(root,800,600);
-        Stage primaryStage = (Stage) btnAdd.getScene().getWindow();
+        Stage primaryStage = (Stage) btnEdit.getScene().getWindow();
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -259,8 +234,7 @@ public class EventsController implements Initializable {
                     }
             }
         }
-        txtDescription.setVisible(true);
-        txtItinerary.setVisible(true);
+
     }
     @FXML
     private void toggleTextFieldOff() {
@@ -273,8 +247,7 @@ public class EventsController implements Initializable {
                     }
             }
         }
-        txtDescription.setVisible(false);
-        txtItinerary.setVisible(false);
+
     }
     @FXML
     private void showAllParticipants(ActionEvent actionEvent) throws IOException {
@@ -289,5 +262,14 @@ public class EventsController implements Initializable {
 
     public void setMainApp(RootLayoutEvenController rootLayoutEvenController) {
         this.rootLayoutEvenController=rootLayoutEvenController;
+    }
+
+    public void displayTicket(MouseEvent mouseEvent) {
+        if(lstTickets.getSelectionModel().getSelectedIndex()==-1)
+            return;
+        Ticket ticket = lstTickets.getSelectionModel().getSelectedItem();
+        Text ticketDescription = new Text(ticket.getBenefit());
+        lblDescriptionTicket.getChildren().clear();
+        lblDescriptionTicket.getChildren().add(ticketDescription);
     }
 }

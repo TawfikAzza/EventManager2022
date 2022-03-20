@@ -60,4 +60,7 @@ public class RootLayoutEvenController {
         ParticipantViewController controller = loader.getController();
         controller.setMainApp(this);
     }
+
+    public void sellTicket(ActionEvent actionEvent) {
+    }
 }
