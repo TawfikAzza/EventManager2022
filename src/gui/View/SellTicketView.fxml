@@ -72,7 +72,7 @@
          <graphic>
             <ImageView fitHeight="61.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../resources/Images/x-transparent-invisible-background-4.png" />
+                  <Image url="@/Images/x-transparent-invisible-background-4.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -83,7 +83,7 @@
          <graphic>
             <ImageView fitHeight="66.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../resources/Images/NewParticipant.png" />
+                  <Image url="@/Images/NewParticipant.png" />
                </image>
             </ImageView>
          </graphic>
