@@ -170,7 +170,8 @@ public class SellTicketViewController implements Initializable {
         }
         Events eventChosen = tableEvent.getSelectionModel().getSelectedItem();
         Participant participant = tableParticipant.getSelectionModel().getSelectedItem();
-        Ticket ticketSold = new Ticket(0,"TESTSERIALNUMBER",tableTicket.getSelectionModel().getSelectedItem().getId());
+        String ticketNumber = getAlphaNumericString(10).toUpperCase(Locale.ROOT);
+        Ticket ticketSold = new Ticket(0,ticketNumber,tableTicket.getSelectionModel().getSelectedItem().getId());
         ticketSold = coordinatorModel.sellTicket(ticketSold,eventChosen,participant);
         btnCreateTicket.setVisible(false);
 
@@ -181,5 +182,31 @@ public class SellTicketViewController implements Initializable {
         alert.setTitle("You are missing data");
         alert.setHeaderText(message);
         alert.showAndWait();
+    }
+    private String getAlphaNumericString(int n)
+    {
+
+        // chose a Character random from this String
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
+
+        // create StringBuffer size of AlphaNumericString
+        StringBuilder sb = new StringBuilder(n);
+
+        for (int i = 0; i < n; i++) {
+
+            // generate a random number between
+            // 0 to AlphaNumericString variable length
+            int index
+                    = (int)(AlphaNumericString.length()
+                    * Math.random());
+
+            // add Character one by one in end of sb
+            sb.append(AlphaNumericString
+                    .charAt(index));
+        }
+
+        return sb.toString();
     }
 }
