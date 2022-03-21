@@ -115,9 +115,41 @@ public class EventDAO implements IEventDAO {
         List<Ticket> ticketList = new ArrayList<>();
         try (Connection con = cm.getConnection()) {
             String sql = "SELECT EVENTS.id,events.name,events.location,events.description,events.startDate,events.endDate," +
-                        "events.itinerary, TicketType.id as ticketID, TicketType.typeName " +
-                        " as nameTicket, TicketType.benefit as ticketBenefit " +
-                        " FROM EVENTS INNER JOIN TicketType ON EVENTS.id = TicketType.eventID" +
+                        "events.itinerary FROM EVENTS";
+
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+
+            while(rs.next()) {
+                Events event = new Events(rs.getInt("id"),
+                                        rs.getString("name"),
+                                        rs.getString("location"),
+                                        rs.getString("description"),
+                                        rs.getObject("startDate",LocalDateTime.class),
+                                        rs.getObject("endDate",LocalDateTime.class),
+                                        rs.getString("itinerary"));
+                allEvents.add(event);
+                }
+            }
+        return allEvents;
+    }
+
+    /**
+     * This one is a method which took several years of my life...
+     * Do not modify it without paying close attention at the way the method retrieve results from the query
+     * Also, if you ask yourself why I used a temporary List of ticket instead of using the one I built....
+     * Well, let's just say that Jeppe will have a lot of questions from me if I remember to ask him...
+     * */
+
+    public List<Events> getAllEventsWithTicketType() throws Exception {
+        List<Events> allEvents = new ArrayList<>();
+        List<Ticket> ticketList = new ArrayList<>();
+        try (Connection con = cm.getConnection()) {
+            String sql = "SELECT EVENTS.id,events.name,events.location,events.description,events.startDate,events.endDate," +
+                    "events.itinerary, TicketType.id as ticketID, TicketType.typeName " +
+                    " as nameTicket, TicketType.benefit as ticketBenefit " +
+                    " FROM EVENTS INNER JOIN TicketType ON EVENTS.id = TicketType.eventID" +
                     " order by id";
             PreparedStatement pstmt = con.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -161,15 +193,15 @@ public class EventDAO implements IEventDAO {
                 }
 
                 ticketList.add(new Ticket(rs.getInt("ticketID")
-                                        ,rs.getString("nameTicket")
-                                        ,rs.getString("ticketBenefit")));
+                        ,rs.getString("nameTicket")
+                        ,rs.getString("ticketBenefit")));
 
                 name=rs.getString("name");
                 location = rs.getString("location");
                 description=rs.getString("description");
                 startDate=rs.getObject("startDate", LocalDateTime.class);
                 if(rs.getObject("endDate",LocalDateTime.class)!=null) {
-                   endDate=rs.getObject("endDate",LocalDateTime.class);
+                    endDate=rs.getObject("endDate",LocalDateTime.class);
                 }
                 if(rs.getString("itinerary")!=null) {
                     itinerary=rs.getString("itinerary");
@@ -193,8 +225,6 @@ public class EventDAO implements IEventDAO {
         }
         return allEvents;
     }
-
-
     @Override
     public Events getEvent(int id) throws Exception {
          Events eventSearched = null;

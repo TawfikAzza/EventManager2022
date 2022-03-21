@@ -4,6 +4,7 @@ import be.Events;
 import be.Participant;
 import be.Ticket;
 import bll.exception.AdminLogicException;
+import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import bll.exception.ParticipantManagerException;
 import gui.Model.CoordinatorModel;
@@ -35,7 +36,7 @@ import java.util.ResourceBundle;
 public class SellTicketViewController implements Initializable {
 
     @FXML
-    private Button btnCreateParticipant;
+    private Button btnCreateTicket,btnCreateParticipant;
     @FXML
     private TableColumn<Events, String> columnNameEvent,columnDateEvent;
     @FXML
@@ -94,8 +95,8 @@ public class SellTicketViewController implements Initializable {
         columnNameEvent.setCellValueFactory(new PropertyValueFactory<>("name"));
         columnDateEvent.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
         try {
-            tableEvent.getItems().addAll(coordinatorModel.getAllEvents());
-        } catch (EventManagerException e) {
+            tableEvent.getItems().addAll(coordinatorModel.getAllEventsWithTicketType());
+        } catch (EventManagerException | EventDAOException e) {
             e.printStackTrace();
         }
 
@@ -143,8 +144,6 @@ public class SellTicketViewController implements Initializable {
     @FXML
     void createParticipant(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/NewParticipantView.fxml"));
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EventView.fxml"));
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
         Parent root = loader.load();
         NewParticipantViewController newParticipantViewController = loader.getController();
         newParticipantViewController.setSellTicketViewController(this);
@@ -153,5 +152,11 @@ public class SellTicketViewController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.show();
+    }
+
+
+    @FXML
+    void createTicket(ActionEvent event) {
+
     }
 }

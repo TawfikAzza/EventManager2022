@@ -12,73 +12,66 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane hgap="5.0" prefHeight="510.0" prefWidth="693.0" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.SellTicketViewController">
+<GridPane prefHeight="510.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.SellTicketViewController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.00003662109376" minWidth="10.0" prefWidth="199.4" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.3999877929688" minWidth="10.0" prefWidth="202.0000244140625" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.19995117187497" minWidth="10.0" prefWidth="205.19997558593747" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints maxHeight="304.1999877929687" minHeight="10.0" prefHeight="40.00000610351563" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="304.1999877929687" minHeight="10.0" prefHeight="40.00000610351563" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="368.3999984741211" minHeight="10.0" prefHeight="305.4000122070312" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="249.80002441406253" minHeight="10.0" prefHeight="150.99998779296874" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <VBox GridPane.rowIndex="2">
+      <VBox>
          <children>
-            <TableView fx:id="tableEvent" onMouseClicked="#displayTicketType" prefHeight="311.0" prefWidth="205.0" styleClass="shadow">
+            <Label text="Select an event" />
+            <TableView fx:id="tableEvent" onMouseClicked="#displayTicketType" prefHeight="228.0" prefWidth="203.0">
               <columns>
                 <TableColumn fx:id="columnNameEvent" prefWidth="100.800048828125" text="Name Event" />
                 <TableColumn fx:id="columnDateEvent" prefWidth="99.20001220703125" text="Date" />
               </columns>
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
             </TableView>
          </children>
       </VBox>
-      <VBox GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <VBox GridPane.columnIndex="2">
          <children>
-            <TableView fx:id="tableParticipant" prefHeight="301.0" prefWidth="233.0" styleClass="shadow">
+            <Label text="Select a Participant" />
+            <HBox>
+               <children>
+                  <Label text="Search">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="searchQuery" onAction="#searchParticipant" prefHeight="26.0" prefWidth="164.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <TableView fx:id="tableParticipant" prefHeight="202.0" prefWidth="206.0">
               <columns>
                 <TableColumn fx:id="columnFirstName" prefWidth="75.0" text="First name" />
                 <TableColumn fx:id="columnLastName" prefWidth="66.4000244140625" text="Last name" />
                   <TableColumn fx:id="columnPhoneNumber" prefWidth="91.99993896484375" text="Phone Number" />
               </columns>
-               <VBox.margin>
-                  <Insets right="5.0" />
-               </VBox.margin>
             </TableView>
+            <Button fx:id="btnCreateParticipant" mnemonicParsing="false" onAction="#createParticipant" text="New Participant" />
          </children>
       </VBox>
-      <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <VBox GridPane.columnIndex="1">
          <children>
-            <TableView fx:id="tableTicket" prefHeight="306.0" prefWidth="230.0" styleClass="shadow">
+            <Label text="Select a type of ticket" />
+            <TableView fx:id="tableTicket" prefHeight="229.0" prefWidth="206.0">
               <columns>
-                <TableColumn fx:id="columnTicketType" prefWidth="114.4000381231308" text="Ticket Type" />
-                <TableColumn fx:id="columnTicketDescription" prefWidth="114.39997100830078" text="Description" />
+                <TableColumn fx:id="columnTicketType" prefWidth="83.19999998807907" text="Ticket Type" />
+                <TableColumn fx:id="columnTicketDescription" prefWidth="118.39996337890625" text="Description" />
               </columns>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
             </TableView>
          </children>
       </VBox>
-      <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="203.0" text="SELL IT!!!!!!!!!!!!!!!!" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="   Select an event" GridPane.rowIndex="1" />
-      <Label alignment="CENTER" prefHeight="31.0" prefWidth="230.0" text="  Select a type of ticket" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Label alignment="CENTER" prefHeight="30.0" prefWidth="230.0" text=" Select a Participant" GridPane.columnIndex="2" />
-      <Button fx:id="btnCreateParticipant" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#createParticipant" prefWidth="102.0" text="New Participant" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <HBox GridPane.columnIndex="2" GridPane.rowIndex="1">
-         <children>
-            <Label text="   Search" />
-            <TextField fx:id="searchQuery" onAction="#searchParticipant" prefHeight="26.0" prefWidth="166.0">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </TextField>
-         </children>
-      </HBox>
+      <Button fx:id="btnCreateTicket" mnemonicParsing="false" onAction="#createTicket" prefHeight="26.0" prefWidth="203.0" text="SELL IT!!!!!!!!!!!!!!!!" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>

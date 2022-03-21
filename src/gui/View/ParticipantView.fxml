@@ -59,5 +59,11 @@
          </children>
       </VBox>
       <Button fx:id="btnGenerateFile" mnemonicParsing="false" onAction="#toGenerateExcelFile" text="Generate Excel file" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TableView fx:id="tableEvent" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+        <columns>
+          <TableColumn fx:id="columnEventName" prefWidth="75.0" text="Event Name" />
+          <TableColumn fx:id="columnEventDate" prefWidth="111.20001220703125" text="Event Date" />
+        </columns>
+      </TableView>
    </children>
 </GridPane>

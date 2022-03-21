@@ -17,7 +17,7 @@ public class DAOTest {
 
     public static void main(String[] args) throws Exception {
         //addEvent();
-        //getAllEvents();
+        getAllEvents();
         //getEvent();
         //removeEvent();
        // updateEvent();

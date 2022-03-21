@@ -18,4 +18,6 @@ public interface IEventDAO {
     Events getEvent(int id) throws Exception;
 
     List<Events> getParticipantEvent(Participant participant) throws SQLServerException;
+
+    List<Events> getAllEventsWithTicketType() throws Exception;
 }

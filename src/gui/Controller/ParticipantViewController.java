@@ -41,6 +41,10 @@ public class ParticipantViewController implements Initializable {
     private Label lblMail,lblName,lblPhoneNumber;
     @FXML
     private ListView<Events> lstEventParticipant;
+    @FXML
+    private TableColumn<Events, String> columnEventDate,columnEventName;
+    @FXML
+    private TableView<Events> tableEvent;
 
     private RootLayoutEvenController rootLayoutEvenController;
     private ParticipantModel participantModel;
@@ -54,15 +58,17 @@ public class ParticipantViewController implements Initializable {
         try {
             coordinatorModel = new CoordinatorModel();
             participantModel = new ParticipantModel();
+            eventModel = new EventModel(); // FILEMANAGER + exceptions
         } catch (Exception | AdminLogicException | EventManagerException e) {
             e.printStackTrace();
         }
-        eventModel = new EventModel(); // FILEMANAGER + exceptions
+
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         allParticipants = FXCollections.observableArrayList();
         updateTable();
+        updateEventTable();
         query.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -80,6 +86,17 @@ public class ParticipantViewController implements Initializable {
             tableParticipant.getItems().addAll(allParticipants);
         } catch (ParticipantManagerException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void updateEventTable() {
+        columnEventName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        columnEventDate.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
+
+        try {
+            tableEvent.getItems().addAll(coordinatorModel.getAllEvents());
+        } catch (EventManagerException e) {
+            displayError(e);
         }
     }
     @FXML
@@ -140,6 +157,8 @@ public class ParticipantViewController implements Initializable {
 
    @FXML
     void toGenerateExcelFile(ActionEvent event) throws IOException {       // FILEMANAGER
-        eventModel.exportExcelFile(7);
+        if(tableEvent.getSelectionModel().getSelectedIndex()==-1)
+            return;
+        eventModel.exportExcelFile(tableEvent.getSelectionModel().getSelectedItem().getId());
     }
 }

@@ -2,6 +2,7 @@ package bll;
 
 import be.Events;
 import be.Participant;
+import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import dal.db.EventDAO;
 import dal.db.TicketDAO;
@@ -64,6 +65,14 @@ public class EventManager {
             return eventDAO.getParticipantEvent(participant);
         } catch (Exception e) {
             throw new EventManagerException("Error while retrieving the events list in database",e);
+        }
+    }
+
+    public List<Events> getAllEventsWithTicketType() throws EventManagerException {
+        try {
+            return eventDAO.getAllEventsWithTicketType();
+        } catch (Exception e) {
+            throw new EventManagerException("Error while retrieving the events from the database",e);
         }
     }
 }
