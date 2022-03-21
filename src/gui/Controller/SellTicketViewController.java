@@ -2,7 +2,7 @@ package gui.Controller;
 
 import be.Events;
 import be.Participant;
-import be.Ticket;
+import be.TicketType;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
@@ -19,10 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
@@ -42,7 +39,7 @@ public class SellTicketViewController implements Initializable {
     @FXML
     private TableColumn<Participant, String> columnFirstName,columnLastName,columnPhoneNumber;
     @FXML
-    private TableColumn<Ticket, String> columnTicketType,columnTicketDescription;
+    private TableColumn<TicketType, String> columnTicketType,columnTicketDescription;
     @FXML
     private TextField searchQuery;
     @FXML
@@ -50,7 +47,7 @@ public class SellTicketViewController implements Initializable {
     @FXML
     private TableView<Participant> tableParticipant;
     @FXML
-    private TableView<Ticket> tableTicket;
+    private TableView<TicketType> tableTicket;
 
     private CoordinatorModel coordinatorModel;
     private ParticipantModel participantModel;
@@ -157,6 +154,27 @@ public class SellTicketViewController implements Initializable {
 
     @FXML
     void createTicket(ActionEvent event) {
+        String message ="";
+        if(tableEvent.getSelectionModel().getSelectedIndex()==-1) {
+            message += "Select an Event \n";
+        }
+        if(tableTicket.getSelectionModel().getSelectedIndex()==-1)
+            message += "Select a ticket type \n";
+        if(tableParticipant.getSelectionModel().getSelectedIndex()==-1)
+            message += "Select a participant ";
+        if(!message.equals("")) {
+            displayMessage(message);
+            return;
+        }
 
+
+
+    }
+
+    private void displayMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("You are missing data");
+        alert.setHeaderText(message);
+        alert.showAndWait();
     }
 }

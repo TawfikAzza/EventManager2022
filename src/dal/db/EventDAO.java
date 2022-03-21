@@ -2,18 +2,14 @@ package dal.db;
 
 import be.Events;
 import be.Participant;
-import be.Ticket;
+import be.TicketType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
 import dal.interfaces.IEventDAO;
-import javafx.event.Event;
-import org.apache.poi.ss.usermodel.Row;
 
-import java.lang.reflect.Array;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class EventDAO implements IEventDAO {
@@ -112,7 +108,7 @@ public class EventDAO implements IEventDAO {
     @Override
     public List<Events> getAllEvents() throws Exception {
         List<Events> allEvents = new ArrayList<>();
-        List<Ticket> ticketList = new ArrayList<>();
+        List<TicketType> ticketList = new ArrayList<>();
         try (Connection con = cm.getConnection()) {
             String sql = "SELECT EVENTS.id,events.name,events.location,events.description,events.startDate,events.endDate," +
                         "events.itinerary FROM EVENTS";
@@ -144,12 +140,12 @@ public class EventDAO implements IEventDAO {
 
     public List<Events> getAllEventsWithTicketType() throws Exception {
         List<Events> allEvents = new ArrayList<>();
-        List<Ticket> ticketList = new ArrayList<>();
+        List<TicketType> ticketList = new ArrayList<>();
         try (Connection con = cm.getConnection()) {
             String sql = "SELECT EVENTS.id,events.name,events.location,events.description,events.startDate,events.endDate," +
                     "events.itinerary, TicketType.id as ticketID, TicketType.typeName " +
                     " as nameTicket, TicketType.benefit as ticketBenefit " +
-                    " FROM EVENTS INNER JOIN TicketType ON EVENTS.id = TicketType.eventID" +
+                    " FROM EVENTS LEFT JOIN TicketType ON EVENTS.id = TicketType.eventID" +
                     " order by id";
             PreparedStatement pstmt = con.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -184,7 +180,7 @@ public class EventDAO implements IEventDAO {
                     if(itinerary!=null) {
                         event.setItinerary(itinerary);
                     }
-                    List<Ticket> tickets = new ArrayList<>(ticketList);
+                    List<TicketType> tickets = new ArrayList<>(ticketList);
                     event.setTicketAvailable(tickets);
 
                     allEvents.add(event);
@@ -192,7 +188,7 @@ public class EventDAO implements IEventDAO {
 
                 }
 
-                ticketList.add(new Ticket(rs.getInt("ticketID")
+                ticketList.add(new TicketType(rs.getInt("ticketID")
                         ,rs.getString("nameTicket")
                         ,rs.getString("ticketBenefit")));
 
@@ -219,7 +215,7 @@ public class EventDAO implements IEventDAO {
             if(itinerary!=null) {
                 event.setItinerary(itinerary);
             }
-            List<Ticket> tickets = new ArrayList<>(ticketList);
+            List<TicketType> tickets = new ArrayList<>(ticketList);
             event.setTicketAvailable(tickets);
             allEvents.add(event);
         }

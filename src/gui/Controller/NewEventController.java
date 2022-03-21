@@ -2,9 +2,8 @@ package gui.Controller;
 
 
 import be.Events;
-import be.Ticket;
+import be.TicketType;
 import bll.exception.AdminLogicException;
-import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import bll.utils.DateUtil;
 import com.jfoenix.controls.JFXButton;
@@ -13,22 +12,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
-import javax.xml.validation.Schema;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +45,7 @@ public class NewEventController implements Initializable {
     @FXML
     private TextField txtName,txtNameTicket;
     @FXML
-    private ListView<Ticket> lstTickets;
+    private ListView<TicketType> lstTickets;
     @FXML
     private GridPane gridPaneNewEvent;
 
@@ -87,7 +80,7 @@ public class NewEventController implements Initializable {
             if(operationType.equals("creation")) {
             Events eventCreated = new Events(0,txtName.getText(),txtLocation.getText(),txtDescription.getText(),getStartDate(),getEndDate(),txtItinerary.getText());
             if(lstTickets.getItems().size()>0) {
-                for (Ticket ticket : lstTickets.getItems())
+                for (TicketType ticket : lstTickets.getItems())
                     eventCreated.getTicketAvailable().add(ticket);
             }
             eventCreated = coordinatorModel.createEvent(eventCreated);
@@ -95,7 +88,7 @@ public class NewEventController implements Initializable {
         }
             if(operationType.equals("modification")) {
                 currentEvent.getTicketAvailable().clear();
-                for(Ticket ticket:lstTickets.getItems())
+                for(TicketType ticket:lstTickets.getItems())
                     currentEvent.getTicketAvailable().add(ticket);
 
                 currentEvent.setName(txtName.getText());
@@ -186,13 +179,13 @@ public class NewEventController implements Initializable {
     }
 
     public void addTicket(ActionEvent actionEvent) {
-        Ticket ticket = null;
+        TicketType ticket = null;
         if(txtNameTicket.getText().equals(""))
             return;
         if(txtTicketDesciption.getText().equals(""))
             return;
-        ticket = new Ticket(0,txtNameTicket.getText(),txtTicketDesciption.getText());
-        for (Ticket ticket1:lstTickets.getItems()) {
+        ticket = new TicketType(0,txtNameTicket.getText(),txtTicketDesciption.getText());
+        for (TicketType ticket1:lstTickets.getItems()) {
             if(ticket.getType().equals(ticket1.getType()))
                 return;
         }
@@ -264,14 +257,14 @@ public class NewEventController implements Initializable {
 
         txtDescription.setText(event.getDescription());
         txtLocation.setText(event.getLocation());
-        for(Ticket ticket:event.getTicketAvailable()){
+        for(TicketType ticket:event.getTicketAvailable()){
            lstTickets.getItems().add(ticket);
         }
         btnCreate.setText("Update Event");
         currentEvent=event;
     }
 
-    public class TicketListCell extends ListCell<Ticket> {
+    public class TicketListCell extends ListCell<TicketType> {
         private final TextField textField = new TextField();
 
         public TicketListCell() {
@@ -289,7 +282,7 @@ public class NewEventController implements Initializable {
         }
 
         @Override
-        protected void updateItem(Ticket ticket, boolean empty) {
+        protected void updateItem(TicketType ticket, boolean empty) {
             super.updateItem(ticket, empty);
             if (isEditing()) {
                 textField.setText(ticket.getType());
