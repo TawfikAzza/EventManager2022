@@ -3,6 +3,7 @@ package gui.Controller;
 import be.Events;
 import be.Participant;
 import bll.exception.EventDAOException;
+import bll.exception.ParticipantManagerException;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Model.ParticipantModel;
 import javafx.fxml.FXML;
@@ -42,7 +43,7 @@ public class ECallParticipantsController implements Initializable {
 
     }
 
-    private void updateTableView() throws Exception {
+    private void updateTableView() throws ParticipantManagerException {
         tableColumnFName.setCellValueFactory(new PropertyValueFactory<>("fname"));
         tableColumnLName.setCellValueFactory(new PropertyValueFactory<>("lname"));
 
@@ -50,7 +51,7 @@ public class ECallParticipantsController implements Initializable {
     }
 
     @FXML
-    void toShowCurrentParticipants(MouseEvent event) throws SQLServerException {
+    void toShowCurrentParticipants(MouseEvent event) throws ParticipantManagerException {
         chosenParticipant = tableViewPartName.getSelectionModel().getSelectedItem();
         labelEmail.setText(chosenParticipant.getEmail());
         labelFName.setText(chosenParticipant.getFname());
@@ -64,7 +65,7 @@ public class ECallParticipantsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             updateTableView();
-        } catch (Exception e) {
+        } catch (ParticipantManagerException e) {
             e.printStackTrace();
         }
     }

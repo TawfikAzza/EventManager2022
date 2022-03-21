@@ -5,6 +5,7 @@ import be.Participant;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
+import bll.exception.ParticipantManagerException;
 import gui.Model.CoordinatorModel;
 import gui.Model.EventModel;
 import gui.Model.ParticipantModel;
@@ -65,7 +66,7 @@ public class ParticipantViewController implements Initializable {
         query.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                searchParticipant(new ActionEvent());
+                searchParticipant();
             }
         });
     }
@@ -77,12 +78,12 @@ public class ParticipantViewController implements Initializable {
         try {
             allParticipants= participantModel.getAllParticipants();
             tableParticipant.getItems().addAll(allParticipants);
-        } catch (Exception e) {
+        } catch (ParticipantManagerException e) {
             e.printStackTrace();
         }
     }
     @FXML
-    void searchParticipant(ActionEvent event) {
+    void searchParticipant() {
         ObservableList<Participant> searchedParticipants = FXCollections.observableArrayList();
 
         for (Participant participant:allParticipants) {
