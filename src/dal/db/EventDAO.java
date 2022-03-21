@@ -119,15 +119,7 @@ public class EventDAO implements IEventDAO {
 
             PreparedStatement pstmt = con.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
-            int idEvent = 0;
-            int currentEvent = -1;
-            boolean flagFirst=false;
-            String name=null;
-            String location = null;
-            String description=null;
-            LocalDateTime startDate=null;
-            LocalDateTime endDate=null;
-            String itinerary=null;
+
 
             while(rs.next()) {
                 Events event = new Events(rs.getInt("id"),

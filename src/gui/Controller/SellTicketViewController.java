@@ -4,6 +4,7 @@ import be.Events;
 import be.Participant;
 import be.Ticket;
 import bll.exception.AdminLogicException;
+import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import bll.exception.ParticipantManagerException;
 import gui.Model.CoordinatorModel;
@@ -94,8 +95,8 @@ public class SellTicketViewController implements Initializable {
         columnNameEvent.setCellValueFactory(new PropertyValueFactory<>("name"));
         columnDateEvent.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
         try {
-            tableEvent.getItems().addAll(coordinatorModel.getAllEvents());
-        } catch (EventManagerException e) {
+            tableEvent.getItems().addAll(coordinatorModel.getAllEventsWithTicketType());
+        } catch (EventManagerException | EventDAOException e) {
             e.printStackTrace();
         }
 
