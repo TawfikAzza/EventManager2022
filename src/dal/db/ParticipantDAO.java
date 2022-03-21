@@ -25,8 +25,8 @@ public class ParticipantDAO {
                 Participant participant = new Participant(rs.getInt("id"),
                         rs.getString("fname"),
                         rs.getString("lname"),
-                        rs.getString("phoneNumber"),
-                        rs.getString("email"));
+                        rs.getString("email"),
+                        rs.getString("phoneNumber"));
                 allParticipants.add(participant);
             }
         }
@@ -36,6 +36,9 @@ public class ParticipantDAO {
     public Participant addParticipant(Participant participant) throws Exception {
         Participant participantCreated=null;
         try (Connection con = cm.getConnection()) {
+            //TODO: Before inserting a Participant in the db, there is a need to check if the participant doesn't
+            // already exist in it. Issue is, which criteria should we take into account? mail, phone number?
+
             String sql = "INSERT INTO Participant VALUES(?,?,?,?)";
 
             PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);

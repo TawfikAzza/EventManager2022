@@ -2,6 +2,7 @@ package gui.Model;
 
 import be.Participant;
 import bll.ParticipantManager;
+import bll.exception.ParticipantManagerException;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,12 +11,12 @@ import java.util.ArrayList;
 
 public class ParticipantModel {
 
-    private ParticipantManager participantLogic;
+    private ParticipantManager participantManager;
     private ObservableList<Participant> participantObservableList;
     private ObservableList<String> showEventsByPartId;
 
     public ParticipantModel() throws Exception {
-        participantLogic = new ParticipantManager();
+        participantManager = new ParticipantManager();
         participantObservableList = FXCollections.observableArrayList();
     }
 
@@ -28,15 +29,19 @@ public class ParticipantModel {
         return single_instance;
     }
 
-    public ObservableList<Participant> getAllParticipants() throws Exception {
-        participantObservableList.setAll(participantLogic.getAllParticipants());
+    public ObservableList<Participant> getAllParticipants() throws ParticipantManagerException {
+        participantObservableList.setAll(participantManager.getAllParticipants());
         return participantObservableList;
     }
 
-    public ObservableList<String> participantsShowEventsbyId (int idParticipant) throws SQLServerException {
+    public ObservableList<String> participantsShowEventsbyId (int idParticipant) throws ParticipantManagerException {
         showEventsByPartId = FXCollections.observableArrayList();
-        showEventsByPartId.setAll(participantLogic.participantsShowEventsbyId(idParticipant));
+        showEventsByPartId.setAll(participantManager.participantsShowEventsbyId(idParticipant));
         return showEventsByPartId;
     }
 
+    public Participant addParticipant(Participant participant) throws ParticipantManagerException {
+        return participantManager.addParticipant(participant);
+
+    }
 }

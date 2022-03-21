@@ -61,6 +61,16 @@ public class RootLayoutEvenController {
         controller.setMainApp(this);
     }
 
-    public void sellTicket(ActionEvent actionEvent) {
+    public void sellTicket(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/gui/View/SellTicketView.fxml"));
+        GridPane eventOverview = (GridPane) loader.load();
+
+        // Set person overview into the center of root layout.
+        topPane.setCenter(eventOverview);
+
+        // Give the controller access to the main app.
+        SellTicketViewController controller = loader.getController();
+        controller.setMainApp(this);
     }
 }
