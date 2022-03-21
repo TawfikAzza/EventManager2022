@@ -1,12 +1,13 @@
 package dal.db;
 
 import be.Events;
+import be.Ticket;
 import be.TicketType;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
+import org.apache.poi.ss.formula.functions.T;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,5 +90,19 @@ public class TicketDAO {
 
     }
 
-   // public TicketType
+    public Ticket addTicketSold(Ticket ticket) throws SQLException {
+        Ticket ticketCreated = null;
+        try (Connection con = cm.getConnection()) {
+
+            String sqlInsert = "INSERT INTO Ticket VALUES (?,?)";
+            PreparedStatement pstmt = con.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1,ticket.getTicketNumber());
+            pstmt.setInt(2,ticket.getTicketTypeID());
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()) {
+                ticketCreated = new Ticket(rs.getInt(1), ticket.getTicketNumber(),ticket.getTicketTypeID());
+            }
+        }
+        return ticketCreated;
+    }
 }

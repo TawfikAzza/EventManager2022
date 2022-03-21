@@ -2,6 +2,7 @@ package dal.db;
 
 import be.Events;
 import be.Participant;
+import be.Ticket;
 import be.TicketType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
@@ -221,6 +222,19 @@ public class EventDAO implements IEventDAO {
         }
         return allEvents;
     }
+
+    @Override
+    public void addParticipantToEvent(Events eventChosen, Participant participant, Ticket ticketSold) throws SQLException {
+        try (Connection con = cm.getConnection()) {
+            String sqlInsert = "INSERT INTO EventParticipant VALUES (?,?,?)";
+            PreparedStatement pstmt = con.prepareStatement(sqlInsert);
+            pstmt.setInt(1,eventChosen.getId());
+            pstmt.setInt(2,participant.getId());
+            pstmt.setInt(3,ticketSold.getId());
+            pstmt.execute();
+        }
+    }
+
     @Override
     public Events getEvent(int id) throws Exception {
          Events eventSearched = null;
@@ -288,11 +302,14 @@ public class EventDAO implements IEventDAO {
 
 
         try (Connection con = cm.getConnection()) {
-            String sql ="SELECT p.fname, p.lname, p.phoneNumber, tt.typeName FROM Participant p " +
-                    "JOIN EventParticipant ep ON ep.idParticipant = p.id " +
-                    "JOIN Events e ON e.id = ep.idEvent " +
-                    "INNER JOIN TicketType tt ON tt.id = ep.ticketID " +
-                    "WHERE e.id = ?";
+            String sql ="SELECT p.fname, p.lname, p.phoneNumber, tt.typeName " +
+                    "FROM Participant p, EventParticipant ep,Events e,TicketType tt,Ticket t " +
+                    "WHERE " +
+                    "ep.idParticipant = p.id AND " +
+                    "e.id = ep.idEvent AND " +
+                    "t.ticketTypeID = tt.id  AND " +
+                    "t.id = ep.ticketID AND " +
+                    "e.id = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, idOfEvent);
             ResultSet rs = pstmt.executeQuery();
@@ -329,7 +346,7 @@ public class EventDAO implements IEventDAO {
             String sql ="SELECT COUNT(*) AS numberRow FROM Participant p " +
                     "JOIN EventParticipant ep ON ep.idParticipant = p.id " +
                     "JOIN Events e ON e.id = ep.idEvent " +
-                    "INNER JOIN TicketType tt ON tt.id = ep.ticketID " +
+                    "INNER JOIN Ticket tt ON tt.id = ep.ticketID " +
                     "WHERE e.id = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, id);

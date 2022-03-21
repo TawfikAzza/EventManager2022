@@ -2,6 +2,7 @@ package gui.Controller;
 
 import be.Events;
 import be.Participant;
+import be.Ticket;
 import be.TicketType;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
@@ -107,6 +108,7 @@ public class SellTicketViewController implements Initializable {
     }
     @FXML
     void displayTicketType(MouseEvent event) {
+        btnCreateTicket.setVisible(true);
         if(tableEvent.getSelectionModel().getSelectedIndex()==-1)
             return;
         tableTicket.getItems().clear();
@@ -153,7 +155,7 @@ public class SellTicketViewController implements Initializable {
 
 
     @FXML
-    void createTicket(ActionEvent event) {
+    void createTicket(ActionEvent event) throws EventManagerException {
         String message ="";
         if(tableEvent.getSelectionModel().getSelectedIndex()==-1) {
             message += "Select an Event \n";
@@ -166,8 +168,11 @@ public class SellTicketViewController implements Initializable {
             displayMessage(message);
             return;
         }
-
-
+        Events eventChosen = tableEvent.getSelectionModel().getSelectedItem();
+        Participant participant = tableParticipant.getSelectionModel().getSelectedItem();
+        Ticket ticketSold = new Ticket(0,"TESTSERIALNUMBER",tableTicket.getSelectionModel().getSelectedItem().getId());
+        ticketSold = coordinatorModel.sellTicket(ticketSold,eventChosen,participant);
+        btnCreateTicket.setVisible(false);
 
     }
 
