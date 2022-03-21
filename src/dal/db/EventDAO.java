@@ -11,6 +11,7 @@ import dal.interfaces.IEventDAO;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class EventDAO implements IEventDAO {
@@ -129,6 +130,12 @@ public class EventDAO implements IEventDAO {
                 allEvents.add(event);
                 }
             }
+        HashMap<Integer,Integer> mapEventParticpantNumber = new HashMap<>();
+        mapEventParticpantNumber = getParticpantNumberByEvent();
+        for (Events event:allEvents)
+            if(mapEventParticpantNumber.get(event.getId())!=null)
+                event.setNumberParticipants(""+mapEventParticpantNumber.get(event.getId()));
+
         return allEvents;
     }
 
@@ -364,4 +371,22 @@ public class EventDAO implements IEventDAO {
         return number;
     } // this private method returns the number of rows in order to create a 2D array in getParticipantsForEventById method
 
+    private HashMap<Integer,Integer> getParticpantNumberByEvent() {
+        HashMap<Integer,Integer> mapEventParticpantNumber = new HashMap<>();
+        try (Connection con = cm.getConnection()) {
+            String sql = "SELECT idEvent,count(idEvent) as countLines " +
+                        "FROM EventParticipant " +
+                        "GROUP BY idEvent";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                mapEventParticpantNumber.put(rs.getInt("idEvent"),rs.getInt("countLines"));
+            }
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return mapEventParticpantNumber;
+    }
 }

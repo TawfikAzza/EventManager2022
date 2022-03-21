@@ -42,7 +42,8 @@ public class ParticipantViewController implements Initializable {
     @FXML
     private ListView<Events> lstEventParticipant;
     @FXML
-    private TableColumn<Events, String> columnEventDate,columnEventName;
+    private TableColumn<Events, String> columnEventDate,columnEventName,columnEventParticipantNumber;
+
     @FXML
     private TableView<Events> tableEvent;
 
@@ -92,7 +93,7 @@ public class ParticipantViewController implements Initializable {
     public void updateEventTable() {
         columnEventName.setCellValueFactory(new PropertyValueFactory<>("name"));
         columnEventDate.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
-
+        columnEventParticipantNumber.setCellValueFactory(new PropertyValueFactory<>("numberParticipants"));
         try {
             tableEvent.getItems().addAll(coordinatorModel.getAllEvents());
         } catch (EventManagerException e) {

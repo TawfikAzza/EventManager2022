@@ -18,6 +18,8 @@ public class Events {
     private String itinerary;
     private String strStartDate;
     private String strEndDate;
+    private String numberParticipants;
+
     public Events(int eventId,String nameEvent, String eventLocation, String eventDescription, LocalDateTime startDate, LocalDateTime endDate, String eventItinerary) {
         this.id=eventId;
         this.startDate = startDate;
@@ -39,6 +41,13 @@ public class Events {
     }
 
 
+    public String getNumberParticipants() {
+        return numberParticipants;
+    }
+
+    public void setNumberParticipants(String numberParticipants) {
+        this.numberParticipants = numberParticipants;
+    }
 
     public int getId() {
         return id;

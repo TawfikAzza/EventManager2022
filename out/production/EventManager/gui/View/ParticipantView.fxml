@@ -62,7 +62,8 @@
       <TableView fx:id="tableEvent" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
         <columns>
           <TableColumn fx:id="columnEventName" prefWidth="75.0" text="Event Name" />
-          <TableColumn fx:id="columnEventDate" prefWidth="111.20001220703125" text="Event Date" />
+          <TableColumn fx:id="columnEventDate" prefWidth="87.20001220703125" text="Event Date" />
+            <TableColumn fx:id="columnEventParticipantNumber" prefWidth="73.5999755859375" text="No Participants" />
         </columns>
       </TableView>
    </children>
