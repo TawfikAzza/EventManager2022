@@ -38,10 +38,17 @@
 {
     //-fx-background-color: #eaeae9;
     -fx-prompt-text-fill: #567ae2;
+    -fx-font-weight: bold;
 }
 
 .shadow{
     -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.1),10.0,0.0,0.0,10.0);
+}
+
+.text-field
+{
+    -fx-border-radius: 10;
+     -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.1),05.0,0.0,0.0,05.0);
 }
 
 

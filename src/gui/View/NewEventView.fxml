@@ -169,7 +169,7 @@
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </GridPane.margin>
       </HBox>
-      <JFXButton fx:id="btnBack" onAction="#goBack" text="&lt;&lt; Back" GridPane.columnIndex="1" GridPane.rowIndex="9">
+      <JFXButton fx:id="btnBack" onAction="#goBack" text="⬅ Back" GridPane.columnIndex="1" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets left="15.0" />
          </GridPane.margin>
