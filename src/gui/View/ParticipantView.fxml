@@ -16,8 +16,8 @@
 <GridPane prefHeight="442.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ParticipantViewController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.59996032714844" minWidth="10.0" prefWidth="242.20003662109377" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.99997558593753" minWidth="10.0" prefWidth="199.19996337890626" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.79999999999995" minWidth="10.0" prefWidth="205.0000122070312" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.99997558593753" minWidth="10.0" prefWidth="190.19998779296876" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.79999999999995" minWidth="10.0" prefWidth="207.80001220703122" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints maxHeight="231.19998779296876" minHeight="10.0" prefHeight="231.19998779296876" vgrow="SOMETIMES" />
@@ -59,11 +59,18 @@
          </children>
       </VBox>
       <Button fx:id="btnGenerateFile" mnemonicParsing="false" onAction="#toGenerateExcelFile" text="Generate Excel file" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TableView fx:id="tableEvent" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+      <TableView fx:id="tableEvent" onMouseClicked="#displayEventParticipant" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
         <columns>
           <TableColumn fx:id="columnEventName" prefWidth="75.0" text="Event Name" />
           <TableColumn fx:id="columnEventDate" prefWidth="87.20001220703125" text="Event Date" />
             <TableColumn fx:id="columnEventParticipantNumber" prefWidth="73.5999755859375" text="No Participants" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableParticipantByEvent" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <columns>
+          <TableColumn fx:id="columnFirstNamePE" prefWidth="60.79998856782913" text="First Name" />
+          <TableColumn fx:id="columnLastNamePE" prefWidth="75.99996566772461" text="Last Name" />
+            <TableColumn fx:id="columnPhoneNumberPE" prefWidth="88.800048828125" text="Phone Number" />
         </columns>
       </TableView>
    </children>

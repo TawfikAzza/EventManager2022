@@ -37,11 +37,12 @@ public class ParticipantViewController implements Initializable {
     @FXML
     private Button btnSearch, btnGenerateFile;
     @FXML
-    private TableColumn<Participant, String> columnFname,columnPhone,columnLname;
+    private TableColumn<Participant, String> columnFname,columnPhone,columnLname,columnFirstNamePE,columnLastNamePE,columnPhoneNumberPE;
     @FXML
     private TextField query;
     @FXML
-    private TableView<Participant> tableParticipant;
+    private TableView<Participant> tableParticipant,tableParticipantByEvent;
+
     @FXML
     private Label lblMail,lblName,lblPhoneNumber;
     @FXML
@@ -73,7 +74,7 @@ public class ParticipantViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         allParticipants = FXCollections.observableArrayList();
-        updateTable();
+        updateTableParticipant();
         updateEventTable();
         query.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -83,7 +84,7 @@ public class ParticipantViewController implements Initializable {
         });
     }
 
-    public void updateTable() {
+    public void updateTableParticipant() {
         columnFname.setCellValueFactory(new PropertyValueFactory<>("fname"));
         columnLname.setCellValueFactory(new PropertyValueFactory<>("lname"));
         columnPhone.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
@@ -94,7 +95,14 @@ public class ParticipantViewController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void updateTableParticipantByEvent(Events event) {
+        columnFirstNamePE.setCellValueFactory(new PropertyValueFactory<>("fname"));
+        columnLastNamePE.setCellValueFactory(new PropertyValueFactory<>("lname"));
+        columnPhoneNumberPE.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        tableParticipantByEvent.getItems().clear();
+        tableParticipantByEvent.getItems().addAll(event.getListParticipants());
 
+    }
     public void updateEventTable() {
         columnEventName.setCellValueFactory(new PropertyValueFactory<>("name"));
         columnEventDate.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
@@ -160,7 +168,12 @@ public class ParticipantViewController implements Initializable {
         alert.setHeaderText(t.getMessage());
         alert.showAndWait();
     }
-
+    @FXML
+    void displayEventParticipant(MouseEvent event) {
+        if(tableEvent.getSelectionModel().getSelectedIndex()==-1)
+            return;
+        updateTableParticipantByEvent(tableEvent.getSelectionModel().getSelectedItem());
+    }
    @FXML
     void toGenerateExcelFile(ActionEvent event) throws IOException {       // FILEMANAGER
         if(tableEvent.getSelectionModel().getSelectedIndex()==-1)

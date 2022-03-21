@@ -7,6 +7,7 @@ import be.TicketType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
 import dal.interfaces.IEventDAO;
+import org.apache.commons.collections4.list.PredicatedList;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -131,10 +132,13 @@ public class EventDAO implements IEventDAO {
                 }
             }
         HashMap<Integer,Integer> mapEventParticpantNumber = new HashMap<>();
+        HashMap<Integer,List<Participant>> mapParticipantByEvents = getParticipantByEvent();
         mapEventParticpantNumber = getParticpantNumberByEvent();
         for (Events event:allEvents)
-            if(mapEventParticpantNumber.get(event.getId())!=null)
+            if(mapEventParticpantNumber.get(event.getId())!=null) {
                 event.setNumberParticipants(""+mapEventParticpantNumber.get(event.getId()));
+                event.setListParticipants(mapParticipantByEvents.get(event.getId()));
+            }
 
         return allEvents;
     }
@@ -271,7 +275,39 @@ public class EventDAO implements IEventDAO {
 
         return eventSearched;
     }
+    public HashMap<Integer,List<Participant>> getParticipantByEvent() throws SQLException{
+        HashMap<Integer,List<Participant>> mapParticipantByEvent = new HashMap<>();
+        HashMap<Integer,Participant> mapParticipant = getParticipantByID();
+        List<Participant> participantList = new ArrayList<>();
+        try (Connection con = cm.getConnection()) {
 
+            String sql = "SELECT idEvent, idParticipant FROM EventParticipant Order by idEvent ";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            int idEvent = 0;
+            int currentEvent = -1;
+            boolean flagFirst=false;
+            while(rs.next()){
+                idEvent= rs.getInt("idEvent");
+                int idParticipant =rs.getInt("idParticipant");
+                if(!flagFirst) {
+                    currentEvent=idEvent;
+                    flagFirst=true;
+                }
+                if(idEvent!=currentEvent) {
+                    List<Participant> participants = new ArrayList<>(participantList);
+
+                    mapParticipantByEvent.put(currentEvent,participants);
+                    participantList.clear();
+                }
+                participantList.add(mapParticipant.get(idParticipant));
+                currentEvent=idEvent;
+            }
+            List<Participant> participants = new ArrayList<>(participantList);
+            mapParticipantByEvent.put(currentEvent,participants);
+        }
+        return mapParticipantByEvent;
+    }
     public List<Events> getParticipantEvent(Participant participant) throws SQLServerException {
         List<Events> participantEvents = new ArrayList<>();
         try (Connection con = cm.getConnection()) {
@@ -301,6 +337,7 @@ public class EventDAO implements IEventDAO {
         }
         return participantEvents;
     }
+
     public String[][] getParticipantsForEventById (int idOfEvent) {
             //int counter = 1;
             int row = 0;
@@ -388,5 +425,24 @@ public class EventDAO implements IEventDAO {
             throwables.printStackTrace();
         }
         return mapEventParticpantNumber;
+    }
+    private HashMap<Integer,Participant> getParticipantByID() throws SQLException {
+        HashMap<Integer,Participant> mapParticipant = new HashMap<>();
+        try (Connection con = cm.getConnection()) {
+            String sql = "SELECT * FROM PARTICIPANT";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            int idParticipant =0;
+            while(rs.next()) {
+                idParticipant=rs.getInt("id");
+                Participant participant = new Participant(idParticipant,
+                                                        rs.getString("fname"),
+                                                        rs.getString("lname"),
+                                                        rs.getString("phoneNumber"),
+                                                        rs.getString("email"));
+                mapParticipant.put(idParticipant,participant);
+            }
+        }
+        return mapParticipant;
     }
 }
