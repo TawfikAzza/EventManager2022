@@ -58,10 +58,11 @@ public class ParticipantViewController implements Initializable {
         try {
             coordinatorModel = new CoordinatorModel();
             participantModel = new ParticipantModel();
+            eventModel = new EventModel(); // FILEMANAGER + exceptions
         } catch (Exception | AdminLogicException | EventManagerException e) {
             e.printStackTrace();
         }
-        eventModel = new EventModel(); // FILEMANAGER + exceptions
+
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

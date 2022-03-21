@@ -6,6 +6,7 @@ import be.Participant;
 import bll.AdminLogic;
 import bll.EventManager;
 import bll.exception.AdminLogicException;
+import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,5 +45,9 @@ public class CoordinatorModel {
 
     public List<Events> getParticipantEvent(Participant participant) throws  EventManagerException {
         return eventManager.getParticipantEvent(participant);
+    }
+
+    public List<Events> getAllEventsWithTicketType() throws EventDAOException, EventManagerException {
+        return eventManager.getAllEventsWithTicketType();
     }
 }

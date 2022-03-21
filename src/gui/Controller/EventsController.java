@@ -86,9 +86,9 @@ public class EventsController implements Initializable {
         eventName.setCellValueFactory(new PropertyValueFactory<>("name"));
         eventDate.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
         try {
-            tableEvents.getItems().addAll(coordinatorModel.getAllEvents());
-        } catch (EventManagerException e) {
-            displayError(e);
+            tableEvents.getItems().addAll(coordinatorModel.getAllEventsWithTicketType());
+        } catch (EventDAOException | EventManagerException e) {
+            e.printStackTrace();
         }
     }
     private void displayError(Throwable t) {
