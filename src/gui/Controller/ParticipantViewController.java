@@ -156,6 +156,8 @@ public class ParticipantViewController implements Initializable {
 
    @FXML
     void toGenerateExcelFile(ActionEvent event) throws IOException {       // FILEMANAGER
-        eventModel.exportExcelFile(7);
+        if(tableEvent.getSelectionModel().getSelectedIndex()==-1)
+            return;
+        eventModel.exportExcelFile(tableEvent.getSelectionModel().getSelectedItem().getId());
     }
 }
