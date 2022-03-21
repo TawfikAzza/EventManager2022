@@ -72,6 +72,6 @@
             </TableView>
          </children>
       </VBox>
-      <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="203.0" text="SELL IT!!!!!!!!!!!!!!!!" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button fx:id="btnCreateTicket" mnemonicParsing="false" onAction="#createTicket" prefHeight="26.0" prefWidth="203.0" text="SELL IT!!!!!!!!!!!!!!!!" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>
