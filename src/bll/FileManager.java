@@ -25,7 +25,7 @@ public class FileManager {
         System.out.println("Array: " + Arrays.deepToString(arraytoPrint));
     }
 
-    public void exportExcelFile (int idOfEvent) {
+    public Workbook exportExcelFile (int idOfEvent) {
         String[][] multiArrayParticipants = databaseEvent.getParticipantsForEventById(idOfEvent);
 
         Workbook workbook = new XSSFWorkbook();
@@ -64,19 +64,20 @@ public class FileManager {
             }
 
         }
-
+        return workbook;
 //"Participants.xlsx"
-        File file = new File("resources/Participants.xlsx");
-        try (FileOutputStream outputStream = new FileOutputStream(file)) {
+        //File file = new File("resources/Participants.xlsx");
+        /*try (FileOutputStream outputStream = new FileOutputStream(file)) {
             workbook.write(outputStream);
             outputStream.close();
             workbook.close();
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 

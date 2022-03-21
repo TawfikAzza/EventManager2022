@@ -7,6 +7,7 @@ import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.IOException;
 import java.util.List;
@@ -46,8 +47,8 @@ public class EventModel {
         this.eventsObservableList.addAll(getAllEvents());
     }
 
-    public void exportExcelFile (int idOfEvent) throws IOException {
-        fileManager.exportExcelFile(idOfEvent);
+    public Workbook exportExcelFile (int idOfEvent) throws IOException {
+        return fileManager.exportExcelFile(idOfEvent);
     }
 
 }

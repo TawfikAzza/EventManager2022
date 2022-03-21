@@ -19,7 +19,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import org.apache.poi.ss.usermodel.Workbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -160,6 +165,22 @@ public class ParticipantViewController implements Initializable {
     void toGenerateExcelFile(ActionEvent event) throws IOException {       // FILEMANAGER
         if(tableEvent.getSelectionModel().getSelectedIndex()==-1)
             return;
-        eventModel.exportExcelFile(tableEvent.getSelectionModel().getSelectedItem().getId());
+        Workbook workbook = eventModel.exportExcelFile(tableEvent.getSelectionModel().getSelectedItem().getId());
+       FileChooser fileChooser = new FileChooser();
+
+       //Set extension filter to .xlsx files
+       FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
+       fileChooser.getExtensionFilters().add(extFilter);
+
+       //Show save file dialog
+       File file = fileChooser.showSaveDialog((Stage) btnGenerateFile.getScene().getWindow());
+       if (file != null) {
+           try (FileOutputStream outputStream = new FileOutputStream(file.getAbsolutePath())) {
+               workbook.write(outputStream);
+           }
+           catch (IOException ex) {
+               ex.printStackTrace();
+           }
+       }
     }
 }
