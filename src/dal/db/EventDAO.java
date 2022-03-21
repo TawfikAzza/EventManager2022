@@ -379,7 +379,7 @@ public class EventDAO implements IEventDAO {
 
 
         return finalArray;
-    } // this method returns 2D array of result which is used in FileManager to print all participants for the event in Excel sheet
+    } // TODO also add information about unique id of ticket
 
 
     public int getNumberOfRow (int id) {
