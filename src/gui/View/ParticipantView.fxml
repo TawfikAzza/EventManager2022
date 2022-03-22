@@ -71,7 +71,7 @@
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../resources/Images/excel.png" />
+                  <Image url="@/Images/excel.png" />
                </image>
             </ImageView>
          </graphic></Button>
