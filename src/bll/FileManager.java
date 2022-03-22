@@ -18,7 +18,7 @@ public class FileManager {
 
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Participants");
-        String[] columnHeadings = {" ", "First name", "Surname", "Phone Number", "Ticket type"};
+        String[] columnHeadings = {"First name", "Surname", "Phone Number", "Ticket type"};
 
         Font headerFont = workbook.createFont();
         headerFont.setBold(true);
@@ -49,7 +49,7 @@ public class FileManager {
             int columnCount = 0;
 
             for (String field : strings) {
-                Cell cell = row.createCell(++columnCount);
+                Cell cell = row.createCell(columnCount++);
                     cell.setCellValue((String) field);
 
             }
