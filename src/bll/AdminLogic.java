@@ -3,6 +3,7 @@ package bll;
 import be.Admin;
 import be.Coordinator;
 import be.Users;
+import bll.exception.AdminDAOException;
 import bll.exception.AdminLogicException;
 import bll.exception.LoginException;
 import dal.db.AdminDAO;
@@ -16,45 +17,81 @@ public class AdminLogic {
 
     private IAdminDAO adminDAO;
 
-    public AdminLogic() throws AdminLogicException {
+    public AdminLogic() throws  AdminDAOException {
         try {
             this.adminDAO = new AdminDAO();
         } catch (IOException e) {
-            throw new AdminLogicException("Failed to initialize Admin Logic class!",e);
+            throw new AdminDAOException("Failed to initialize Admin Logic class!",e);
         }
     }
 
-    public void addLoginUser(Users user)
+    public void addLoginUser(Users user) throws AdminDAOException
     {
-        adminDAO.addLoginUser(user);
+        try {
+            adminDAO.addLoginUser(user);
+        }
+        catch (SQLException e)
+        {
+            throw new AdminDAOException("Failed to connect to the database.", e);
+        }
     }
 
-    public void deleteUser(Users user)
-    {
-        adminDAO.deleteUser(user);
+    public void deleteUser(Users user) throws AdminDAOException {
+        try {
+            adminDAO.deleteUser(user);
+        }
+        catch (SQLException e)
+        {
+            throw new AdminDAOException("Failed to connect to the database.", e);
+        }
     }
 
-    public void editUser(Users user)
-    {
-        adminDAO.editUser(user);
+    public void editUser(Users user) throws AdminDAOException {
+        try {
+            adminDAO.editUser(user);
+        }
+        catch (SQLException e)
+        {
+            throw new AdminDAOException("Failed to connect to the database.", e);
+        }
     }
 
-    public ArrayList<Coordinator> getAllCoordinators()
-    {
-        return adminDAO.getAllCoordinators();
+    public ArrayList<Coordinator> getAllCoordinators() throws AdminDAOException {
+        try {
+            return adminDAO.getAllCoordinators();
+        } catch (SQLException e) {
+            throw new AdminDAOException("Failed to connect to the database.", e);
+        }
     }
 
-    public ArrayList<Admin> getAllAdmins()
-    {
-        return adminDAO.getAllAdmins();
+    public ArrayList<Admin> getAllAdmins() throws AdminDAOException {
+        try{
+            return adminDAO.getAllAdmins();
+        }
+        catch(SQLException e)
+        {
+            throw new AdminDAOException("Failed to connect to the database.", e);
+        }
     }
 
-    public ArrayList<String> getAccountTypes(){
-        return adminDAO.getAccountTypes();
+    public ArrayList<String> getAccountTypes() throws AdminDAOException {
+        try{
+            return adminDAO.getAccountTypes();
+        }
+        catch(SQLException e)
+        {
+            throw new AdminDAOException("Failed to connect to the database.", e);
+        }
     }
 
-    public Users getUser(String username, String password) throws SQLException {
+    public Users getUser(String username, String password) throws AdminDAOException {
+        try{
             return adminDAO.getUser(username, password);
+        }
+        catch(SQLException e)
+        {
+            throw new AdminDAOException("Failed to connect to the database.", e);
+        }
     }
 
 }

@@ -1,7 +1,9 @@
 package gui.Controller;
 
 import be.Users;
+import bll.exception.AdminDAOException;
 import bll.exception.AdminLogicException;
+import bll.utils.DisplayError;
 import gui.Model.AdminModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,8 +34,8 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             this.adminModel = new AdminModel();
-        } catch (AdminLogicException e) {
-            e.printStackTrace();
+        } catch (AdminDAOException e) {
+            DisplayError.displayError(e);
         }
     }
 
@@ -62,18 +64,20 @@ public class MainController implements Initializable {
     public void SubmitLogin(ActionEvent actionEvent) throws IOException {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        Users user = adminModel.getUser(username, password);
-
+        Users user = null;
         try {
+            user = adminModel.getUser(username, password);
             if (user.getRoleID() == 1) {
                 openAdminMgr();
             }
             if (user.getRoleID() == 2) {
                 openEventMgr();
             }
-        } catch (NullPointerException e) {
+        } catch (AdminDAOException  e) {
+            DisplayError.displayError(e);
+        }
+        catch (NullPointerException e) {
             errorLabel.setText("Invalid username or password");
         }
-
     }
 }

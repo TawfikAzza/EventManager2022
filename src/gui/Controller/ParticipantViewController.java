@@ -2,10 +2,7 @@ package gui.Controller;
 
 import be.Events;
 import be.Participant;
-import bll.exception.AdminLogicException;
-import bll.exception.EventDAOException;
-import bll.exception.EventManagerException;
-import bll.exception.ParticipantManagerException;
+import bll.exception.*;
 import gui.Model.CoordinatorModel;
 import gui.Model.EventModel;
 import gui.Model.ParticipantModel;
@@ -66,7 +63,7 @@ public class ParticipantViewController implements Initializable {
             coordinatorModel = new CoordinatorModel();
             participantModel = new ParticipantModel();
             eventModel = new EventModel(); // FILEMANAGER + exceptions
-        } catch (Exception | AdminLogicException | EventManagerException e) {
+        } catch (Exception | EventManagerException | AdminDAOException e) {
             e.printStackTrace();
         }
 

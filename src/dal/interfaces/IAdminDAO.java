@@ -10,17 +10,17 @@ import java.util.ArrayList;
 
 public interface IAdminDAO {
 
-    void addLoginUser(Users user);
+    void addLoginUser(Users user) throws SQLException;
 
-    void deleteUser(Users user);
+    void deleteUser(Users user) throws SQLException;
 
-    void editUser(Users user);
+    void editUser(Users user) throws SQLException;
 
-    ArrayList<Coordinator> getAllCoordinators();
+    ArrayList<Coordinator> getAllCoordinators() throws SQLException;
 
-    ArrayList<Admin> getAllAdmins();
+    ArrayList<Admin> getAllAdmins() throws SQLException;
 
-    ArrayList<String> getAccountTypes();
+    ArrayList<String> getAccountTypes() throws SQLException;
 
     Users getUser(String username, String password) throws SQLException;
 

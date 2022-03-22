@@ -2,6 +2,7 @@ package gui.Controller;
 
 import be.Events;
 import be.TicketType;
+import bll.exception.AdminDAOException;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
@@ -70,7 +71,7 @@ public class EventsController implements Initializable {
     public EventsController() {
         try {
             coordinatorModel = new CoordinatorModel();
-        } catch (EventManagerException | AdminLogicException e) {
+        } catch (EventManagerException | AdminDAOException e) {
             displayError(e);
         }
     }
