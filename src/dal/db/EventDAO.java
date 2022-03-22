@@ -3,17 +3,16 @@ package dal.db;
 import be.Events;
 import be.Participant;
 import be.Ticket;
+import be.TicketType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
 import dal.interfaces.IEventDAO;
-import javafx.event.Event;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.commons.collections4.list.PredicatedList;
 
-import java.lang.reflect.Array;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class EventDAO implements IEventDAO {
@@ -112,12 +111,53 @@ public class EventDAO implements IEventDAO {
     @Override
     public List<Events> getAllEvents() throws Exception {
         List<Events> allEvents = new ArrayList<>();
-        List<Ticket> ticketList = new ArrayList<>();
+        List<TicketType> ticketList = new ArrayList<>();
         try (Connection con = cm.getConnection()) {
             String sql = "SELECT EVENTS.id,events.name,events.location,events.description,events.startDate,events.endDate," +
-                        "events.itinerary, TicketType.id as ticketID, TicketType.typeName " +
-                        " as nameTicket, TicketType.benefit as ticketBenefit " +
-                        " FROM EVENTS INNER JOIN TicketType ON EVENTS.id = TicketType.eventID" +
+                        "events.itinerary FROM EVENTS";
+
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+
+            while(rs.next()) {
+                Events event = new Events(rs.getInt("id"),
+                                        rs.getString("name"),
+                                        rs.getString("location"),
+                                        rs.getString("description"),
+                                        rs.getObject("startDate",LocalDateTime.class),
+                                        rs.getObject("endDate",LocalDateTime.class),
+                                        rs.getString("itinerary"));
+                allEvents.add(event);
+                }
+            }
+        HashMap<Integer,Integer> mapEventParticpantNumber = new HashMap<>();
+        HashMap<Integer,List<Participant>> mapParticipantByEvents = getParticipantByEvent();
+        mapEventParticpantNumber = getParticpantNumberByEvent();
+        for (Events event:allEvents)
+            if(mapEventParticpantNumber.get(event.getId())!=null) {
+                event.setNumberParticipants(""+mapEventParticpantNumber.get(event.getId()));
+                event.setListParticipants(mapParticipantByEvents.get(event.getId()));
+            }
+
+        return allEvents;
+    }
+
+    /**
+     * This one is a method which took several years of my life...
+     * Do not modify it without paying close attention at the way the method retrieve results from the query
+     * Also, if you ask yourself why I used a temporary List of ticket instead of using the one I built....
+     * Well, let's just say that Jeppe will have a lot of questions from me if I remember to ask him...
+     * */
+
+    public List<Events> getAllEventsWithTicketType() throws Exception {
+        List<Events> allEvents = new ArrayList<>();
+        List<TicketType> ticketList = new ArrayList<>();
+        try (Connection con = cm.getConnection()) {
+            String sql = "SELECT EVENTS.id,events.name,events.location,events.description,events.startDate,events.endDate," +
+                    "events.itinerary, TicketType.id as ticketID, TicketType.typeName " +
+                    " as nameTicket, TicketType.benefit as ticketBenefit " +
+                    " FROM EVENTS LEFT JOIN TicketType ON EVENTS.id = TicketType.eventID" +
                     " order by id";
             PreparedStatement pstmt = con.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -144,7 +184,7 @@ public class EventDAO implements IEventDAO {
                             name,
                             location
                     );
-                    event.setDescription(location);
+                    event.setDescription(description);
                     event.setStartDate(startDate);
                     if(endDate!=null) {
                         event.setEndDate(endDate);
@@ -152,7 +192,7 @@ public class EventDAO implements IEventDAO {
                     if(itinerary!=null) {
                         event.setItinerary(itinerary);
                     }
-                    List<Ticket> tickets = new ArrayList<>(ticketList);
+                    List<TicketType> tickets = new ArrayList<>(ticketList);
                     event.setTicketAvailable(tickets);
 
                     allEvents.add(event);
@@ -160,16 +200,16 @@ public class EventDAO implements IEventDAO {
 
                 }
 
-                ticketList.add(new Ticket(rs.getInt("ticketID")
-                                        ,rs.getString("nameTicket")
-                                        ,rs.getString("ticketBenefit")));
+                ticketList.add(new TicketType(rs.getInt("ticketID")
+                        ,rs.getString("nameTicket")
+                        ,rs.getString("ticketBenefit")));
 
                 name=rs.getString("name");
                 location = rs.getString("location");
                 description=rs.getString("description");
                 startDate=rs.getObject("startDate", LocalDateTime.class);
                 if(rs.getObject("endDate",LocalDateTime.class)!=null) {
-                   endDate=rs.getObject("endDate",LocalDateTime.class);
+                    endDate=rs.getObject("endDate",LocalDateTime.class);
                 }
                 if(rs.getString("itinerary")!=null) {
                     itinerary=rs.getString("itinerary");
@@ -187,13 +227,24 @@ public class EventDAO implements IEventDAO {
             if(itinerary!=null) {
                 event.setItinerary(itinerary);
             }
-            List<Ticket> tickets = new ArrayList<>(ticketList);
+            List<TicketType> tickets = new ArrayList<>(ticketList);
             event.setTicketAvailable(tickets);
             allEvents.add(event);
         }
         return allEvents;
     }
 
+    @Override
+    public void addParticipantToEvent(Events eventChosen, Participant participant, Ticket ticketSold) throws SQLException {
+        try (Connection con = cm.getConnection()) {
+            String sqlInsert = "INSERT INTO EventParticipant VALUES (?,?,?)";
+            PreparedStatement pstmt = con.prepareStatement(sqlInsert);
+            pstmt.setInt(1,eventChosen.getId());
+            pstmt.setInt(2,participant.getId());
+            pstmt.setInt(3,ticketSold.getId());
+            pstmt.execute();
+        }
+    }
 
     @Override
     public Events getEvent(int id) throws Exception {
@@ -224,7 +275,39 @@ public class EventDAO implements IEventDAO {
 
         return eventSearched;
     }
+    public HashMap<Integer,List<Participant>> getParticipantByEvent() throws SQLException{
+        HashMap<Integer,List<Participant>> mapParticipantByEvent = new HashMap<>();
+        HashMap<Integer,Participant> mapParticipant = getParticipantByID();
+        List<Participant> participantList = new ArrayList<>();
+        try (Connection con = cm.getConnection()) {
 
+            String sql = "SELECT idEvent, idParticipant FROM EventParticipant Order by idEvent ";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            int idEvent = 0;
+            int currentEvent = -1;
+            boolean flagFirst=false;
+            while(rs.next()){
+                idEvent= rs.getInt("idEvent");
+                int idParticipant =rs.getInt("idParticipant");
+                if(!flagFirst) {
+                    currentEvent=idEvent;
+                    flagFirst=true;
+                }
+                if(idEvent!=currentEvent) {
+                    List<Participant> participants = new ArrayList<>(participantList);
+
+                    mapParticipantByEvent.put(currentEvent,participants);
+                    participantList.clear();
+                }
+                participantList.add(mapParticipant.get(idParticipant));
+                currentEvent=idEvent;
+            }
+            List<Participant> participants = new ArrayList<>(participantList);
+            mapParticipantByEvent.put(currentEvent,participants);
+        }
+        return mapParticipantByEvent;
+    }
     public List<Events> getParticipantEvent(Participant participant) throws SQLServerException {
         List<Events> participantEvents = new ArrayList<>();
         try (Connection con = cm.getConnection()) {
@@ -254,6 +337,7 @@ public class EventDAO implements IEventDAO {
         }
         return participantEvents;
     }
+
     public String[][] getParticipantsForEventById (int idOfEvent) {
             //int counter = 1;
             int row = 0;
@@ -262,11 +346,14 @@ public class EventDAO implements IEventDAO {
 
 
         try (Connection con = cm.getConnection()) {
-            String sql ="SELECT p.fname, p.lname, p.phoneNumber, tt.typeName FROM Participant p " +
-                    "JOIN EventParticipant ep ON ep.idParticipant = p.id " +
-                    "JOIN Events e ON e.id = ep.idEvent " +
-                    "INNER JOIN TicketType tt ON tt.id = ep.ticketID " +
-                    "WHERE e.id = ?";
+            String sql ="SELECT p.fname, p.lname, p.phoneNumber, tt.typeName " +
+                    "FROM Participant p, EventParticipant ep,Events e,TicketType tt,Ticket t " +
+                    "WHERE " +
+                    "ep.idParticipant = p.id AND " +
+                    "e.id = ep.idEvent AND " +
+                    "t.ticketTypeID = tt.id  AND " +
+                    "t.id = ep.ticketID AND " +
+                    "e.id = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, idOfEvent);
             ResultSet rs = pstmt.executeQuery();
@@ -292,7 +379,7 @@ public class EventDAO implements IEventDAO {
 
 
         return finalArray;
-    } // this method returns 2D array of result which is used in FileManager to print all participants for the event in Excel sheet
+    } // TODO also add information about unique id of ticket
 
 
     public int getNumberOfRow (int id) {
@@ -303,7 +390,7 @@ public class EventDAO implements IEventDAO {
             String sql ="SELECT COUNT(*) AS numberRow FROM Participant p " +
                     "JOIN EventParticipant ep ON ep.idParticipant = p.id " +
                     "JOIN Events e ON e.id = ep.idEvent " +
-                    "INNER JOIN TicketType tt ON tt.id = ep.ticketID " +
+                    "INNER JOIN Ticket tt ON tt.id = ep.ticketID " +
                     "WHERE e.id = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, id);
@@ -321,4 +408,41 @@ public class EventDAO implements IEventDAO {
         return number;
     } // this private method returns the number of rows in order to create a 2D array in getParticipantsForEventById method
 
+    private HashMap<Integer,Integer> getParticpantNumberByEvent() {
+        HashMap<Integer,Integer> mapEventParticpantNumber = new HashMap<>();
+        try (Connection con = cm.getConnection()) {
+            String sql = "SELECT idEvent,count(idEvent) as countLines " +
+                        "FROM EventParticipant " +
+                        "GROUP BY idEvent";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                mapEventParticpantNumber.put(rs.getInt("idEvent"),rs.getInt("countLines"));
+            }
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return mapEventParticpantNumber;
+    }
+    private HashMap<Integer,Participant> getParticipantByID() throws SQLException {
+        HashMap<Integer,Participant> mapParticipant = new HashMap<>();
+        try (Connection con = cm.getConnection()) {
+            String sql = "SELECT * FROM PARTICIPANT";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            int idParticipant =0;
+            while(rs.next()) {
+                idParticipant=rs.getInt("id");
+                Participant participant = new Participant(idParticipant,
+                                                        rs.getString("fname"),
+                                                        rs.getString("lname"),
+                                                        rs.getString("phoneNumber"),
+                                                        rs.getString("email"));
+                mapParticipant.put(idParticipant,participant);
+            }
+        }
+        return mapParticipant;
+    }
 }

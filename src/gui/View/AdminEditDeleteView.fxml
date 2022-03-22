@@ -31,7 +31,7 @@
             </Label>
             <HBox alignment="BOTTOM_LEFT" prefHeight="226.0" prefWidth="210.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleBack" prefHeight="26.0" prefWidth="79.0" text="&lt;- Back">
+                  <Button mnemonicParsing="false" onAction="#handleBack" prefHeight="26.0" prefWidth="79.0" text="⬅ Back">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>

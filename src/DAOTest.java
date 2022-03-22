@@ -10,7 +10,9 @@ import javafx.event.Event;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DAOTest {
 
@@ -23,6 +25,19 @@ public class DAOTest {
        // updateEvent();
 //addParticipant();
        // getAllParticipants();
+       // getHashMap();
+    }
+    public static void getHashMap() throws Exception {
+        EventDAO eventDAO = new EventDAO();
+        HashMap<Integer,List<Participant>> test = eventDAO.getParticipantByEvent();
+        for (Map.Entry entry: test.entrySet()) {
+            Integer index = (Integer) entry.getKey();
+            List<Participant> testList = (List<Participant>) entry.getValue();
+            for (Participant participant:testList) {
+                System.out.println("IdEvent : "+index+" name : "+participant.getFname());
+            }
+        }
+
     }
     public static void getAllParticipants() throws Exception {
         ParticipantDAO participantDAO = new ParticipantDAO();

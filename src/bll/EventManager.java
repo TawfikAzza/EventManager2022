@@ -2,11 +2,14 @@ package bll;
 
 import be.Events;
 import be.Participant;
+import be.Ticket;
+import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import dal.db.EventDAO;
 import dal.db.TicketDAO;
 import dal.interfaces.IEventDAO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class EventManager {
@@ -64,6 +67,25 @@ public class EventManager {
             return eventDAO.getParticipantEvent(participant);
         } catch (Exception e) {
             throw new EventManagerException("Error while retrieving the events list in database",e);
+        }
+    }
+
+    public List<Events> getAllEventsWithTicketType() throws EventManagerException {
+        try {
+            return eventDAO.getAllEventsWithTicketType();
+        } catch (Exception e) {
+            throw new EventManagerException("Error while retrieving the events from the database",e);
+        }
+    }
+
+    public Ticket sellTicket(Ticket ticketSold, Events eventChosen, Participant participant) throws EventManagerException {
+        try {
+            ticketSold = ticketDAO.addTicketSold(ticketSold);
+            eventDAO.addParticipantToEvent(eventChosen,participant,ticketSold);
+            return ticketSold;
+
+        } catch (SQLException e) {
+            throw new EventManagerException("Error while creating the ticket in the database! ",e);
         }
     }
 }
