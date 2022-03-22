@@ -117,7 +117,6 @@ public class EventsController implements Initializable {
     public void displayEvent(MouseEvent mouseEvent) {
         if(tableEvents.getSelectionModel().getSelectedItem()!=null) {
             Events event = tableEvents.getSelectionModel().getSelectedItem();
-            System.out.println("location: "+event.getLocation()+" Description : "+event.getDescription());
             toggleTextFieldOff();
             toggleLabelsOn();
             setLabelText(event);
