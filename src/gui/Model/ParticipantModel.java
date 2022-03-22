@@ -3,11 +3,8 @@ package gui.Model;
 import be.Participant;
 import bll.ParticipantManager;
 import bll.exception.ParticipantManagerException;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
 
 public class ParticipantModel {
 
@@ -34,9 +31,9 @@ public class ParticipantModel {
         return participantObservableList;
     }
 
-    public ObservableList<String> participantsShowEventsbyId (int idParticipant) throws ParticipantManagerException {
+    public ObservableList<String> participantsShowEventsById(int idParticipant) throws ParticipantManagerException {
         showEventsByPartId = FXCollections.observableArrayList();
-        showEventsByPartId.setAll(participantManager.participantsShowEventsbyId(idParticipant));
+        showEventsByPartId.setAll(participantManager.participantsShowEventsById(idParticipant));
         return showEventsByPartId;
     }
 

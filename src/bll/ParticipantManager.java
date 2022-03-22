@@ -21,7 +21,7 @@ public class ParticipantManager {
             throw new ParticipantManagerException("Error while getting the list of participants",e);
         }
     }
-    public ArrayList<String> participantsShowEventsbyId (int idParticipant) throws ParticipantManagerException {
+    public ArrayList<String> participantsShowEventsById (int idParticipant) throws ParticipantManagerException {
         try {
             return participantDAO.participantsShowEventsbyId(idParticipant);
         } catch (SQLServerException e) {
@@ -36,4 +36,7 @@ public class ParticipantManager {
             throw new ParticipantManagerException("Error while creating a participant in the database",e);
         }
     }
+    /*public boolean removeParticipant(Participant participant) {
+
+    }*/
 }

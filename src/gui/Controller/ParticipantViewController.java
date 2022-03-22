@@ -2,6 +2,7 @@ package gui.Controller;
 
 import be.Events;
 import be.Participant;
+import bll.ParticipantManager;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
@@ -35,7 +36,7 @@ import java.util.ResourceBundle;
 public class ParticipantViewController implements Initializable {
 
     @FXML
-    private Button btnSearch, btnGenerateFile;
+    private Button btnSearch, btnGenerateFile, removeParticipantBtn;
     @FXML
     private TableColumn<Participant, String> columnFname,columnPhone,columnLname,columnFirstNamePE,columnLastNamePE,columnPhoneNumberPE;
     @FXML
@@ -195,5 +196,14 @@ public class ParticipantViewController implements Initializable {
                ex.printStackTrace();
            }
        }
+    }
+    public void removeParticipant (ActionEvent actionEvent){
+        System.out.println("email:"+tableParticipantByEvent.getSelectionModel().getSelectedItem().getEmail());
+        System.out.println("PhoneNumber:"+tableParticipantByEvent.getSelectionModel().getSelectedItem().getPhoneNumber());
+        System.out.println("Fname:"+tableParticipantByEvent.getSelectionModel().getSelectedItem().getFname());
+        System.out.println("Lname:"+tableParticipantByEvent.getSelectionModel().getSelectedItem().getLname());
+        System.out.println("Id:"+tableParticipantByEvent.getSelectionModel().getSelectedItem().getId());
+
+//        ParticipantManager.removeParticipant();
     }
 }
