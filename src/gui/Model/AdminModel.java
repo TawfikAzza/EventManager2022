@@ -8,6 +8,8 @@ import bll.exception.AdminLogicException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.SQLException;
+
 public class AdminModel {
 
     ObservableList<Coordinator> coordinatorObservableList;
@@ -48,6 +50,16 @@ public class AdminModel {
 
     public ObservableList<Admin> getAdminObservableList() {
         return adminObservableList;
+    }
+
+    public Users getUser(String username, String password)
+    {
+        try {
+            return logic.getUser(username, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void deleteAll(){

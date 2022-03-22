@@ -6,6 +6,7 @@ import be.Users;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
 import dal.interfaces.IAdminDAO;
+import org.apache.commons.math3.exception.NullArgumentException;
 
 import java.io.IOException;
 import java.sql.*;
@@ -18,6 +19,42 @@ public class AdminDAO implements IAdminDAO {
 
     public AdminDAO() throws IOException {
         this.dbc = new ConnectionManager();
+    }
+
+    public Users getUser(String username, String password) throws SQLException {
+        try (Connection connection = dbc.getConnection()) {
+            String sql = "SELECT * FROM LoginUser WHERE loginName = ? AND password = ?";
+
+            PreparedStatement ps = dbc.getConnection().prepareStatement(sql);
+
+            ps.setString(1, username);
+            ps.setString(2, password);
+
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+
+            while(rs.next())
+            {
+                int userID = rs.getInt("userID");
+                String loginName = rs.getString("loginName");
+                String pass = rs.getString("password");
+                int roleID = rs.getInt("roleID");
+                String email = rs.getString("email");
+                String fname = rs.getString("fname");
+                String lname = rs.getString("lname");
+
+                if(roleID == 1)
+                {
+                    return new Admin(userID, loginName, pass, roleID, email, fname, lname);
+                }
+                if(roleID == 2)
+                {
+                    return new Coordinator(userID, loginName, pass, roleID, email, fname, lname);
+                }
+            }
+
+        }
+        return null;
     }
 
     @Override

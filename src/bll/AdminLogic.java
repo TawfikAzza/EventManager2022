@@ -4,10 +4,12 @@ import be.Admin;
 import be.Coordinator;
 import be.Users;
 import bll.exception.AdminLogicException;
+import bll.exception.LoginException;
 import dal.db.AdminDAO;
 import dal.interfaces.IAdminDAO;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AdminLogic {
@@ -49,6 +51,10 @@ public class AdminLogic {
 
     public ArrayList<String> getAccountTypes(){
         return adminDAO.getAccountTypes();
+    }
+
+    public Users getUser(String username, String password) throws SQLException {
+            return adminDAO.getUser(username, password);
     }
 
 }
