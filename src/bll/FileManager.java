@@ -18,7 +18,7 @@ public class FileManager {
 
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Participants");
-        String[] columnHeadings = {"First name", "Surname", "Phone Number", "Ticket type"};
+        String[] columnHeadings = {" ", "First name", "Surname", "Phone Number", "Ticket type"};
 
         Font headerFont = workbook.createFont();
         headerFont.setBold(true);
@@ -32,16 +32,19 @@ public class FileManager {
 
         Row headerRow = sheet.createRow(0);
 
+
         for (int i=0; i < columnHeadings.length; i++) {
             Cell cell = headerRow.createCell(i);
             cell.setCellValue(columnHeadings[i]);
             cell.setCellStyle(headerStyle);
+            sheet.setColumnWidth(i, sheet.getColumnWidth(i) * 2);
         }
 
         int rowCount = 0;
 
         for (String[] strings : multiArrayParticipants) {
             Row row = sheet.createRow(++rowCount);
+
 
             int columnCount = 0;
 
@@ -52,7 +55,7 @@ public class FileManager {
             }
 
         }
-        return workbook;                // TODO there is a bug to be fixed - column for the list of participants has wrong position by one column
+        return workbook;
 
     }
 
