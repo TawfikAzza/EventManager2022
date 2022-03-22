@@ -36,7 +36,7 @@
                 <TableColumn fx:id="columnDateEvent" prefWidth="99.20001220703125" text="Date" />
               </columns>
                <VBox.margin>
-                  <Insets left="5.0" />
+                  <Insets bottom="2.0" left="5.0" right="2.0" top="2.0" />
                </VBox.margin>
             </TableView>
          </children>
@@ -50,7 +50,7 @@
                   <TableColumn fx:id="columnPhoneNumber" prefWidth="91.99993896484375" text="Phone Number" />
               </columns>
                <VBox.margin>
-                  <Insets right="5.0" />
+                  <Insets bottom="2.0" left="2.0" right="5.0" top="2.0" />
                </VBox.margin>
             </TableView>
          </children>
@@ -63,7 +63,7 @@
                 <TableColumn fx:id="columnTicketDescription" prefWidth="114.39997100830078" text="Description" />
               </columns>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
                </VBox.margin>
             </TableView>
          </children>
