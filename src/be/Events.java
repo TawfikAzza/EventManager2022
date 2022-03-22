@@ -2,7 +2,6 @@ package be;
 
 import bll.utils.DateUtil;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +13,13 @@ public class Events {
     private String name;
     private String location;
     List<Participant> listParticipants = new ArrayList<>();
-    List<Ticket> ticketAvailable = new ArrayList<>();
+    List<TicketType> ticketAvailable = new ArrayList<>();
     private String description;
     private String itinerary;
     private String strStartDate;
     private String strEndDate;
+    private String numberParticipants;
+
     public Events(int eventId,String nameEvent, String eventLocation, String eventDescription, LocalDateTime startDate, LocalDateTime endDate, String eventItinerary) {
         this.id=eventId;
         this.startDate = startDate;
@@ -40,6 +41,13 @@ public class Events {
     }
 
 
+    public String getNumberParticipants() {
+        return numberParticipants;
+    }
+
+    public void setNumberParticipants(String numberParticipants) {
+        this.numberParticipants = numberParticipants;
+    }
 
     public int getId() {
         return id;
@@ -84,11 +92,11 @@ public class Events {
     public List<Participant> getListParticipants() {
         return listParticipants;
     }
-    public List<Ticket> getTicketAvailable() {
+    public List<TicketType> getTicketAvailable() {
         return ticketAvailable;
     }
 
-    public void setTicketAvailable(List<Ticket> ticketAvailable) {
+    public void setTicketAvailable(List<TicketType> ticketAvailable) {
 
         this.ticketAvailable = ticketAvailable;
     }

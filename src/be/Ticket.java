@@ -2,13 +2,13 @@ package be;
 
 public class Ticket {
     private int id;
-    private String type; // This holds the name of the ticket: Regular, VIP, vegetarian,...
-    private String benefit; // This describes the benefit of this type: Free drinks, reserved seating, members-only ticket, multi-day pass
+    private String ticketNumber;
+    private int ticketTypeID;
 
-    public Ticket(int id, String type, String benefit) {
+    public Ticket(int id, String ticketNumber, int ticketTypeID) {
         this.id = id;
-        this.type = type;
-        this.benefit = benefit;
+        this.ticketNumber = ticketNumber;
+        this.ticketTypeID = ticketTypeID;
     }
 
     public int getId() {
@@ -19,24 +19,19 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getTicketNumber() {
+        return ticketNumber;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTicketNumber(String ticketNumber) {
+        this.ticketNumber = ticketNumber;
     }
 
-    public String getBenefit() {
-        return benefit;
+    public int getTicketTypeID() {
+        return ticketTypeID;
     }
 
-    public void setBenefit(String benefit) {
-        this.benefit = benefit;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s",type);
+    public void setTicketTypeID(int ticketTypeID) {
+        this.ticketTypeID = ticketTypeID;
     }
 }

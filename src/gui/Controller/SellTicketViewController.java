@@ -3,6 +3,7 @@ package gui.Controller;
 import be.Events;
 import be.Participant;
 import be.Ticket;
+import be.TicketType;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
@@ -19,10 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
@@ -42,7 +40,7 @@ public class SellTicketViewController implements Initializable {
     @FXML
     private TableColumn<Participant, String> columnFirstName,columnLastName,columnPhoneNumber;
     @FXML
-    private TableColumn<Ticket, String> columnTicketType,columnTicketDescription;
+    private TableColumn<TicketType, String> columnTicketType,columnTicketDescription;
     @FXML
     private TextField searchQuery;
     @FXML
@@ -50,7 +48,7 @@ public class SellTicketViewController implements Initializable {
     @FXML
     private TableView<Participant> tableParticipant;
     @FXML
-    private TableView<Ticket> tableTicket;
+    private TableView<TicketType> tableTicket;
 
     private CoordinatorModel coordinatorModel;
     private ParticipantModel participantModel;
@@ -110,6 +108,7 @@ public class SellTicketViewController implements Initializable {
     }
     @FXML
     void displayTicketType(MouseEvent event) {
+        btnCreateTicket.setVisible(true);
         if(tableEvent.getSelectionModel().getSelectedIndex()==-1)
             return;
         tableTicket.getItems().clear();
@@ -156,7 +155,58 @@ public class SellTicketViewController implements Initializable {
 
 
     @FXML
-    void createTicket(ActionEvent event) {
+    void createTicket(ActionEvent event) throws EventManagerException {
+        String message ="";
+        if(tableEvent.getSelectionModel().getSelectedIndex()==-1) {
+            message += "Select an Event \n";
+        }
+        if(tableTicket.getSelectionModel().getSelectedIndex()==-1)
+            message += "Select a ticket type \n";
+        if(tableParticipant.getSelectionModel().getSelectedIndex()==-1)
+            message += "Select a participant ";
+        if(!message.equals("")) {
+            displayMessage(message);
+            return;
+        }
+        Events eventChosen = tableEvent.getSelectionModel().getSelectedItem();
+        Participant participant = tableParticipant.getSelectionModel().getSelectedItem();
+        String ticketNumber = getAlphaNumericString(10).toUpperCase(Locale.ROOT);
+        Ticket ticketSold = new Ticket(0,ticketNumber,tableTicket.getSelectionModel().getSelectedItem().getId());
+        ticketSold = coordinatorModel.sellTicket(ticketSold,eventChosen,participant);
+        btnCreateTicket.setVisible(false);
 
+    }
+
+    private void displayMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("You are missing data");
+        alert.setHeaderText(message);
+        alert.showAndWait();
+    }
+    private String getAlphaNumericString(int n)
+    {
+
+        // chose a Character random from this String
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
+
+        // create StringBuffer size of AlphaNumericString
+        StringBuilder sb = new StringBuilder(n);
+
+        for (int i = 0; i < n; i++) {
+
+            // generate a random number between
+            // 0 to AlphaNumericString variable length
+            int index
+                    = (int)(AlphaNumericString.length()
+                    * Math.random());
+
+            // add Character one by one in end of sb
+            sb.append(AlphaNumericString
+                    .charAt(index));
+        }
+
+        return sb.toString();
     }
 }

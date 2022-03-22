@@ -1,11 +1,10 @@
 package gui.Controller;
 
 import be.Events;
-import be.Ticket;
+import be.TicketType;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
-import bll.utils.DateUtil;
 import com.jfoenix.controls.JFXButton;
 import gui.Model.CoordinatorModel;
 import javafx.event.ActionEvent;
@@ -63,7 +62,7 @@ public class EventsController implements Initializable {
     @FXML
     private TextArea txtDescription,txtItinerary;
     @FXML
-    private ListView<Ticket> lstTickets;
+    private ListView<TicketType> lstTickets;
     private Events currentEvent;
 
     private RootLayoutEvenController rootLayoutEvenController;
@@ -129,9 +128,9 @@ public class EventsController implements Initializable {
 
             lstTickets.getItems().clear();
 
-        for (Ticket ticket:tableEvents.getSelectionModel().getSelectedItem().getTicketAvailable()) {
-
-            lstTickets.getItems().add(ticket);
+        for (TicketType ticket:tableEvents.getSelectionModel().getSelectedItem().getTicketAvailable()) {
+            if(ticket.getType()!=null)
+             lstTickets.getItems().add(ticket);
         }
 
     }
@@ -267,7 +266,7 @@ public class EventsController implements Initializable {
     public void displayTicket(MouseEvent mouseEvent) {
         if(lstTickets.getSelectionModel().getSelectedIndex()==-1)
             return;
-        Ticket ticket = lstTickets.getSelectionModel().getSelectedItem();
+        TicketType ticket = lstTickets.getSelectionModel().getSelectedItem();
         Text ticketDescription = new Text(ticket.getBenefit());
         lblDescriptionTicket.getChildren().clear();
         lblDescriptionTicket.getChildren().add(ticketDescription);

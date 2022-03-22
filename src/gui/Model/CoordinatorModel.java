@@ -3,6 +3,7 @@ package gui.Model;
 import be.Coordinator;
 import be.Events;
 import be.Participant;
+import be.Ticket;
 import bll.AdminLogic;
 import bll.EventManager;
 import bll.exception.AdminLogicException;
@@ -49,5 +50,9 @@ public class CoordinatorModel {
 
     public List<Events> getAllEventsWithTicketType() throws EventDAOException, EventManagerException {
         return eventManager.getAllEventsWithTicketType();
+    }
+
+    public Ticket sellTicket(Ticket ticketSold,Events eventChosen, Participant participant) throws EventManagerException {
+        return eventManager.sellTicket(ticketSold,eventChosen,participant);
     }
 }

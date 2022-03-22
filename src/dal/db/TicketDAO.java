@@ -1,17 +1,14 @@
 package dal.db;
 
 import be.Events;
-import be.Participant;
 import be.Ticket;
+import be.TicketType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
+import org.apache.poi.ss.formula.functions.T;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.sql.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TicketDAO {
@@ -24,7 +21,7 @@ public class TicketDAO {
         try (Connection con = cm.getConnection()) {
             String sqlInsert = "INSERT INTO TicketType VALUES (?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(sqlInsert);
-            for (Ticket ticket:event.getTicketAvailable()) {
+            for (TicketType ticket:event.getTicketAvailable()) {
                 pstmt.setString(1,ticket.getType());
                 pstmt.setString(2,ticket.getBenefit());
                 pstmt.setInt(3,event.getId());
@@ -35,9 +32,9 @@ public class TicketDAO {
     }
     public void updateEventTicket(Events event) throws Exception {
         HashMap<Integer,Integer> mapTicket = new HashMap<>();
-        HashMap<Integer,Ticket> ticketListReceived = new HashMap<>();
-        HashMap<Integer,Ticket> ticketListDB = new HashMap<>();
-        for (Ticket ticket:event.getTicketAvailable()) {
+        HashMap<Integer, TicketType> ticketListReceived = new HashMap<>();
+        HashMap<Integer, TicketType> ticketListDB = new HashMap<>();
+        for (TicketType ticket:event.getTicketAvailable()) {
             ticketListReceived.put(ticket.getId(),ticket);
             mapTicket.put(ticket.getId(),0);
         }
@@ -62,19 +59,19 @@ public class TicketDAO {
                 int ticketID = rs.getInt("id");
                 String typeName = rs.getString("typeName");
                 String benefit = rs.getString("benefit");
-                ticketListDB.put(ticketID,new Ticket(ticketID,typeName,benefit));
+                ticketListDB.put(ticketID,new TicketType(ticketID,typeName,benefit));
                 if(mapTicket.get(ticketID)!=null)
                     mapTicket.put(ticketID,mapTicket.get(ticketID)+1);
             }
             for(Map.Entry entry:ticketListDB.entrySet()) {
                 int index = (Integer)entry.getKey();
-                Ticket ticket = (Ticket) entry.getValue();
+                TicketType ticket = (TicketType) entry.getValue();
                 if(ticketListReceived.get(index)==null) {
                     pstmtDelete.setInt(1,ticket.getId());
                     pstmtDelete.execute();
                 }
             }
-            for (Ticket ticket: event.getTicketAvailable()) {
+            for (TicketType ticket: event.getTicketAvailable()) {
                 if(mapTicket.get(ticket.getId())!=0) {
                     pstmtUpdate.setString(1,ticket.getType());
                     pstmtUpdate.setString(2,ticket.getBenefit());
@@ -91,5 +88,21 @@ public class TicketDAO {
 
         }
 
+    }
+
+    public Ticket addTicketSold(Ticket ticket) throws SQLException {
+        Ticket ticketCreated = null;
+        try (Connection con = cm.getConnection()) {
+
+            String sqlInsert = "INSERT INTO Ticket VALUES (?,?)";
+            PreparedStatement pstmt = con.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1,ticket.getTicketNumber());
+            pstmt.setInt(2,ticket.getTicketTypeID());
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()) {
+                ticketCreated = new Ticket(rs.getInt(1), ticket.getTicketNumber(),ticket.getTicketTypeID());
+            }
+        }
+        return ticketCreated;
     }
 }
