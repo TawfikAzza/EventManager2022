@@ -81,7 +81,8 @@ public class NewEventController implements Initializable {
             Events eventCreated = new Events(0,txtName.getText(),txtLocation.getText(),txtDescription.getText(),getStartDate(),getEndDate(),txtItinerary.getText());
             if(lstTickets.getItems().size()>0) {
                 for (TicketType ticket : lstTickets.getItems())
-                    eventCreated.getTicketAvailable().add(ticket);
+                    if(ticket.getType()!=null)
+                        eventCreated.getTicketAvailable().add(ticket);
             }
             eventCreated = coordinatorModel.createEvent(eventCreated);
             goBack();
@@ -89,7 +90,8 @@ public class NewEventController implements Initializable {
             if(operationType.equals("modification")) {
                 currentEvent.getTicketAvailable().clear();
                 for(TicketType ticket:lstTickets.getItems())
-                    currentEvent.getTicketAvailable().add(ticket);
+                    if(ticket.getType()!=null)
+                        currentEvent.getTicketAvailable().add(ticket);
 
                 currentEvent.setName(txtName.getText());
                 currentEvent.setStartDate(getStartDate());
@@ -258,7 +260,8 @@ public class NewEventController implements Initializable {
         txtDescription.setText(event.getDescription());
         txtLocation.setText(event.getLocation());
         for(TicketType ticket:event.getTicketAvailable()){
-           lstTickets.getItems().add(ticket);
+            if(ticket.getType()!=null)
+                lstTickets.getItems().add(ticket);
         }
         btnCreate.setText("Update Event");
         currentEvent=event;

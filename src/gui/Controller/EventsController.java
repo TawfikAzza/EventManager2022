@@ -117,6 +117,7 @@ public class EventsController implements Initializable {
     public void displayEvent(MouseEvent mouseEvent) {
         if(tableEvents.getSelectionModel().getSelectedItem()!=null) {
             Events event = tableEvents.getSelectionModel().getSelectedItem();
+            System.out.println("location: "+event.getLocation()+" Description : "+event.getDescription());
             toggleTextFieldOff();
             toggleLabelsOn();
             setLabelText(event);
@@ -129,8 +130,8 @@ public class EventsController implements Initializable {
             lstTickets.getItems().clear();
 
         for (TicketType ticket:tableEvents.getSelectionModel().getSelectedItem().getTicketAvailable()) {
-
-            lstTickets.getItems().add(ticket);
+            if(ticket.getType()!=null)
+             lstTickets.getItems().add(ticket);
         }
 
     }

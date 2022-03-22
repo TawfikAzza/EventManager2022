@@ -184,7 +184,7 @@ public class EventDAO implements IEventDAO {
                             name,
                             location
                     );
-                    event.setDescription(location);
+                    event.setDescription(description);
                     event.setStartDate(startDate);
                     if(endDate!=null) {
                         event.setEndDate(endDate);
