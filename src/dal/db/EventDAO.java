@@ -438,8 +438,8 @@ public class EventDAO implements IEventDAO {
                 Participant participant = new Participant(idParticipant,
                                                         rs.getString("fname"),
                                                         rs.getString("lname"),
-                                                        rs.getString("phoneNumber"),
-                                                        rs.getString("email"));
+                                                        rs.getString("email"),
+                                                        rs.getString("phoneNumber") );
                 mapParticipant.put(idParticipant,participant);
             }
         }
