@@ -16,10 +16,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane prefHeight="442.0" prefWidth="639.0" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ParticipantViewController">
+<GridPane prefHeight="459.0" prefWidth="652.0" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ParticipantViewController">
    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.59996032714844" minWidth="10.0" prefWidth="242.20003662109377" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.99997558593753" minWidth="10.0" prefWidth="190.19998779296876" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.59996032714844" minWidth="10.0" prefWidth="246.4" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.99997558593753" minWidth="10.0" prefWidth="194.4" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.79999999999995" minWidth="10.0" prefWidth="207.80001220703122" />
    </columnConstraints>
    <rowConstraints>
@@ -42,32 +42,41 @@
                      </HBox.margin></Button>
                </children>
             </HBox>
-            <TableView fx:id="tableParticipant" onMouseClicked="#displayParticipant" prefHeight="188.0" prefWidth="253.0">
+            <TableView fx:id="tableParticipant" onMouseClicked="#displayParticipant" prefHeight="188.0" prefWidth="253.0" styleClass="shadow">
               <columns>
                 <TableColumn fx:id="columnFname" prefWidth="73.59997862577438" text="First Name" />
                 <TableColumn fx:id="columnLname" prefWidth="79.199951171875" text="Last Name" />
                   <TableColumn fx:id="columnPhone" prefWidth="103.19999694824219" text="Phone" />
               </columns>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
             </TableView>
          </children>
       </VBox>
       <AnchorPane prefHeight="231.0" prefWidth="171.0" GridPane.columnIndex="1">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Name:" />
-            <Label fx:id="lblName" layoutX="100.0" layoutY="14.0" />
-            <Label layoutX="14.0" layoutY="58.0" text="mail:" />
-            <Label fx:id="lblMail" layoutX="100.0" layoutY="58.0" />
-            <Label layoutX="10.0" layoutY="124.0" text="Phone number:" />
-            <Label fx:id="lblPhoneNumber" layoutX="100.0" layoutY="124.0" />
+            <Label layoutX="7.0" layoutY="76.0" text="Name:" textFill="#3823b8" />
+            <Label fx:id="lblName" layoutX="51.0" layoutY="75.0" prefHeight="18.0" prefWidth="126.0" />
+            <Label layoutX="8.0" layoutY="107.0" text="email:" textFill="#3823b8" />
+            <Label fx:id="lblMail" layoutX="43.0" layoutY="106.0" prefHeight="18.0" prefWidth="141.0" />
+            <Label layoutX="7.0" layoutY="133.0" text="Phone number:" textFill="#3823b8" />
+            <Label fx:id="lblPhoneNumber" layoutX="98.0" layoutY="133.0" prefHeight="18.0" prefWidth="87.0" />
          </children>
       </AnchorPane>
       <VBox GridPane.columnIndex="2">
          <children>
-            <Label text="Participant's events:" />
-            <ListView fx:id="lstEventParticipant" prefHeight="205.0" prefWidth="205.0" styleClass="shadow" />
+            <Label text="Participant's events:" textFill="#3823b8">
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin></Label>
+            <ListView fx:id="lstEventParticipant" prefHeight="205.0" prefWidth="205.0" styleClass="shadow">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin></ListView>
          </children>
       </VBox>
-      <Button fx:id="btnGenerateFile" mnemonicParsing="false" onAction="#toGenerateExcelFile" text="Generate Excel file" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Button fx:id="btnGenerateFile" mnemonicParsing="false" onAction="#toGenerateExcelFile" prefHeight="34.0" prefWidth="149.0" text="Generate Excel file" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -75,19 +84,25 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <TableView fx:id="tableEvent" onMouseClicked="#displayEventParticipant" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+      <TableView fx:id="tableEvent" onMouseClicked="#displayEventParticipant" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" GridPane.rowIndex="1">
         <columns>
           <TableColumn fx:id="columnEventName" prefWidth="75.0" text="Event Name" />
           <TableColumn fx:id="columnEventDate" prefWidth="87.20001220703125" text="Event Date" />
             <TableColumn fx:id="columnEventParticipantNumber" prefWidth="73.5999755859375" text="No Participants" />
         </columns>
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
       </TableView>
-      <TableView fx:id="tableParticipantByEvent" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <TableView fx:id="tableParticipantByEvent" prefHeight="209.0" prefWidth="257.0" styleClass="shadow" GridPane.columnIndex="2" GridPane.rowIndex="1">
         <columns>
           <TableColumn fx:id="columnFirstNamePE" prefWidth="60.79998856782913" text="First Name" />
           <TableColumn fx:id="columnLastNamePE" prefWidth="75.99996566772461" text="Last Name" />
             <TableColumn fx:id="columnPhoneNumberPE" prefWidth="88.800048828125" text="Phone Number" />
         </columns>
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
       </TableView>
    </children>
 </GridPane>
