@@ -4,10 +4,7 @@ import be.Events;
 import be.Participant;
 import be.Ticket;
 import be.TicketType;
-import bll.exception.AdminLogicException;
-import bll.exception.EventDAOException;
-import bll.exception.EventManagerException;
-import bll.exception.ParticipantManagerException;
+import bll.exception.*;
 import gui.Model.CoordinatorModel;
 import gui.Model.ParticipantModel;
 import javafx.beans.value.ChangeListener;
@@ -61,7 +58,7 @@ public class SellTicketViewController implements Initializable {
         try {
             coordinatorModel = new CoordinatorModel();
             participantModel = new ParticipantModel();
-        } catch (EventManagerException | AdminLogicException | Exception e) {
+        } catch (EventManagerException | Exception | AdminDAOException e) {
             e.printStackTrace();
         }
     }

@@ -6,6 +6,7 @@ import be.Users;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
 import dal.interfaces.IAdminDAO;
+import org.apache.commons.math3.exception.NullArgumentException;
 
 import java.io.IOException;
 import java.sql.*;
@@ -20,8 +21,44 @@ public class AdminDAO implements IAdminDAO {
         this.dbc = new ConnectionManager();
     }
 
+    public Users getUser(String username, String password) throws SQLException {
+        try (Connection connection = dbc.getConnection()) {
+            String sql = "SELECT * FROM LoginUser WHERE loginName = ? AND password = ?";
+
+            PreparedStatement ps = dbc.getConnection().prepareStatement(sql);
+
+            ps.setString(1, username);
+            ps.setString(2, password);
+
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+
+            while(rs.next())
+            {
+                int userID = rs.getInt("userID");
+                String loginName = rs.getString("loginName");
+                String pass = rs.getString("password");
+                int roleID = rs.getInt("roleID");
+                String email = rs.getString("email");
+                String fname = rs.getString("fname");
+                String lname = rs.getString("lname");
+
+                if(roleID == 1)
+                {
+                    return new Admin(userID, loginName, pass, roleID, email, fname, lname);
+                }
+                if(roleID == 2)
+                {
+                    return new Coordinator(userID, loginName, pass, roleID, email, fname, lname);
+                }
+            }
+
+        }
+        return null;
+    }
+
     @Override
-    public void addLoginUser(Users user) {
+    public void addLoginUser(Users user) throws SQLException {
         String loginName = user.getLoginName();
         String password = user.getPassword();
         int roleID = user.getRoleID();
@@ -32,7 +69,7 @@ public class AdminDAO implements IAdminDAO {
         try (Connection connection = dbc.getConnection()) {
             String sql = "INSERT INTO LoginUser(loginName, password, roleID, email, fname, lname) VALUES(?,?,?,?,?,?)";
 
-            PreparedStatement ps = dbc.getConnection().prepareStatement(sql);
+            PreparedStatement ps = connection.prepareStatement(sql);
 
             ps.setString(1, loginName);
             ps.setString(2, password);
@@ -43,14 +80,11 @@ public class AdminDAO implements IAdminDAO {
 
             ps.execute();
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
-
     }
 
     @Override
-    public void deleteUser(Users user) {
+    public void deleteUser(Users user) throws SQLException {
         int userID = user.getUserID();
 
         try (Connection connection = dbc.getConnection()) {
@@ -61,12 +95,10 @@ public class AdminDAO implements IAdminDAO {
 
             ps.execute();
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
     }
 
-    public void editUser(Users user) {
+    public void editUser(Users user) throws SQLException{
 
         String loginName = user.getLoginName();
         String password = user.getPassword();;
@@ -88,12 +120,10 @@ public class AdminDAO implements IAdminDAO {
 
             ps.execute();
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
     }
 
-    public ArrayList<Coordinator> getAllCoordinators()
+    public ArrayList<Coordinator> getAllCoordinators() throws SQLException
     {
         ArrayList<Coordinator> allCoordinators = new ArrayList<>();
 
@@ -121,13 +151,10 @@ public class AdminDAO implements IAdminDAO {
                 allCoordinators.add(coordinator);
             }
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
         return allCoordinators;
     }
 
-    public ArrayList<Admin> getAllAdmins()
+    public ArrayList<Admin> getAllAdmins() throws SQLException
     {
         ArrayList<Admin> allAdmins = new ArrayList<>();
 
@@ -155,13 +182,10 @@ public class AdminDAO implements IAdminDAO {
                 allAdmins.add(admin);
             }
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
         return allAdmins;
     }
 
-    public ArrayList<String> getAccountTypes(){
+    public ArrayList<String> getAccountTypes() throws SQLException{
         ArrayList<String> accountTypes = new ArrayList<>();
 
         try (Connection connection = dbc.getConnection()) {
@@ -176,14 +200,8 @@ public class AdminDAO implements IAdminDAO {
                 String accountType = rs.getString("roleName");
                 accountTypes.add(accountType);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
         return accountTypes;
-    }
-    private int checkUserRole(Users user)
-    {
-        return user.getRoleID();
     }
 
 }

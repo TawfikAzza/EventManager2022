@@ -2,7 +2,9 @@ package gui.Controller;
 
 import be.Admin;
 import be.Coordinator;
+import bll.exception.AdminDAOException;
 import bll.exception.AdminLogicException;
+import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
 import javafx.event.ActionEvent;
@@ -48,8 +50,8 @@ public class AddEventCoordinatorViewController implements Initializable {
         try {
             this.adminModel = new AdminModel();
             this.accountTypeChoiceBox.setItems(adminModel.getAccountTypes());
-        } catch (AdminLogicException e) {
-            e.printStackTrace();
+        } catch (AdminDAOException e) {
+            DisplayError.displayError(e);
         }
     }
 
@@ -58,30 +60,33 @@ public class AddEventCoordinatorViewController implements Initializable {
         SceneSetter.setScene(accountTypeChoiceBox, loader);
     }
 
-    public void addNewEventCoordinatorClick(ActionEvent actionEvent) throws IOException {
-        String loginName = loginNameTextField.getText();
-        String password = passwordField.getText();
-        String email = emailTextField.getText();
-        String firstName = firstNameTextField.getText();
-        String lastName = lastNameTextField.getText();
-        String role = accountTypeChoiceBox.getValue();
+    public void addNewEventCoordinatorClick(ActionEvent actionEvent) {
+        try {
+            String loginName = loginNameTextField.getText();
+            String password = passwordField.getText();
+            String email = emailTextField.getText();
+            String firstName = firstNameTextField.getText();
+            String lastName = lastNameTextField.getText();
+            String role = accountTypeChoiceBox.getValue();
 
-        if(confirmPassword()) {
-            if (role.equals("Admin")) {
-                Admin admin = new Admin(loginName, password, 1, email, firstName, lastName);
-                adminModel.addLoginUser(admin);
+            if (confirmPassword()) {
+                if (role.equals("Admin")) {
+                    Admin admin = new Admin(loginName, password, 1, email, firstName, lastName);
+                    adminModel.addLoginUser(admin);
+                }
+                if (role.equals("Event Coordinator")) {
+                    Coordinator coordinator = new Coordinator(loginName, password, 2, email, firstName, lastName);
+                    adminModel.addLoginUser(coordinator);
+                }
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+                SceneSetter.setScene(accountTypeChoiceBox, loader);
+            } else {
+                System.out.println("Passwords do not match");
             }
-            if(role.equals("Event Coordinator"))
-            {
-                Coordinator coordinator = new Coordinator(loginName, password, 2, email, firstName, lastName);
-                adminModel.addLoginUser(coordinator);
-            }
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
-            SceneSetter.setScene(accountTypeChoiceBox, loader);
+        } catch (AdminDAOException | IOException e) {
+            DisplayError.displayError(e);
         }
-        else {
-            System.out.println("Passwords do not match");
-        }
+
     }
 
     private boolean confirmPassword()

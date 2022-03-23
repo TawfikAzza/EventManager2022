@@ -6,6 +6,7 @@ import be.Participant;
 import be.Ticket;
 import bll.AdminLogic;
 import bll.EventManager;
+import bll.exception.AdminDAOException;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
@@ -20,7 +21,7 @@ public class CoordinatorModel {
     private ObservableList<Coordinator> allCoordinator = FXCollections.observableArrayList();
     private EventManager eventManager;
     private AdminLogic adminManager;
-    public CoordinatorModel() throws EventManagerException, AdminLogicException {
+    public CoordinatorModel() throws EventManagerException, AdminDAOException {
         eventManager = new EventManager();
         adminManager = new AdminLogic();
     }
@@ -29,7 +30,7 @@ public class CoordinatorModel {
         allEvents.addAll(eventManager.getAllEvents());
         return allEvents;
     }
-    public ObservableList<Coordinator> getAllCollaborators() {
+    public ObservableList<Coordinator> getAllCollaborators() throws AdminDAOException {
         allCoordinator.clear();
         allCoordinator.addAll(adminManager.getAllCoordinators());
         return allCoordinator;
