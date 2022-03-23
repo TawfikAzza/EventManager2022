@@ -60,7 +60,8 @@ public class EventManager {
     }
 
     public void deleteEvent(Events event) throws Exception {
-        eventDAO.removeEvent(event);}
+     //   eventDAO.removeEvent(event);
+    }
 
     public List<Events> getParticipantEvent(Participant participant) throws EventManagerException {
         try {
