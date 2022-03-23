@@ -1,3 +1,6 @@
+.root {
+    -fx-background-color: #0a3fd5;
+}
 .button
 {
     -fx-background-color: #A7BAEC;

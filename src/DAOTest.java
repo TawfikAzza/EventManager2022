@@ -3,18 +3,28 @@ import be.Participant;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import bll.utils.DateUtil;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import dal.db.EventDAO;
 import dal.db.ParticipantDAO;
 import gui.Model.EventModel;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.Event;
+import javafx.scene.image.Image;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.*;
 
 public class DAOTest {
+
+
 
 
     public static void main(String[] args) throws Exception {
@@ -26,7 +36,9 @@ public class DAOTest {
 //addParticipant();
        // getAllParticipants();
        // getHashMap();
+
     }
+
     public static void getHashMap() throws Exception {
         EventDAO eventDAO = new EventDAO();
         HashMap<Integer,List<Participant>> test = eventDAO.getParticipantByEvent();
