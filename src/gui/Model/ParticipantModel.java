@@ -34,7 +34,7 @@ public class ParticipantModel {
 
     public ObservableList<String> participantsShowEventsById(int idParticipant) throws ParticipantManagerException {
         showEventsByPartId = FXCollections.observableArrayList();
-        showEventsByPartId.setAll(participantManager.participantsShowEventsById(idParticipant));
+        showEventsByPartId.setAll(participantManager.participantsShowEventsbyId(idParticipant));
         return showEventsByPartId;
     }
 

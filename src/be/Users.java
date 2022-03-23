@@ -1,8 +1,6 @@
 package be;
 
-import gui.Model.AdminModel;
-
-public abstract class Users {
+public class Users {
     private int userID;
     private String firstName;
     private String lastName;
@@ -11,10 +9,10 @@ public abstract class Users {
     private String password;
     private int roleID;
 
-    public Users(String loginName, String password, int roleID, String mail) {
-        this.mail=mail;
+    public Users(String loginName, String password, String mail, int roleID) {
         this.loginName = loginName;
         this.password = password;
+        this.mail=mail;
         this.roleID = roleID;
     }
 
