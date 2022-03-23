@@ -55,7 +55,7 @@ public class EventManager {
             eventDAO.updateEvent(event);
             ticketDAO.updateEventTicket(event);
         } catch (Exception e) {
-            throw new EventManagerException("Error while creating the Event in database",e);
+            throw new EventManagerException("Error while updating the Event in database",e);
         }
     }
 
@@ -67,7 +67,7 @@ public class EventManager {
         try {
             return eventDAO.getParticipantEvent(participant);
         } catch (Exception e) {
-            throw new EventManagerException("Error while retrieving the events list in database",e);
+            throw new EventManagerException("Error while retrieving the participants list in database",e);
         }
     }
 

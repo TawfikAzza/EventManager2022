@@ -6,6 +6,7 @@ import bll.exception.AdminDAOException;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
+import bll.utils.DisplayError;
 import com.jfoenix.controls.JFXButton;
 import gui.Model.CoordinatorModel;
 import javafx.event.ActionEvent;
@@ -89,7 +90,7 @@ public class EventsController implements Initializable {
         try {
             tableEvents.getItems().addAll(coordinatorModel.getAllEventsWithTicketType());
         } catch (EventDAOException | EventManagerException e) {
-            e.printStackTrace();
+            displayError(e);
         }
     }
     private void displayError(Throwable t) {
