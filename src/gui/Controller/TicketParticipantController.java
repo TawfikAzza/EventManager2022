@@ -36,21 +36,20 @@ public class TicketParticipantController implements Initializable {
 
     @FXML
     private ImageView imageQRCode;
-
     @FXML
     private TextFlow lblDescription;
-
     @FXML
-    private Label lblLocation,lblName,lblTicketType;
+    private Label lblLocation,lblName,lblTicketType, lblStartDate , lblEndDate;
 
     @FXML
     private TextFlow lblEventName;
-
     private Participant participant;
     private Events event;
     private Ticket ticketSold;
     private TicketType ticketTypeSold;
     private AnchorPane anchorPane;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -69,12 +68,14 @@ public class TicketParticipantController implements Initializable {
     public void setTicketType(TicketType ticketTypeSold) {
         this.ticketTypeSold=ticketTypeSold;
     }
+
     public void setValues() {
         //This is where you set the parameters for the look and feel.
         //In particular the textFlow which necessits a setting up of
         //font etc through its Text object.
         try {
             imageQRCode.setImage(generateQRCode(ticketSold.getTicketNumber()));
+
             Text textDescription = new Text(event.getDescription());
             lblDescription.getChildren().add(textDescription);
             Text text = new Text(event.getName());
@@ -83,6 +84,8 @@ public class TicketParticipantController implements Initializable {
             lblLocation.setText(event.getLocation());
             lblTicketType.setText(ticketTypeSold.getType());
             lblName.setText(participant.getFname()+" "+participant.getLname());
+            lblStartDate.setText(event.getStrStartDate());
+            lblEndDate.setText(event.getStrEndDate());
         } catch (WriterException e) {
             e.printStackTrace();
         }

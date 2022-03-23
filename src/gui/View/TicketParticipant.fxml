@@ -17,40 +17,49 @@
       </ImageView>
       <Pane layoutX="613.0" prefHeight="300.0" prefWidth="86.0">
          <children>
-            <Pane prefHeight="300.0" prefWidth="97.0" style="-fx-background-color: #4882c3;">
-               <children>
-                  <Label fx:id="lblTicketType" layoutX="-41.0" layoutY="115.0" rotate="-90.0" text="Ticket Type" textFill="WHITE">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
+            <Pane layoutX="-618.0" layoutY="247.0" prefHeight="53.0" prefWidth="715.0" style="-fx-background-color: #4882c3;" />
          </children>
       </Pane>
       <Pane prefHeight="300.0" prefWidth="153.0" style="-fx-background-color: #d2d0e6;">
          <children>
-            <Label layoutX="15.0" layoutY="31.0" text="Name:" />
-            <Label layoutX="14.0" layoutY="77.0" text="Location:" />
-            <Label layoutX="14.0" layoutY="126.0" text="Description:" />
-            <Label fx:id="lblName" layoutX="14.0" layoutY="48.0" prefHeight="20.0" prefWidth="134.0" style="-fx-background-color: #ffffff;">
+            <Label layoutX="15.0" layoutY="11.0" text="Name:" />
+            <Label layoutX="14.0" layoutY="49.0" text="Location:" />
+            <Label layoutX="14.0" layoutY="154.0" text="Description:" />
+            <Label fx:id="lblName" layoutX="14.0" layoutY="28.0" prefHeight="20.0" prefWidth="134.0" style="-fx-background-color: #ffffff;">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblLocation" layoutX="14.0" layoutY="94.0" prefHeight="20.0" prefWidth="134.0" style="-fx-background-color: #ffffff;">
+            <Label fx:id="lblLocation" layoutX="14.0" layoutY="66.0" prefHeight="20.0" prefWidth="134.0" style="-fx-background-color: #ffffff;">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextFlow fx:id="lblDescription" layoutX="11.0" layoutY="143.0" prefHeight="145.0" prefWidth="134.0" style="-fx-background-color: #ffffff;" />
+            <TextFlow fx:id="lblDescription" layoutX="11.0" layoutY="172.0" prefHeight="116.0" prefWidth="134.0" style="-fx-background-color: #ffffff;" />
+            <Label layoutX="14.0" layoutY="86.0" text="Start Date: " />
+            <Label fx:id="lblStartDate" layoutX="14.0" layoutY="102.0" prefHeight="20.0" prefWidth="134.0" style="-fx-background-color: #ffffff;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="122.0" text="End Date: " />
+            <Label fx:id="lblEndDate" layoutX="14.0" layoutY="138.0" prefHeight="20.0" prefWidth="134.0" style="-fx-background-color: #ffffff;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <ImageView fx:id="imageQRCode" fitHeight="88.0" fitWidth="86.0" layoutX="512.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageQRCode" fitHeight="88.0" fitWidth="86.0" layoutX="600.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Images/code.png" />
          </image>
       </ImageView>
-      <TextFlow fx:id="lblEventName" layoutX="207.0" layoutY="83.0" prefHeight="134.0" prefWidth="340.0" />
+      <TextFlow fx:id="lblEventName" layoutX="165.0" layoutY="102.0" prefHeight="134.0" prefWidth="527.0" textAlignment="CENTER" />
+      <Label fx:id="lblTicketType" alignment="CENTER" contentDisplay="TOP" layoutX="151.0" layoutY="246.0" prefHeight="53.0" prefWidth="555.0" text="Ticket Type" textFill="WHITE">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
