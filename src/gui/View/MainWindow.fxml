@@ -60,7 +60,8 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <TextField fx:id="username" promptText="Username" stylesheets="@CSS/Style.css">
+            <Label fx:id="errorLabel" />
+            <TextField fx:id="usernameTextField" promptText="Username" stylesheets="@CSS/Style.css">
                <VBox.margin>
                   <Insets bottom="11.0" top="24.0" />
                </VBox.margin>
@@ -70,7 +71,7 @@
                </styleClass>
             </TextField>
 
-            <PasswordField fx:id="password" promptText="Password" stylesheets="@CSS/Style.css">
+            <PasswordField fx:id="passwordTextField" promptText="Password" stylesheets="@CSS/Style.css">
                <VBox.margin>
                   <Insets bottom="11.0" top="16.0" />
                </VBox.margin>

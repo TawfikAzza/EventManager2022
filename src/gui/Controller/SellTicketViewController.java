@@ -4,10 +4,7 @@ import be.Events;
 import be.Participant;
 import be.Ticket;
 import be.TicketType;
-import bll.exception.AdminLogicException;
-import bll.exception.EventDAOException;
-import bll.exception.EventManagerException;
-import bll.exception.ParticipantManagerException;
+import bll.exception.*;
 import gui.Model.CoordinatorModel;
 import gui.Model.ParticipantModel;
 import javafx.beans.value.ChangeListener;
@@ -23,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -34,7 +32,7 @@ import java.util.ResourceBundle;
 public class SellTicketViewController implements Initializable {
 
     @FXML
-    private Button btnCreateTicket,btnCreateParticipant;
+    private Button btnCreateTicket,btnCreateParticipant,btnTicket;
     @FXML
     private TableColumn<Events, String> columnNameEvent,columnDateEvent;
     @FXML
@@ -54,19 +52,23 @@ public class SellTicketViewController implements Initializable {
     private ParticipantModel participantModel;
     private RootLayoutEvenController rootLayoutEvenController;
     private ObservableList<Participant> allParticipants;
-
+    private Participant ticketParticipant;
+    private Events ticketEvent;
+    private Ticket ticketSold;
+    private TicketType ticketTypeSold;
     //TODO: Create the page to add/modify/delete a Participant in the db.
 
     public SellTicketViewController() {
         try {
             coordinatorModel = new CoordinatorModel();
             participantModel = new ParticipantModel();
-        } catch (EventManagerException | AdminLogicException | Exception e) {
+        } catch (EventManagerException | Exception | AdminDAOException e) {
             e.printStackTrace();
         }
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        btnTicket.setVisible(false);
         searchQuery.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -170,11 +172,54 @@ public class SellTicketViewController implements Initializable {
         }
         Events eventChosen = tableEvent.getSelectionModel().getSelectedItem();
         Participant participant = tableParticipant.getSelectionModel().getSelectedItem();
+        ticketParticipant= participant;
+        ticketEvent=eventChosen;
         String ticketNumber = getAlphaNumericString(10).toUpperCase(Locale.ROOT);
-        Ticket ticketSold = new Ticket(0,ticketNumber,tableTicket.getSelectionModel().getSelectedItem().getId());
+        ticketTypeSold= tableTicket.getSelectionModel().getSelectedItem();
+        ticketSold = new Ticket(0,ticketNumber,ticketTypeSold.getId());
         ticketSold = coordinatorModel.sellTicket(ticketSold,eventChosen,participant);
         btnCreateTicket.setVisible(false);
+        btnTicket.setVisible(true);
+    }
 
+    @FXML
+    void openTicket(ActionEvent event) throws IOException {
+      /* String message ="";
+        if(tableEvent.getSelectionModel().getSelectedIndex()==-1) {
+            message += "Select an Event \n";
+        }
+        if(tableTicket.getSelectionModel().getSelectedIndex()==-1)
+            message += "Select a ticket type \n";
+        if(tableParticipant.getSelectionModel().getSelectedIndex()==-1)
+            message += "Select a participant ";
+        if(!message.equals("")) {
+            displayMessage(message);
+            return;
+        }
+        //TEST PART TO DELETE !!!!!
+        ticketParticipant=tableParticipant.getSelectionModel().getSelectedItem();
+        ticketSold = new Ticket(25,"THISISATEST",tableTicket.getSelectionModel().getSelectedItem().getId());
+        ticketEvent = tableEvent.getSelectionModel().getSelectedItem();
+        ticketTypeSold = tableTicket.getSelectionModel().getSelectedItem();
+        //END TEST PART*/
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/TicketParticipant.fxml"));
+        Parent root = loader.load();
+        TicketParticipantController ticketParticipantController = loader.getController();
+        AnchorPane anchorPane = (AnchorPane) root;
+        ticketParticipantController.setParticipant(ticketParticipant);
+        ticketParticipantController.setEvent(ticketEvent);
+        ticketParticipantController.setTicket(ticketSold);
+        ticketParticipantController.setTicketType(ticketTypeSold);
+        ticketParticipantController.setAnchorPane(anchorPane);
+        ticketParticipantController.setValues();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void displayMessage(String message) {

@@ -68,14 +68,20 @@
             </TableView>
          </children>
       </VBox>
-      <Button fx:id="btnCreateTicket" mnemonicParsing="false" onAction="#createTicket" prefHeight="26.0" prefWidth="203.0" text="SELL IT!!!!!!!!!!!!!!!!" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <graphic>
-            <ImageView fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@/Images/sellit.png" />
-               </image>
-            </ImageView>
-         </graphic></Button>
+      <VBox GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <children>
+            <Button fx:id="btnCreateTicket" mnemonicParsing="false" onAction="#createTicket" prefHeight="26.0" prefWidth="203.0" text=" Confirm Transaction">
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/Images/sellit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnTicket" mnemonicParsing="false" onAction="#openTicket" prefHeight="52.0" prefWidth="206.0" text="Print/Save Ticket" />
+         </children>
+      </VBox>
       <Label alignment="CENTER" prefHeight="30.0" prefWidth="207.0" text="   Select an event" GridPane.rowIndex="1" />
       <Label alignment="CENTER" prefHeight="31.0" prefWidth="230.0" text="  Select a type of ticket" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Label alignment="CENTER" prefHeight="30.0" prefWidth="230.0" text=" Select a Participant" GridPane.columnIndex="2" />

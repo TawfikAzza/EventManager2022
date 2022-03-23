@@ -3,11 +3,13 @@ package gui.Controller;
 import be.Admin;
 import be.Coordinator;
 import be.Events;
+import bll.exception.AdminDAOException;
 import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import bll.utils.CurrentAdmin;
 import bll.utils.CurrentEventCoordinator;
+import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
 import gui.Model.EventModel;
@@ -61,8 +63,8 @@ public class AdminViewController implements Initializable {
         this.eventTableView.setItems(eventmodel.getEventsObservableList());
         this.adminTableView.setItems(adminModel.getAdminObservableList());
         this.initTables();
-        } catch (Exception | EventDAOException | AdminLogicException | EventManagerException e) {
-            e.printStackTrace();
+        } catch (Exception | EventDAOException | EventManagerException | AdminDAOException e) {
+            DisplayError.displayError(e);
         }
     }
 

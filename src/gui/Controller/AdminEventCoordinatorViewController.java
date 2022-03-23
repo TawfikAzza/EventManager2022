@@ -1,8 +1,10 @@
 package gui.Controller;
 
 import be.Coordinator;
+import bll.exception.AdminDAOException;
 import bll.exception.AdminLogicException;
 import bll.utils.CurrentEventCoordinator;
+import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
 import javafx.event.ActionEvent;
@@ -38,8 +40,8 @@ public class AdminEventCoordinatorViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             this.adminModel = new AdminModel();
-        } catch (AdminLogicException e) {
-            e.printStackTrace();
+        } catch (AdminDAOException e) {
+            DisplayError.displayError(e);
         }
         Coordinator coordinator = CurrentEventCoordinator.getInstance();
         nameLabel.setText(coordinator.getFirstName() + " " + coordinator.getLastName());
@@ -58,13 +60,13 @@ public class AdminEventCoordinatorViewController implements Initializable {
         alert.setResultConverter(buttonType -> {
             if(buttonType==ButtonType.OK)
             {
-                adminModel.deleteUser(CurrentEventCoordinator.getInstance());
-                CurrentEventCoordinator.setInstance(null);
                 try {
+                    adminModel.deleteUser(CurrentEventCoordinator.getInstance());
+                    CurrentEventCoordinator.setInstance(null);
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
                     SceneSetter.setScene(nameLabel, loader);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (AdminDAOException | IOException e) {
+                   DisplayError.displayError(e);
                 }
             }
             return null;
