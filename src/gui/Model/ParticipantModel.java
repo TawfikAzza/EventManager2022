@@ -1,5 +1,6 @@
 package gui.Model;
 
+import be.Events;
 import be.Participant;
 import bll.ParticipantManager;
 import bll.exception.ParticipantManagerException;
@@ -40,5 +41,13 @@ public class ParticipantModel {
     public Participant addParticipant(Participant participant) throws ParticipantManagerException {
         return participantManager.addParticipant(participant);
 
+    }
+
+    public void updateParticipant(Participant participant) throws ParticipantManagerException {
+        participantManager.updateParticipant(participant);
+    }
+
+    public void deleteParticipantFromEvent(Participant participant, Events event) throws ParticipantManagerException {
+        participantManager.deleteParticipantFromEvent(participant, event);
     }
 }

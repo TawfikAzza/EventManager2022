@@ -84,6 +84,7 @@ public class EventsController implements Initializable {
     public void updateTableView() {
         eventName.setCellValueFactory(new PropertyValueFactory<>("name"));
         eventDate.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
+        numParticipants.setCellValueFactory((new PropertyValueFactory<>("numberParticipants")));
         try {
             tableEvents.getItems().addAll(coordinatorModel.getAllEventsWithTicketType());
         } catch (EventDAOException | EventManagerException e) {

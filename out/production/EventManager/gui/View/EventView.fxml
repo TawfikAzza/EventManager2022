@@ -35,9 +35,9 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <ListView fx:id="lstTickets" layoutX="10.0" layoutY="41.0" minHeight="120.0" minWidth="98.0" onMouseClicked="#displayTicket" prefHeight="120.0" prefWidth="182.0" styleClass="shadow" stylesheets="@CSS/Style.css" />
-            <TextFlow fx:id="lblDescriptionTicket" layoutX="119.0" layoutY="30.0" prefHeight="63.0" prefWidth="96.0" />
-            <Label layoutX="119.0" layoutY="11.0" text="Description">
+            <ListView fx:id="lstTickets" layoutX="13.0" layoutY="52.0" minHeight="120.0" minWidth="98.0" onMouseClicked="#displayTicket" prefHeight="120.0" prefWidth="182.0" styleClass="shadow" stylesheets="@CSS/Style.css" />
+            <TextFlow fx:id="lblDescriptionTicket" layoutX="209.0" layoutY="80.0" prefHeight="63.0" prefWidth="96.0" />
+            <Label layoutX="209.0" layoutY="52.0" text="Ticket Description">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

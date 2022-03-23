@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane prefHeight="459.0" prefWidth="652.0" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ParticipantViewController">
+<GridPane prefHeight="515.0" prefWidth="659.0" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ParticipantViewController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.59996032714844" minWidth="10.0" prefWidth="246.4" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.99997558593753" minWidth="10.0" prefWidth="194.4" />
@@ -24,7 +24,7 @@
    </columnConstraints>
    <rowConstraints>
       <RowConstraints maxHeight="231.19998779296876" minHeight="10.0" prefHeight="231.19998779296876" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="217.60001220703126" minHeight="10.0" prefHeight="217.60001220703126" valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="217.60001220703126" minHeight="10.0" prefHeight="217.60001220703126" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
@@ -62,6 +62,8 @@
             <Label fx:id="lblMail" layoutX="43.0" layoutY="106.0" prefHeight="18.0" prefWidth="141.0" />
             <Label layoutX="7.0" layoutY="133.0" text="Phone number:" textFill="#3823b8" />
             <Label fx:id="lblPhoneNumber" layoutX="98.0" layoutY="133.0" prefHeight="18.0" prefWidth="87.0" />
+            <Button fx:id="btnEditParticipant" layoutX="2.0" layoutY="163.0" mnemonicParsing="false" onAction="#editParticpant" prefHeight="41.0" prefWidth="98.0" text="Edit Participant" />
+            <Button fx:id="btnDeleteParticipant" layoutX="116.0" layoutY="162.0" mnemonicParsing="false" onAction="#deleteParticipant" prefHeight="42.0" prefWidth="74.0" text="Delete" />
          </children>
       </AnchorPane>
       <VBox GridPane.columnIndex="2">
@@ -76,6 +78,14 @@
                </VBox.margin></ListView>
          </children>
       </VBox>
+      <Button fx:id="btnGenerateFile" mnemonicParsing="false" onAction="#toGenerateExcelFile" prefHeight="34.0" prefWidth="149.0" text="Generate Excel file" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/Images/excel.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <TableView fx:id="tableEvent" onMouseClicked="#displayEventParticipant" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" GridPane.rowIndex="1">
         <columns>
           <TableColumn fx:id="columnEventName" prefWidth="75.0" text="Event Name" />
@@ -86,31 +96,23 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </TableView>
-      <TableView fx:id="tableParticipantByEvent" prefHeight="209.0" prefWidth="257.0" styleClass="shadow" GridPane.columnIndex="2" GridPane.rowIndex="1">
-        <columns>
-          <TableColumn fx:id="columnFirstNamePE" prefWidth="60.79998856782913" text="First Name" />
-          <TableColumn fx:id="columnLastNamePE" prefWidth="75.99996566772461" text="Last Name" />
-            <TableColumn fx:id="columnPhoneNumberPE" prefWidth="88.800048828125" text="Phone Number" />
-        </columns>
+      <VBox GridPane.columnIndex="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
-      </TableView>
-      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-alignment: center;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <children>
-            <Button fx:id="btnGenerateFile" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#toGenerateExcelFile" prefHeight="34.0" prefWidth="150.0" text="Generate Excel file">
-               <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@/Images/excel.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+            <TableView fx:id="tableParticipantByEvent" prefHeight="175.0" prefWidth="202.0" styleClass="shadow">
+              <columns>
+                <TableColumn fx:id="columnFirstNamePE" prefWidth="60.79998856782913" text="First Name" />
+                <TableColumn fx:id="columnLastNamePE" prefWidth="75.99996566772461" text="Last Name" />
+                  <TableColumn fx:id="columnPhoneNumberPE" prefWidth="88.800048828125" text="Phone Number" />
+              </columns>
+            </TableView>
+            <Button fx:id="btnDeleteParticicpantFromEvent" mnemonicParsing="false" onAction="#deleteParticipantFromEvent" text="Remove Participant from event">
                <VBox.margin>
-                  <Insets bottom="22.0" />
+                  <Insets left="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="removeParticipantBtn" mnemonicParsing="false" onAction="#removeParticipant" text="Remove Participant" />
          </children>
       </VBox>
    </children>
