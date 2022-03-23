@@ -1,10 +1,7 @@
 package gui.Controller;
 
-import be.Events;
 import be.Participant;
-import bll.exception.EventDAOException;
 import bll.exception.ParticipantManagerException;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Model.ParticipantModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -57,7 +54,7 @@ public class ECallParticipantsController implements Initializable {
         labelFName.setText(chosenParticipant.getFname());
         labelLName.setText(chosenParticipant.getLname());
         labelTelNumber.setText(chosenParticipant.getPhoneNumber());
-        listViewEvents.setItems(participantModel.participantsShowEventsbyId(chosenParticipant.getId()));
+        listViewEvents.setItems(participantModel.participantsShowEventsById(chosenParticipant.getId()));
     }
 
 
