@@ -49,6 +49,7 @@
    </padding>
    <styleClass>
       <String fx:value="label" />
+      <String fx:value="anchor" />
       <String fx:value="text-field" />
    </styleClass>
 </GridPane>
