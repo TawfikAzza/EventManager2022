@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="topPane" prefHeight="619.0" prefWidth="103.0" styleClass="anchor" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.RootLayoutEvenController">
+<BorderPane fx:id="topPane" prefHeight="619.0" prefWidth="103.0" styleClass="anchor02" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.RootLayoutEvenController">
     <left>
-        <VBox prefHeight="619.0" prefWidth="122.0" styleClass="anchor" stylesheets="@CSS/Style.css" BorderPane.alignment="CENTER">
+        <VBox prefHeight="619.0" prefWidth="122.0" styleClass="anchor02" stylesheets="@CSS/Style.css" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="btnAdd" contentDisplay="TOP" mnemonicParsing="false" onAction="#addEvent" prefHeight="102.0" prefWidth="102.0" text="Add an Event">
                <graphic>
@@ -54,7 +54,7 @@
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                </VBox.margin></Button>
-            <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#sellTicket" prefHeight="106.0" prefWidth="113.0" text="Sell a Ticket">
+            <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#sellTicket" prefHeight="106.0" prefWidth="110.0" text="Sell a Ticket">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                </VBox.margin>

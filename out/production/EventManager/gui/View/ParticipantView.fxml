@@ -16,15 +16,15 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane prefHeight="515.0" prefWidth="659.0" styleClass="anchor" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ParticipantViewController">
+<GridPane prefHeight="515.0" prefWidth="659.0" styleClass="anchor02" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ParticipantViewController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.59996032714844" minWidth="10.0" prefWidth="246.4" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.99997558593753" minWidth="10.0" prefWidth="194.4" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.79999999999995" minWidth="10.0" prefWidth="207.80001220703122" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints maxHeight="231.19998779296876" minHeight="10.0" prefHeight="231.19998779296876" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="217.60001220703126" minHeight="10.0" prefHeight="217.60001220703126" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="263.1999847412109" minHeight="10.0" prefHeight="263.1999847412109" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="217.60001220703126" minHeight="10.0" prefHeight="186.4000152587891" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
@@ -42,7 +42,7 @@
                      </HBox.margin></Button>
                </children>
             </HBox>
-            <TableView fx:id="tableParticipant" onMouseClicked="#displayParticipant" prefHeight="188.0" prefWidth="253.0" styleClass="shadow">
+            <TableView fx:id="tableParticipant" onMouseClicked="#displayParticipant" prefHeight="194.0" prefWidth="241.0" styleClass="shadow">
               <columns>
                 <TableColumn fx:id="columnFname" prefWidth="73.59997862577438" text="First Name" />
                 <TableColumn fx:id="columnLname" prefWidth="79.199951171875" text="Last Name" />
@@ -56,13 +56,13 @@
       </VBox>
       <AnchorPane prefHeight="231.0" prefWidth="171.0" GridPane.columnIndex="1">
          <children>
-            <Label layoutX="7.0" layoutY="57.0" text="Name:" textFill="#3823b8" />
+            <Label layoutX="2.0" layoutY="57.0" text="Name:" textFill="#3823b8" />
             <Label fx:id="lblName" layoutX="5.0" layoutY="75.0" prefHeight="18.0" prefWidth="182.0" style="-fx-background-color: #ffffff;" />
-            <Label layoutX="8.0" layoutY="91.0" text="email:" textFill="#3823b8" />
+            <Label layoutX="4.0" layoutY="91.0" text="email:" textFill="#3823b8" />
             <Label fx:id="lblMail" layoutX="3.0" layoutY="108.0" prefHeight="18.0" prefWidth="182.0" style="-fx-background-color: #ffffff;" />
-            <Label layoutX="7.0" layoutY="125.0" text="Phone number:" textFill="#3823b8" />
-            <Label fx:id="lblPhoneNumber" layoutX="3.0" layoutY="139.0" prefHeight="18.0" prefWidth="182.0" style="-fx-background-color: #ffffff;" />
-            <Button fx:id="btnEditParticipant" layoutX="2.0" layoutY="174.0" mnemonicParsing="false" onAction="#editParticpant" prefHeight="41.0" prefWidth="98.0" text="Edit Participant" />
+            <Label layoutX="3.0" layoutY="125.0" text="Phone number:" textFill="#3823b8" />
+            <Label fx:id="lblPhoneNumber" layoutX="3.0" layoutY="142.0" prefHeight="18.0" prefWidth="182.0" style="-fx-background-color: #ffffff;" />
+            <Button fx:id="btnEditParticipant" layoutX="2.0" layoutY="177.0" mnemonicParsing="false" onAction="#editParticpant" prefHeight="41.0" prefWidth="98.0" text="Edit Participant" />
             <Button fx:id="btnDeleteParticipant" layoutX="116.0" layoutY="177.0" mnemonicParsing="false" onAction="#deleteParticipant" prefHeight="42.0" prefWidth="74.0" text="Delete" />
          </children>
       </AnchorPane>
@@ -72,7 +72,7 @@
                <VBox.margin>
                   <Insets left="5.0" />
                </VBox.margin></Label>
-            <ListView fx:id="lstEventParticipant" prefHeight="205.0" prefWidth="205.0" styleClass="shadow">
+            <ListView fx:id="lstEventParticipant" prefHeight="228.0" prefWidth="202.0" styleClass="shadow">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin></ListView>
@@ -101,6 +101,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
          <children>
+            <Label text="Table Participant By Event" />
             <TableView fx:id="tableParticipantByEvent" prefHeight="175.0" prefWidth="202.0" styleClass="shadow">
               <columns>
                 <TableColumn fx:id="columnFirstNamePE" prefWidth="60.79998856782913" text="First Name" />
@@ -108,7 +109,7 @@
                   <TableColumn fx:id="columnPhoneNumberPE" prefWidth="88.800048828125" text="Phone Number" />
               </columns>
             </TableView>
-            <Button fx:id="btnDeleteParticicpantFromEvent" mnemonicParsing="false" onAction="#deleteParticipantFromEvent" text="Remove Participant from event">
+            <Button fx:id="btnDeleteParticicpantFromEvent" mnemonicParsing="false" onAction="#deleteParticipantFromEvent" prefWidth="182.0" text="Remove Participant from event">
                <VBox.margin>
                   <Insets left="10.0" />
                </VBox.margin>

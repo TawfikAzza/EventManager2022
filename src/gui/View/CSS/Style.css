@@ -34,14 +34,20 @@
 .anchor01 {
     -fx-background-color: #ffffff;
 
+}
+
+.anchor02 {
+    -fx-background-color: #8795c4;
 
 }
+
 
 .label
 {
     //-fx-background-color: #eaeae9;
     -fx-prompt-text-fill: #567ae2;
     -fx-font-weight: bold;
+    -fx-text-fill:   #ffffff;
 }
 
 .shadow{

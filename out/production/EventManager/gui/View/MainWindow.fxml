@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="390.0" prefWidth="590.0" style="-fx-background-color: #fafafa;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.MainController">
+<AnchorPane prefHeight="390.0" prefWidth="590.0" style="-fx-background-color: #fafafa;" styleClass="anchor02" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.MainController">
 
    <stylesheets>
       <URL value="@CSS/Style.css" />
@@ -22,7 +22,7 @@
 
 
    <children>
-      <VBox layoutX="176.0" layoutY="22.0" prefHeight="346.0" prefWidth="238.0" style="-fx-alignment: center;">
+      <VBox layoutX="176.0" layoutY="22.0" prefHeight="346.0" prefWidth="238.0" style="-fx-alignment: center; -fx-background-radius: 25;" styleClass="anchor02">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>

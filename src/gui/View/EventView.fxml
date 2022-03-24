@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.EventsController">
+<GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="751.0" styleClass="anchor02" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.EventsController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.9999755859375" minWidth="270.0" prefWidth="331.9999755859375" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="374.1999633789063" minWidth="300.0" prefWidth="360.7999267578125" />
@@ -24,7 +24,7 @@
       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <AnchorPane fx:id="topPane" prefHeight="640.0" prefWidth="322.0" styleClass="anchor" stylesheets="@CSS/Style.css" GridPane.columnIndex="1">
+      <AnchorPane fx:id="topPane" prefHeight="640.0" prefWidth="322.0" styleClass="anchor02" stylesheets="@CSS/Style.css" GridPane.columnIndex="1">
          <children>
             <JFXButton fx:id="btnEdit" buttonType="RAISED" layoutX="21.0" layoutY="346.0" onAction="#editEvent" prefHeight="27.0" prefWidth="97.0" text="Edit Event" />
             <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="21.0" layoutY="388.0" onAction="#deleteEvent" prefHeight="27.0" prefWidth="97.0" text="Delete Event" />
