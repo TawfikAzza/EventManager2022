@@ -27,7 +27,7 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Login Name" />
+      <Label stylesheets="@CSS/Style.css" text="Login Name" />
       <Label text="Email" GridPane.rowIndex="3" />
       <Label text="First Name" GridPane.rowIndex="1" />
       <Label text="Last Name" GridPane.rowIndex="2" />
@@ -48,8 +48,7 @@
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <styleClass>
-      <String fx:value="label" />
-      <String fx:value="anchor" />
+      <String fx:value="anchor02" />
       <String fx:value="text-field" />
    </styleClass>
 </GridPane>
