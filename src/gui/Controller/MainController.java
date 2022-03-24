@@ -2,7 +2,6 @@ package gui.Controller;
 
 import be.Users;
 import bll.MainManager;
-import dal.db.UsersDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,8 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
-import javax.swing.text.LabelView;
 import java.io.IOException;
 
 
@@ -28,8 +27,8 @@ public class MainController {
         Stage stage = new Stage();
         Scene scene = new Scene(root,800,600);
         stage.setScene(scene);
-
         stage.show();
+        closeWindow();
     }
 
     public void openAdminMgr() throws IOException {
@@ -38,8 +37,13 @@ public class MainController {
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-
         stage.show();
+        closeWindow();
+
+    }
+    public void closeWindow() throws IOException {
+        Stage window = (Stage) this.password.getScene().getWindow();
+        window.close();
     }
 
 
@@ -53,6 +57,7 @@ public class MainController {
             else if (users.getRoleID()== 2)
             {
                 openEventMgr();
+
             }
         }
         else
