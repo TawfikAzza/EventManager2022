@@ -48,9 +48,9 @@
          <children>
             <TableView fx:id="tableEvents" onMouseClicked="#displayEvent" prefHeight="286.0" prefWidth="274.0" styleClass="shadow" stylesheets="@CSS/Style.css">
                <columns>
-                  <TableColumn fx:id="eventName" prefWidth="83.19998168945312" text="Event" />
-                  <TableColumn fx:id="eventDate" prefWidth="60.0" text="Date" />
-                  <TableColumn fx:id="numParticipants" prefWidth="99.2000732421875" text="Participants" />
+                  <TableColumn fx:id="eventName" prefWidth="95.20000779628754" text="Event" />
+                  <TableColumn fx:id="eventDate" prefWidth="69.59998321533203" text="Date" />
+                  <TableColumn fx:id="numParticipants" prefWidth="104.80000305175781" text="Participants" />
                </columns>
                <VBox.margin>
                   <Insets left="10.0" right="15.0" top="25.0" />
