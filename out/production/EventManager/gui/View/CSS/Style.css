@@ -47,7 +47,7 @@
     //-fx-background-color: #eaeae9;
     -fx-prompt-text-fill: #567ae2;
     -fx-font-weight: bold;
-    -fx-text-fill:   #ffffff;
+    -fx-text-fill:   black;
 }
 
 .shadow{
@@ -158,12 +158,12 @@
     -fx-text-background-color: black;
     -fx-font-weight: bold;
 }
-.list-view .list-cell:odd {
+.list-view .list-cell:even {
     -fx-background-color: #809cd5;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
-.list-view .list-cell:even {
+.list-view .list-cell:odd {
     -fx-background-color: #a6b7e5;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
