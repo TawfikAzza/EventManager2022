@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="BorderPain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="730.0" styleClass="anchor" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ECallParticipantsController">
+<BorderPane id="BorderPain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="730.0" styleClass="anchor02" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ECallParticipantsController">
    <left>
-      <BorderPane prefHeight="482.0" prefWidth="319.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="482.0" prefWidth="319.0" styleClass="anchor02" BorderPane.alignment="CENTER">
          <center>
             <TableView fx:id="tableViewPartName" onMouseClicked="#toShowCurrentParticipants" prefHeight="405.0" prefWidth="293.0" styleClass="shadow" stylesheets="@CSS/Style.css" BorderPane.alignment="CENTER">
               <columns>
@@ -50,7 +50,7 @@
       </BorderPane>
    </left>
    <right>
-      <AnchorPane prefHeight="482.0" prefWidth="386.0" styleClass="anchor" stylesheets="@CSS/Style.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="482.0" prefWidth="386.0" styleClass="anchor02" stylesheets="@CSS/Style.css" BorderPane.alignment="CENTER">
          <children>
             <GridPane alignment="CENTER" layoutX="58.0" layoutY="170.0" AnchorPane.topAnchor="25.0">
               <columnConstraints>
