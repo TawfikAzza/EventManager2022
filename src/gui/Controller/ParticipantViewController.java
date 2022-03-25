@@ -255,7 +255,5 @@ public class ParticipantViewController implements Initializable {
             System.out.println("button Cancel");
             //
         }
-
-
     }
 }
