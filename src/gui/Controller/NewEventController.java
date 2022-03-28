@@ -7,7 +7,7 @@ import bll.exception.AdminDAOException;
 import bll.exception.AdminLogicException;
 import bll.exception.EventManagerException;
 import bll.utils.DateUtil;
-import com.jfoenix.controls.JFXButton;
+
 import gui.Model.CoordinatorModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
 public class NewEventController implements Initializable {
 
     @FXML
-    private JFXButton btnBack,btnCreate;
+    private Button btnBack,btnCreate;
     @FXML
     private ComboBox<String> startComboHour,startComboMinute,endComboHour,endComboMinute;
 

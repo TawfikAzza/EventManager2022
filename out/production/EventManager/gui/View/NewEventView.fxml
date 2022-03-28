@@ -169,16 +169,16 @@
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </GridPane.margin>
       </HBox>
-      <JFXButton fx:id="btnBack" onAction="#goBack" text="⬅ Back" GridPane.columnIndex="1" GridPane.rowIndex="9">
+      <Button fx:id="btnBack" onAction="#goBack" text="⬅ Back" GridPane.columnIndex="1" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets left="15.0" />
          </GridPane.margin>
-      </JFXButton>
-      <JFXButton fx:id="btnCreate" onAction="#createEvent" text="Create Event" GridPane.columnIndex="1" GridPane.rowIndex="9">
+      </Button>
+      <Button fx:id="btnCreate" onAction="#createEvent" text="Create Event" GridPane.columnIndex="1" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets left="100.0" />
          </GridPane.margin>
-      </JFXButton>
+      </Button>
       <HBox prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
             <ComboBox fx:id="startComboHour" prefHeight="26.0" prefWidth="67.0" />

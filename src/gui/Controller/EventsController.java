@@ -7,7 +7,6 @@ import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import bll.utils.DisplayError;
-import com.jfoenix.controls.JFXButton;
 import gui.Model.CoordinatorModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,13 +44,13 @@ public class EventsController implements Initializable {
     @FXML
     private TableColumn<Events, String> eventDate;
     @FXML
-    private JFXButton btnAdd,btnAllParticipants;
+    private Button btnAdd,btnAllParticipants;
 
     @FXML
-    private JFXButton btnDelete;
+    private Button btnDelete;
 
     @FXML
-    private JFXButton btnEdit;
+    private Button btnEdit;
 
     @FXML
     private Label lblName,lblEndDate,lblLocation,lblStartDate,lblStartTime,lblNameTicket;

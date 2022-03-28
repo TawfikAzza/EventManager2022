@@ -1,18 +1,19 @@
 .root {
-    -fx-background-color: #0a3fd5;
+    -fx-background-color: #fafafa;
 }
 .button
 {
-    -fx-background-color: #A7BAEC;
-    -fx-border-color: #5E709F;
+    -fx-background-color: #FF7D87;
+    -fx-border-color: #FF5050;
     -fx-border-style: solid;
     -fx-border-radius: 50;
     -fx-background-radius: 50;
-
+    -fx-text-background-color: #fafafa;
 }
+
 .button:hover
 {
-    -fx-background-color: #8395C6;
+    -fx-background-color: #ff5e75;
     -fx-cursor: hand;
 }
 .textArea
@@ -220,4 +221,10 @@ TextArea prompt text: #6A6A6A
 Secondary color: #FF7878
 Secondary border color: #AB3A3A
 
+
+
+
+#ff5050
+#ff7d87
+#ffA5b4
 */

@@ -8,9 +8,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="topPane" prefHeight="619.0" prefWidth="103.0" styleClass="anchor02" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.RootLayoutEvenController">
-    <left>
-        <VBox prefHeight="619.0" prefWidth="122.0" styleClass="anchor02" stylesheets="@CSS/Style.css" BorderPane.alignment="CENTER">
+<?import java.net.URL?>
+<BorderPane fx:id="topPane" prefHeight="619.0" prefWidth="103.0" styleClass="anchor02" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.RootLayoutEvenController">
+   <stylesheets>
+      <URL value="@CSS/Style.css" />
+   </stylesheets>
+   <left>
+        <VBox prefHeight="619.0" prefWidth="122.0" styleClass="anchor02"  BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="btnAdd" contentDisplay="TOP" mnemonicParsing="false" onAction="#addEvent" prefHeight="102.0" prefWidth="102.0" text="Add an Event">
                <graphic>
