@@ -16,7 +16,7 @@
           prefWidth="887.0" styleClass="anchor02" xmlns="http://javafx.com/javafx/17"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AdminViewController">
     <stylesheets>
-        <URL value="@CSS/Style.css" />
+        <URL value="@../CSS/Style.css" />
     </stylesheets>
 
     <columnConstraints>

@@ -8,7 +8,6 @@
     -fx-border-style: solid;
     -fx-border-radius: 50;
     -fx-background-radius: 50;
-    -fx-text-background-color: #fafafa;
 }
 
 .button:hover

@@ -4,7 +4,6 @@ import be.Admin;
 import be.Coordinator;
 import be.Events;
 import bll.exception.AdminDAOException;
-import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import bll.utils.CurrentAdmin;
@@ -82,7 +81,7 @@ public class AdminViewController implements Initializable {
     }
 
     public void handleNewClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AddEventCoordinatorView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AddEventCoordinatorView.fxml"));
         SceneSetter.setScene(adminTableView, loader);
     }
 
@@ -92,7 +91,7 @@ public class AdminViewController implements Initializable {
         {
             if(mouseEvent.getClickCount()==2) {
                 CurrentEventCoordinator.setInstance(coordinator);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEventCoordinatorView.fxml"));
                 SceneSetter.setScene(adminTableView, loader);
             }
         }
@@ -104,7 +103,7 @@ public class AdminViewController implements Initializable {
         {
             if(mouseEvent.getClickCount()==2) {
                 CurrentAdmin.setInstance(admin);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
                 SceneSetter.setScene(adminTableView, loader);
             }
         }

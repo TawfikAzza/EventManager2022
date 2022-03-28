@@ -20,7 +20,7 @@
           xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="gui.Controller.SellTicketViewController">
     <stylesheets>
-        <URL value="@CSS/Style.css" />
+        <URL value="@../CSS/Style.css" />
     </stylesheets>
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.00003662109376" minWidth="10.0" prefWidth="199.4"/>

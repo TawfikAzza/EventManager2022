@@ -1,15 +1,10 @@
 package gui.Controller;
 
 import be.Admin;
-import bll.AdminLogic;
 import bll.exception.AdminDAOException;
-import bll.exception.AdminLogicException;
 import bll.utils.CurrentAdmin;
-import bll.utils.CurrentEventCoordinator;
 import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
-import dal.db.AdminDAO;
-import dal.interfaces.IAdminDAO;
 import gui.Model.AdminModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,12 +41,12 @@ public class AdminEditDeleteViewController implements Initializable {
     }
 
     public void handleBack(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
         SceneSetter.setScene(nameLabel, loader);
     }
 
     public void handleEditClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EditAdminView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/EditAdminView.fxml"));
         SceneSetter.setScene(nameLabel, loader);
     }
 
@@ -65,7 +60,7 @@ public class AdminEditDeleteViewController implements Initializable {
                 try {
                     adminModel.deleteUser(CurrentAdmin.getInstance());
                     CurrentAdmin.setInstance(null);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
                     SceneSetter.setScene(nameLabel, loader);
                 } catch (AdminDAOException | IOException e) {
                     DisplayError.displayError(e);

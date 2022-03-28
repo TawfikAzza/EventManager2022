@@ -4,7 +4,6 @@ package gui.Controller;
 import be.Events;
 import be.TicketType;
 import bll.exception.AdminDAOException;
-import bll.exception.AdminLogicException;
 import bll.exception.EventManagerException;
 import bll.utils.DateUtil;
 
@@ -208,11 +207,11 @@ public class NewEventController implements Initializable {
     }
     private void goBack() throws IOException {
         FXMLLoader loaderPage = new FXMLLoader();
-        loaderPage.setLocation(getClass().getResource("/gui/View/EventView.fxml"));
+        loaderPage.setLocation(getClass().getResource("/gui/View/ECViews/EventView.fxml"));
         GridPane eventOverview = (GridPane) loaderPage.load();
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/RootLayoutEvent.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/RootLayoutEvent.fxml"));
         Parent root = loader.load();
 
         RootLayoutEvenController rootLayoutEvenController = loader.getController();

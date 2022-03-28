@@ -16,7 +16,7 @@
           prefHeight="409.0" prefWidth="526.0" xmlns="http://javafx.com/javafx/17"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AddEventCoordinatorViewController">
     <stylesheets>
-        <URL value="@CSS/Style.css" />
+        <URL value="@../CSS/Style.css" />
     </stylesheets>
     <columnConstraints>
 

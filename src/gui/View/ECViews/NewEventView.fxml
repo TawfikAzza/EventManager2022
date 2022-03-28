@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="gridPaneNewEvent" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="600.0" styleClass="anchor02" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.NewEventController">
+<GridPane fx:id="gridPaneNewEvent" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="600.0" styleClass="anchor02" stylesheets="@../CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.NewEventController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="149.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="441.0" minWidth="10.0" prefWidth="441.0" />
@@ -116,12 +116,12 @@
             <Insets left="15.0" right="15.0" />
          </GridPane.margin>
       </TextField>
-      <TextArea fx:id="txtDescription" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" stylesheets="@CSS/Style.css" GridPane.columnIndex="1" GridPane.rowIndex="6">
+      <TextArea fx:id="txtDescription" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" stylesheets="@../CSS/Style.css" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </GridPane.margin>
       </TextArea>
-      <TextArea fx:id="txtItinerary" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" stylesheets="@CSS/Style.css" GridPane.columnIndex="1" GridPane.rowIndex="7">
+      <TextArea fx:id="txtItinerary" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" stylesheets="@../CSS/Style.css" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </GridPane.margin>
@@ -159,7 +159,7 @@
                   <Insets top="5.0" />
                </padding>
             </VBox>
-            <ListView fx:id="lstTickets" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" stylesheets="@CSS/Style.css">
+            <ListView fx:id="lstTickets" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" stylesheets="@../CSS/Style.css">
                <HBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </HBox.margin>

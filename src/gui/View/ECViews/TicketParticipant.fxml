@@ -12,7 +12,7 @@
 <AnchorPane onMouseClicked="#printTicket" prefHeight="240.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.TicketParticipantController">
     <stylesheets>
-        <URL value="@CSS/Style.css" />
+        <URL value="@../CSS/Style.css" />
     </stylesheets>
     <children>
         <ImageView fitHeight="300.0" fitWidth="706.0" pickOnBounds="true" preserveRatio="true">

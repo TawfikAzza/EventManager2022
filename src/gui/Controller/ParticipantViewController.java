@@ -203,7 +203,7 @@ public class ParticipantViewController implements Initializable {
     private void editParticpant(ActionEvent event) throws IOException {
         if(tableParticipant.getSelectionModel().getSelectedIndex()==-1)
             return;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/NewParticipantView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/NewParticipantView.fxml"));
         Parent root = loader.load();
         NewParticipantViewController newParticipantViewController = loader.getController();
         newParticipantViewController.setParticipantViewController(this);

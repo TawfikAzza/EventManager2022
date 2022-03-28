@@ -2,7 +2,6 @@ package gui.Controller;
 
 import be.Coordinator;
 import bll.exception.AdminDAOException;
-import bll.exception.AdminLogicException;
 import bll.utils.CurrentEventCoordinator;
 import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
@@ -49,7 +48,7 @@ public class AdminEventCoordinatorViewController implements Initializable {
     }
 
     public void handleEditClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EditEventCoordinatorView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/EditEventCoordinatorView.fxml"));
         SceneSetter.setScene(nameLabel, loader);
     }
 
@@ -63,7 +62,7 @@ public class AdminEventCoordinatorViewController implements Initializable {
                 try {
                     adminModel.deleteUser(CurrentEventCoordinator.getInstance());
                     CurrentEventCoordinator.setInstance(null);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
                     SceneSetter.setScene(nameLabel, loader);
                 } catch (AdminDAOException | IOException e) {
                    DisplayError.displayError(e);
@@ -75,7 +74,7 @@ public class AdminEventCoordinatorViewController implements Initializable {
     }
 
     public void handleBack(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
         SceneSetter.setScene(nameLabel, loader);
     }
 

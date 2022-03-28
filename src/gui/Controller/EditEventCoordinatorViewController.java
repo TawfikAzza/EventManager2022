@@ -3,7 +3,6 @@ package gui.Controller;
 import be.Coordinator;
 import be.Users;
 import bll.exception.AdminDAOException;
-import bll.exception.AdminLogicException;
 import bll.utils.CurrentEventCoordinator;
 import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
@@ -12,12 +11,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,7 +50,7 @@ public class EditEventCoordinatorViewController implements Initializable {
     }
 
     public void backClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEventCoordinatorView.fxml"));
         SceneSetter.setScene(firstNameTextField, loader);
     }
 
@@ -71,7 +67,7 @@ public class EditEventCoordinatorViewController implements Initializable {
             try {
                 adminModel.editUser(coordinator);
                 CurrentEventCoordinator.setInstance(coordinator);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEventCoordinatorView.fxml"));
                 SceneSetter.setScene(firstNameTextField, loader);
             } catch (AdminDAOException | IOException e) {
                 DisplayError.displayError(e);

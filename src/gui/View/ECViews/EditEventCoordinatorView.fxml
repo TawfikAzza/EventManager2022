@@ -15,7 +15,7 @@
           prefHeight="308.0" prefWidth="440.0" styleClass="anchor02" xmlns="http://javafx.com/javafx/17"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.EditEventCoordinatorViewController">
     <stylesheets>
-        <URL value="@CSS/Style.css"/>
+        <URL value="@../CSS/Style.css"/>
     </stylesheets>
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.20001220703125" minWidth="10.0" prefWidth="112.0"/>

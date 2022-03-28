@@ -17,11 +17,11 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import java.net.URL?>
-<GridPane prefHeight="515.0" prefWidth="659.0" styleClass="anchor02" stylesheets="@CSS/Style.css"
+<GridPane prefHeight="515.0" prefWidth="659.0" styleClass="anchor02" stylesheets="@../CSS/Style.css"
           xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="gui.Controller.ParticipantViewController">
     <stylesheets>
-        <URL value="@CSS/Style.css" />
+        <URL value="@../CSS/Style.css" />
     </stylesheets>
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.59996032714844" minWidth="10.0" prefWidth="246.4"/>
