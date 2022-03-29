@@ -3,8 +3,6 @@ package gui.Controller;
 import be.Coordinator;
 import be.Users;
 import bll.exception.AdminDAOException;
-import bll.exception.AdminLogicException;
-import bll.utils.CurrentEventCoordinator;
 import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
@@ -12,12 +10,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,6 +38,13 @@ public class EditEventCoordinatorViewController implements Initializable {
     @FXML
     private Button newEventCoordinatorButton;
 
+    Coordinator eventCoordinator;
+
+    public EditEventCoordinatorViewController(Coordinator eventCoordinator)
+    {
+        this.eventCoordinator = eventCoordinator;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -50,11 +52,13 @@ public class EditEventCoordinatorViewController implements Initializable {
         } catch ( AdminDAOException e) {
             DisplayError.displayError(e);
         }
-        setFields(CurrentEventCoordinator.getInstance());
+        setFields(eventCoordinator);
     }
 
     public void backClick(ActionEvent actionEvent) throws IOException {
+        AdminEventCoordinatorViewController controller = new AdminEventCoordinatorViewController(eventCoordinator);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+        loader.setController(controller);
         SceneSetter.setScene(firstNameTextField, loader);
     }
 
@@ -64,13 +68,12 @@ public class EditEventCoordinatorViewController implements Initializable {
         String email = emailTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
-        int ID = CurrentEventCoordinator.getInstance().getUserID();
+        int ID = eventCoordinator.getUserID();
 
         Coordinator coordinator = new Coordinator(ID, loginName, password,2, email,firstName, lastName);
         if(confirmPassword()) {
             try {
                 adminModel.editUser(coordinator);
-                CurrentEventCoordinator.setInstance(coordinator);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
                 SceneSetter.setScene(firstNameTextField, loader);
             } catch (AdminDAOException | IOException e) {

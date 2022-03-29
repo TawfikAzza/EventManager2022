@@ -2,8 +2,6 @@ package gui.Controller;
 
 import be.Coordinator;
 import bll.exception.AdminDAOException;
-import bll.exception.AdminLogicException;
-import bll.utils.CurrentEventCoordinator;
 import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
@@ -49,13 +47,14 @@ public class AdminEventCoordinatorViewController implements Initializable {
         } catch (AdminDAOException e) {
             DisplayError.displayError(e);
         }
-        Coordinator coordinator = CurrentEventCoordinator.getInstance();
-        nameLabel.setText(coordinator.getFirstName() + " " + coordinator.getLastName());
-        emailLabel.setText(coordinator.getMail());
+        nameLabel.setText(eventCoordinator.getFirstName() + " " + eventCoordinator.getLastName());
+        emailLabel.setText(eventCoordinator.getMail());
     }
 
     public void handleEditClick(ActionEvent actionEvent) throws IOException {
+        EditEventCoordinatorViewController controller = new EditEventCoordinatorViewController(eventCoordinator);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EditEventCoordinatorView.fxml"));
+        loader.setController(controller);
         SceneSetter.setScene(nameLabel, loader);
     }
 
@@ -67,8 +66,7 @@ public class AdminEventCoordinatorViewController implements Initializable {
             if(buttonType==ButtonType.OK)
             {
                 try {
-                    adminModel.deleteUser(CurrentEventCoordinator.getInstance());
-                    CurrentEventCoordinator.setInstance(null);
+                    adminModel.deleteUser(eventCoordinator);
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
                     SceneSetter.setScene(nameLabel, loader);
                 } catch (AdminDAOException | IOException e) {
