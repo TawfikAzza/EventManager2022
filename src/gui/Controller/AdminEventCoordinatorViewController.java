@@ -35,6 +35,12 @@ public class AdminEventCoordinatorViewController implements Initializable {
     private TableColumn tableColumnDate;
 
     AdminModel adminModel;
+    Coordinator eventCoordinator;
+
+    public AdminEventCoordinatorViewController(Coordinator coordinator)
+    {
+        this.eventCoordinator = coordinator;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
