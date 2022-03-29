@@ -67,7 +67,7 @@ public class AdminEventCoordinatorViewController implements Initializable {
             {
                 try {
                     adminModel.deleteUser(eventCoordinator);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
                     SceneSetter.setScene(nameLabel, loader);
                 } catch (AdminDAOException | IOException e) {
                    DisplayError.displayError(e);
