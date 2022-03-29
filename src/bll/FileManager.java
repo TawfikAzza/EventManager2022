@@ -32,10 +32,12 @@ public class FileManager {
 
         Row headerRow = sheet.createRow(0);
 
+
         for (int i=0; i < columnHeadings.length; i++) {
             Cell cell = headerRow.createCell(i);
             cell.setCellValue(columnHeadings[i]);
             cell.setCellStyle(headerStyle);
+            sheet.setColumnWidth(i, sheet.getColumnWidth(i) * 2);
         }
 
         int rowCount = 0;
@@ -43,16 +45,17 @@ public class FileManager {
         for (String[] strings : multiArrayParticipants) {
             Row row = sheet.createRow(++rowCount);
 
+
             int columnCount = 0;
 
             for (String field : strings) {
-                Cell cell = row.createCell(++columnCount);
+                Cell cell = row.createCell(columnCount++);
                     cell.setCellValue((String) field);
 
             }
 
         }
-        return workbook;                // TODO there is a bug to be fixed - column for the list of participants has wrong position by one column
+        return workbook;
 
     }
 

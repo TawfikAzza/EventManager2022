@@ -231,6 +231,15 @@ public class EventDAO implements IEventDAO {
             event.setTicketAvailable(tickets);
             allEvents.add(event);
         }
+        HashMap<Integer,Integer> mapEventParticpantNumber = new HashMap<>();
+        HashMap<Integer,List<Participant>> mapParticipantByEvents = getParticipantByEvent();
+        mapEventParticpantNumber = getParticpantNumberByEvent();
+        for (Events event:allEvents)
+            if(mapEventParticpantNumber.get(event.getId())!=null) {
+                event.setNumberParticipants(""+mapEventParticpantNumber.get(event.getId()));
+                event.setListParticipants(mapParticipantByEvents.get(event.getId()));
+            }
+
         return allEvents;
     }
 
@@ -438,8 +447,8 @@ public class EventDAO implements IEventDAO {
                 Participant participant = new Participant(idParticipant,
                                                         rs.getString("fname"),
                                                         rs.getString("lname"),
-                                                        rs.getString("phoneNumber"),
-                                                        rs.getString("email"));
+                                                        rs.getString("email"),
+                                                        rs.getString("phoneNumber") );
                 mapParticipant.put(idParticipant,participant);
             }
         }

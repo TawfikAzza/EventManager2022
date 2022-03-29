@@ -1,10 +1,12 @@
 package bll;
 
+import be.Events;
 import be.Participant;
 import bll.exception.ParticipantManagerException;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.ParticipantDAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ParticipantManager {
@@ -34,6 +36,22 @@ public class ParticipantManager {
             return participantDAO.addParticipant(participant);
         } catch (Exception e) {
             throw new ParticipantManagerException("Error while creating a participant in the database",e);
+        }
+    }
+
+    public void updateParticipant(Participant participant) throws ParticipantManagerException {
+        try {
+            participantDAO.updateParticipant(participant);
+        } catch (Exception e) {
+            throw new ParticipantManagerException("Error while updating a participant in the database",e);
+        }
+    }
+
+    public void deleteParticipantFromEvent(Participant participant, Events event) throws ParticipantManagerException {
+        try {
+            participantDAO.deleteParticipantFromEvent(participant,event);
+        } catch (SQLException e) {
+            throw new ParticipantManagerException("Error while deleting a participation from an event",e);
         }
     }
 }

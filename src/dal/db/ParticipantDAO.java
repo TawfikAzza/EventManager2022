@@ -1,4 +1,5 @@
 package dal.db;
+import be.Events;
 import be.Participant;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
@@ -62,7 +63,7 @@ public class ParticipantDAO {
 
     public void updateParticipant(Participant participant) throws Exception {
         try (Connection con = cm.getConnection()) {
-            String sql = "UPDATE Participant SET fname = ?, lname = ?, phoneNumber = ? email = ? WHERE id = ?";
+            String sql = "UPDATE Participant SET fname = ?, lname = ?, phoneNumber = ?, email = ? WHERE id = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
 
             pstmt.setString(1, participant.getFname());
@@ -85,7 +86,23 @@ public class ParticipantDAO {
 
         }
     }
+    public void deleteParticipantFromEvent(Participant participant, Events event) throws SQLException {
+        try (Connection con = cm.getConnection()) {
+            String sqlDeleteFromTicket = "DELETE FROM TICKET WHERE id = " +
+                    "(SELECT ticketID FROM EventParticipant WHERE idParticipant=? AND idEvent = ?)";
 
+            String sqlDeleteFromEventParticipant = "DELETE FROM EventParticipant WHERE idParticipant=? AND idEvent=? ";
+            PreparedStatement pstmtDeleteTicket = con.prepareStatement(sqlDeleteFromTicket);
+            pstmtDeleteTicket.setInt(1,participant.getId());
+            pstmtDeleteTicket.setInt(2,event.getId());
+            PreparedStatement pstmtDeleteFromEventParticipant = con.prepareStatement(sqlDeleteFromEventParticipant);
+            pstmtDeleteFromEventParticipant.setInt(1,participant.getId());
+            pstmtDeleteFromEventParticipant.setInt(2,event.getId());
+            pstmtDeleteTicket.execute();
+            pstmtDeleteFromEventParticipant.execute();
+        }
+
+    }
     public ArrayList<String> participantsShowEventsbyId (int idParticipant) throws SQLServerException {
         ArrayList<String> eventsOfOneParticipant = new ArrayList<>();
 

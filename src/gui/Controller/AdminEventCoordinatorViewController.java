@@ -79,7 +79,7 @@ public class AdminEventCoordinatorViewController implements Initializable {
     }
 
     public void handleBack(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
         SceneSetter.setScene(nameLabel, loader);
     }
 

@@ -3,10 +3,8 @@ package gui.Controller;
 import be.Events;
 import be.TicketType;
 import bll.exception.AdminDAOException;
-import bll.exception.AdminLogicException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
-import com.jfoenix.controls.JFXButton;
 import gui.Model.CoordinatorModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,13 +42,13 @@ public class EventsController implements Initializable {
     @FXML
     private TableColumn<Events, String> eventDate;
     @FXML
-    private JFXButton btnAdd,btnAllParticipants;
+    private Button btnAdd,btnAllParticipants;
 
     @FXML
-    private JFXButton btnDelete;
+    private Button btnDelete;
 
     @FXML
-    private JFXButton btnEdit;
+    private Button btnEdit;
 
     @FXML
     private Label lblName,lblEndDate,lblLocation,lblStartDate,lblStartTime,lblNameTicket;
@@ -85,10 +83,11 @@ public class EventsController implements Initializable {
     public void updateTableView() {
         eventName.setCellValueFactory(new PropertyValueFactory<>("name"));
         eventDate.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
+        numParticipants.setCellValueFactory((new PropertyValueFactory<>("numberParticipants")));
         try {
             tableEvents.getItems().addAll(coordinatorModel.getAllEventsWithTicketType());
         } catch (EventDAOException | EventManagerException e) {
-            e.printStackTrace();
+            displayError(e);
         }
     }
     private void displayError(Throwable t) {
@@ -175,13 +174,13 @@ public class EventsController implements Initializable {
             return;
         currentEvent=tableEvents.getSelectionModel().getSelectedItem();
         FXMLLoader loaderPage = new FXMLLoader();
-        loaderPage.setLocation(getClass().getResource("/gui/View/NewEventView.fxml"));
+        loaderPage.setLocation(getClass().getResource("/gui/View/ECViews/NewEventView.fxml"));
         GridPane eventOverview = (GridPane) loaderPage.load();
         NewEventController newEventController = loaderPage.getController();
         newEventController.setOperationType("modification");
         newEventController.setValue(currentEvent);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/RootLayoutEvent.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/RootLayoutEvent.fxml"));
         Parent root = loader.load();
 
         RootLayoutEvenController rootLayoutEvenController = loader.getController();
@@ -251,7 +250,7 @@ public class EventsController implements Initializable {
     }
     @FXML
     private void showAllParticipants(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EC-allParticipantsView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/EC-allParticipantsView.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
         Scene scene = new Scene(root);

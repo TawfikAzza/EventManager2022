@@ -12,11 +12,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -24,15 +28,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ParticipantViewController implements Initializable {
 
     @FXML
-    private Button btnSearch, btnGenerateFile;
+    private Button btnSearch, btnGenerateFile,btnDeleteParticipant,btnDeleteParticicpantFromEvent;
+
+
     @FXML
     private TableColumn<Participant, String> columnFname,columnPhone,columnLname,columnFirstNamePE,columnLastNamePE,columnPhoneNumberPE;
     @FXML
@@ -86,6 +89,7 @@ public class ParticipantViewController implements Initializable {
         columnLname.setCellValueFactory(new PropertyValueFactory<>("lname"));
         columnPhone.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         try {
+            tableParticipant.getItems().clear();
             allParticipants= participantModel.getAllParticipants();
             tableParticipant.getItems().addAll(allParticipants);
         } catch (ParticipantManagerException e) {
@@ -105,13 +109,14 @@ public class ParticipantViewController implements Initializable {
         columnEventDate.setCellValueFactory(new PropertyValueFactory<>("strStartDate"));
         columnEventParticipantNumber.setCellValueFactory(new PropertyValueFactory<>("numberParticipants"));
         try {
+            tableEvent.getItems().clear();
             tableEvent.getItems().addAll(coordinatorModel.getAllEvents());
         } catch (EventManagerException e) {
             displayError(e);
         }
     }
     @FXML
-    void searchParticipant() {
+    private void searchParticipant() {
         ObservableList<Participant> searchedParticipants = FXCollections.observableArrayList();
 
         for (Participant participant:allParticipants) {
@@ -166,13 +171,13 @@ public class ParticipantViewController implements Initializable {
         alert.showAndWait();
     }
     @FXML
-    void displayEventParticipant(MouseEvent event) {
+    private void displayEventParticipant(MouseEvent event) {
         if(tableEvent.getSelectionModel().getSelectedIndex()==-1)
             return;
         updateTableParticipantByEvent(tableEvent.getSelectionModel().getSelectedItem());
     }
    @FXML
-    void toGenerateExcelFile(ActionEvent event) throws IOException {       // FILEMANAGER
+    private void toGenerateExcelFile(ActionEvent event) throws IOException {       // FILEMANAGER
         if(tableEvent.getSelectionModel().getSelectedIndex()==-1)
             return;
         Workbook workbook = eventModel.exportExcelFile(tableEvent.getSelectionModel().getSelectedItem().getId());
@@ -192,5 +197,63 @@ public class ParticipantViewController implements Initializable {
                ex.printStackTrace();
            }
        }
+    }
+
+    @FXML
+    private void editParticpant(ActionEvent event) throws IOException {
+        if(tableParticipant.getSelectionModel().getSelectedIndex()==-1)
+            return;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/NewParticipantView.fxml"));
+        Parent root = loader.load();
+        NewParticipantViewController newParticipantViewController = loader.getController();
+        newParticipantViewController.setParticipantViewController(this);
+        newParticipantViewController.setValue(tableParticipant.getSelectionModel().getSelectedItem());
+        newParticipantViewController.setOperationType("modification");
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void deleteParticipant(ActionEvent event) {
+
+    }
+    @FXML
+    void deleteParticipantFromEvent(ActionEvent event) {
+        String message = "";
+        if(tableParticipantByEvent.getSelectionModel().getSelectedIndex()==-1){
+            message += "Please select a participant to remove \n\n";
+        }
+        if(tableEvent.getSelectionModel().getSelectedIndex()==-1) {
+            message += "Please select an Event \n";
+        }
+        if(!message.equals("")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Missing information to continue");
+            alert.setHeaderText(message);
+            alert.showAndWait();
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Choose wisely...");
+        alert.setHeaderText("Are you sure you want to delete the Participant "+
+                tableParticipantByEvent.getSelectionModel().getSelectedItem().getFname()+" "+
+                tableParticipantByEvent.getSelectionModel().getSelectedItem().getLname()+" ?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                participantModel.deleteParticipantFromEvent(tableParticipantByEvent.getSelectionModel().getSelectedItem(),
+                                                            tableEvent.getSelectionModel().getSelectedItem());
+                updateEventTable();
+                tableParticipantByEvent.getItems().remove(tableParticipantByEvent.getSelectionModel().getSelectedItem());
+            } catch (ParticipantManagerException e) {
+                displayError(e);
+            }
+        } else {
+            System.out.println("button Cancel");
+            //
+        }
     }
 }
