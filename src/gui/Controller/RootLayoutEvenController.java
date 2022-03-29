@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -20,7 +19,7 @@ public class RootLayoutEvenController {
     @FXML
     void addEvent(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/View/NewEventView.fxml"));
+        loader.setLocation(getClass().getResource("/gui/View/ECViews/NewEventView.fxml"));
         GridPane personOverview = (GridPane) loader.load();
 
         // Set person overview into the center of root layout.
@@ -34,7 +33,7 @@ public class RootLayoutEvenController {
     @FXML
     void manageEvent(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/View/EventView.fxml"));
+        loader.setLocation(getClass().getResource("/gui/View/ECViews/EventView.fxml"));
         GridPane eventOverview = (GridPane) loader.load();
 
         // Set person overview into the center of root layout.
@@ -50,7 +49,7 @@ public class RootLayoutEvenController {
     @FXML
     void manageParticipants(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/View/ParticipantView.fxml"));
+        loader.setLocation(getClass().getResource("/gui/View/ECViews/ParticipantView.fxml"));
         GridPane eventOverview = (GridPane) loader.load();
 
         // Set person overview into the center of root layout.
@@ -63,7 +62,7 @@ public class RootLayoutEvenController {
 
     public void sellTicket(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/View/SellTicketView.fxml"));
+        loader.setLocation(getClass().getResource("/gui/View/ECViews/SellTicketView.fxml"));
         GridPane eventOverview = (GridPane) loader.load();
 
         // Set person overview into the center of root layout.

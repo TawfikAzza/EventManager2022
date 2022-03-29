@@ -39,7 +39,7 @@
                   <Font size="14.0" />
                </font></Label>
             <Label fx:id="loginWrongLabel" prefHeight="34.0" prefWidth="204.0" text="Your username or password does not exist" textAlignment="CENTER" textFill="#c12121" textOverrun="WORD_ELLIPSIS" visible="false" wrapText="true" />
-            <TextField fx:id="username" promptText="Username" stylesheets="@CSS/Style.css">
+            <TextField fx:id="username" promptText="Username">
                <VBox.margin>
                   <Insets bottom="7.0" top="2.0" />
                </VBox.margin>
@@ -49,7 +49,7 @@
                </styleClass>
             </TextField>
 
-            <PasswordField fx:id="password" promptText="Password" stylesheets="@CSS/Style.css">
+            <PasswordField fx:id="password" promptText="Password">
                <VBox.margin>
                   <Insets bottom="11.0" top="16.0" />
                </VBox.margin>

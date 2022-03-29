@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+<?import java.net.URL?>
+<AnchorPane onMouseClicked="#printTicket" prefHeight="240.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.TicketParticipantController">
+    <stylesheets>
+        <URL value="@../CSS/Style.css" />
+    </stylesheets>
+    <children>
+        <ImageView fitHeight="300.0" fitWidth="706.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@/Images/Ticket-Background.jpg"/>
+            </image>
+        </ImageView>
+        <Pane layoutX="613.0" prefHeight="300.0" prefWidth="86.0">
+            <children>
+                <Pane layoutX="-618.0" layoutY="247.0" prefHeight="53.0" prefWidth="715.0"
+                      style="-fx-background-color: #4882c3;"/>
+            </children>
+        </Pane>
+        <Pane prefHeight="300.0" prefWidth="153.0" style="-fx-background-color: #d2d0e6;">
+            <children>
+                <Label layoutX="15.0" layoutY="11.0" text="Name:"/>
+                <Label layoutX="14.0" layoutY="49.0" text="Location:"/>
+                <Label layoutX="14.0" layoutY="154.0" text="Description:"/>
+                <Label fx:id="lblName" layoutX="14.0" layoutY="28.0" prefHeight="20.0" prefWidth="134.0"
+                       style="-fx-background-color: #ffffff;">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="lblLocation" layoutX="14.0" layoutY="66.0" prefHeight="20.0" prefWidth="134.0"
+                       style="-fx-background-color: #ffffff;">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                </Label>
+                <TextFlow fx:id="lblDescription" layoutX="11.0" layoutY="172.0" prefHeight="116.0" prefWidth="134.0"
+                          style="-fx-background-color: #ffffff;"/>
+                <Label layoutX="14.0" layoutY="86.0" text="Start Date: "/>
+                <Label fx:id="lblStartDate" layoutX="14.0" layoutY="102.0" prefHeight="20.0" prefWidth="134.0"
+                       style="-fx-background-color: #ffffff;">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="14.0" layoutY="122.0" text="End Date: "/>
+                <Label fx:id="lblEndDate" layoutX="14.0" layoutY="138.0" prefHeight="20.0" prefWidth="134.0"
+                       style="-fx-background-color: #ffffff;">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <ImageView fx:id="imageQRCode" fitHeight="88.0" fitWidth="86.0" layoutX="600.0" layoutY="14.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@/Images/code.png"/>
+            </image>
+        </ImageView>
+        <TextFlow fx:id="lblEventName" layoutX="165.0" layoutY="102.0" prefHeight="134.0" prefWidth="527.0"
+                  textAlignment="CENTER"/>
+        <Label fx:id="lblTicketType" alignment="CENTER" contentDisplay="TOP" layoutX="151.0" layoutY="246.0"
+               prefHeight="53.0" prefWidth="555.0" text="Ticket Type" textFill="WHITE">
+            <font>
+                <Font size="36.0"/>
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

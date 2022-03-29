@@ -3,7 +3,6 @@ package gui.Controller;
 import be.Admin;
 import be.Coordinator;
 import bll.exception.AdminDAOException;
-import bll.exception.AdminLogicException;
 import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
@@ -11,13 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,7 +52,7 @@ public class AddEventCoordinatorViewController implements Initializable {
     }
 
     public void backClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
         SceneSetter.setScene(accountTypeChoiceBox, loader);
     }
 
@@ -78,7 +74,7 @@ public class AddEventCoordinatorViewController implements Initializable {
                     Coordinator coordinator = new Coordinator(loginName, password, 2, email, firstName, lastName);
                     adminModel.addLoginUser(coordinator);
                 }
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
                 SceneSetter.setScene(accountTypeChoiceBox, loader);
             } else {
                 System.out.println("Passwords do not match");

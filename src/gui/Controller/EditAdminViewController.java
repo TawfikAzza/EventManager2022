@@ -1,12 +1,9 @@
 package gui.Controller;
 
 import be.Admin;
-import be.Coordinator;
 import be.Users;
 import bll.exception.AdminDAOException;
-import bll.exception.AdminLogicException;
 import bll.utils.CurrentAdmin;
-import bll.utils.CurrentEventCoordinator;
 import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
@@ -14,12 +11,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,7 +50,7 @@ public class EditAdminViewController implements Initializable {
     }
 
     public void backClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
         SceneSetter.setScene(firstNameTextField, loader);
     }
 
@@ -73,7 +67,7 @@ public class EditAdminViewController implements Initializable {
             try {
                 adminModel.editUser(admin);
                 CurrentAdmin.setInstance(admin);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
                 SceneSetter.setScene(firstNameTextField, loader);
             } catch (AdminDAOException | IOException e) {
                 DisplayError.displayError(e);

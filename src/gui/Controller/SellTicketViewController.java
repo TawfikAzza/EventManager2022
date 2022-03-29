@@ -144,7 +144,7 @@ public class SellTicketViewController implements Initializable {
     }
     @FXML
     void createParticipant(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/NewParticipantView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/NewParticipantView.fxml"));
         Parent root = loader.load();
         NewParticipantViewController newParticipantViewController = loader.getController();
         newParticipantViewController.setSellTicketViewController(this);
@@ -203,7 +203,7 @@ public class SellTicketViewController implements Initializable {
         ticketTypeSold = tableTicket.getSelectionModel().getSelectedItem();
         //END TEST PART*/
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/TicketParticipant.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/TicketParticipant.fxml"));
         Parent root = loader.load();
         TicketParticipantController ticketParticipantController = loader.getController();
         AnchorPane anchorPane = (AnchorPane) root;
