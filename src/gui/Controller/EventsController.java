@@ -5,6 +5,8 @@ import be.TicketType;
 import bll.exception.AdminDAOException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
+import bll.utils.DisplayError;
+import bll.utils.SceneSetter;
 import gui.Model.CoordinatorModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -169,26 +171,33 @@ public class EventsController implements Initializable {
     }
 
     @FXML
-    void editEvent(ActionEvent event) throws IOException {
+    void editEvent(ActionEvent event) {
         if(tableEvents.getSelectionModel().getSelectedIndex()==-1)
             return;
         currentEvent=tableEvents.getSelectionModel().getSelectedItem();
         FXMLLoader loaderPage = new FXMLLoader();
         loaderPage.setLocation(getClass().getResource("/gui/View/ECViews/NewEventView.fxml"));
-        GridPane eventOverview = (GridPane) loaderPage.load();
-        NewEventController newEventController = loaderPage.getController();
-        newEventController.setOperationType("modification");
-        newEventController.setValue(currentEvent);
+        GridPane eventOverview = null;
+        try {
+            eventOverview = (GridPane) loaderPage.load();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/RootLayoutEvent.fxml"));
-        Parent root = loader.load();
+            NewEventController newEventController = loaderPage.getController();
+            newEventController.setOperationType("modification");
+            newEventController.setValue(currentEvent);
 
-        RootLayoutEvenController rootLayoutEvenController = loader.getController();
-        rootLayoutEvenController.setCenter(eventOverview);
-        Scene scene = new Scene(root,800,600);
-        Stage primaryStage = (Stage) btnEdit.getScene().getWindow();
-        primaryStage.setScene(scene);
-        primaryStage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/RootLayoutEvent.fxml"));
+            Parent root = loader.load();
+
+            RootLayoutEvenController rootLayoutEvenController = loader.getController();
+            rootLayoutEvenController.setCenter(eventOverview);
+            Scene scene = new Scene(root, 800, 600);
+            Stage primaryStage = (Stage) btnEdit.getScene().getWindow();
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        catch (IOException e) {
+            DisplayError.displayError(e);
+        }
     }
 
     @FXML
@@ -250,13 +259,17 @@ public class EventsController implements Initializable {
     }
     @FXML
     private void showAllParticipants(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/EC-allParticipantsView.fxml"));
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/EC-allParticipantsView.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
 
         stage.show();
+
+         */
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/EC-allParticipantsView.fxml"));
+        SceneSetter.setScene(topPane, loader);
     }
 
     public void setMainApp(RootLayoutEvenController rootLayoutEvenController) {

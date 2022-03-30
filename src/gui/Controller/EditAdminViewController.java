@@ -56,7 +56,7 @@ public class EditAdminViewController implements Initializable {
         setFields(admin);
     }
 
-    public void backClick(ActionEvent actionEvent) throws IOException {
+    public void backClick(ActionEvent actionEvent) {
         AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
         loader.setController(controller);
@@ -79,7 +79,7 @@ public class EditAdminViewController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
                 loader.setController(controller);
                 SceneSetter.setScene(firstNameTextField, loader);
-            } catch (AdminDAOException | IOException e) {
+            } catch (AdminDAOException e) {
                 DisplayError.displayError(e);
             }
         }

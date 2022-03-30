@@ -2,6 +2,8 @@ package gui.Controller;
 
 import be.Users;
 import bll.MainManager;
+import bll.utils.DisplayError;
+import bll.utils.SceneSetter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,25 +21,24 @@ public class MainController {
     public TextField username;
     public Label loginWrongLabel;
     public MainManager mainManager = new MainManager() ;
-    public void openEventMgr() throws IOException {
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EventView.fxml"));
+    public void openEventMgr() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/RootLayoutEvent.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root,800,600);
-        stage.setScene(scene);
-        stage.show();
-        closeWindow();
+        SceneSetter.setScene(password ,loader);
+        try {
+            closeWindow();
+        } catch (IOException e) {
+            DisplayError.displayError(e);
+        }
     }
 
-    public void openAdminMgr() throws IOException {
+    public void openAdminMgr() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        closeWindow();
+        SceneSetter.setScene(password ,loader);
+        try {
+            closeWindow();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
     public void closeWindow() throws IOException {

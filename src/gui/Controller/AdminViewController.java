@@ -38,15 +38,9 @@ public class AdminViewController implements Initializable {
     @FXML
     private TableColumn<Events, String> tableColumnEventName;
     @FXML
-    private TableColumn<Coordinator, String> tableColumnNumberOfEvents;
-    @FXML
-    private TableColumn<Events, String> tableColumnNumberOfCoordinators;
-    @FXML
     private TableView<Events> eventTableView;
     @FXML
     private TableView<Coordinator> coordinatorTableView;
-    @FXML
-    private Button newCoordinatorBtn;
 
     private AdminModel adminModel;
     private EventModel eventmodel;
@@ -71,19 +65,17 @@ public class AdminViewController implements Initializable {
 
         this.tableColumnEventName.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.tableColumnEventDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        //this.tableColumnNumberOfCoordinators.setCellValueFactory(new PropertyValueFactory<>("Number of Events"));
 
         this.tableColumnFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         this.tableColumnLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        //this.tableColumnNumberOfEvents.setCellValueFactory(new PropertyValueFactory<>());
     }
 
-    public void handleNewClick(ActionEvent actionEvent) throws IOException {
+    public void handleNewClick(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AddEventCoordinatorView.fxml"));
         SceneSetter.setScene(adminTableView, loader);
     }
 
-    public void handleCoordinatorClick(MouseEvent mouseEvent) throws IOException {
+    public void handleCoordinatorClick(MouseEvent mouseEvent) {
         Coordinator coordinator = coordinatorTableView.getSelectionModel().getSelectedItem();
         if(coordinator!=null)
         {
@@ -96,7 +88,7 @@ public class AdminViewController implements Initializable {
         }
     }
 
-    public void handleAdminClick(MouseEvent mouseEvent) throws IOException {
+    public void handleAdminClick(MouseEvent mouseEvent) {
         Admin admin = adminTableView.getSelectionModel().getSelectedItem();
         if(admin!=null)
         {

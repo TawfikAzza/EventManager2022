@@ -55,7 +55,7 @@ public class EditEventCoordinatorViewController implements Initializable {
         setFields(eventCoordinator);
     }
 
-    public void backClick(ActionEvent actionEvent) throws IOException {
+    public void backClick(ActionEvent actionEvent) {
         AdminEventCoordinatorViewController controller = new AdminEventCoordinatorViewController(eventCoordinator);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
         loader.setController(controller);
@@ -76,7 +76,7 @@ public class EditEventCoordinatorViewController implements Initializable {
                 adminModel.editUser(coordinator);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
                 SceneSetter.setScene(firstNameTextField, loader);
-            } catch (AdminDAOException | IOException e) {
+            } catch (AdminDAOException e) {
                 DisplayError.displayError(e);
             }
         }

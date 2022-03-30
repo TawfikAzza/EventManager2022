@@ -3,6 +3,7 @@ package gui.Controller;
 import be.Events;
 import be.Participant;
 import bll.exception.*;
+import bll.utils.DisplayError;
 import gui.Model.CoordinatorModel;
 import gui.Model.EventModel;
 import gui.Model.ParticipantModel;
@@ -200,20 +201,24 @@ public class ParticipantViewController implements Initializable {
     }
 
     @FXML
-    private void editParticpant(ActionEvent event) throws IOException {
-        if(tableParticipant.getSelectionModel().getSelectedIndex()==-1)
-            return;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/NewParticipantView.fxml"));
-        Parent root = loader.load();
-        NewParticipantViewController newParticipantViewController = loader.getController();
-        newParticipantViewController.setParticipantViewController(this);
-        newParticipantViewController.setValue(tableParticipant.getSelectionModel().getSelectedItem());
-        newParticipantViewController.setOperationType("modification");
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.show();
+    private void editParticpant(ActionEvent event) {
+        try {
+            if (tableParticipant.getSelectionModel().getSelectedIndex() == -1)
+                return;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/NewParticipantView.fxml"));
+            Parent root = loader.load();
+            NewParticipantViewController newParticipantViewController = loader.getController();
+            newParticipantViewController.setParticipantViewController(this);
+            newParticipantViewController.setValue(tableParticipant.getSelectionModel().getSelectedItem());
+            newParticipantViewController.setOperationType("modification");
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e) {
+            DisplayError.displayError(e);}
     }
 
     @FXML

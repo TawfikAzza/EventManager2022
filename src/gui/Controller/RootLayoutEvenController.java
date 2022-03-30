@@ -1,5 +1,6 @@
 package gui.Controller;
 
+import bll.utils.DisplayError;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,21 +18,27 @@ public class RootLayoutEvenController {
     private Button btnAdd;
 
     @FXML
-    void addEvent(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/View/ECViews/NewEventView.fxml"));
-        GridPane personOverview = (GridPane) loader.load();
+    void addEvent(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/gui/View/ECViews/NewEventView.fxml"));
+            GridPane personOverview = (GridPane) loader.load();
 
-        // Set person overview into the center of root layout.
-        topPane.setCenter(personOverview);
+            // Set person overview into the center of root layout.
+            topPane.setCenter(personOverview);
 
-        // Give the controller access to the main app.
-        NewEventController controller = loader.getController();
-        controller.setMainApp(this);
+            // Give the controller access to the main app.
+            NewEventController controller = loader.getController();
+            controller.setMainApp(this);
+        }
+        catch (IOException e) {
+            DisplayError.displayError(e);}
+
     }
 
     @FXML
-    void manageEvent(ActionEvent event) throws IOException {
+    void manageEvent(ActionEvent event){
+        try {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/View/ECViews/EventView.fxml"));
         GridPane eventOverview = (GridPane) loader.load();
@@ -42,34 +49,44 @@ public class RootLayoutEvenController {
         // Give the controller access to the main app.
         EventsController controller = loader.getController();
         controller.setMainApp(this);
+        }
+        catch (IOException e) {
+            DisplayError.displayError(e);}
     }
     public void setCenter(GridPane gridPane) {
         topPane.setCenter(gridPane);
     }
     @FXML
-    void manageParticipants(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/View/ECViews/ParticipantView.fxml"));
-        GridPane eventOverview = (GridPane) loader.load();
+    void manageParticipants(ActionEvent event) {
+        try {
 
-        // Set person overview into the center of root layout.
-        topPane.setCenter(eventOverview);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/gui/View/ECViews/ParticipantView.fxml"));
+            GridPane eventOverview = (GridPane) loader.load();
 
-        // Give the controller access to the main app.
-        ParticipantViewController controller = loader.getController();
-        controller.setMainApp(this);
+            // Set person overview into the center of root layout.
+            topPane.setCenter(eventOverview);
+
+            // Give the controller access to the main app.
+            ParticipantViewController controller = loader.getController();
+            controller.setMainApp(this);
+        }
+        catch (IOException e) {DisplayError.displayError(e);}
     }
 
-    public void sellTicket(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/View/ECViews/SellTicketView.fxml"));
-        GridPane eventOverview = (GridPane) loader.load();
+    public void sellTicket(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/gui/View/ECViews/SellTicketView.fxml"));
+            GridPane eventOverview = (GridPane) loader.load();
 
-        // Set person overview into the center of root layout.
-        topPane.setCenter(eventOverview);
+            // Set person overview into the center of root layout.
+            topPane.setCenter(eventOverview);
 
-        // Give the controller access to the main app.
-        SellTicketViewController controller = loader.getController();
-        controller.setMainApp(this);
+            // Give the controller access to the main app.
+            SellTicketViewController controller = loader.getController();
+            controller.setMainApp(this);
+        }
+        catch (IOException e) {DisplayError.displayError(e);}
     }
 }
