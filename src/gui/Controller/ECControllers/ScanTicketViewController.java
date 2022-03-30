@@ -1,4 +1,4 @@
-package gui.Controller;
+package gui.Controller.ECControllers;
 
 import bll.utils.WebCamService;
 import bll.utils.WebCamView;
