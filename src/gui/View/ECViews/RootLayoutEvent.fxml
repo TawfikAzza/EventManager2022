@@ -11,7 +11,7 @@
 <?import java.net.URL?>
 <BorderPane fx:id="topPane" prefHeight="619.0" prefWidth="103.0" styleClass="anchor02"
             xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="gui.Controller.RootLayoutEvenController">
+            fx:controller="gui.Controller.ECControllers.RootLayoutEvenController">
     <stylesheets>
         <URL value="@../CSS/Style.css"/>
     </stylesheets>

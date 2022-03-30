@@ -13,7 +13,7 @@
 <?import java.net.URL?>
 <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
           prefHeight="308.0" prefWidth="440.0" styleClass="anchor02" xmlns="http://javafx.com/javafx/17"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.EditEventCoordinatorViewController">
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AdminControllers.EditEventCoordinatorViewController">
     <stylesheets>
         <URL value="@../CSS/Style.css"/>
     </stylesheets>
