@@ -145,8 +145,9 @@ public class TicketParticipantController implements Initializable {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
 
         //Prompt user to select a file
-        File file = fileChooser.showSaveDialog(null);
-
+        //File file = fileChooser.showSaveDialog(null);
+        String fileName = "resources/TempTickets/"+ticketSold.getTicketNumber()+".png";
+        File file = new File(fileName);
         if(file != null){
             try {
                 //Pad the capture area
@@ -156,6 +157,7 @@ public class TicketParticipantController implements Initializable {
                 RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
                 //Write the snapshot to the chosen file
                 ImageIO.write(renderedImage, "png", file);
+
             } catch (IOException ex) { ex.printStackTrace(); }
         }
     }
@@ -211,7 +213,8 @@ public class TicketParticipantController implements Initializable {
         //C:\Users\deaso>"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE" /m "cchesberg@gmail.com" /c ipm.note /a "c:\Users\deaso\random.dat
 
         try {
-            rt.exec(new String[]{"cmd.exe","/c", outlook, "/m", "cchesberg@gmail.com?subject=Ticket_Email", "/a", "c:\\Users\\deaso\\random.dat"});
+            String attachment = "resources/TempTickets/"+ticketSold.getTicketNumber()+".png";
+            rt.exec(new String[]{"cmd.exe","/c", outlook, "/m", "cchesberg@gmail.com?subject=Ticket_Email", "/a", attachment});
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
