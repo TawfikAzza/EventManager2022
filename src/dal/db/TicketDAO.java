@@ -94,15 +94,17 @@ public class TicketDAO {
         Ticket ticketCreated = null;
         try (Connection con = cm.getConnection()) {
 
-            String sqlInsert = "INSERT INTO Ticket VALUES (?,?)";
+            String sqlInsert = "INSERT INTO Ticket VALUES (?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1,ticket.getTicketNumber());
             pstmt.setInt(2,ticket.getTicketTypeID());
+            pstmt.setBoolean(3,true);
             ResultSet rs = pstmt.executeQuery();
             if(rs.next()) {
                 ticketCreated = new Ticket(rs.getInt(1), ticket.getTicketNumber(),ticket.getTicketTypeID());
             }
         }
+        System.out.println("In TicketDAO: addTicketSold");
         return ticketCreated;
     }
     public TicketType getTicketTypeFromTicket(String ticketNumber) throws SQLException {
