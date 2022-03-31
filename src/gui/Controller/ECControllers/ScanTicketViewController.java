@@ -1,5 +1,8 @@
 package gui.Controller.ECControllers;
 
+import bll.EventManager;
+import bll.exception.EventManagerException;
+import bll.utils.DisplayError;
 import bll.utils.WebCamService;
 import bll.utils.WebCamView;
 import com.github.sarxos.webcam.Webcam;
@@ -37,15 +40,20 @@ public class ScanTicketViewController implements Initializable {
 
     private WebCamService service ;
     private Webcam cam;
-
+    private EventManager eventManager;
 
     public ScanTicketViewController() {
-
+        try {
+            eventManager = new EventManager();
+        } catch (EventManagerException e) {
+            DisplayError.displayError(e);
+        }
         // note this is in init as it **must not** be called on the FX Application Thread:
         ObservableList<Webcam> listCam = FXCollections.observableArrayList();
         cam = Webcam.getWebcams().get(0);
 
         service = new WebCamService(cam);
+
         //setComboCam();
     }
 
@@ -92,21 +100,18 @@ public class ScanTicketViewController implements Initializable {
             public void run() {
                 Result result = null;
                 BufferedImage image = null;
+                boolean isValidTicket=true;
                 do {
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        DisplayError.displayError(e);
                     }
 
-
-
                     if (cam.isOpen()) {
-
                         if ((image = cam.getImage()) == null) {
                             continue;
                         }
-
                         LuminanceSource source = new BufferedImageLuminanceSource(image);
                         BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 
@@ -119,9 +124,22 @@ public class ScanTicketViewController implements Initializable {
 
                     if (result != null) {
                         txtCode.setText(result.getText());
+
+                        try {
+                            isValidTicket = eventManager.validTicketScan(result.getText());
+                            if(isValidTicket) {
+                                txtCode.setText("Ticket Valid");
+                            }
+                            if(!isValidTicket)
+                                txtCode.setText("Ticket not valid");
+                            Thread.sleep(3000);
+                        } catch (InterruptedException | EventManagerException e) {
+                            DisplayError.displayError(e);
+                        }
+                        result=null;
                     }
 
-                } while (result==null);
+                } while (true);
             }
         };
         thread.setDaemon(true);

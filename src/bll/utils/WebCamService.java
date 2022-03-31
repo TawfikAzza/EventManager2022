@@ -43,9 +43,9 @@ public class WebCamService extends Service<Image> {
                             updateValue(SwingFXUtils.toFXImage(bimg, null));
                         }
                     }
-                    System.out.println("Cancelled, closing cam");
+                   // System.out.println("Cancelled, closing cam");
                     cam.close();
-                    System.out.println("Cam closed");
+                  //  System.out.println("Cam closed");
                     return getValue();
                 } finally {
                     cam.close();
