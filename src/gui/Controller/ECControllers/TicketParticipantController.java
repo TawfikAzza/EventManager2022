@@ -115,6 +115,7 @@ public class TicketParticipantController implements Initializable {
             alert.setHeaderText("Print/Save Ticket");
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.OK) {
+                captureAndSaveDisplay();
                 openOutlook();
                 job.showPrintDialog(stagePrint);
             } else {
