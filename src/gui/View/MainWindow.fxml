@@ -35,10 +35,7 @@
                 </ImageView>
 
 
-                <Label prefHeight="18.0" prefWidth="37.0" text="Login">
-                    <font>
-                        <Font size="14.0"/>
-                    </font>
+                <Label prefHeight="18.0" prefWidth="37.0" text="Login" style="-fx-font-size: 15px">
                 </Label>
                 <Label fx:id="loginWrongLabel" prefHeight="34.0" prefWidth="204.0"
                        text="Your username or password does not exist" textAlignment="CENTER" textFill="#C12121"

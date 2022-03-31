@@ -16,5 +16,6 @@
     <orderEntry type="library" name="apache.poi.ooxml" level="project" />
     <orderEntry type="library" name="jfoenix" level="project" />
     <orderEntry type="library" name="github.sarxos.webcam.capture" level="project" />
+    <orderEntry type="library" name="de.jensd.fontawesomefx.commons" level="project" />
   </component>
 </module>
