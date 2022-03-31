@@ -23,6 +23,16 @@ public class ParticipantManager {
             throw new ParticipantManagerException("Error while getting the list of participants",e);
         }
     }
+
+    public void deleteParticipant(Participant participant) throws ParticipantManagerException {
+        try {
+            participantDAO.deleteParticipant(participant);
+        } catch (SQLException e) {
+            throw new ParticipantManagerException("Error while removing participant",e);
+        }
+    }
+
+
     public ArrayList<String> participantsShowEventsbyId (int idParticipant) throws ParticipantManagerException {
         try {
             return participantDAO.participantsShowEventsbyId(idParticipant);

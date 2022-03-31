@@ -92,7 +92,7 @@ public class NewEventController implements Initializable {
                 for(TicketType ticket:lstTickets.getItems())
                     if(ticket.getType()!=null)
                         currentEvent.getTicketAvailable().add(ticket);
-
+                System.out.println();
                 currentEvent.setName(txtName.getText());
                 currentEvent.setStartDate(getStartDate());
                 currentEvent.setEndDate(getEndDate());

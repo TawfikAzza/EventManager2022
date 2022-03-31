@@ -17,12 +17,15 @@ public class ParticipantDAO {
         ArrayList<Participant> allParticipants = new ArrayList<>();
 
         try (Connection con = cm.getConnection()) {
-            String sql ="SELECT * FROM Participant";
+            String sql ="SELECT * FROM Participant WHERE fname != ? AND lname != ? AND phoneNumber != ? AND email != ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, "ANONYMOUS");
+            pstmt.setString(2, "ANONYMOUS");
+            pstmt.setString(3, "00000000");
+            pstmt.setString(4, "ANONYMOUS");
             ResultSet rs = pstmt.executeQuery();
 
-            while(rs.next())
-            {
+            while(rs.next()) {
                 Participant participant = new Participant(rs.getInt("id"),
                         rs.getString("fname"),
                         rs.getString("lname"),
@@ -76,12 +79,17 @@ public class ParticipantDAO {
             pstmt.execute();
         }
     }
-    public void deleteParticipant(Participant participant) throws Exception{
+    public void deleteParticipant(Participant participant) throws  SQLException {
         try (Connection con = cm.getConnection()) {
-            String sql = "DELETE FROM Participant WHERE id = ?";
+            String sql = "UPDATE Participant SET fname = ?, lname = ?, phoneNumber = ?, email = ? WHERE id = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
 
-            pstmt.setInt(1, participant.getId());
+            pstmt.setString(1, "ANONYMOUS");
+            pstmt.setString(2, "ANONYMOUS");
+            pstmt.setString(3, "00000000");
+            pstmt.setString(4, "ANONYMOUS");
+            pstmt.setInt(5, participant.getId());
+
             pstmt.execute();
 
         }

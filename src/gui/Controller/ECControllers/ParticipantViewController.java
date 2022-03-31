@@ -3,6 +3,7 @@ package gui.Controller.ECControllers;
 import be.Events;
 import be.Participant;
 import bll.exception.*;
+import bll.utils.DisplayError;
 import gui.Controller.ECControllers.NewParticipantViewController;
 import gui.Controller.ECControllers.RootLayoutEvenController;
 import gui.Model.CoordinatorModel;
@@ -114,7 +115,7 @@ public class ParticipantViewController implements Initializable {
             tableEvent.getItems().clear();
             tableEvent.getItems().addAll(coordinatorModel.getAllEvents());
         } catch (EventManagerException e) {
-            displayError(e);
+            DisplayError.displayError(e);
         }
     }
     @FXML
@@ -155,7 +156,7 @@ public class ParticipantViewController implements Initializable {
             listEvents = coordinatorModel.getParticipantEvent(participant);
             lstEventParticipant.getItems().addAll(listEvents);
         } catch (EventManagerException e) {
-            displayError(e);
+            DisplayError.displayError(e);
         }
     }
     public void displayParticipant(MouseEvent mouseEvent) {
@@ -166,12 +167,7 @@ public class ParticipantViewController implements Initializable {
         setListViewEvents(currentParticipant);
     }
 
-    private void displayError(Throwable t) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Something went wrong...");
-        alert.setHeaderText(t.getMessage());
-        alert.showAndWait();
-    }
+
     @FXML
     private void displayEventParticipant(MouseEvent event) {
         if(tableEvent.getSelectionModel().getSelectedIndex()==-1)
@@ -220,7 +216,14 @@ public class ParticipantViewController implements Initializable {
 
     @FXML
     private void deleteParticipant(ActionEvent event) {
-
+        if(tableParticipant.getSelectionModel().getSelectedIndex()==-1)
+            return;
+        try {
+            participantModel.deleteParticipant(tableParticipant.getSelectionModel().getSelectedItem());
+            updateTableParticipant();
+        } catch (ParticipantManagerException e) {
+            DisplayError.displayError(e);
+        }
     }
     @FXML
     void deleteParticipantFromEvent(ActionEvent event) {
@@ -251,7 +254,7 @@ public class ParticipantViewController implements Initializable {
                 updateEventTable();
                 tableParticipantByEvent.getItems().remove(tableParticipantByEvent.getSelectionModel().getSelectedItem());
             } catch (ParticipantManagerException e) {
-                displayError(e);
+                DisplayError.displayError(e);
             }
         } else {
             System.out.println("button Cancel");

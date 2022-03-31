@@ -50,4 +50,8 @@ public class ParticipantModel {
     public void deleteParticipantFromEvent(Participant participant, Events event) throws ParticipantManagerException {
         participantManager.deleteParticipantFromEvent(participant, event);
     }
+
+    public void deleteParticipant(Participant selectedParticipant) throws ParticipantManagerException {
+        participantManager.deleteParticipant(selectedParticipant);
+    }
 }
