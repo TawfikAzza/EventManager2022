@@ -4,15 +4,11 @@ import be.Events;
 import be.Participant;
 import be.Ticket;
 import be.TicketType;
-import bll.exception.ParticipantManagerException;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,8 +16,6 @@ import javafx.print.PageLayout;
 import javafx.print.PageOrientation;
 import javafx.print.Paper;
 import javafx.print.PrinterJob;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,17 +26,15 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import javax.imageio.ImageIO;
-import javax.print.attribute.standard.OrientationRequested;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TicketParticipantController implements Initializable {
 
@@ -123,6 +115,7 @@ public class TicketParticipantController implements Initializable {
             alert.setHeaderText("Print/Save Ticket");
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.OK) {
+                openOutlook();
                 job.showPrintDialog(stagePrint);
             } else {
                 /*FileChooser fileChooser = new FileChooser();
@@ -169,4 +162,63 @@ public class TicketParticipantController implements Initializable {
     public void setAnchorPane(AnchorPane anchorPane) {
         this.anchorPane=anchorPane;
     }
+
+    public String getOutlook() {
+        try {
+            Process p = Runtime.getRuntime()
+                    .exec(new String[]{"cmd.exe", "/c", "assoc", ".pst"});
+            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String extensionType = input.readLine();
+            input.close();
+            // extract type
+            if (extensionType == null) {
+                outlookNotFoundMessage("File type PST not associated with Outlook.");
+            } else {
+                String fileType[] = extensionType.split("=");
+
+                p = Runtime.getRuntime().exec(
+                        new String[]{"cmd.exe", "/c", "ftype", fileType[1]});
+                input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                String fileAssociation = input.readLine();
+                // extract path
+                Pattern pattern = Pattern.compile("\".*?\"");
+                Matcher m = pattern.matcher(fileAssociation);
+                if (m.find()) {
+                    String outlookPath = m.group(0);
+                    System.out.println(outlookPath);
+                    return outlookPath;
+                } else {
+                    outlookNotFoundMessage("Error parsing PST file association");
+                }
+            }
+
+        } catch (Exception err) {
+            err.printStackTrace();
+            outlookNotFoundMessage(err.getMessage());
+        }
+        return null;
+    }
+
+    private static void outlookNotFoundMessage(String errorMessage) {
+        System.out.println("Could not find Outlook: \n" + errorMessage);
+    }
+
+    public void openOutlook()
+    {
+
+        String outlook = getOutlook();
+        Runtime rt = Runtime.getRuntime();
+        //C:\Users\deaso>"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE" /m "cchesberg@gmail.com" /c ipm.note /a "c:\Users\deaso\random.dat
+
+        try {
+            rt.exec(new String[]{"cmd.exe","/c", outlook, "/m", "cchesberg@gmail.com?subject=Ticket_Email", "/a", "c:\\Users\\deaso\\random.dat"});
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }
+
+
+
