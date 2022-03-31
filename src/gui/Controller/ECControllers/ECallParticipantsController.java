@@ -1,4 +1,4 @@
-package gui.Controller;
+package gui.Controller.ECControllers;
 
 import be.Participant;
 import bll.exception.ParticipantManagerException;

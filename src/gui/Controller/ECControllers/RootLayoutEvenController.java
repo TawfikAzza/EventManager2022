@@ -1,4 +1,4 @@
-package gui.Controller;
+package gui.Controller.ECControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,5 +71,15 @@ public class RootLayoutEvenController {
         // Give the controller access to the main app.
         SellTicketViewController controller = loader.getController();
         controller.setMainApp(this);
+    }
+
+    @FXML
+    void scanTicket(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/gui/View/ECViews/ScanTicketView.fxml"));
+        GridPane eventOverview = (GridPane) loader.load();
+
+        // Set person overview into the center of root layout.
+        topPane.setCenter(eventOverview);
     }
 }

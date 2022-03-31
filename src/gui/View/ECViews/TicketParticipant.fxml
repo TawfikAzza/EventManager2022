@@ -10,7 +10,7 @@
 
 <?import java.net.URL?>
 <AnchorPane onMouseClicked="#printTicket" prefHeight="240.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.TicketParticipantController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ECControllers.TicketParticipantController">
     <stylesheets>
         <URL value="@../CSS/Style.css" />
     </stylesheets>

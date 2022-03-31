@@ -1,8 +1,10 @@
-package gui.Controller;
+package gui.Controller.ECControllers;
 
 import be.Events;
 import be.Participant;
 import bll.exception.*;
+import gui.Controller.ECControllers.NewParticipantViewController;
+import gui.Controller.ECControllers.RootLayoutEvenController;
 import gui.Model.CoordinatorModel;
 import gui.Model.EventModel;
 import gui.Model.ParticipantModel;

@@ -30,7 +30,7 @@ public class TicketDAO {
            pstmt.executeBatch();
         }
     }
-    public void updateEventTicket(Events event) throws Exception {
+    public void updateEventTicketType(Events event) throws Exception {
         HashMap<Integer,Integer> mapTicket = new HashMap<>();
         HashMap<Integer, TicketType> ticketListReceived = new HashMap<>();
         HashMap<Integer, TicketType> ticketListDB = new HashMap<>();
@@ -94,15 +94,55 @@ public class TicketDAO {
         Ticket ticketCreated = null;
         try (Connection con = cm.getConnection()) {
 
-            String sqlInsert = "INSERT INTO Ticket VALUES (?,?)";
+            String sqlInsert = "INSERT INTO Ticket VALUES (?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1,ticket.getTicketNumber());
             pstmt.setInt(2,ticket.getTicketTypeID());
+            pstmt.setBoolean(3,true);
             ResultSet rs = pstmt.executeQuery();
             if(rs.next()) {
                 ticketCreated = new Ticket(rs.getInt(1), ticket.getTicketNumber(),ticket.getTicketTypeID());
             }
         }
+        System.out.println("In TicketDAO: addTicketSold");
         return ticketCreated;
+    }
+    public TicketType getTicketTypeFromTicket(String ticketNumber) throws SQLException {
+        TicketType ticketTypeSearched = null;
+        try (Connection con = cm.getConnection()) {
+
+            String sql = "SELECT TicketType.id as id, TicketType.typeName as typeName, TicketType.benefit as benefit " +
+                         " FROM TicketType INNER JOIN Ticket ON TicketType.id = Ticket.ticketTypeID " +
+                         " WHERE Ticket.ticketNumber = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1,ticketNumber);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()) {
+                ticketTypeSearched = new TicketType(rs.getInt("id"),
+                                                    rs.getString("typeName"),
+                                                    rs.getString("benefit"));
+            }
+        }
+        return ticketTypeSearched;
+    }
+    public boolean validTicketScan(String ticketNumber) throws SQLException {
+        boolean isTicketValid = false;
+        try (Connection con = cm.getConnection()) {
+            isTicketValid = false;
+            String sqlCheck = "SELECT valid FROM Ticket WHERE ticketNumber = ?";
+            String sqlUpdate = "UPDATE Ticket set valid = 0 WHERE ticketNumber = ?";
+            PreparedStatement pstmtCheck = con.prepareStatement(sqlCheck);
+            PreparedStatement pstmtUpdate = con.prepareStatement(sqlUpdate);
+            pstmtCheck.setString(1,ticketNumber);
+            pstmtUpdate.setString(1,ticketNumber);
+            ResultSet rsCheck = pstmtCheck.executeQuery();
+            while(rsCheck.next()) {
+                isTicketValid = rsCheck.getBoolean("valid");
+            }
+            if(isTicketValid) {
+                pstmtUpdate.execute();
+            }
+        }
+        return isTicketValid;
     }
 }

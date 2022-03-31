@@ -53,7 +53,7 @@ public class EventManager {
     public void updateEvent(Events event) throws EventManagerException {
         try {
             eventDAO.updateEvent(event);
-            ticketDAO.updateEventTicket(event);
+            ticketDAO.updateEventTicketType(event);
         } catch (Exception e) {
             throw new EventManagerException("Error while updating the Event in database", e);
         }
@@ -87,6 +87,14 @@ public class EventManager {
 
         } catch (SQLException e) {
             throw new EventManagerException("Error while creating the ticket in the database! ", e);
+        }
+    }
+
+    public boolean validTicketScan(String text) throws EventManagerException {
+        try {
+            return ticketDAO.validTicketScan(text);
+        } catch (SQLException e) {
+            throw new EventManagerException("Error while scanning the ticket ! ", e);
         }
     }
 }

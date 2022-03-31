@@ -13,7 +13,7 @@
 
 <GridPane prefHeight="220.0" prefWidth="540.0" styleClass="anchor02" stylesheets="@../CSS/Style.css"
           xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="gui.Controller.NewParticipantViewController">
+          fx:controller="gui.Controller.ECControllers.NewParticipantViewController">
     <stylesheets>
         <URL value="@../CSS/Style.css" />
     </stylesheets>
