@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" styleClass="anchor02" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.RootLayoutEvenController">
+<BorderPane fx:id="topPane" prefHeight="619.0" prefWidth="103.0" styleClass="anchor02" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ECControllers.RootLayoutEvenController">
     <stylesheets>
         <URL value="@../CSS/Style.css" />
     </stylesheets>
@@ -76,6 +76,7 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
+            <Button fx:id="btnScan" mnemonicParsing="false" onAction="#scanTicket" prefHeight="118.0" prefWidth="124.0" text="Scan Ticket" />
             </children>
         </VBox>
     </left>

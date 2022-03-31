@@ -15,5 +15,6 @@
     <orderEntry type="library" name="apache.poi.ooxml.schemas" level="project" />
     <orderEntry type="library" name="apache.poi.ooxml" level="project" />
     <orderEntry type="library" name="jfoenix" level="project" />
+    <orderEntry type="library" name="github.sarxos.webcam.capture" level="project" />
   </component>
 </module>

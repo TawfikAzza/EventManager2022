@@ -251,6 +251,7 @@ public class EventDAO implements IEventDAO {
             pstmt.setInt(1,eventChosen.getId());
             pstmt.setInt(2,participant.getId());
             pstmt.setInt(3,ticketSold.getId());
+            System.out.println("In AddParticipantToEvent");
             pstmt.execute();
         }
     }

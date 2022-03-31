@@ -14,7 +14,7 @@
 <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
           prefHeight="308.0" prefWidth="440.0" styleClass="anchor02" stylesheets="@../CSS/Style.css"
           xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="gui.Controller.EditAdminViewController">
+          fx:controller="gui.Controller.AdminControllers.EditAdminViewController">
     <stylesheets>
         <URL value="@../CSS/Style.css" />
     </stylesheets>

@@ -1,4 +1,4 @@
-package gui.Controller;
+package gui.Controller.ECControllers;
 
 import bll.utils.DisplayError;
 import javafx.event.ActionEvent;
@@ -88,5 +88,15 @@ public class RootLayoutEvenController {
             controller.setMainApp(this);
         }
         catch (IOException e) {DisplayError.displayError(e);}
+    }
+
+    @FXML
+    void scanTicket(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/gui/View/ECViews/ScanTicketView.fxml"));
+        GridPane eventOverview = (GridPane) loader.load();
+
+        // Set person overview into the center of root layout.
+        topPane.setCenter(eventOverview);
     }
 }

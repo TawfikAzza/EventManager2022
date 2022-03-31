@@ -1,4 +1,4 @@
-package gui.Controller;
+package gui.Controller.AdminControllers;
 
 import be.Coordinator;
 import bll.exception.AdminDAOException;
