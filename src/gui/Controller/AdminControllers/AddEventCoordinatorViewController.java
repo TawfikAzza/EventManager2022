@@ -51,7 +51,7 @@ public class AddEventCoordinatorViewController implements Initializable {
         }
     }
 
-    public void backClick(ActionEvent actionEvent) throws IOException {
+    public void backClick(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
         SceneSetter.setScene(accountTypeChoiceBox, loader);
     }
@@ -79,7 +79,7 @@ public class AddEventCoordinatorViewController implements Initializable {
             } else {
                 System.out.println("Passwords do not match");
             }
-        } catch (AdminDAOException | IOException e) {
+        } catch (AdminDAOException e) {
             DisplayError.displayError(e);
         }
 

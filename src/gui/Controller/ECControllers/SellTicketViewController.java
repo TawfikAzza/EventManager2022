@@ -5,6 +5,7 @@ import be.Participant;
 import be.Ticket;
 import be.TicketType;
 import bll.exception.*;
+import bll.utils.DisplayError;
 import gui.Model.CoordinatorModel;
 import gui.Model.ParticipantModel;
 import javafx.beans.value.ChangeListener;
@@ -143,47 +144,54 @@ public class SellTicketViewController implements Initializable {
 
     }
     @FXML
-    void createParticipant(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/NewParticipantView.fxml"));
-        Parent root = loader.load();
-        NewParticipantViewController newParticipantViewController = loader.getController();
-        newParticipantViewController.setSellTicketViewController(this);
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.show();
+    void createParticipant(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/NewParticipantView.fxml"));
+            Parent root = loader.load();
+            NewParticipantViewController newParticipantViewController = loader.getController();
+            newParticipantViewController.setSellTicketViewController(this);
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e) {
+            DisplayError.displayError(e);}
     }
 
 
     @FXML
-    void createTicket(ActionEvent event) throws EventManagerException {
-        String message ="";
-        if(tableEvent.getSelectionModel().getSelectedIndex()==-1) {
-            message += "Select an Event \n";
+    void createTicket(ActionEvent event) {
+        try {
+            String message = "";
+            if (tableEvent.getSelectionModel().getSelectedIndex() == -1) {
+                message += "Select an Event \n";
+            }
+            if (tableTicket.getSelectionModel().getSelectedIndex() == -1)
+                message += "Select a ticket type \n";
+            if (tableParticipant.getSelectionModel().getSelectedIndex() == -1)
+                message += "Select a participant ";
+            if (!message.equals("")) {
+                displayMessage(message);
+                return;
+            }
+            Events eventChosen = tableEvent.getSelectionModel().getSelectedItem();
+            Participant participant = tableParticipant.getSelectionModel().getSelectedItem();
+            ticketParticipant = participant;
+            ticketEvent = eventChosen;
+            String ticketNumber = getAlphaNumericString(10).toUpperCase(Locale.ROOT);
+            ticketTypeSold = tableTicket.getSelectionModel().getSelectedItem();
+            ticketSold = new Ticket(0, ticketNumber, ticketTypeSold.getId());
+            ticketSold = coordinatorModel.sellTicket(ticketSold, eventChosen, participant);
+            btnCreateTicket.setVisible(false);
+            btnTicket.setVisible(true);
         }
-        if(tableTicket.getSelectionModel().getSelectedIndex()==-1)
-            message += "Select a ticket type \n";
-        if(tableParticipant.getSelectionModel().getSelectedIndex()==-1)
-            message += "Select a participant ";
-        if(!message.equals("")) {
-            displayMessage(message);
-            return;
-        }
-        Events eventChosen = tableEvent.getSelectionModel().getSelectedItem();
-        Participant participant = tableParticipant.getSelectionModel().getSelectedItem();
-        ticketParticipant= participant;
-        ticketEvent=eventChosen;
-        String ticketNumber = getAlphaNumericString(10).toUpperCase(Locale.ROOT);
-        ticketTypeSold= tableTicket.getSelectionModel().getSelectedItem();
-        ticketSold = new Ticket(0,ticketNumber,ticketTypeSold.getId());
-        ticketSold = coordinatorModel.sellTicket(ticketSold,eventChosen,participant);
-        btnCreateTicket.setVisible(false);
-        btnTicket.setVisible(true);
+        catch (EventManagerException e) {DisplayError.displayError(e);}
     }
 
     @FXML
-    void openTicket(ActionEvent event) throws IOException {
+    void openTicket(ActionEvent event) {
       /* String message ="";
         if(tableEvent.getSelectionModel().getSelectedIndex()==-1) {
             message += "Select an Event \n";
@@ -203,23 +211,26 @@ public class SellTicketViewController implements Initializable {
         ticketTypeSold = tableTicket.getSelectionModel().getSelectedItem();
         //END TEST PART*/
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/TicketParticipant.fxml"));
-        Parent root = loader.load();
-        TicketParticipantController ticketParticipantController = loader.getController();
-        AnchorPane anchorPane = (AnchorPane) root;
-        ticketParticipantController.setParticipant(ticketParticipant);
-        ticketParticipantController.setEvent(ticketEvent);
-        ticketParticipantController.setTicket(ticketSold);
-        ticketParticipantController.setTicketType(ticketTypeSold);
-        ticketParticipantController.setAnchorPane(anchorPane);
-        ticketParticipantController.setValues();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/TicketParticipant.fxml"));
+            Parent root = loader.load();
+            TicketParticipantController ticketParticipantController = loader.getController();
+            AnchorPane anchorPane = (AnchorPane) root;
+            ticketParticipantController.setParticipant(ticketParticipant);
+            ticketParticipantController.setEvent(ticketEvent);
+            ticketParticipantController.setTicket(ticketSold);
+            ticketParticipantController.setTicketType(ticketTypeSold);
+            ticketParticipantController.setAnchorPane(anchorPane);
+            ticketParticipantController.setValues();
 
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.show();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e) {DisplayError.displayError(e);}
     }
 
     private void displayMessage(String message) {

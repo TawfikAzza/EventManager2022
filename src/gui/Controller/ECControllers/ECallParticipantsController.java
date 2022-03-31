@@ -37,7 +37,6 @@ public class ECallParticipantsController implements Initializable {
 
     public ECallParticipantsController() throws Exception {
         participantModel = ParticipantModel.getInstance();
-
     }
 
     private void updateTableView() throws ParticipantManagerException {

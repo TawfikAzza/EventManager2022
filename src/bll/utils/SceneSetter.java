@@ -10,9 +10,14 @@ import java.io.IOException;
 
 public class SceneSetter {
 
-    public static void setScene(Node node, FXMLLoader loader) throws IOException {
+    public static void setScene(Node node, FXMLLoader loader) {
 
-        Parent root = loader.load();
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            DisplayError.displayError(e);
+        }
 
         Scene scene = new Scene(root);
         Stage primaryStage = (Stage) node.getScene().getWindow();

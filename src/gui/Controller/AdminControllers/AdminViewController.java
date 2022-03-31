@@ -6,8 +6,6 @@ import be.Events;
 import bll.exception.AdminDAOException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
-import bll.utils.CurrentAdmin;
-import bll.utils.CurrentEventCoordinator;
 import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
@@ -40,15 +38,9 @@ public class AdminViewController implements Initializable {
     @FXML
     private TableColumn<Events, String> tableColumnEventName;
     @FXML
-    private TableColumn<Coordinator, String> tableColumnNumberOfEvents;
-    @FXML
-    private TableColumn<Events, String> tableColumnNumberOfCoordinators;
-    @FXML
     private TableView<Events> eventTableView;
     @FXML
     private TableView<Coordinator> coordinatorTableView;
-    @FXML
-    private Button newCoordinatorBtn;
 
     private AdminModel adminModel;
     private EventModel eventmodel;
@@ -73,37 +65,37 @@ public class AdminViewController implements Initializable {
 
         this.tableColumnEventName.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.tableColumnEventDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        //this.tableColumnNumberOfCoordinators.setCellValueFactory(new PropertyValueFactory<>("Number of Events"));
 
         this.tableColumnFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         this.tableColumnLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        //this.tableColumnNumberOfEvents.setCellValueFactory(new PropertyValueFactory<>());
     }
 
-    public void handleNewClick(ActionEvent actionEvent) throws IOException {
+    public void handleNewClick(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AddEventCoordinatorView.fxml"));
         SceneSetter.setScene(adminTableView, loader);
     }
 
-    public void handleCoordinatorClick(MouseEvent mouseEvent) throws IOException {
+    public void handleCoordinatorClick(MouseEvent mouseEvent) {
         Coordinator coordinator = coordinatorTableView.getSelectionModel().getSelectedItem();
         if(coordinator!=null)
         {
             if(mouseEvent.getClickCount()==2) {
-                CurrentEventCoordinator.setInstance(coordinator);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEventCoordinatorView.fxml"));
+                AdminEventCoordinatorViewController controller = new AdminEventCoordinatorViewController(coordinator);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+                loader.setController(controller);
                 SceneSetter.setScene(adminTableView, loader);
             }
         }
     }
 
-    public void handleAdminClick(MouseEvent mouseEvent) throws IOException {
+    public void handleAdminClick(MouseEvent mouseEvent) {
         Admin admin = adminTableView.getSelectionModel().getSelectedItem();
         if(admin!=null)
         {
             if(mouseEvent.getClickCount()==2) {
-                CurrentAdmin.setInstance(admin);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
+                AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
+                loader.setController(controller);
                 SceneSetter.setScene(adminTableView, loader);
             }
         }
