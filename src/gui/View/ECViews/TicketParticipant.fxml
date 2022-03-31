@@ -39,25 +39,17 @@
                 </Label>
                 <Label fx:id="lblLocation" layoutX="14.0" layoutY="66.0" prefHeight="20.0" prefWidth="134.0"
                        style="-fx-background-color: #ffffff;">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
-                    </font>
+
                 </Label>
                 <TextFlow fx:id="lblDescription" layoutX="11.0" layoutY="172.0" prefHeight="116.0" prefWidth="134.0"
                           style="-fx-background-color: #ffffff;"/>
                 <Label layoutX="14.0" layoutY="86.0" text="Start Date: "/>
                 <Label fx:id="lblStartDate" layoutX="14.0" layoutY="102.0" prefHeight="20.0" prefWidth="134.0"
                        style="-fx-background-color: #ffffff;">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
-                    </font>
                 </Label>
                 <Label layoutX="14.0" layoutY="122.0" text="End Date: "/>
                 <Label fx:id="lblEndDate" layoutX="14.0" layoutY="138.0" prefHeight="20.0" prefWidth="134.0"
                        style="-fx-background-color: #ffffff;">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
-                    </font>
                 </Label>
             </children>
         </Pane>

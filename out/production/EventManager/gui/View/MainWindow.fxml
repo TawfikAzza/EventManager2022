@@ -13,56 +13,57 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="390.0" prefWidth="590.0" style="-fx-background-color: #fafafa;" styleClass="anchor02" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.MainController">
+<AnchorPane prefHeight="390.0" prefWidth="590.0" styleClass="root" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.MainController">
 
-   <stylesheets>
-      <URL value="@CSS/Style.css" />
-   </stylesheets>
+    <stylesheets>
+        <URL value="@CSS/Style.css"/>
+    </stylesheets>
 
 
+    <children>
+        <VBox layoutX="176.0" layoutY="22.0" prefHeight="346.0" prefWidth="238.0"
+              style="-fx-alignment: center; -fx-background-radius: 25;" styleClass="">
+            <children>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <!--
+                           To use SceneBuilder add: "@../../../Resources" to the front of the url otherwise the application will freak out :)
+                        -->
+                        <Image url="@/Images/Logo.png"/>
+                    </image>
+                </ImageView>
 
-   <children>
-      <VBox layoutX="176.0" layoutY="22.0" prefHeight="346.0" prefWidth="238.0" style="-fx-alignment: center; -fx-background-radius: 25;" styleClass="anchor02">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <!--
-                     To use SceneBuilder add: "@../../../Resources" to the front of the url otherwise the application will freak out :)
-                  -->
-                  <Image url="@/Images/Logo.png" />
-               </image>
-            </ImageView>
-            
 
-            <Label prefHeight="18.0" prefWidth="37.0" text="Login">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <Label fx:id="loginWrongLabel" prefHeight="34.0" prefWidth="204.0" text="Your username or password does not exist" textAlignment="CENTER" textFill="#c12121" textOverrun="WORD_ELLIPSIS" visible="false" wrapText="true" />
-            <TextField fx:id="username" promptText="Username">
-               <VBox.margin>
-                  <Insets bottom="7.0" top="2.0" />
-               </VBox.margin>
-               <styleClass>
-                  <String fx:value="textArea" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </TextField>
+                <Label prefHeight="18.0" prefWidth="37.0" text="Login">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="loginWrongLabel" prefHeight="34.0" prefWidth="204.0"
+                       text="Your username or password does not exist" textAlignment="CENTER" textFill="#C12121"
+                       textOverrun="WORD_ELLIPSIS" visible="false" wrapText="true"/>
+                <TextField fx:id="username" promptText="Username">
+                    <VBox.margin>
+                        <Insets bottom="7.0" top="2.0"/>
+                    </VBox.margin>
+                    <styleClass>
+                        <String fx:value="textArea"/>
+                    </styleClass>
+                </TextField>
 
-            <PasswordField fx:id="password" promptText="Password">
-               <VBox.margin>
-                  <Insets bottom="11.0" top="16.0" />
-               </VBox.margin>
-               <styleClass>
-                  <String fx:value="textArea" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </PasswordField>
-            <Button fx:id="SubmitButton" mnemonicParsing="false" onAction="#submitLogin" text="Submit">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></Button>
-         </children>
-      </VBox>
-   </children>
+                <PasswordField fx:id="password" promptText="Password">
+                    <VBox.margin>
+                        <Insets bottom="11.0" top="16.0"/>
+                    </VBox.margin>
+                    <styleClass>
+                        <String fx:value="textArea"/>
+                    </styleClass>
+                </PasswordField>
+                <Button fx:id="SubmitButton" mnemonicParsing="false" onAction="#submitLogin" text="Submit"
+                        textFill="#FAFAFA">
+                </Button>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

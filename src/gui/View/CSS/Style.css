@@ -1,9 +1,10 @@
 .root {
     -fx-background-color: #fafafa;
+    -fx-font-family: "Roboto Light";
 }
 .button
 {
-    -fx-background-color: #FF7D87;
+    -fx-background-color: #FF5050;
     -fx-border-color: #FF5050;
     -fx-border-style: solid;
     -fx-border-radius: 50;
@@ -12,17 +13,31 @@
 
 .button:hover
 {
-    -fx-background-color: #ff5e75;
+    -fx-background-color: #FF7D87;
     -fx-cursor: hand;
 }
-.textArea
+.button.label
+{
+    -fx-text-fill: #FAFAFA;
+    -fx-font-family: "Roboto Thin";
+}
+.text-area
 {
     -fx-background-radius: 50;
     -fx-border-radius: 50;
     -fx-background-color: #DEDEDE;
     -fx-border-color: #C4C4C4;
     -fx-prompt-text-fill: #6A6A6A;
-
+    -fx-effect: null;
+}
+.text-field
+{
+    -fx-background-radius: 50;
+    -fx-border-radius: 50;
+    -fx-background-color: #DEDEDE;
+    -fx-border-color: #C4C4C4;
+    -fx-prompt-text-fill: #6A6A6A;
+    -fx-effect: null;
 }
 
 .anchor {
@@ -44,21 +59,19 @@
 
 .label
 {
-    //-fx-background-color: #eaeae9;
-    -fx-prompt-text-fill: #567ae2;
-    -fx-font-weight: bold;
-    -fx-text-fill:   black;
+    -fx-text-fill: #151515;
+    -fx-font-family: "Roboto Thin";
+}
+#loginWrongLabel
+{
+    -fx-text-fill: red;
+    -fx-font-family: "Roboto Thin";
 }
 
 .shadow{
-    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.1),10.0,0.0,0.0,10.0);
+    -fx-effect:null;
 }
 
-.text-field
-{
-    -fx-border-radius: 10;
-     -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.1),05.0,0.0,0.0,05.0);
-}
 /*************************Table VIEW CSS *********************************/
 .table-view {
     -fx-background-color: #8395C6;

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -34,7 +32,7 @@
       <RowConstraints maxHeight="57.0" minHeight="0.0" prefHeight="57.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Event Name:" textFill="#3823b8">
+      <Label text="Event Name:">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -42,7 +40,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Event Location:" textFill="#3823b8" GridPane.rowIndex="1">
+      <Label text="Event Location:" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -50,7 +48,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Event's Date:" textFill="#3823b8" GridPane.rowIndex="2">
+      <Label text="Event's Date:" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -58,7 +56,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Event's end Date:" textFill="#3823b8" GridPane.rowIndex="4">
+      <Label text="Event's end Date:" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -66,7 +64,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Event's Description:" textFill="#3823b8" GridPane.rowIndex="6">
+      <Label text="Event's Description:" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -74,7 +72,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label text="Event's end time:" textFill="#3823b8" GridPane.rowIndex="5">
+      <Label text="Event's end time:" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -82,7 +80,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Event's start time:" textFill="#3823b8" GridPane.rowIndex="3">
+      <Label text="Event's start time:" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -90,7 +88,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Itinerary:" textFill="#3823b8" GridPane.rowIndex="7">
+      <Label text="Itinerary:" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -98,7 +96,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Ticket's available" textFill="#3823b8" GridPane.rowIndex="8">
+      <Label text="Ticket's available" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -130,12 +128,12 @@
          <children>
             <VBox>
                <children>
-                  <Label text="Name:" textFill="#3823b8">
+                  <Label text="Name:">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
                   <TextField fx:id="txtNameTicket" />
-                  <Label text="Benefit:" textFill="#3823b8">
+                  <Label text="Benefit:">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
