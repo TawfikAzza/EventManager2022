@@ -24,11 +24,13 @@ public class MainController {
     public void openEventMgr() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/RootLayoutEvent.fxml"));
         SceneSetter.setScene(password ,loader);
-        try {
+        /*try {
             closeWindow();
         } catch (IOException e) {
             DisplayError.displayError(e);
         }
+
+         */
     }
 
     public void openAdminMgr() {
