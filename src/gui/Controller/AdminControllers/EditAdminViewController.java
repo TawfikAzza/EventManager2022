@@ -1,6 +1,6 @@
-package gui.Controller;
+package gui.Controller.AdminControllers;
 
-import be.Coordinator;
+import be.Admin;
 import be.Users;
 import bll.exception.AdminDAOException;
 import bll.utils.DisplayError;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EditEventCoordinatorViewController implements Initializable {
+public class EditAdminViewController implements Initializable {
     private AdminModel adminModel;
 
     @FXML
@@ -38,43 +38,46 @@ public class EditEventCoordinatorViewController implements Initializable {
     @FXML
     private Button newEventCoordinatorButton;
 
-    Coordinator eventCoordinator;
+    private Admin admin;
 
-    public EditEventCoordinatorViewController(Coordinator eventCoordinator)
+
+    public EditAdminViewController(Admin admin)
     {
-        this.eventCoordinator = eventCoordinator;
+        this.admin = admin;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             this.adminModel = new AdminModel();
-        } catch ( AdminDAOException e) {
+        } catch (AdminDAOException e) {
             DisplayError.displayError(e);
         }
-        setFields(eventCoordinator);
+        setFields(admin);
     }
 
     public void backClick(ActionEvent actionEvent) {
-        AdminEventCoordinatorViewController controller = new AdminEventCoordinatorViewController(eventCoordinator);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+        AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
         loader.setController(controller);
         SceneSetter.setScene(firstNameTextField, loader);
     }
 
-    public void editEventCoordinatorClick(ActionEvent actionEvent) {
+    public void editAdmin(ActionEvent actionEvent) {
         String loginName = loginNameTextField.getText();
         String password = passwordField.getText();
         String email = emailTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
-        int ID = eventCoordinator.getUserID();
+        int ID = admin.getUserID();
 
-        Coordinator coordinator = new Coordinator(ID, loginName, password,2, email,firstName, lastName);
+        Admin admin = new Admin(ID, loginName, password,2, email,firstName, lastName);
         if(confirmPassword()) {
             try {
-                adminModel.editUser(coordinator);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+                adminModel.editUser(admin);
+                AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
+                loader.setController(controller);
                 SceneSetter.setScene(firstNameTextField, loader);
             } catch (AdminDAOException e) {
                 DisplayError.displayError(e);

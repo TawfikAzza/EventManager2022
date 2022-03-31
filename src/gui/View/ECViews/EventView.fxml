@@ -18,7 +18,7 @@
 <GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
           prefHeight="639.0" prefWidth="751.0" styleClass="anchor02"
           xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="gui.Controller.EventsController">
+          fx:controller="gui.Controller.ECControllers.EventsController">
     <stylesheets>
         <URL value="@../CSS/Style.css" />
     </stylesheets>

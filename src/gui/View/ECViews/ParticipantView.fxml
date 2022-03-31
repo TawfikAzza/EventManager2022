@@ -19,7 +19,7 @@
 <?import java.net.URL?>
 <GridPane prefHeight="515.0" prefWidth="659.0" styleClass="anchor02" stylesheets="@../CSS/Style.css"
           xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="gui.Controller.ParticipantViewController">
+          fx:controller="gui.Controller.ECControllers.ParticipantViewController">
     <stylesheets>
         <URL value="@../CSS/Style.css" />
     </stylesheets>
