@@ -117,7 +117,7 @@ public class TicketParticipantController implements Initializable {
             if(result.isPresent() && result.get() == ButtonType.OK) {
                 captureAndSaveDisplay();
                 openOutlook();
-                job.showPrintDialog(stagePrint);
+                //job.showPrintDialog(stagePrint);
             } else {
                 /*FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Save PDF File");
