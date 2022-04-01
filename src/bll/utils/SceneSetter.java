@@ -19,7 +19,7 @@ public class SceneSetter {
             DisplayError.displayError(e);
         }
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,800,600);
         Stage primaryStage = (Stage) node.getScene().getWindow();
         primaryStage.setScene(scene);
 

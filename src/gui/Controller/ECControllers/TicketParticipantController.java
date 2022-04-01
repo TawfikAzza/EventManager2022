@@ -12,9 +12,6 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.print.PageLayout;
-import javafx.print.PageOrientation;
-import javafx.print.Paper;
 import javafx.print.PrinterJob;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -25,7 +22,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
@@ -101,15 +97,18 @@ public class TicketParticipantController implements Initializable {
         return SwingFXUtils.toFXImage(qrImage,null);
     }
 
-    public void printTicket(MouseEvent event) throws FileNotFoundException {
+    public void printTicket(MouseEvent event)  {
 
         PrinterJob job = PrinterJob.createPrinterJob();
         if(job != null){
-            Stage stagePrint = (Stage) lblTicketType.getScene().getWindow();
-            PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, 0, 0, 0, 0);
+           // Stage stagePrint = (Stage) lblTicketType.getScene().getWindow();
+            //PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, 0, 0, 0, 0);
+
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Make a choice");
             ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Print");
             ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Save");
+
             alert.setTitle("Choose wisely...");
             alert.setHeaderText("Print/Save Ticket");
             Optional<ButtonType> result = alert.showAndWait();
@@ -176,7 +175,7 @@ public class TicketParticipantController implements Initializable {
             if (extensionType == null) {
                 outlookNotFoundMessage("File type PST not associated with Outlook.");
             } else {
-                String fileType[] = extensionType.split("=");
+                String[] fileType = extensionType.split("=");
 
                 p = Runtime.getRuntime().exec(
                         new String[]{"cmd.exe", "/c", "ftype", fileType[1]});
@@ -212,8 +211,11 @@ public class TicketParticipantController implements Initializable {
         //C:\Users\deaso>"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE" /m "cchesberg@gmail.com" /c ipm.note /a "c:\Users\deaso\random.dat
 
         try {
+
             String attachment = "resources/TempTickets/"+ticketSold.getTicketNumber()+".png";
-            rt.exec(new String[]{"cmd.exe", "/c", outlook, "/m", "cchesberg@gmail.com?subject=Ticket_Email","/a", attachment});
+            File file = new File(attachment);
+            System.out.println(file.getAbsolutePath());
+            rt.exec(new String[]{"cmd.exe","/c", outlook, "/m", "cchesberg@gmail.com?subject=Ticket_Email", "/a", file.getAbsolutePath()});
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
