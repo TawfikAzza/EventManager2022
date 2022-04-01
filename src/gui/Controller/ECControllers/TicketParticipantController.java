@@ -17,6 +17,8 @@ import javafx.print.PageOrientation;
 import javafx.print.Paper;
 import javafx.print.PrinterJob;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -27,9 +29,12 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -115,8 +120,9 @@ public class TicketParticipantController implements Initializable {
             alert.setHeaderText("Print/Save Ticket");
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.OK) {
-                openOutlook();
-                job.showPrintDialog(stagePrint);
+                //openOutlook();
+                openMail();
+                //job.showPrintDialog(stagePrint);
             } else {
                 /*FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Save PDF File");
@@ -215,6 +221,14 @@ public class TicketParticipantController implements Initializable {
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void openMail() {
+        try {
+            Desktop.getDesktop().mail( new URI( "mailto:cchesberg@gmail.com?subject=test&body=testmail&attachment=c:\\Users\\deaso\\random.dat" ) );
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
     }
