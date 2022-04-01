@@ -108,16 +108,19 @@ public class TicketParticipantController implements Initializable {
         if(job != null){
             Stage stagePrint = (Stage) lblTicketType.getScene().getWindow();
             PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, 0, 0, 0, 0);
+
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Make a choice");
             ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Print");
             ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Save");
+            ((Button) alert.getDialogPane().lookupButton(ButtonType.NO)).setText("test");
             alert.setTitle("Choose wisely...");
             alert.setHeaderText("Print/Save Ticket");
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.OK) {
                 captureAndSaveDisplay();
                 openOutlook();
-                job.showPrintDialog(stagePrint);
+               // job.showPrintDialog(stagePrint);
             } else {
                 /*FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Save PDF File");

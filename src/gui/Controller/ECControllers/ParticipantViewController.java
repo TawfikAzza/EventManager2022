@@ -83,6 +83,9 @@ public class ParticipantViewController implements Initializable {
                 searchParticipant();
             }
         });
+        tableParticipantByEvent.setOnMouseClicked(e-> {
+            System.out.println(tableParticipantByEvent.getSelectionModel().getSelectedItem().getTicketID());
+        });
     }
 
     public void updateTableParticipant() {
