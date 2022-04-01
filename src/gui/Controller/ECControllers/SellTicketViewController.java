@@ -222,7 +222,7 @@ public class SellTicketViewController implements Initializable {
             ticketParticipantController.setTicketType(ticketTypeSold);
             ticketParticipantController.setAnchorPane(anchorPane);
             ticketParticipantController.setValues();
-
+    //ticketParticipantController.captureAndSaveDisplay();
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);

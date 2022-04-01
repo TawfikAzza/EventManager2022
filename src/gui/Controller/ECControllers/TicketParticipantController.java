@@ -56,7 +56,6 @@ public class TicketParticipantController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
     public void setParticipant(Participant participant) {
         this.participant = participant;
@@ -133,7 +132,7 @@ public class TicketParticipantController implements Initializable {
                     //writer.writeString();
                     //DOCUMENT WRITING CODE BEGINS
                 }*/
-                captureAndSaveDisplay();
+                //captureAndSaveDisplay();
                // job.printPage(pageLayout,anchorPane);
             }
             job.endJob();
@@ -208,14 +207,13 @@ public class TicketParticipantController implements Initializable {
 
     public void openOutlook()
     {
-
         String outlook = getOutlook();
         Runtime rt = Runtime.getRuntime();
         //C:\Users\deaso>"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE" /m "cchesberg@gmail.com" /c ipm.note /a "c:\Users\deaso\random.dat
 
         try {
             String attachment = "resources/TempTickets/"+ticketSold.getTicketNumber()+".png";
-            rt.exec(new String[]{"cmd.exe","/c", outlook, "/m", "cchesberg@gmail.com?subject=Ticket_Email", "/a", attachment});
+            rt.exec(new String[]{"cmd.exe", "/c", outlook, "/m", "cchesberg@gmail.com?subject=Ticket_Email","/a", attachment});
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
