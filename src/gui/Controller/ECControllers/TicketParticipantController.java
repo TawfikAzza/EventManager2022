@@ -213,9 +213,12 @@ public class TicketParticipantController implements Initializable {
         try {
 
             String attachment = "resources/TempTickets/"+ticketSold.getTicketNumber()+".png";
+            String subject = "Ticket_Email"; //Don't use spaces
+            String email = participant.getEmail();
+            String emailSubjectCombined = email+"?subject="+subject;
             File file = new File(attachment);
             System.out.println(file.getAbsolutePath());
-            rt.exec(new String[]{"cmd.exe","/c", outlook, "/m", "cchesberg@gmail.com?subject=Ticket_Email", "/a", file.getAbsolutePath()});
+            rt.exec(new String[]{"cmd.exe","/c", outlook, "/m", emailSubjectCombined, "/a", file.getAbsolutePath()});
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
