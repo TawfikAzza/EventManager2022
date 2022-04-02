@@ -2,6 +2,7 @@ package gui.Controller.ECControllers;
 
 import be.Participant;
 import bll.exception.ParticipantManagerException;
+import bll.utils.DisplayError;
 import gui.Model.ParticipantModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,8 +26,8 @@ public class NewParticipantViewController {
     public NewParticipantViewController() {
         try {
             participantModel = new ParticipantModel();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception | ParticipantManagerException e) {
+            DisplayError.displayError(e);
         }
     }
 

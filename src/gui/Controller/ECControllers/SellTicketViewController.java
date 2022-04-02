@@ -63,7 +63,7 @@ public class SellTicketViewController implements Initializable {
         try {
             coordinatorModel = new CoordinatorModel();
             participantModel = new ParticipantModel();
-        } catch (EventManagerException | Exception | AdminDAOException e) {
+        } catch (EventManagerException | Exception | AdminDAOException | ParticipantManagerException e) {
             e.printStackTrace();
         }
     }

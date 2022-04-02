@@ -71,8 +71,8 @@ public class ParticipantViewController implements Initializable {
             coordinatorModel = new CoordinatorModel();
             participantModel = new ParticipantModel();
             eventModel = new EventModel(); // FILEMANAGER + exceptions
-        } catch (Exception | EventManagerException | AdminDAOException e) {
-            e.printStackTrace();
+        } catch (Exception | EventManagerException | AdminDAOException | ParticipantManagerException e) {
+            DisplayError.displayError(e);
         }
 
     }
@@ -87,7 +87,6 @@ public class ParticipantViewController implements Initializable {
                 searchParticipant();
             }
         });
-
     }
 
     public void updateTableParticipant() {
@@ -99,7 +98,7 @@ public class ParticipantViewController implements Initializable {
             allParticipants= participantModel.getAllParticipants();
             tableParticipant.getItems().addAll(allParticipants);
         } catch (ParticipantManagerException e) {
-            e.printStackTrace();
+           DisplayError.displayError(e);
         }
     }
     public void updateTableParticipantByEvent(Events event) {
@@ -245,7 +244,7 @@ public class ParticipantViewController implements Initializable {
                workbook.write(outputStream);
            }
            catch (IOException ex) {
-               ex.printStackTrace();
+               DisplayError.displayError(ex);
            }
        }
     }
@@ -272,8 +271,15 @@ public class ParticipantViewController implements Initializable {
     }
 
     @FXML
-    private void deleteParticipant(ActionEvent event) {
-
+    private void deleteParticipant()  {
+        if (tableParticipant.getSelectionModel().getSelectedIndex() == -1)
+            return;
+        try {
+            coordinatorModel.deleteParticipant(tableParticipant.getSelectionModel().getSelectedItem());
+        } catch (ParticipantManagerException e) {
+            DisplayError.displayError(e);
+        }
+        updateTableParticipant();
     }
     @FXML
     void deleteParticipantFromEvent(ActionEvent event) {
