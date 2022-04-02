@@ -213,7 +213,6 @@ public class TicketParticipantController implements Initializable {
     {
         String outlook = getOutlook();
         Runtime rt = Runtime.getRuntime();
-        //C:\Users\deaso>"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE" /m "cchesberg@gmail.com" /c ipm.note /a "c:\Users\deaso\random.dat
 
         try {
 
@@ -231,13 +230,6 @@ public class TicketParticipantController implements Initializable {
         }
     }
 
-    public void openMail() {
-        try {
-            Desktop.getDesktop().mail( new URI( "mailto:cchesberg@gmail.com?subject=test&body=testmail&attachment=c:\\Users\\deaso\\random.dat" ) );
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }
 }
 
 
