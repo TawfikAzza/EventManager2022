@@ -97,15 +97,17 @@ public class ParticipantDAO {
     public void deleteParticipantFromEvent(Participant participant, Events event) throws SQLException {
         try (Connection con = cm.getConnection()) {
             String sqlDeleteFromTicket = "DELETE FROM TICKET WHERE id = " +
-                    "(SELECT ticketID FROM EventParticipant WHERE idParticipant=? AND idEvent = ?)";
+                    "(SELECT ticketID FROM EventParticipant WHERE idParticipant=? AND idEvent = ? AND ticketID = ?)";
 
-            String sqlDeleteFromEventParticipant = "DELETE FROM EventParticipant WHERE idParticipant=? AND idEvent=? ";
+            String sqlDeleteFromEventParticipant = "DELETE FROM EventParticipant WHERE idParticipant=? AND idEvent=? AND ticketID = ?";
             PreparedStatement pstmtDeleteTicket = con.prepareStatement(sqlDeleteFromTicket);
             pstmtDeleteTicket.setInt(1,participant.getId());
             pstmtDeleteTicket.setInt(2,event.getId());
+            pstmtDeleteTicket.setInt(3,participant.getTicketID());
             PreparedStatement pstmtDeleteFromEventParticipant = con.prepareStatement(sqlDeleteFromEventParticipant);
             pstmtDeleteFromEventParticipant.setInt(1,participant.getId());
             pstmtDeleteFromEventParticipant.setInt(2,event.getId());
+            pstmtDeleteFromEventParticipant.setInt(3,participant.getTicketID());
             pstmtDeleteTicket.execute();
             pstmtDeleteFromEventParticipant.execute();
         }

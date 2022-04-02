@@ -12,9 +12,6 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.print.PageLayout;
-import javafx.print.PageOrientation;
-import javafx.print.Paper;
 import javafx.print.PrinterJob;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -27,7 +24,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -61,7 +57,6 @@ public class TicketParticipantController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
     public void setParticipant(Participant participant) {
         this.participant = participant;
@@ -107,21 +102,24 @@ public class TicketParticipantController implements Initializable {
         return SwingFXUtils.toFXImage(qrImage,null);
     }
 
-    public void printTicket(MouseEvent event) throws FileNotFoundException {
+    public void printTicket(MouseEvent event)  {
 
         PrinterJob job = PrinterJob.createPrinterJob();
         if(job != null){
-            Stage stagePrint = (Stage) lblTicketType.getScene().getWindow();
-            PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, 0, 0, 0, 0);
+           // Stage stagePrint = (Stage) lblTicketType.getScene().getWindow();
+            //PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, 0, 0, 0, 0);
+
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Make a choice");
             ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Print");
             ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Save");
+
             alert.setTitle("Choose wisely...");
             alert.setHeaderText("Print/Save Ticket");
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.OK) {
-                //openOutlook();
-                openMail();
+                captureAndSaveDisplay();
+                openOutlook();
                 //job.showPrintDialog(stagePrint);
             } else {
                 /*FileChooser fileChooser = new FileChooser();
@@ -138,7 +136,7 @@ public class TicketParticipantController implements Initializable {
                     //writer.writeString();
                     //DOCUMENT WRITING CODE BEGINS
                 }*/
-                captureAndSaveDisplay();
+                //captureAndSaveDisplay();
                // job.printPage(pageLayout,anchorPane);
             }
             job.endJob();
@@ -151,8 +149,9 @@ public class TicketParticipantController implements Initializable {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
 
         //Prompt user to select a file
-        File file = fileChooser.showSaveDialog(null);
-
+        //File file = fileChooser.showSaveDialog(null);
+        String fileName = "resources/TempTickets/"+ticketSold.getTicketNumber()+".png";
+        File file = new File(fileName);
         if(file != null){
             try {
                 //Pad the capture area
@@ -162,6 +161,7 @@ public class TicketParticipantController implements Initializable {
                 RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
                 //Write the snapshot to the chosen file
                 ImageIO.write(renderedImage, "png", file);
+
             } catch (IOException ex) { ex.printStackTrace(); }
         }
     }
@@ -180,7 +180,7 @@ public class TicketParticipantController implements Initializable {
             if (extensionType == null) {
                 outlookNotFoundMessage("File type PST not associated with Outlook.");
             } else {
-                String fileType[] = extensionType.split("=");
+                String[] fileType = extensionType.split("=");
 
                 p = Runtime.getRuntime().exec(
                         new String[]{"cmd.exe", "/c", "ftype", fileType[1]});
@@ -211,13 +211,19 @@ public class TicketParticipantController implements Initializable {
 
     public void openOutlook()
     {
-
         String outlook = getOutlook();
         Runtime rt = Runtime.getRuntime();
         //C:\Users\deaso>"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE" /m "cchesberg@gmail.com" /c ipm.note /a "c:\Users\deaso\random.dat
 
         try {
-            rt.exec(new String[]{"cmd.exe","/c", outlook, "/m", "cchesberg@gmail.com?subject=Ticket_Email", "/a", "c:\\Users\\deaso\\random.dat"});
+
+            String attachment = "resources/TempTickets/"+ticketSold.getTicketNumber()+".png";
+            String subject = "Ticket_Email"; //Don't use spaces
+            String email = participant.getEmail();
+            String emailSubjectCombined = email+"?subject="+subject;
+            File file = new File(attachment);
+            System.out.println(file.getAbsolutePath());
+            rt.exec(new String[]{"cmd.exe","/c", outlook, "/m", emailSubjectCombined, "/a", file.getAbsolutePath()});
 
         } catch (IOException e) {
             // TODO Auto-generated catch block

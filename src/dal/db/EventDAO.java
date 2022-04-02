@@ -291,7 +291,7 @@ public class EventDAO implements IEventDAO {
         List<Participant> participantList = new ArrayList<>();
         try (Connection con = cm.getConnection()) {
 
-            String sql = "SELECT idEvent, idParticipant FROM EventParticipant Order by idEvent ";
+            String sql = "SELECT idEvent, idParticipant,ticketID FROM EventParticipant Order by idEvent ";
             PreparedStatement pstmt = con.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             int idEvent = 0;
@@ -300,6 +300,7 @@ public class EventDAO implements IEventDAO {
             while(rs.next()){
                 idEvent= rs.getInt("idEvent");
                 int idParticipant =rs.getInt("idParticipant");
+                int ticketID = rs.getInt("ticketID");
                 if(!flagFirst) {
                     currentEvent=idEvent;
                     flagFirst=true;
@@ -310,7 +311,15 @@ public class EventDAO implements IEventDAO {
                     mapParticipantByEvent.put(currentEvent,participants);
                     participantList.clear();
                 }
-                participantList.add(mapParticipant.get(idParticipant));
+                Participant participant = new Participant(mapParticipant.get(idParticipant).getId(),
+                                                        mapParticipant.get(idParticipant).getFname(),
+                                                        mapParticipant.get(idParticipant).getLname(),
+                                                        mapParticipant.get(idParticipant).getEmail(),
+                                                        mapParticipant.get(idParticipant).getPhoneNumber());
+                participant.setTicketID(ticketID);
+                participantList.add(participant);
+
+                participantList.get(participantList.size()-1).setTicketID(ticketID);
                 currentEvent=idEvent;
             }
             List<Participant> participants = new ArrayList<>(participantList);
