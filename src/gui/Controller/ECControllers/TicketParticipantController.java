@@ -4,6 +4,7 @@ import be.Events;
 import be.Participant;
 import be.Ticket;
 import be.TicketType;
+import bll.utils.DisplayError;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -25,12 +26,9 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -102,7 +100,7 @@ public class TicketParticipantController implements Initializable {
         return SwingFXUtils.toFXImage(qrImage,null);
     }
 
-    public void printTicket(MouseEvent event)  {
+    public void printTicket() {
 
         PrinterJob job = PrinterJob.createPrinterJob();
         if(job != null){
@@ -122,20 +120,26 @@ public class TicketParticipantController implements Initializable {
                 openOutlook();
                 //job.showPrintDialog(stagePrint);
             } else {
-                /*FileChooser fileChooser = new FileChooser();
-                fileChooser.setTitle("Save PDF File");
-                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF File", "*.pdf"));
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Save PNG File");
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG File", "*.png"));
                 File selectedFile = fileChooser.showSaveDialog(lblTicketType.getScene().getWindow());
                 if (selectedFile != null) {
-                    String dest = selectedFile.getAbsolutePath();
-                    PdfWriter writer = new PdfWriter(dest);
-                    PdfDocument pdf = new PdfDocument(writer);
-                    Document document = new Document(pdf);
+                    WritableImage writableImage = new WritableImage((int)anchorPane.getWidth() + 20,
+                            (int)anchorPane.getHeight() + 20);
+                    anchorPane.snapshot(null, writableImage);
+                    RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+                    //Write the snapshot to the chosen file
+                    try {
+                        ImageIO.write(renderedImage, "png", selectedFile);
+                    } catch (IOException e) {
+                        DisplayError.displayError(e);
+                    }
 
                     //document.add()
                     //writer.writeString();
                     //DOCUMENT WRITING CODE BEGINS
-                }*/
+                }
                 //captureAndSaveDisplay();
                // job.printPage(pageLayout,anchorPane);
             }
@@ -221,12 +225,11 @@ public class TicketParticipantController implements Initializable {
             String email = "cchesberg@gmail.com"; //participant.getEmail();
             String emailSubjectCombined = email+"?subject="+subject;
             File file = new File(attachment);
-            System.out.println(file.getAbsolutePath());
             rt.exec(new String[]{"cmd.exe","/c", outlook, "/m", emailSubjectCombined, "/a", file.getAbsolutePath()});
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            DisplayError.displayError(e);
         }
     }
 

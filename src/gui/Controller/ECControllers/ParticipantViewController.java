@@ -2,8 +2,11 @@ package gui.Controller.ECControllers;
 
 import be.Events;
 import be.Participant;
+import be.Ticket;
+import be.TicketType;
 import bll.exception.*;
 import bll.utils.DisplayError;
+import dal.db.TicketDAO;
 import gui.Model.CoordinatorModel;
 import gui.Model.EventModel;
 import gui.Model.ParticipantModel;
@@ -20,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -118,6 +122,51 @@ public class ParticipantViewController implements Initializable {
         } catch (EventManagerException e) {
             displayError(e);
         }
+    }
+
+    @FXML
+    void printTicket() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/TicketParticipant.fxml"));
+            Parent root = loader.load();
+            TicketParticipantController ticketParticipantController = loader.getController();
+            AnchorPane anchorPane = (AnchorPane) root;
+            String message = "";
+            if (tableEvent.getSelectionModel().getSelectedIndex() == -1) {
+                message += "Select an Event \n";
+            }
+            if (tableParticipantByEvent.getSelectionModel().getSelectedIndex() == -1)
+                message += "Select a participant ";
+            if (!message.equals("")) {
+                DisplayError.displayMessage(message);
+                return;
+            }
+
+            try {
+                ticketParticipantController.setParticipant(tableParticipantByEvent.getSelectionModel().getSelectedItem());
+                ticketParticipantController.setEvent(tableEvent.getSelectionModel().getSelectedItem());
+                Ticket ticketSold = null;
+                TicketType ticketTypeSold = null;
+                ticketSold = eventModel.getTicket(tableParticipantByEvent.getSelectionModel().getSelectedItem().getTicketID());
+                 ticketTypeSold = eventModel.getTicketType(ticketSold.getTicketTypeID());
+                ticketParticipantController.setTicket(ticketSold);
+
+                ticketParticipantController.setTicketType(ticketTypeSold);
+                ticketParticipantController.setAnchorPane(anchorPane);
+                ticketParticipantController.setValues();
+                //ticketParticipantController.captureAndSaveDisplay();
+            } catch (EventManagerException e) {
+                DisplayError.displayError(e);
+            }
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.show();
+
+        }
+        catch (IOException e) {DisplayError.displayError(e);}
     }
     @FXML
     private void searchParticipant() {

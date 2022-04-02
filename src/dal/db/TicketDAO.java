@@ -16,6 +16,38 @@ public class TicketDAO {
     public TicketDAO() throws Exception {
         cm = new ConnectionManager();
     }
+    public Ticket getTicket(int idTicket) throws SQLException {
+        Ticket ticketSearched = null;
+        try (Connection con = cm.getConnection()) {
+            String sqlSelect = "SELECT * FROM Ticket WHERE id = ?";
+            PreparedStatement pstmt = con.prepareStatement(sqlSelect);
+            pstmt.setInt(1,idTicket);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()) {
+                ticketSearched = new Ticket(rs.getInt("id"),
+                                            rs.getString("ticketNumber"),
+                                            rs.getInt("ticketTypeID"),
+                                            rs.getBoolean("valid"));
+            }
+        }
+        return ticketSearched;
+    }
+
+    public TicketType getTicketType(int idTicketType) throws SQLException {
+        TicketType ticketType = null;
+        try (Connection con = cm.getConnection()) {
+            String sqlSelect = "SELECT * FROM TicketType WHERE id = ?";
+            PreparedStatement pstmt = con.prepareStatement(sqlSelect);
+            pstmt.setInt(1,idTicketType);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()) {
+                ticketType = new TicketType(rs.getInt("id"),
+                                            rs.getString("typeName"),
+                                            rs.getString("benefit"));
+            }
+        }
+        return ticketType;
+    }
     public void addEventTicket(Events event) throws Exception {
 
         try (Connection con = cm.getConnection()) {
