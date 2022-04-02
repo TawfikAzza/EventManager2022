@@ -129,6 +129,7 @@ public class ScanTicketViewController implements Initializable {
                             isValidTicket = eventManager.validTicketScan(result.getText());
                             if(isValidTicket) {
                                 txtCode.setText("Ticket Valid");
+                                Thread.sleep(3000);
                             }
                             if(!isValidTicket)
                                 txtCode.setText("Ticket not valid");

@@ -218,7 +218,7 @@ public class TicketParticipantController implements Initializable {
 
             String attachment = "resources/TempTickets/"+ticketSold.getTicketNumber()+".png";
             String subject = "Ticket_Email"; //Don't use spaces
-            String email = participant.getEmail();
+            String email = "cchesberg@gmail.com"; //participant.getEmail();
             String emailSubjectCombined = email+"?subject="+subject;
             File file = new File(attachment);
             System.out.println(file.getAbsolutePath());

@@ -16,6 +16,8 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 public class AdminEditDeleteViewController implements Initializable {
     @FXML
@@ -25,6 +27,8 @@ public class AdminEditDeleteViewController implements Initializable {
 
     private AdminModel adminModel;
     private Admin admin;
+    private Logger logger;
+    private FileHandler fileHandler;
 
     public AdminEditDeleteViewController(Admin admin)
     {

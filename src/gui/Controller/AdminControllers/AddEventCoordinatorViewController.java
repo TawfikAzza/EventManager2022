@@ -36,10 +36,7 @@ public class AddEventCoordinatorViewController implements Initializable {
     private TextField lastNameTextField;
     @FXML
     private PasswordField confirmPasswordField;
-    @FXML
-    private Button backButton;
-    @FXML
-    private Button newEventCoordinatorButton;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
