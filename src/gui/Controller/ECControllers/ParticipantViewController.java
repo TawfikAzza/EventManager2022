@@ -51,6 +51,8 @@ public class ParticipantViewController implements Initializable {
     @FXML
     private Label lblMail,lblName,lblPhoneNumber;
     @FXML
+    private Label lbTicketBinifit, lbTicketNumber, lbTicketType;
+    @FXML
     private ListView<Events> lstEventParticipant;
     @FXML
     private TableColumn<Events, String> columnEventDate,columnEventName,columnEventParticipantNumber;
@@ -189,6 +191,7 @@ public class ParticipantViewController implements Initializable {
     public void setMainApp(RootLayoutEvenController rootLayoutEvenController) {
         this.rootLayoutEvenController=rootLayoutEvenController;
     }
+
     private void setLabelParticipant(Participant participant) {
         if(participant==null)
             return;
@@ -196,6 +199,30 @@ public class ParticipantViewController implements Initializable {
         lblMail.setText(participant.getEmail());
         lblPhoneNumber.setText(participant.getPhoneNumber());
     }
+
+    @FXML
+    private void setLabelTicket () {
+        if(tableEvent.getSelectionModel().getSelectedIndex()==-1)
+            return;
+        if(tableParticipantByEvent.getSelectionModel().getSelectedIndex()==-1)
+            return;
+        int ticketID = tableParticipantByEvent.getSelectionModel().getSelectedItem().getTicketID();
+        try {
+
+            Ticket ticketParticipant = eventModel.getTicket(ticketID);
+            System.out.println("Ticket : "+ticketID);
+            TicketType ticketType = eventModel.getTicketType(ticketParticipant.getTicketTypeID());
+            lbTicketNumber.setText(ticketParticipant.getTicketNumber());
+            lbTicketType.setText(ticketType.getType());
+            lbTicketBinifit.setText(ticketType.getBenefit());
+
+        } catch (EventManagerException e) {
+            DisplayError.displayError(e);
+        }
+
+    }
+
+
     private void setListViewEvents(Participant participant) {
         List<Events> listEvents = new ArrayList<>();
         try {

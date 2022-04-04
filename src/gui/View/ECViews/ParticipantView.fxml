@@ -100,6 +100,18 @@
                         <Insets left="20.0" top="50.0" />
                     </VBox.margin>
                 </Button>
+            <Label prefHeight="20.0" prefWidth="111.0" text="Ticket Number" />
+            <Label fx:id="lbTicketNumber" alignment="TOP_LEFT" prefHeight="18.0" prefWidth="202.0" />
+            <Label text="Ticket Type">
+               <opaqueInsets>
+                  <Insets top="5.0" />
+               </opaqueInsets></Label>
+            <Label fx:id="lbTicketType" alignment="TOP_LEFT" prefHeight="18.0" prefWidth="219.0" />
+            <Label text="Ticket Binifit">
+               <opaqueInsets>
+                  <Insets top="5.0" />
+               </opaqueInsets></Label>
+            <Label fx:id="lbTicketBinifit" alignment="TOP_LEFT" prefHeight="63.0" prefWidth="198.0" />
             </children>
         </VBox>
         <TableView fx:id="tableEvent" onMouseClicked="#displayEventParticipant" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" GridPane.rowIndex="1">
@@ -118,7 +130,7 @@
             </GridPane.margin>
             <children>
                 <Label text="Table Participant By Event" />
-                <TableView fx:id="tableParticipantByEvent" prefHeight="175.0" prefWidth="202.0" styleClass="shadow">
+                <TableView fx:id="tableParticipantByEvent" onMouseClicked="#setLabelTicket" prefHeight="175.0" prefWidth="202.0" styleClass="shadow">
                     <columns>
                         <TableColumn fx:id="columnFirstNamePE" prefWidth="60.79998856782913" text="First Name" />
                         <TableColumn fx:id="columnLastNamePE" prefWidth="75.99996566772461" text="Last Name" />
