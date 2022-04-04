@@ -210,7 +210,6 @@ public class ParticipantViewController implements Initializable {
         try {
 
             Ticket ticketParticipant = eventModel.getTicket(ticketID);
-            System.out.println("Ticket : "+ticketID);
             TicketType ticketType = eventModel.getTicketType(ticketParticipant.getTicketTypeID());
             lbTicketNumber.setText(ticketParticipant.getTicketNumber());
             lbTicketType.setText(ticketType.getType());
