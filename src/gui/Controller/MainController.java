@@ -2,6 +2,8 @@ package gui.Controller;
 
 import be.Users;
 import bll.MainManager;
+import bll.utils.DisplayError;
+import bll.utils.SceneSetter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 
 public class MainController {
@@ -19,32 +23,28 @@ public class MainController {
     public TextField username;
     public Label loginWrongLabel;
     public MainManager mainManager = new MainManager() ;
-    public void openEventMgr() throws IOException {
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EventView.fxml"));
+    private Logger logger;
+    private FileHandler fileHandler;
+
+    public MainController()
+    {
+        this.logger = Logger.getLogger("LoginInfo");
+        try {
+            this.fileHandler = new FileHandler("resources/Log/login.log", true);
+            logger.addHandler(fileHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void openEventMgr() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/RootLayoutEvent.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root,800,600);
-        stage.setScene(scene);
-        stage.show();
-        closeWindow();
+        SceneSetter.setScene(password ,loader);
     }
 
-    public void openAdminMgr() throws IOException {
+    public void openAdminMgr() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        closeWindow();
-
+        SceneSetter.setScene(password ,loader);
     }
-    public void closeWindow() throws IOException {
-        Stage window = (Stage) this.password.getScene().getWindow();
-        window.close();
-    }
-
 
     public void submitLogin(ActionEvent actionEvent) throws Exception{
         Users users= mainManager.submitLogin(username.getText(), password.getText());
@@ -52,11 +52,12 @@ public class MainController {
         {
             if (users.getRoleID() == 1) {
                 openAdminMgr();
+                logger.info("Admin: " + username.getText() + " logged in");
             }
             else if (users.getRoleID()== 2)
             {
                 openEventMgr();
-
+                logger.info("Event Coordinator: " + username.getText() + " logged in");
             }
         }
         else

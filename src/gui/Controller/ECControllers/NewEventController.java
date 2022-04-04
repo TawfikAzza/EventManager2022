@@ -5,8 +5,10 @@ import be.Events;
 import be.TicketType;
 import bll.exception.AdminDAOException;
 import bll.exception.EventManagerException;
+import bll.exception.ParticipantManagerException;
 import bll.utils.DateUtil;
 
+import bll.utils.DisplayError;
 import gui.Model.CoordinatorModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,7 +57,7 @@ public class NewEventController implements Initializable {
     private RootLayoutEvenController rootLayoutEvenController;
     private Events currentEvent;
     private String operationType="creation";
-    public NewEventController() throws EventManagerException, AdminDAOException {
+    public NewEventController() throws EventManagerException, AdminDAOException, ParticipantManagerException {
             coordinatorModel = new CoordinatorModel();
     }
 
@@ -74,7 +76,8 @@ public class NewEventController implements Initializable {
         this.eventsController = eventsController;
     }
     @FXML
-    private void createEvent(ActionEvent event) throws EventManagerException, IOException {
+    private void createEvent(ActionEvent event) {
+        try {
         if(!checkFields())
             return;
             if(operationType.equals("creation")) {
@@ -84,15 +87,17 @@ public class NewEventController implements Initializable {
                     if(ticket.getType()!=null)
                         eventCreated.getTicketAvailable().add(ticket);
             }
-            eventCreated = coordinatorModel.createEvent(eventCreated);
-            goBack();
-        }
+
+                    eventCreated = coordinatorModel.createEvent(eventCreated);
+                    goBack();
+
+            }
             if(operationType.equals("modification")) {
                 currentEvent.getTicketAvailable().clear();
                 for(TicketType ticket:lstTickets.getItems())
                     if(ticket.getType()!=null)
                         currentEvent.getTicketAvailable().add(ticket);
-
+                System.out.println();
                 currentEvent.setName(txtName.getText());
                 currentEvent.setStartDate(getStartDate());
                 currentEvent.setEndDate(getEndDate());
@@ -102,6 +107,9 @@ public class NewEventController implements Initializable {
                 coordinatorModel.updateEvent(currentEvent);
                 goBack();
             }
+        } catch (EventManagerException e) {
+            DisplayError.displayError(e);
+        }
     }
 
     @FXML
@@ -205,21 +213,23 @@ public class NewEventController implements Initializable {
     public void setMainApp(RootLayoutEvenController rootLayoutEvenController) {
         this.rootLayoutEvenController=rootLayoutEvenController;
     }
-    private void goBack() throws IOException {
-        FXMLLoader loaderPage = new FXMLLoader();
-        loaderPage.setLocation(getClass().getResource("/gui/View/ECViews/EventView.fxml"));
-        GridPane eventOverview = (GridPane) loaderPage.load();
+    private void goBack() {
+        try {
+            FXMLLoader loaderPage = new FXMLLoader();
+            loaderPage.setLocation(getClass().getResource("/gui/View/ECViews/EventView.fxml"));
+            GridPane eventOverview = (GridPane) loaderPage.load();
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/RootLayoutEvent.fxml"));
-        Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/RootLayoutEvent.fxml"));
+            Parent root = loader.load();
 
-        RootLayoutEvenController rootLayoutEvenController = loader.getController();
-        rootLayoutEvenController.setCenter(eventOverview);
-        Scene scene = new Scene(root);
-        Stage primaryStage = (Stage) btnBack.getScene().getWindow();
-        primaryStage.setScene(scene);
-        primaryStage.show();
+            RootLayoutEvenController rootLayoutEvenController = loader.getController();
+            rootLayoutEvenController.setCenter(eventOverview);
+            Scene scene = new Scene(root);
+            Stage primaryStage = (Stage) btnBack.getScene().getWindow();
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {DisplayError.displayError(e);}
     }
 
     public void setValue(Events event) {

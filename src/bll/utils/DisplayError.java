@@ -10,5 +10,10 @@ public class DisplayError {
         alert.setHeaderText(t.getMessage());
         alert.showAndWait();
     }
-
+    public static void displayMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("You are missing data");
+        alert.setHeaderText(message);
+        alert.showAndWait();
+    }
 }

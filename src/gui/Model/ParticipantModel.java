@@ -13,14 +13,14 @@ public class ParticipantModel {
     private ObservableList<Participant> participantObservableList;
     private ObservableList<String> showEventsByPartId;
 
-    public ParticipantModel() throws Exception {
+    public ParticipantModel() throws Exception, ParticipantManagerException {
         participantManager = new ParticipantManager();
         participantObservableList = FXCollections.observableArrayList();
     }
 
     private static ParticipantModel single_instance = null;
 
-    public static ParticipantModel getInstance() throws Exception {
+    public static ParticipantModel getInstance() throws Exception, ParticipantManagerException {
         if (single_instance == null)
             single_instance = new ParticipantModel();
 
@@ -49,5 +49,9 @@ public class ParticipantModel {
 
     public void deleteParticipantFromEvent(Participant participant, Events event) throws ParticipantManagerException {
         participantManager.deleteParticipantFromEvent(participant, event);
+    }
+
+    public void deleteParticipant(Participant selectedParticipant) throws ParticipantManagerException {
+        participantManager.deleteParticipant(selectedParticipant);
     }
 }

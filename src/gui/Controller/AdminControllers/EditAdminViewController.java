@@ -3,7 +3,6 @@ package gui.Controller.AdminControllers;
 import be.Admin;
 import be.Users;
 import bll.exception.AdminDAOException;
-import bll.utils.CurrentAdmin;
 import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
@@ -39,6 +38,14 @@ public class EditAdminViewController implements Initializable {
     @FXML
     private Button newEventCoordinatorButton;
 
+    private Admin admin;
+
+
+    public EditAdminViewController(Admin admin)
+    {
+        this.admin = admin;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -46,11 +53,13 @@ public class EditAdminViewController implements Initializable {
         } catch (AdminDAOException e) {
             DisplayError.displayError(e);
         }
-        setFields(CurrentAdmin.getInstance());
+        setFields(admin);
     }
 
-    public void backClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
+    public void backClick(ActionEvent actionEvent) {
+        AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
+        loader.setController(controller);
         SceneSetter.setScene(firstNameTextField, loader);
     }
 
@@ -60,16 +69,17 @@ public class EditAdminViewController implements Initializable {
         String email = emailTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
-        int ID = CurrentAdmin.getInstance().getUserID();
+        int ID = admin.getUserID();
 
         Admin admin = new Admin(ID, loginName, password,2, email,firstName, lastName);
         if(confirmPassword()) {
             try {
                 adminModel.editUser(admin);
-                CurrentAdmin.setInstance(admin);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
+                AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
+                loader.setController(controller);
                 SceneSetter.setScene(firstNameTextField, loader);
-            } catch (AdminDAOException | IOException e) {
+            } catch (AdminDAOException e) {
                 DisplayError.displayError(e);
             }
         }

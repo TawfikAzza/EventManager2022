@@ -12,8 +12,12 @@ import java.util.ArrayList;
 public class ParticipantManager {
     ParticipantDAO participantDAO;
 
-    public ParticipantManager() throws Exception {
-        this.participantDAO = new ParticipantDAO();
+    public ParticipantManager() throws ParticipantManagerException {
+        try {
+            this.participantDAO = new ParticipantDAO();
+        } catch (Exception e) {
+            throw new ParticipantManagerException("Error while creating the ParticipantManager",e);
+        }
     }
 
     public ArrayList<Participant> getAllParticipants() throws ParticipantManagerException {
@@ -23,6 +27,16 @@ public class ParticipantManager {
             throw new ParticipantManagerException("Error while getting the list of participants",e);
         }
     }
+
+    public void deleteParticipant(Participant participant) throws ParticipantManagerException {
+        try {
+            participantDAO.deleteParticipant(participant);
+        } catch (SQLException e) {
+            throw new ParticipantManagerException("Error while removing participant",e);
+        }
+    }
+
+
     public ArrayList<String> participantsShowEventsbyId (int idParticipant) throws ParticipantManagerException {
         try {
             return participantDAO.participantsShowEventsbyId(idParticipant);

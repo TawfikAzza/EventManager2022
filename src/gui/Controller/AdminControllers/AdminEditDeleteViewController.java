@@ -2,7 +2,6 @@ package gui.Controller.AdminControllers;
 
 import be.Admin;
 import bll.exception.AdminDAOException;
-import bll.utils.CurrentAdmin;
 import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
@@ -17,6 +16,8 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 public class AdminEditDeleteViewController implements Initializable {
     @FXML
@@ -26,10 +27,16 @@ public class AdminEditDeleteViewController implements Initializable {
 
     private AdminModel adminModel;
     private Admin admin;
+    private Logger logger;
+    private FileHandler fileHandler;
+
+    public AdminEditDeleteViewController(Admin admin)
+    {
+     this.admin = admin;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.admin = CurrentAdmin.getInstance();
         this.nameLabel.setText(admin.getFirstName() + " " + admin.getLastName());
         this.emailLabel.setText(admin.getMail());
         try {
@@ -40,13 +47,15 @@ public class AdminEditDeleteViewController implements Initializable {
 
     }
 
-    public void handleBack(ActionEvent actionEvent) throws IOException {
+    public void handleBack(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
         SceneSetter.setScene(nameLabel, loader);
     }
 
-    public void handleEditClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/EditAdminView.fxml"));
+    public void handleEditClick(ActionEvent actionEvent) {
+        EditAdminViewController controller = new EditAdminViewController(admin);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EditAdminView.fxml"));
+        loader.setController(controller);
         SceneSetter.setScene(nameLabel, loader);
     }
 
@@ -58,11 +67,10 @@ public class AdminEditDeleteViewController implements Initializable {
             if(buttonType== ButtonType.OK)
             {
                 try {
-                    adminModel.deleteUser(CurrentAdmin.getInstance());
-                    CurrentAdmin.setInstance(null);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
+                    adminModel.deleteUser(admin);
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
                     SceneSetter.setScene(nameLabel, loader);
-                } catch (AdminDAOException | IOException e) {
+                } catch (AdminDAOException e) {
                     DisplayError.displayError(e);
                 }
             }

@@ -6,6 +6,7 @@ public class Participant {
     private String lname;
     private String email;
     private String phoneNumber;
+    private int ticketID;
 
     public Participant(int id, String fname, String lname, String email, String phoneNumber) {
         this.id = id;
@@ -49,5 +50,13 @@ public class Participant {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public int getTicketID() {
+        return ticketID;
+    }
+
+    public void setTicketID(int ticketID) {
+        this.ticketID = ticketID;
     }
 }

@@ -4,11 +4,18 @@ public class Ticket {
     private int id;
     private String ticketNumber;
     private int ticketTypeID;
-
+    private boolean valid;
     public Ticket(int id, String ticketNumber, int ticketTypeID) {
         this.id = id;
         this.ticketNumber = ticketNumber;
         this.ticketTypeID = ticketTypeID;
+    }
+
+    public Ticket(int id, String ticketNumber, int ticketTypeID, boolean valid) {
+        this.id = id;
+        this.ticketNumber = ticketNumber;
+        this.ticketTypeID = ticketTypeID;
+        this.valid = valid;
     }
 
     public int getId() {

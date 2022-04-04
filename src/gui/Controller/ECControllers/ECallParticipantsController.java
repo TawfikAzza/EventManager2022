@@ -35,9 +35,8 @@ public class ECallParticipantsController implements Initializable {
     @FXML
     private TableView<Participant> tableViewPartName;
 
-    public ECallParticipantsController() throws Exception {
+    public ECallParticipantsController() throws Exception, ParticipantManagerException {
         participantModel = ParticipantModel.getInstance();
-
     }
 
     private void updateTableView() throws ParticipantManagerException {
