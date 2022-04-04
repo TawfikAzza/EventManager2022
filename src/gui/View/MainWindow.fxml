@@ -22,6 +22,11 @@
 
 
    <children>
+      <ImageView fitHeight="390.0" fitWidth="590.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Images/istockphoto-503862244-170667a.jpg" />
+         </image>
+      </ImageView>
       <VBox layoutX="176.0" layoutY="22.0" prefHeight="346.0" prefWidth="238.0" style="-fx-alignment: center; -fx-background-radius: 25;" styleClass="anchor02">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
