@@ -13,9 +13,10 @@
         <URL value="@../CSS/Style.css" />
     </stylesheets>
     <left>
-        <VBox prefHeight="619.0" prefWidth="122.0" style="-fx-alignment: baseline-center;" styleClass="root" BorderPane.alignment="CENTER">
+        <VBox prefHeight="619.0" prefWidth="122.0" style="-fx-alignment: baseline-center;" styleClass="eventRoot" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="btnAdd" contentDisplay="TOP" mnemonicParsing="false" onAction="#addEvent" style="-fx-alignment: center;" text="Add An Event" textFill="#fafafa">
+                <Button fx:id="btnAdd" contentDisplay="TOP" mnemonicParsing="false" onAction="#addEvent" text="Add An Event" textFill="#fafafa"
+                styleClass="eventRootButton">
                     <graphic>
                         <ImageView fitHeight="51.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -23,14 +24,11 @@
                             </image>
                         </ImageView>
                     </graphic>
-                    <font>
-                        <Font name="Roboto Light" size="12.0" />
-                    </font>
                     <VBox.margin>
                         <Insets top="38.0" />
                     </VBox.margin>
                 </Button>
-                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#manageEvent" text="Manage Events" textFill="#fafafa">
+                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#manageEvent" text="Manage Events" textFill="#fafafa" styleClass="eventRootButton">
                     <graphic>
                         <ImageView fitHeight="51.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -42,7 +40,7 @@
                         <Insets top="38.0" />
                     </VBox.margin>
                 </Button>
-                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#manageParticipants" text="Participants" textFill="#fafafa">
+                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#manageParticipants" text="Participants" textFill="#fafafa" styleClass="eventRootButton">
                     <graphic>
                         <ImageView fitHeight="69.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -54,7 +52,7 @@
                         <Insets top="38.0" />
                     </VBox.margin>
                 </Button>
-                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#sellTicket" text="Sell a Ticket" textFill="#fafafa">
+                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#sellTicket" text="Sell a Ticket" textFill="#fafafa" styleClass="eventRootButton">
                     <graphic>
                         <ImageView fitHeight="81.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -66,10 +64,11 @@
                         <Insets top="38.0" />
                     </VBox.margin>
                 </Button>
-            <Button fx:id="btnScan" mnemonicParsing="false" onAction="#scanTicket" text="Scan Ticket" textFill="#fafafa">
+            <Button fx:id="btnScan" mnemonicParsing="false" onAction="#scanTicket" text="Scan Ticket" textFill="#fafafa" styleClass="eventRootButton">
                <VBox.margin>
                   <Insets top="38.0" />
-               </VBox.margin></Button>
+               </VBox.margin>
+            </Button>
             </children>
         </VBox>
     </left>
