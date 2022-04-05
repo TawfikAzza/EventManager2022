@@ -1,21 +1,34 @@
 package gui.Controller.ECControllers;
 
 import bll.utils.DisplayError;
+import gui.util.FontsAwesomeHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import org.apache.commons.math3.analysis.function.Add;
 
 import java.io.IOException;
 
 public class RootLayoutEvenController {
+
     @FXML
     private BorderPane topPane;
 
     @FXML
+    private Label AddEventIcon;
+
+    @FXML
     private Button btnAdd;
+
+    @FXML
+    public void initialize()
+    {
+        AddEventIcon.setText(FontsAwesomeHelper.getFontAwesomeIconForButtons("add").getText());
+    }
 
     @FXML
     void addEvent(ActionEvent event) {
