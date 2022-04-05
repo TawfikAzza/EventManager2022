@@ -12,8 +12,12 @@ import java.util.ArrayList;
 public class ParticipantManager {
     ParticipantDAO participantDAO;
 
-    public ParticipantManager() throws Exception {
-        this.participantDAO = new ParticipantDAO();
+    public ParticipantManager() throws ParticipantManagerException {
+        try {
+            this.participantDAO = new ParticipantDAO();
+        } catch (Exception e) {
+            throw new ParticipantManagerException("Error while creating the ParticipantManager",e);
+        }
     }
 
     public ArrayList<Participant> getAllParticipants() throws ParticipantManagerException {

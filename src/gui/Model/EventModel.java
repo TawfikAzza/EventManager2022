@@ -1,6 +1,8 @@
 package gui.Model;
 
 import be.Events;
+import be.Ticket;
+import be.TicketType;
 import bll.EventManager;
 import bll.FileManager;
 import bll.exception.EventDAOException;
@@ -51,4 +53,11 @@ public class EventModel {
         return fileManager.exportExcelFile(idOfEvent);
     }
 
+    public Ticket getTicket(int ticketID) throws EventManagerException {
+        return eventManager.getTicket(ticketID);
+    }
+
+    public TicketType getTicketType(int ticketTypeID) throws EventManagerException {
+        return eventManager.getTicketType(ticketTypeID);
+    }
 }

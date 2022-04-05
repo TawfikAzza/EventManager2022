@@ -3,6 +3,7 @@ package bll;
 import be.Events;
 import be.Participant;
 import be.Ticket;
+import be.TicketType;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import dal.db.EventDAO;
@@ -95,6 +96,22 @@ public class EventManager {
             return ticketDAO.validTicketScan(text);
         } catch (SQLException e) {
             throw new EventManagerException("Error while scanning the ticket ! ", e);
+        }
+    }
+
+    public Ticket getTicket(int ticketID) throws EventManagerException {
+        try {
+            return ticketDAO.getTicket(ticketID);
+        } catch (SQLException e) {
+            throw new EventManagerException("Error while retrieving the ticket from the database! ", e);
+        }
+    }
+
+    public TicketType getTicketType(int ticketTypeID) throws EventManagerException {
+        try {
+            return ticketDAO.getTicketType(ticketTypeID);
+        } catch (SQLException e) {
+            throw new EventManagerException("Error while retrieving the ticket type from the database! ", e);
         }
     }
 }

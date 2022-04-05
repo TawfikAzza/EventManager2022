@@ -5,6 +5,7 @@ import be.Events;
 import be.TicketType;
 import bll.exception.AdminDAOException;
 import bll.exception.EventManagerException;
+import bll.exception.ParticipantManagerException;
 import bll.utils.DateUtil;
 
 import bll.utils.DisplayError;
@@ -56,7 +57,7 @@ public class NewEventController implements Initializable {
     private RootLayoutEvenController rootLayoutEvenController;
     private Events currentEvent;
     private String operationType="creation";
-    public NewEventController() throws EventManagerException, AdminDAOException {
+    public NewEventController() throws EventManagerException, AdminDAOException, ParticipantManagerException {
             coordinatorModel = new CoordinatorModel();
     }
 

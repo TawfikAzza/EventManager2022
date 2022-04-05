@@ -6,10 +6,8 @@ import be.Participant;
 import be.Ticket;
 import bll.AdminLogic;
 import bll.EventManager;
-import bll.exception.AdminDAOException;
-import bll.exception.AdminLogicException;
-import bll.exception.EventDAOException;
-import bll.exception.EventManagerException;
+import bll.ParticipantManager;
+import bll.exception.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -21,9 +19,11 @@ public class CoordinatorModel {
     private ObservableList<Coordinator> allCoordinator = FXCollections.observableArrayList();
     private EventManager eventManager;
     private AdminLogic adminManager;
-    public CoordinatorModel() throws EventManagerException, AdminDAOException {
+    private ParticipantManager participantManager;
+    public CoordinatorModel() throws EventManagerException, AdminDAOException, ParticipantManagerException {
         eventManager = new EventManager();
         adminManager = new AdminLogic();
+        participantManager = new ParticipantManager();
     }
     public ObservableList<Events> getAllEvents() throws EventManagerException {
         allEvents.clear();
@@ -55,5 +55,9 @@ public class CoordinatorModel {
 
     public Ticket sellTicket(Ticket ticketSold,Events eventChosen, Participant participant) throws EventManagerException {
         return eventManager.sellTicket(ticketSold,eventChosen,participant);
+    }
+
+    public void deleteParticipant(Participant selectedItem) throws ParticipantManagerException {
+        participantManager.deleteParticipant(selectedItem);
     }
 }

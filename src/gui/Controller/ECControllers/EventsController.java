@@ -5,6 +5,7 @@ import be.TicketType;
 import bll.exception.AdminDAOException;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
+import bll.exception.ParticipantManagerException;
 import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.CoordinatorModel;
@@ -71,7 +72,7 @@ public class EventsController implements Initializable {
     public EventsController() {
         try {
             coordinatorModel = new CoordinatorModel();
-        } catch (EventManagerException | AdminDAOException e) {
+        } catch (EventManagerException | AdminDAOException | ParticipantManagerException e) {
             displayError(e);
         }
     }
