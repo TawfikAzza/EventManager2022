@@ -7,13 +7,19 @@
 <?import javafx.scene.text.*?>
 
 
+
 <BorderPane fx:id="topPane" prefHeight="619.0" prefWidth="103.0" styleClass="anchor02"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="gui.Controller.ECControllers.RootLayoutEvenController">
+
     <stylesheets>
         <URL value="@../CSS/Style.css"/>
     </stylesheets>
     <left>
+        <!--each of the buttons in this VBox have a label. The label starts out empty and is filled with an
+        icon from the font-awesome font by the controller when it initialises. The icons are all
+        gotten from the helper class FontsAwesomeHelper.-->
+
         <VBox prefHeight="619.0" prefWidth="122.0" styleClass="anchor02" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="btnAdd" contentDisplay="TOP" mnemonicParsing="false" onAction="#addEvent"
@@ -25,7 +31,8 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="10.0"/>
                     </VBox.margin>
                     <graphic>
-                        <Label fx:id="AddEventIcon" text="Label"/>
+
+                        <Label fx:id="AddEventIcon" style="-fx-font-family: FontAwesome;"  text="Label"/>
                     </graphic>
                 </Button>
                 <Button fx:id="btnManage" contentDisplay="TOP" mnemonicParsing="false" onAction="#manageEvent"
