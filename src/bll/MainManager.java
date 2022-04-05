@@ -1,6 +1,7 @@
 package bll;
 
 import be.Users;
+import bll.utils.LoggedInUser;
 import dal.db.UsersDAO;
 
 public class MainManager {
@@ -18,6 +19,7 @@ public class MainManager {
     {
         Users users= usersDAO.compareLogins(username, password);
         if (users != null){
+            LoggedInUser.getInstance(users);
             return users;
 
         }

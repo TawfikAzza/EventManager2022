@@ -4,6 +4,7 @@ import be.Coordinator;
 import be.Users;
 import bll.exception.AdminDAOException;
 import bll.utils.DisplayError;
+import bll.utils.LoggedInUser;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
 import javafx.event.ActionEvent;
@@ -17,6 +18,8 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 public class EditEventCoordinatorViewController implements Initializable {
     private AdminModel adminModel;
@@ -33,16 +36,21 @@ public class EditEventCoordinatorViewController implements Initializable {
     private TextField lastNameTextField;
     @FXML
     private PasswordField confirmPasswordField;
-    @FXML
-    private Button backButton;
-    @FXML
-    private Button newEventCoordinatorButton;
 
-    Coordinator eventCoordinator;
+    private Coordinator eventCoordinator;
+    private Logger logger;
+    private FileHandler fileHandler;
 
     public EditEventCoordinatorViewController(Coordinator eventCoordinator)
     {
         this.eventCoordinator = eventCoordinator;
+        this.logger = Logger.getLogger("AdminOperations");
+        try {
+            this.fileHandler = new FileHandler("resources/Log/adminOperations.log", true);
+            logger.addHandler(fileHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -74,7 +82,10 @@ public class EditEventCoordinatorViewController implements Initializable {
         if(confirmPassword()) {
             try {
                 adminModel.editUser(coordinator);
+                logger.info("Admin: " + LoggedInUser.getInstance(null).getUserID() + " edited Event Coordinator with the ID: " + eventCoordinator.getUserID());
+                AdminEventCoordinatorViewController controller = new AdminEventCoordinatorViewController(eventCoordinator);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+                loader.setController(controller);
                 SceneSetter.setScene(firstNameTextField, loader);
             } catch (AdminDAOException e) {
                 DisplayError.displayError(e);

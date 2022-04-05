@@ -3,6 +3,7 @@ package gui.Controller.AdminControllers;
 import be.Admin;
 import bll.exception.AdminDAOException;
 import bll.utils.DisplayError;
+import bll.utils.LoggedInUser;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
 import javafx.event.ActionEvent;
@@ -32,7 +33,14 @@ public class AdminEditDeleteViewController implements Initializable {
 
     public AdminEditDeleteViewController(Admin admin)
     {
-     this.admin = admin;
+        this.admin = admin;
+        this.logger = Logger.getLogger("AdminOperations");
+        try {
+            this.fileHandler = new FileHandler("resources/Log/adminOperations.log", true);
+            logger.addHandler(fileHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -68,6 +76,7 @@ public class AdminEditDeleteViewController implements Initializable {
             {
                 try {
                     adminModel.deleteUser(admin);
+                    logger.info("Admin: " + LoggedInUser.getInstance(null).getUserID() + " deleted Admin: " + admin);
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
                     SceneSetter.setScene(nameLabel, loader);
                 } catch (AdminDAOException e) {

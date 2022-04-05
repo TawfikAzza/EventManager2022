@@ -4,6 +4,7 @@ import be.Admin;
 import be.Users;
 import bll.exception.AdminDAOException;
 import bll.utils.DisplayError;
+import bll.utils.LoggedInUser;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
 import javafx.event.ActionEvent;
@@ -17,6 +18,8 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 public class EditAdminViewController implements Initializable {
     private AdminModel adminModel;
@@ -39,11 +42,20 @@ public class EditAdminViewController implements Initializable {
     private Button newEventCoordinatorButton;
 
     private Admin admin;
+    private Logger logger;
+    private FileHandler fileHandler;
 
 
     public EditAdminViewController(Admin admin)
     {
         this.admin = admin;
+        this.logger = Logger.getLogger("AdminOperations");
+        try {
+            this.fileHandler = new FileHandler("resources/Log/adminOperations.log", true);
+            logger.addHandler(fileHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -75,6 +87,7 @@ public class EditAdminViewController implements Initializable {
         if(confirmPassword()) {
             try {
                 adminModel.editUser(admin);
+                logger.info("Admin: " + LoggedInUser.getInstance(null).getUserID() + " edited Admin with the ID: " + admin.getUserID());
                 AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
                 loader.setController(controller);

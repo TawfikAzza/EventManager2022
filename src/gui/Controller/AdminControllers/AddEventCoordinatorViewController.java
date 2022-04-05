@@ -4,6 +4,7 @@ import be.Admin;
 import be.Coordinator;
 import bll.exception.AdminDAOException;
 import bll.utils.DisplayError;
+import bll.utils.LoggedInUser;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
 import javafx.event.ActionEvent;
@@ -18,6 +19,8 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 public class AddEventCoordinatorViewController implements Initializable {
     private AdminModel adminModel;
@@ -37,6 +40,9 @@ public class AddEventCoordinatorViewController implements Initializable {
     @FXML
     private PasswordField confirmPasswordField;
 
+    private Logger logger;
+    private FileHandler fileHandler;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,6 +51,17 @@ public class AddEventCoordinatorViewController implements Initializable {
             this.accountTypeChoiceBox.setItems(adminModel.getAccountTypes());
         } catch (AdminDAOException e) {
             DisplayError.displayError(e);
+        }
+    }
+
+    public AddEventCoordinatorViewController()
+    {
+        this.logger = Logger.getLogger("AdminOperations");
+        try {
+            this.fileHandler = new FileHandler("resources/Log/adminOperations.log", true);
+            logger.addHandler(fileHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -71,6 +88,7 @@ public class AddEventCoordinatorViewController implements Initializable {
                     Coordinator coordinator = new Coordinator(loginName, password, 2, email, firstName, lastName);
                     adminModel.addLoginUser(coordinator);
                 }
+                logger.info("Admin: " + LoggedInUser.getInstance(null).getUserID() + " created User: " + loginName);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
                 SceneSetter.setScene(accountTypeChoiceBox, loader);
             } else {
