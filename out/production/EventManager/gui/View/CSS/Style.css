@@ -5,6 +5,10 @@
     -fx-font-weight: 700;
 
 }
+.loginRoot
+{
+
+}
 .eventRoot{
     -fx-background-color: #FF4D4D;
     -fx-font-family: Raleway, sans-serif;
@@ -66,11 +70,7 @@
 
 
 .anchor02 {
-<<<<<<< HEAD
-    -fx-background-color: #FFFFFF;
-=======
     -fx-background-color: #FAFAFA;
->>>>>>> Mani-3.2
 
 }
 .label
