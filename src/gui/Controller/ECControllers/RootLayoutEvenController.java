@@ -32,6 +32,7 @@ public class RootLayoutEvenController {
             controller.setMainApp(this);
         }
         catch (IOException e) {
+            e.printStackTrace();
             DisplayError.displayError(e);}
 
     }
