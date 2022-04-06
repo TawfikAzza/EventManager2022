@@ -133,15 +133,34 @@ public class NewEventController implements Initializable {
     }
 
     private boolean checkFields() {
-
-        return startComboHour.getValue() != null
+        String message = "";
+        if(txtName.getText().equals(""))
+            message += "\n Provide a valid value for the event's name ";
+        if(txtLocation.getText().equals(""))
+            message += "\n Provide a valid value for the event's location ";
+        if(txtStartDate.getValue() == null)
+            message += "\n Select a valid value for the starting date of the event ";
+        if(startComboHour.getValue() == null)
+            message += "\n Select a valid value for the starting hour";
+        if(startComboMinute.getValue()==null)
+            message += "\n Select a valid value for the starting minute ";
+        if(txtDescription.getText().equals(""))
+            message += "\n Provide a valid value for the event's description ";
+        if(lstTickets.getItems().size()==0)
+            message += "\n Provide a valid value for the event's ticket type (currently empty) ";
+       /* return startComboHour.getValue() != null
                 && startComboMinute.getValue() != null
                 && txtStartDate.getValue() != null
                 && !txtDescription.getText().equals("")
                 && !txtLocation.getText().equals("")
                 && !txtName.getText().equals("")
-                && !(lstTickets.getItems().size()==0);
-
+                && !(lstTickets.getItems().size()==0);*/
+        if(message.equals(""))
+            return true;
+        else {
+            DisplayError.displayMessage(message);
+            return false;
+        }
     }
 
     private void fillComboBox(){

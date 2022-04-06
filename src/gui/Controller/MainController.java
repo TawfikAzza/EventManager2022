@@ -3,6 +3,7 @@ package gui.Controller;
 import be.Users;
 import bll.MainManager;
 import bll.utils.DisplayError;
+import bll.utils.LoggedInUser;
 import bll.utils.SceneSetter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -52,12 +53,14 @@ public class MainController {
         {
             if (users.getRoleID() == 1) {
                 openAdminMgr();
-                logger.info("Admin: " + username.getText() + " logged in");
+                logger.info("Admin: " + username.getText() + " ID:" + users.getUserID() + " logged in");
+
             }
             else if (users.getRoleID()== 2)
             {
                 openEventMgr();
-                logger.info("Event Coordinator: " + username.getText() + " logged in");
+                logger.info("Event Coordinator: " + username.getText() + " ID:" + users.getUserID() + " logged in");
+
             }
         }
         else

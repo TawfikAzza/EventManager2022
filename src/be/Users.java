@@ -15,6 +15,12 @@ public class Users {
         this.mail=mail;
         this.roleID = roleID;
     }
+    public Users(int userID, String loginName, String mail, int roleID) {
+        this.userID = userID;
+        this.loginName = loginName;
+        this.mail=mail;
+        this.roleID = roleID;
+    }
 
     public Users(String loginName, String password, int roleID, String mail, String firstName, String lastName) {
         this.mail=mail;
