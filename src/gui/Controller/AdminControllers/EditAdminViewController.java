@@ -42,20 +42,10 @@ public class EditAdminViewController implements Initializable {
     private Button newEventCoordinatorButton;
 
     private Admin admin;
-    private Logger logger;
-    private FileHandler fileHandler;
-
 
     public EditAdminViewController(Admin admin)
     {
         this.admin = admin;
-        this.logger = Logger.getLogger("AdminOperations");
-        try {
-            this.fileHandler = new FileHandler("resources/Log/adminOperations.log", true);
-            logger.addHandler(fileHandler);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -87,7 +77,6 @@ public class EditAdminViewController implements Initializable {
         if(confirmPassword()) {
             try {
                 adminModel.editUser(admin);
-                logger.info("Admin: " + LoggedInUser.getInstance(null).getUserID() + " edited Admin with the ID: " + admin.getUserID());
                 AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
                 loader.setController(controller);

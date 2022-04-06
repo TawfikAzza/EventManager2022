@@ -33,8 +33,8 @@ public class AdminLogic {
     {
         try {
             adminDAO.addLoginUser(user);
-            Users loggedIn = LoggedInUser.getInstance(null);
-            log.getLogger().info("Admin: " + loggedIn.getLoginName() + " with the ID: "+ loggedIn.getUserID() + " created User: " + user.getLoginName());
+            logMessage("added", user);
+
         }
         catch (SQLException e)
         {
@@ -45,6 +45,7 @@ public class AdminLogic {
     public void deleteUser(Users user) throws AdminDAOException {
         try {
             adminDAO.deleteUser(user);
+            logMessage("deleted", user);
         }
         catch (SQLException e)
         {
@@ -55,6 +56,7 @@ public class AdminLogic {
     public void editUser(Users user) throws AdminDAOException {
         try {
             adminDAO.editUser(user);
+            logMessage("edited", user);
         }
         catch (SQLException e)
         {
@@ -98,6 +100,12 @@ public class AdminLogic {
         {
             throw new AdminDAOException("Failed to connect to the database.", e);
         }
+    }
+
+    public void logMessage(String action, Users user)
+    {
+        Users loggedIn = LoggedInUser.getInstance(null);
+        log.getLogger().info("Admin: " + loggedIn.getLoginName() + " with the ID: "+ loggedIn.getUserID() + " " + action + " User: " + user.getLoginName() + " with the ID " +user.getUserID());
     }
 
 }

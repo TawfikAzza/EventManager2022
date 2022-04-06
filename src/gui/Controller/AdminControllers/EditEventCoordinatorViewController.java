@@ -37,19 +37,10 @@ public class EditEventCoordinatorViewController implements Initializable {
     private PasswordField confirmPasswordField;
 
     private Coordinator eventCoordinator;
-    private Logger logger;
-    private FileHandler fileHandler;
 
     public EditEventCoordinatorViewController(Coordinator eventCoordinator)
     {
         this.eventCoordinator = eventCoordinator;
-        this.logger = Logger.getLogger("AdminOperations");
-        try {
-            this.fileHandler = new FileHandler("resources/Log/adminOperations.log", true);
-            logger.addHandler(fileHandler);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -81,7 +72,6 @@ public class EditEventCoordinatorViewController implements Initializable {
         if(confirmPassword()) {
             try {
                 adminModel.editUser(coordinator);
-                logger.info("Admin: " + LoggedInUser.getInstance(null).getUserID() + " edited Event Coordinator with the ID: " + eventCoordinator.getUserID());
                 AdminEventCoordinatorViewController controller = new AdminEventCoordinatorViewController(eventCoordinator);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEventCoordinatorView.fxml"));
                 loader.setController(controller);

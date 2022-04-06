@@ -37,19 +37,10 @@ public class AdminEventCoordinatorViewController implements Initializable {
 
     private AdminModel adminModel;
     private final Coordinator eventCoordinator;
-    private Logger logger;
-    private FileHandler fileHandler;
 
     public AdminEventCoordinatorViewController(Coordinator coordinator)
     {
         this.eventCoordinator = coordinator;
-        this.logger = Logger.getLogger("AdminOperations");
-        try {
-            this.fileHandler = new FileHandler("resources/Log/adminOperations.log", true);
-            logger.addHandler(fileHandler);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -79,7 +70,6 @@ public class AdminEventCoordinatorViewController implements Initializable {
             {
                 try {
                     adminModel.deleteUser(eventCoordinator);
-                    logger.info("Admin: " + LoggedInUser.getInstance(null).getUserID() + " deleted Event Coordinator: " + eventCoordinator);
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
                     SceneSetter.setScene(nameLabel, loader);
                 } catch (AdminDAOException e) {
