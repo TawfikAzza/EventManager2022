@@ -9,9 +9,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import org.apache.commons.math3.analysis.function.Add;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class RootLayoutEvenController {
 

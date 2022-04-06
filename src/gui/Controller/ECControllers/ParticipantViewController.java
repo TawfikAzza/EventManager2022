@@ -108,7 +108,12 @@ public class ParticipantViewController implements Initializable {
         columnLastNamePE.setCellValueFactory(new PropertyValueFactory<>("lname"));
         columnPhoneNumberPE.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         tableParticipantByEvent.getItems().clear();
-        tableParticipantByEvent.getItems().addAll(event.getListParticipants());
+        List<Participant> participants = new ArrayList<>();
+        for (Participant participant : event.getListParticipants()) {
+            if(!participant.getFname().equals("ANONYMOUS"))
+                participants.add(participant);
+        }
+        tableParticipantByEvent.getItems().addAll(participants);
 
     }
     public void updateEventTable() {
@@ -298,14 +303,30 @@ public class ParticipantViewController implements Initializable {
 
     @FXML
     private void deleteParticipant()  {
+        String message ="";
         if (tableParticipant.getSelectionModel().getSelectedIndex() == -1)
+            message += "Please select a participant to remove \n\n";
+        if(!message.equals("")) {
+            DisplayError.displayMessage(message);
             return;
-        try {
-            coordinatorModel.deleteParticipant(tableParticipant.getSelectionModel().getSelectedItem());
-        } catch (ParticipantManagerException e) {
-            DisplayError.displayError(e);
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Choose wisely...");
+        alert.setHeaderText("Are you sure you want to delete the Participant (This operation will be permanent) \n "+
+                tableParticipant.getSelectionModel().getSelectedItem().getFname()+" "+
+                tableParticipant.getSelectionModel().getSelectedItem().getLname()+" ?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                coordinatorModel.deleteParticipant(tableParticipant.getSelectionModel().getSelectedItem());
+            } catch (ParticipantManagerException e) {
+                DisplayError.displayError(e);
+            }
         }
         updateTableParticipant();
+        updateEventTable();
+        if(tableEvent.getSelectionModel().getSelectedIndex()!=-1)
+            updateTableParticipantByEvent(tableEvent.getSelectionModel().getSelectedItem());
     }
     @FXML
     void deleteParticipantFromEvent(ActionEvent event) {
