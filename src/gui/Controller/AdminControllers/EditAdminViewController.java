@@ -70,7 +70,7 @@ public class EditAdminViewController implements Initializable {
 
     public void backClick(ActionEvent actionEvent) {
         AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
         loader.setController(controller);
         SceneSetter.setScene(firstNameTextField, loader);
     }
@@ -89,7 +89,7 @@ public class EditAdminViewController implements Initializable {
                 adminModel.editUser(admin);
                 logger.info("Admin: " + LoggedInUser.getInstance(null).getUserID() + " edited Admin with the ID: " + admin.getUserID());
                 AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
                 loader.setController(controller);
                 SceneSetter.setScene(firstNameTextField, loader);
             } catch (AdminDAOException e) {

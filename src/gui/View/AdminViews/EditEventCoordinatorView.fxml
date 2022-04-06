@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="308.0" prefWidth="440.0" styleClass="anchor" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" >
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="308.0" prefWidth="440.0" styleClass="anchor" stylesheets="@../CSS/Style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" >
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.20001220703125" minWidth="10.0" prefWidth="112.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="308.0" minWidth="10.0" prefWidth="308.0" />
@@ -46,7 +46,7 @@
       <TextField fx:id="firstNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <TextField fx:id="lastNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Button fx:id="backButton" mnemonicParsing="false" onAction="#backClick" text="⬅ Back" GridPane.rowIndex="6" />
-      <Button fx:id="newEventCoordinatorButton" mnemonicParsing="false" onAction="#editAdmin" prefHeight="26.0" prefWidth="183.0" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Button fx:id="newEventCoordinatorButton" mnemonicParsing="false" onAction="#editEventCoordinatorClick" prefHeight="26.0" prefWidth="183.0" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="6" />
       <Label text="Password" textFill="#3823b8" GridPane.rowIndex="4">
          <font>
             <Font name="System Bold" size="14.0" />

@@ -168,7 +168,7 @@ public class EventsController implements Initializable {
 
     @FXML
     void deleteEvent(ActionEvent event) {
-        
+
 
     }
 

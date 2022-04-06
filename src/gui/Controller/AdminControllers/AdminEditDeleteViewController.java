@@ -62,7 +62,7 @@ public class AdminEditDeleteViewController implements Initializable {
 
     public void handleEditClick(ActionEvent actionEvent) {
         EditAdminViewController controller = new EditAdminViewController(admin);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EditAdminView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/EditAdminView.fxml"));
         loader.setController(controller);
         SceneSetter.setScene(nameLabel, loader);
     }
@@ -77,7 +77,7 @@ public class AdminEditDeleteViewController implements Initializable {
                 try {
                     adminModel.deleteUser(admin);
                     logger.info("Admin: " + LoggedInUser.getInstance(null).getUserID() + " deleted Admin: " + admin);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminView.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
                     SceneSetter.setScene(nameLabel, loader);
                 } catch (AdminDAOException e) {
                     DisplayError.displayError(e);

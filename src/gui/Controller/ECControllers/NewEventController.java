@@ -28,6 +28,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 public class NewEventController implements Initializable {
 
@@ -51,7 +53,8 @@ public class NewEventController implements Initializable {
     @FXML
     private GridPane gridPaneNewEvent;
 
-
+    private Logger logger;
+    private FileHandler fileHandler;
     private CoordinatorModel coordinatorModel;
     private EventsController eventsController;
     private RootLayoutEvenController rootLayoutEvenController;

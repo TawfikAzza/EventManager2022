@@ -12,17 +12,15 @@ public class SceneSetter {
 
     public static void setScene(Node node, FXMLLoader loader) {
 
-        Parent root = null;
         try {
-            root = loader.load();
+            Parent root = loader.load();
+            Scene scene = new Scene(root,800,600);
+            Stage primaryStage = (Stage) node.getScene().getWindow();
+            primaryStage.setScene(scene);
+            primaryStage.show();
         } catch (IOException e) {
             DisplayError.displayError(e);
         }
 
-        Scene scene = new Scene(root,800,600);
-        Stage primaryStage = (Stage) node.getScene().getWindow();
-        primaryStage.setScene(scene);
-
-        primaryStage.show();
     }
 }

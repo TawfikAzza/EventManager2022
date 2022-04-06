@@ -65,7 +65,7 @@ public class AdminEventCoordinatorViewController implements Initializable {
 
     public void handleEditClick(ActionEvent actionEvent) {
         EditEventCoordinatorViewController controller = new EditEventCoordinatorViewController(eventCoordinator);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/EditEventCoordinatorView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/EditEventCoordinatorView.fxml"));
         loader.setController(controller);
         SceneSetter.setScene(nameLabel, loader);
     }

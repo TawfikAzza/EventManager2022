@@ -40,10 +40,6 @@ public class AddEventCoordinatorViewController implements Initializable {
     @FXML
     private PasswordField confirmPasswordField;
 
-    private Logger logger;
-    private FileHandler fileHandler;
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -56,13 +52,6 @@ public class AddEventCoordinatorViewController implements Initializable {
 
     public AddEventCoordinatorViewController()
     {
-        this.logger = Logger.getLogger("AdminOperations");
-        try {
-            this.fileHandler = new FileHandler("resources/Log/adminOperations.log", true);
-            logger.addHandler(fileHandler);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void backClick(ActionEvent actionEvent) {
@@ -88,7 +77,6 @@ public class AddEventCoordinatorViewController implements Initializable {
                     Coordinator coordinator = new Coordinator(loginName, password, 2, email, firstName, lastName);
                     adminModel.addLoginUser(coordinator);
                 }
-                logger.info("Admin: " + LoggedInUser.getInstance(null).getUserID() + " created User: " + loginName);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
                 SceneSetter.setScene(accountTypeChoiceBox, loader);
             } else {

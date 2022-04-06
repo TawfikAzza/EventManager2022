@@ -17,7 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import java.io.IOException;
+
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
@@ -81,7 +81,7 @@ public class AdminViewController implements Initializable {
         {
             if(mouseEvent.getClickCount()==2) {
                 AdminEventCoordinatorViewController controller = new AdminEventCoordinatorViewController(coordinator);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEventCoordinatorView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEventCoordinatorView.fxml"));
                 loader.setController(controller);
                 SceneSetter.setScene(adminTableView, loader);
             }
@@ -94,7 +94,7 @@ public class AdminViewController implements Initializable {
         {
             if(mouseEvent.getClickCount()==2) {
                 AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminEditDeleteView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
                 loader.setController(controller);
                 SceneSetter.setScene(adminTableView, loader);
             }
