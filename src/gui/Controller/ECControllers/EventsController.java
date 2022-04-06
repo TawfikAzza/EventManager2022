@@ -168,6 +168,7 @@ public class EventsController implements Initializable {
 
     @FXML
     void deleteEvent(ActionEvent event) {
+        
 
     }
 
@@ -258,20 +259,7 @@ public class EventsController implements Initializable {
         }
 
     }
-    @FXML
-    private void showAllParticipants(ActionEvent actionEvent) throws IOException {
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/EC-allParticipantsView.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
 
-        stage.show();
-
-         */
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/EC-allParticipantsView.fxml"));
-        SceneSetter.setScene(topPane, loader);
-    }
 
     public void setMainApp(RootLayoutEvenController rootLayoutEvenController) {
         this.rootLayoutEvenController=rootLayoutEvenController;
