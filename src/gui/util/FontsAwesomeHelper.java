@@ -20,6 +20,10 @@ public class FontsAwesomeHelper {
                 return FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TICKET);
             case "scan":
                 return FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.QRCODE);
+            case "checkmark":
+                return FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.CHECK);
+            case "cross":
+                return FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TIMES);
             default:
                 throw new RuntimeException("ICON NOT FOUND");
         }
