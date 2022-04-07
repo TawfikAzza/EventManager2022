@@ -27,10 +27,6 @@ public class EventModel {
         fileManager = new FileManager();
     }
 
-    public void deleteEvent(Events event) throws Exception {
-        eventManager.deleteEvent(event);
-    }
-
     public List<Events> getAllEvents() throws EventManagerException {
         return eventManager.getAllEvents();
     }

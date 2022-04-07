@@ -1,17 +1,17 @@
 package bll;
 
-import be.Events;
-import be.Participant;
-import be.Ticket;
-import be.TicketType;
+import be.*;
 import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
+import bll.utils.LogCreator;
+import bll.utils.LoggedInUser;
 import dal.db.EventDAO;
 import dal.db.TicketDAO;
 import dal.interfaces.IEventDAO;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class EventManager {
     /**
@@ -21,12 +21,14 @@ public class EventManager {
      */
     private IEventDAO eventDAO;
     private TicketDAO ticketDAO;
+    private LogCreator log;
 
     public EventManager() throws EventManagerException {
 
         try {
             eventDAO = new EventDAO();
             ticketDAO = new TicketDAO();
+            this.log = new LogCreator("CoordinatorOperations");
         } catch (Exception e) {
             throw new EventManagerException("Failed to initialize Event Manager class!", e);
         }
@@ -45,6 +47,7 @@ public class EventManager {
             Events eventCreated = eventDAO.addEvent(event);
             event.setId(eventCreated.getId());
             ticketDAO.addEventTicket(event);
+            logMessage("created", event);
             return event;
         } catch (Exception e) {
             throw new EventManagerException("Error while creating the Event in database", e);
@@ -55,13 +58,10 @@ public class EventManager {
         try {
             eventDAO.updateEvent(event);
             ticketDAO.updateEventTicketType(event);
+            logMessage("edited", event);
         } catch (Exception e) {
             throw new EventManagerException("Error while updating the Event in database", e);
         }
-    }
-
-    public void deleteEvent(Events event) throws Exception {
-        //   eventDAO.removeEvent(event);
     }
 
     public List<Events> getParticipantEvent(Participant participant) throws EventManagerException {
@@ -113,5 +113,11 @@ public class EventManager {
         } catch (SQLException e) {
             throw new EventManagerException("Error while retrieving the ticket type from the database! ", e);
         }
+    }
+
+    public void logMessage(String action, Events event)
+    {
+        Users loggedIn = LoggedInUser.getInstance(null);
+        log.getLogger().info("Event Coordinator: " + loggedIn.getLoginName() + " with the ID: "+ loggedIn.getUserID() + " " + action + " Event: " + event.getName() + " with the ID " +event.getId());
     }
 }

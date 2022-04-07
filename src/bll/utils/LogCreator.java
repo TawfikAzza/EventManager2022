@@ -1,5 +1,7 @@
 package bll.utils;
 
+import be.Users;
+
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;

@@ -12,11 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<?import java.net.URL?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-          prefWidth="887.0" styleClass="anchor02" xmlns="http://javafx.com/javafx/17"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AdminControllers.AdminViewController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="887.0" styleClass="anchor02" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.AdminControllers.AdminViewController">
     <stylesheets>
         <URL value="@../CSS/Style.css" />
     </stylesheets>
@@ -75,18 +71,13 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                 </TableView>
-                <Button mnemonicParsing="false" onAction="#handleDeleteEvent" text="Delete Event">
-                    <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </VBox.margin>
-                </Button>
             </children>
         </VBox>
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="270.0">
             <children>
                 <Label text="Admins">
                     <font>
-                        <Font size="16.0" />
+                        <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
                 <TableView fx:id="adminTableView" onMouseClicked="#handleAdminClick" prefHeight="318.0" prefWidth="340.0" styleClass="shadow">

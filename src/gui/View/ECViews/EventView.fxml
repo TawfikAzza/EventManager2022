@@ -31,7 +31,6 @@
         <AnchorPane fx:id="topPane" prefHeight="640.0" prefWidth="322.0" styleClass="anchor02" GridPane.columnIndex="1">
             <children>
                 <Button fx:id="btnEdit" layoutX="21.0" layoutY="346.0" onAction="#editEvent" prefHeight="27.0" prefWidth="97.0" text="Edit Event" />
-                <Button fx:id="btnDelete" layoutX="21.0" layoutY="388.0" onAction="#deleteEvent" prefHeight="27.0" prefWidth="97.0" text="Delete Event" />
                 <Label layoutX="13.0" layoutY="11.0" text="Type of tickets:">
                     <font>
                         <Font name="System Bold" size="13.0" />

@@ -3,6 +3,7 @@ package gui.Controller;
 import be.Users;
 import bll.MainManager;
 import bll.utils.DisplayError;
+import bll.utils.LogCreator;
 import bll.utils.LoggedInUser;
 import bll.utils.SceneSetter;
 import javafx.event.ActionEvent;
@@ -24,19 +25,8 @@ public class MainController {
     public TextField username;
     public Label loginWrongLabel;
     public MainManager mainManager = new MainManager() ;
-    private Logger logger;
-    private FileHandler fileHandler;
 
-    public MainController()
-    {
-        this.logger = Logger.getLogger("LoginInfo");
-        try {
-            this.fileHandler = new FileHandler("resources/Log/login.log", true);
-            logger.addHandler(fileHandler);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
     public void openEventMgr() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/RootLayoutEvent.fxml"));
         SceneSetter.setScene(password ,loader);
@@ -53,13 +43,11 @@ public class MainController {
         {
             if (users.getRoleID() == 1) {
                 openAdminMgr();
-                logger.info("Admin: " + username.getText() + " ID:" + users.getUserID() + " logged in");
 
             }
             else if (users.getRoleID()== 2)
             {
                 openEventMgr();
-                logger.info("Event Coordinator: " + username.getText() + " ID:" + users.getUserID() + " logged in");
 
             }
         }

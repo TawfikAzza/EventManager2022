@@ -45,12 +45,6 @@ public class EventsController implements Initializable {
     @FXML
     private TableColumn<Events, String> eventDate;
     @FXML
-    private Button btnAdd,btnAllParticipants;
-
-    @FXML
-    private Button btnDelete;
-
-    @FXML
     private Button btnEdit;
 
     @FXML

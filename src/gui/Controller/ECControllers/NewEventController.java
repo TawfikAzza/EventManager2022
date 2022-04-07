@@ -53,8 +53,6 @@ public class NewEventController implements Initializable {
     @FXML
     private GridPane gridPaneNewEvent;
 
-    private Logger logger;
-    private FileHandler fileHandler;
     private CoordinatorModel coordinatorModel;
     private EventsController eventsController;
     private RootLayoutEvenController rootLayoutEvenController;

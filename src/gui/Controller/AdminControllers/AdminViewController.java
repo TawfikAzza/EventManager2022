@@ -101,7 +101,7 @@ public class AdminViewController implements Initializable {
         }
     }
 
-    public void handleDeleteEvent(ActionEvent actionEvent) {
+    /*public void handleDeleteEvent(ActionEvent actionEvent) {
         Events event = eventTableView.getSelectionModel().getSelectedItem();
         if(event!=null)
         {
@@ -123,4 +123,6 @@ public class AdminViewController implements Initializable {
 
     }
     }
+
+     */
 }
