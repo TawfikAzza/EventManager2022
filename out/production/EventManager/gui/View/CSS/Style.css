@@ -22,17 +22,13 @@
     -fx-border-radius: 50;
     -fx-background-radius: 50;
     -fx-text-background-color: #FAFAFA;
+    -fx-font-family: Raleway, sans-serif;
 }
 
 .button:hover
 {
     -fx-background-color: #FF7D87;
     -fx-cursor: hand;
-}
-.button.label
-{
-    -fx-text-fill: #FAFAFA;
-
 }
 .text-area
 {
