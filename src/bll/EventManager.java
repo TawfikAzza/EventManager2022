@@ -120,4 +120,12 @@ public class EventManager {
         Users loggedIn = LoggedInUser.getInstance(null);
         log.getLogger().info("Event Coordinator: " + loggedIn.getLoginName() + " with the ID: "+ loggedIn.getUserID() + " " + action + " Event: " + event.getName() + " with the ID " +event.getId());
     }
+
+    public TicketType getTicketTypeFromTicket(String text) throws EventManagerException {
+        try {
+            return ticketDAO.getTicketTypeFromTicket(text);
+        } catch (SQLException e) {
+            throw  new EventManagerException("Error while retrieving ticket type for the scanner! ",e);
+        }
+    }
 }

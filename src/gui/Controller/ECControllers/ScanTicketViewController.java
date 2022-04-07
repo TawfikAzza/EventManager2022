@@ -1,6 +1,8 @@
 package gui.Controller.ECControllers;
 
+import be.TicketType;
 import bll.EventManager;
+import bll.exception.EventDAOException;
 import bll.exception.EventManagerException;
 import bll.utils.DisplayError;
 import bll.utils.WebCamService;
@@ -9,6 +11,8 @@ import com.github.sarxos.webcam.Webcam;
 import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import gui.Model.EventModel;
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -17,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -36,16 +41,18 @@ public class ScanTicketViewController implements Initializable {
     private TextField txtCode;
 
     @FXML
+    private Label lblCode,lblTicketType,lblBenefit,lblStatus;
+    @FXML
     private ComboBox<Webcam> comboCam;
 
     private WebCamService service ;
     private Webcam cam;
-    private EventManager eventManager;
+    private EventModel eventModel;
 
     public ScanTicketViewController() {
         try {
-            eventManager = new EventManager();
-        } catch (EventManagerException e) {
+            eventModel = new EventModel();
+        } catch (EventDAOException | EventManagerException | Exception e) {
             DisplayError.displayError(e);
         }
         // note this is in init as it **must not** be called on the FX Application Thread:
@@ -97,13 +104,21 @@ public class ScanTicketViewController implements Initializable {
     private void scanQRCode(TextField test) {
 
         Thread thread = new Thread(){
+            boolean scanned=false;
+            boolean isValidTicket=true;
             public void run() {
                 Result result = null;
+
                 BufferedImage image = null;
-                boolean isValidTicket=true;
+
                 do {
                     try {
                         Thread.sleep(100);
+                        if(scanned) {
+                            System.out.println("scanned now sleeping");
+                            Thread.sleep(3000);
+                            scanned=false;
+                        }
                     } catch (InterruptedException e) {
                         DisplayError.displayError(e);
                     }
@@ -123,20 +138,51 @@ public class ScanTicketViewController implements Initializable {
                     }
 
                     if (result != null) {
-                        txtCode.setText(result.getText());
-
                         try {
-                            isValidTicket = eventManager.validTicketScan(result.getText());
+
+                            String ticketNumber = result.getText();
+                            isValidTicket = eventModel.validTicketScan(ticketNumber);
+
                             if(isValidTicket) {
-                                txtCode.setText("Ticket Valid");
-                                Thread.sleep(3000);
+                                scanned=true;
+                                Platform.runLater(() -> {
+                                    lblCode.setText(ticketNumber);
+                                    TicketType ticketType = null;
+                                    try {
+                                        ticketType = eventModel.getTicketTypeFromTicket(ticketNumber);
+                                    } catch (EventManagerException e) {
+                                        DisplayError.displayError(e);
+                                    }
+                                    if(ticketType!=null) {
+                                        lblTicketType.setText(ticketType.getType());
+                                        lblBenefit.setText(ticketType.getBenefit());
+                                    }
+                                    lblStatus.setText("Valid");
+                                });
                             }
-                            if(!isValidTicket)
-                                txtCode.setText("Ticket not valid");
-                            Thread.sleep(3000);
-                        } catch (InterruptedException | EventManagerException e) {
+                            if(!isValidTicket) {
+                                System.out.println("scanned non valid");
+                                scanned=true;
+                                Platform.runLater(() -> {
+                                    lblCode.setText(ticketNumber);
+                                    TicketType ticketType = null;
+                                    try {
+                                        ticketType = eventModel.getTicketTypeFromTicket(ticketNumber);
+                                    } catch (EventManagerException e) {
+                                        DisplayError.displayError(e);
+                                    }
+                                    if (ticketType != null) {
+                                        lblTicketType.setText(ticketType.getType());
+                                        lblBenefit.setText(ticketType.getBenefit());
+                                    }
+                                    lblStatus.setText("Not Valid");
+                                });
+                            }
+
+                        } catch (EventManagerException e) {
                             DisplayError.displayError(e);
                         }
+
                         result=null;
                     }
 

@@ -139,6 +139,7 @@ public class TicketDAO {
         System.out.println("In TicketDAO: addTicketSold");
         return ticketCreated;
     }
+
     public TicketType getTicketTypeFromTicket(String ticketNumber) throws SQLException {
         TicketType ticketTypeSearched = null;
         try (Connection con = cm.getConnection()) {

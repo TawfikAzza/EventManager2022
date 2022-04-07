@@ -56,4 +56,12 @@ public class EventModel {
     public TicketType getTicketType(int ticketTypeID) throws EventManagerException {
         return eventManager.getTicketType(ticketTypeID);
     }
+
+    public boolean validTicketScan(String text) throws EventManagerException {
+        return eventManager.validTicketScan(text);
+    }
+
+    public TicketType getTicketTypeFromTicket(String text) throws EventManagerException {
+        return eventManager.getTicketTypeFromTicket(text);
+    }
 }

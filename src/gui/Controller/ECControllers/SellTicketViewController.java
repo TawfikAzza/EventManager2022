@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class SellTicketViewController implements Initializable {
 
@@ -241,6 +242,8 @@ public class SellTicketViewController implements Initializable {
     }
     private String getAlphaNumericString(int n)
     {
+        UUID uuid = UUID.randomUUID();
+        String randomUUIDString = uuid.toString();
 
         // chose a Character random from this String
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
