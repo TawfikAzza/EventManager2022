@@ -94,6 +94,11 @@ public class ScanTicketViewController implements Initializable {
     @FXML
     void changeCam() {
         cam.close();
+        if (service.isRunning()) {
+            service.cancel();
+        } else {
+            service.restart();
+        }
         cam = comboCam.getSelectionModel().getSelectedItem();
         service = new WebCamService(cam);
         WebCamView view = new WebCamView(service);
