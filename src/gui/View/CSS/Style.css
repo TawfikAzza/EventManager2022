@@ -42,6 +42,7 @@
     -fx-border-color: #C4C4C4;
     -fx-prompt-text-fill: #6A6A6A;
     -fx-effect: null;
+    -fx-opacity: 0.8;
 /*Make the box for text area transparent, it will most likely help with making stuff not as ugly*/
 }
 .text-area .corner{
@@ -201,24 +202,24 @@
 }
 
 .list-cell:filled:hover {
-    -fx-background-color: #0093ff;
+    -fx-background-color: #FF7272;
     -fx-text-fill: white;
 }
-.list-view .virtual-flow .scroll-bar:vertical .thumb{
-    -fx-background-color:  #919ec2;
+.list-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color: #ff8c8c;
 }
 
-.list-view .virtual-flow .scroll-bar:horizontal .thumb {
-    -fx-background-color:  #919ec2;
+.list-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color: #ff8c8c;
 }
 
 .list-view .corner{
     -fx-background-radius: 20;
-    -fx-background-color: #8395C6;
+    -fx-background-color: #ff8c8c;
 }
 .list-view .scroll-bar{
     -fx-background-radius: 30;
-    -fx-background-color: #919ec2;
+    -fx-background-color: #FAFAFA;
 }
 /* Design Ideas
 

@@ -23,7 +23,7 @@ public class FontsAwesomeHelper {
             case "checkmark":
                 return FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.CHECK);
             case "cross":
-                return FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.TIMES);
+                return FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.BAN);
             default:
                 throw new RuntimeException("ICON NOT FOUND");
         }
