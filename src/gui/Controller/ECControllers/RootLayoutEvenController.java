@@ -24,12 +24,28 @@ public class RootLayoutEvenController {
     private Label AddEventIcon;
 
     @FXML
+    private Label ManageEventIcon;
+
+    @FXML
+    private Label ParticipantIcon;
+
+    @FXML
+    private Label SellIcon;
+
+    @FXML
+    private Label ScanIcon;
+
+    @FXML
     private Button btnAdd;
 
     @FXML
     public void initialize()
     {
         AddEventIcon.setText(FontsAwesomeHelper.getFontAwesomeIconForButtons("add").getText());
+        ManageEventIcon.setText(FontsAwesomeHelper.getFontAwesomeIconForButtons("manage").getText());
+        ParticipantIcon.setText(FontsAwesomeHelper.getFontAwesomeIconForButtons("participants").getText());
+        SellIcon.setText(FontsAwesomeHelper.getFontAwesomeIconForButtons("sell").getText());
+        ScanIcon.setText(FontsAwesomeHelper.getFontAwesomeIconForButtons("scan").getText());
     }
 
     @FXML

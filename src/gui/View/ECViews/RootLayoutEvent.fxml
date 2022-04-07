@@ -32,7 +32,7 @@
                     </VBox.margin>
                     <graphic>
 
-                        <Label fx:id="AddEventIcon" style="-fx-font-family: FontAwesome;"  text="Label"/>
+                        <Label fx:id="AddEventIcon" styleClass="iconLabel" text="Label"/>
                     </graphic>
                 </Button>
                 <Button fx:id="btnManage" contentDisplay="TOP" mnemonicParsing="false" onAction="#manageEvent"
@@ -44,7 +44,7 @@
                         <Insets bottom="2.0" left="2.0" right="2.0" top="10.0"/>
                     </VBox.margin>
                     <graphic>
-                        <Label fx:id="ManageEventIcon" text="Label"/>
+                        <Label fx:id="ManageEventIcon"  styleClass="iconLabel" text="Label"/>
                     </graphic>
                 </Button>
                 <Button fx:id="btnParticipant" contentDisplay="TOP" mnemonicParsing="false"
@@ -56,7 +56,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="10.0"/>
                     </VBox.margin>
                     <graphic>
-                        <Label fx:id="ParticipantIcon" text="Label"/>
+                        <Label fx:id="ParticipantIcon" styleClass="iconLabel" text="Label"/>
                     </graphic>
                 </Button>
                 <Button fx:id="btnSell" contentDisplay="TOP" mnemonicParsing="false" onAction="#sellTicket"
@@ -68,7 +68,7 @@
                         <Font size="12.0"/>
                     </font>
                     <graphic>
-                        <Label fx:id="SellIcon" text="Label"/>
+                        <Label fx:id="SellIcon" styleClass="iconLabel" text="Label"/>
                     </graphic>
                 </Button>
                 <Button fx:id="btnScan" contentDisplay="TOP" mnemonicParsing="false" onAction="#scanTicket"
@@ -80,7 +80,7 @@
                         <Font size="12.0"/>
                     </font>
                     <graphic>
-                        <Label fx:id="ScanIcon" text="Label"/>
+                        <Label fx:id="ScanIcon"  styleClass="iconLabel" text="Label"/>
                     </graphic>
                 </Button>
             </children>
