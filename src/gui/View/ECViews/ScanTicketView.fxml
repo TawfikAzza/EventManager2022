@@ -9,8 +9,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import java.net.URL?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ECControllers.ScanTicketViewController">
-  <columnConstraints>
+    <stylesheets>
+        <URL value="@../CSS/Style.css" />
+    </stylesheets>
+    <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="588.0000366210937" minWidth="10.0" prefWidth="588.0000366210937" />
   </columnConstraints>
   <rowConstraints>
