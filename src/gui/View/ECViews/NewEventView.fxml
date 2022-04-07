@@ -115,12 +115,12 @@
             <Insets left="15.0" right="15.0" />
          </GridPane.margin>
       </TextField>
-      <TextArea fx:id="txtDescription" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" stylesheets="@../CSS/Style.css" GridPane.columnIndex="1" GridPane.rowIndex="6">
+      <TextArea fx:id="txtDescription" prefHeight="200.0" prefWidth="200.0" stylesheets="@../CSS/Style.css" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </GridPane.margin>
       </TextArea>
-      <TextArea fx:id="txtItinerary" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" stylesheets="@../CSS/Style.css" GridPane.columnIndex="1" GridPane.rowIndex="7">
+      <TextArea fx:id="txtItinerary" prefHeight="200.0" prefWidth="200.0" stylesheets="@../CSS/Style.css" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </GridPane.margin>
@@ -158,7 +158,7 @@
                   <Insets top="5.0" />
                </padding>
             </VBox>
-            <ListView fx:id="lstTickets" prefHeight="200.0" prefWidth="200.0" styleClass="shadow" stylesheets="@../CSS/Style.css">
+            <ListView fx:id="lstTickets" prefHeight="200.0" prefWidth="200.0" stylesheets="@../CSS/Style.css">
                <HBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </HBox.margin>

@@ -6,81 +6,72 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-
-<BorderPane fx:id="topPane" prefHeight="619.0" prefWidth="103.0" styleClass="anchor02"
-            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="gui.Controller.ECControllers.RootLayoutEvenController">
+<BorderPane fx:id="topPane" prefHeight="619.0" prefWidth="103.0" styleClass="anchor02" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ECControllers.RootLayoutEvenController">
 
     <stylesheets>
-        <URL value="@../CSS/Style.css"/>
+        <URL value="@../CSS/Style.css" />
     </stylesheets>
     <left>
         <!--each of the buttons in this VBox have a label. The label starts out empty and is filled with an
         icon from the font-awesome font by the controller when it initialises. The icons are all
         gotten from the helper class FontsAwesomeHelper.-->
 
-        <VBox prefHeight="619.0" prefWidth="122.0" styleClass="anchor02" BorderPane.alignment="CENTER">
+        <VBox prefHeight="619.0" prefWidth="122.0" styleClass="root-layout" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="btnAdd" contentDisplay="TOP" mnemonicParsing="false" onAction="#addEvent"
-                        prefHeight="102.0" prefWidth="102.0" text="Add an Event">
+                <Button fx:id="btnAdd" contentDisplay="TOP" mnemonicParsing="false" onAction="#addEvent" prefHeight="102.0" prefWidth="102.0" styleClass="rootButton" text="Add an Event">
                     <font>
-                        <Font size="12.0"/>
+                        <Font size="12.0" />
                     </font>
                     <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                     </VBox.margin>
                     <graphic>
 
-                        <Label fx:id="AddEventIcon" styleClass="iconLabel" text="Label"/>
+                        <Label fx:id="AddEventIcon" styleClass="iconLabel" text="Label" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnManage" contentDisplay="TOP" mnemonicParsing="false" onAction="#manageEvent"
-                        prefHeight="102.0" prefWidth="102.0" text="Manage Events">
+                <Button fx:id="btnManage" contentDisplay="TOP" mnemonicParsing="false" onAction="#manageEvent" prefHeight="102.0" prefWidth="102.0" text="Manage Events">
                     <font>
-                        <Font size="12.0"/>
+                        <Font size="12.0" />
                     </font>
                     <VBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="10.0"/>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="10.0" />
                     </VBox.margin>
                     <graphic>
-                        <Label fx:id="ManageEventIcon"  styleClass="iconLabel" text="Label"/>
+                        <Label fx:id="ManageEventIcon" styleClass="iconLabel" text="Label" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnParticipant" contentDisplay="TOP" mnemonicParsing="false"
-                        onAction="#manageParticipants" prefHeight="102.0" prefWidth="102.0" text="Participants">
+                <Button fx:id="btnParticipant" contentDisplay="TOP" mnemonicParsing="false" onAction="#manageParticipants" prefHeight="102.0" prefWidth="102.0" text="Participants">
                     <font>
-                        <Font size="12.0"/>
+                        <Font size="12.0" />
                     </font>
                     <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                     </VBox.margin>
                     <graphic>
-                        <Label fx:id="ParticipantIcon" styleClass="iconLabel" text="Label"/>
+                        <Label fx:id="ParticipantIcon" styleClass="iconLabel" text="Label" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnSell" contentDisplay="TOP" mnemonicParsing="false" onAction="#sellTicket"
-                        prefHeight="102.0" prefWidth="102.0" text="Sell a Ticket">
+                <Button fx:id="btnSell" contentDisplay="TOP" mnemonicParsing="false" onAction="#sellTicket" prefHeight="102.0" prefWidth="102.0" text="Sell a Ticket">
                     <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                     </VBox.margin>
                     <font>
-                        <Font size="12.0"/>
+                        <Font size="12.0" />
                     </font>
                     <graphic>
-                        <Label fx:id="SellIcon" styleClass="iconLabel" text="Label"/>
+                        <Label fx:id="SellIcon" styleClass="iconLabel" text="Label" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnScan" contentDisplay="TOP" mnemonicParsing="false" onAction="#scanTicket"
-                        prefHeight="102.0" prefWidth="102.0" text="Scan Ticket">
+                <Button fx:id="btnScan" contentDisplay="TOP" mnemonicParsing="false" onAction="#scanTicket" prefHeight="102.0" prefWidth="102.0" text="Scan Ticket">
                     <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                     </VBox.margin>
                     <font>
-                        <Font size="12.0"/>
+                        <Font size="12.0" />
                     </font>
                     <graphic>
-                        <Label fx:id="ScanIcon"  styleClass="iconLabel" text="Label"/>
+                        <Label fx:id="ScanIcon" styleClass="iconLabel" text="Label" />
                     </graphic>
                 </Button>
             </children>

@@ -119,7 +119,7 @@
                 </ImageView>
             </graphic>
             <font>
-                <Font name="System Bold" size="12.0"/>
+                <Font size="12.0"/>
             </font>
             <GridPane.margin>
                 <Insets top="5.0"/>

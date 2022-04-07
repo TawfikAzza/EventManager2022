@@ -5,9 +5,19 @@
     -fx-font-weight: 700;
 
 }
-.loginRoot
+.root-layout {
+    -fx-background-color: #FF4D4D;
+    -fx-font-family: Raleway, sans-serif;
+    -fx-font-weight: 700;
+}
+.text-field
 {
-
+    -fx-background-radius: 50;
+    -fx-border-radius: 50;
+    -fx-background-color: #DEDEDE;
+    -fx-border-color: #C4C4C4;
+    -fx-prompt-text-fill: #6A6A6A;
+    -fx-effect: null;
 }
 .eventRoot{
     -fx-background-color: #FF4D4D;
@@ -23,8 +33,8 @@
     -fx-background-radius: 50;
     -fx-text-background-color: #FAFAFA;
     -fx-font-family: Raleway, sans-serif;
+    -fx-text-fill: #FAFAFA;
 }
-
 .button:hover
 {
     -fx-background-color: #FF7D87;
@@ -43,15 +53,6 @@
 }
 .text-area .corner{
     -fx-border-radius: 50;
-}
-.text-field
-{
-    -fx-background-radius: 50;
-    -fx-border-radius: 50;
-    -fx-background-color: #DEDEDE;
-    -fx-border-color: #C4C4C4;
-    -fx-prompt-text-fill: #6A6A6A;
-    -fx-effect: null;
 }
 
 .anchor {

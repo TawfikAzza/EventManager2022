@@ -31,24 +31,24 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Label text="Login Name" textFill="#3823b8">
+        <Label text="Login Name">
             <font>
                 <Font size="14.0"/>
             </font>
         </Label>
         <Label text="Email" GridPane.rowIndex="3">
             <font>
-                <Font name="System Bold" size="14.0"/>
+                <Font size="14.0"/>
             </font>
         </Label>
-        <Label text="First Name" textFill="#3823b8" GridPane.rowIndex="1">
+        <Label text="First Name" GridPane.rowIndex="1">
             <font>
-                <Font name="System Bold" size="14.0"/>
+                <Font size="14.0"/>
             </font>
         </Label>
         <Label text="Last Name" GridPane.rowIndex="2">
             <font>
-                <Font name="System Bold" size="14.0"/>
+                <Font size="14.0"/>
             </font>
         </Label>
         <TextField fx:id="loginNameTextField" GridPane.columnIndex="1"/>
@@ -60,14 +60,14 @@
                 prefHeight="26.0" prefWidth="183.0" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
         <Label text="Password" GridPane.rowIndex="4">
             <font>
-                <Font name="System Bold" size="14.0"/>
+                <Font size="14.0"/>
             </font>
         </Label>
         <PasswordField fx:id="passwordField" prefHeight="26.0" prefWidth="154.0" GridPane.columnIndex="1"
                        GridPane.rowIndex="4"/>
         <Label text="Confirm Password" GridPane.rowIndex="5">
             <font>
-                <Font name="System Bold" size="12.0"/>
+                <Font size="14.0"/>
             </font>
         </Label>
         <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
