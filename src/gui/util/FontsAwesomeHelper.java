@@ -22,7 +22,7 @@ public class FontsAwesomeHelper {
                 return FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.QRCODE);
             case "checkmark":
                 return FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.CHECK);
-            case "cross":
+            case "ban":
                 return FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.BAN);
             default:
                 throw new RuntimeException("ICON NOT FOUND");

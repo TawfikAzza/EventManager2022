@@ -12,6 +12,7 @@ import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import gui.Model.EventModel;
+import gui.util.FontsAwesomeHelper;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -151,7 +152,7 @@ public class ScanTicketViewController implements Initializable {
                             if(isValidTicket) {
                                 scanned=true;
                                 Platform.runLater(() -> {
-                                    //@MANI HERE IS THE PLACE TO CHANGE FOR THE CASE WHEN THE TICKET IS VALID
+                                    lblStatus.setText(FontsAwesomeHelper.getFontAwesomeIconForButtons("check").getText());
                                     lblCode.setText(ticketNumber);
                                     TicketType ticketType = null;
                                     try {
@@ -170,7 +171,7 @@ public class ScanTicketViewController implements Initializable {
                                 System.out.println("scanned non valid");
                                 scanned=true;
                                 Platform.runLater(() -> {
-                                    //@MANI HERE IS THE PLACE TO CHANGE FOR THE CASE WHEN THE TICKET IS INVALID
+                                    lblStatus.setText(FontsAwesomeHelper.getFontAwesomeIconForButtons("ban").getText());
                                     lblCode.setText(ticketNumber);
                                     TicketType ticketType = null;
                                     try {
