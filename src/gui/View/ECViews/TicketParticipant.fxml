@@ -21,10 +21,10 @@
         </ImageView>
         <Pane layoutX="613.0" prefHeight="300.0" prefWidth="86.0">
             <children>
-                <Pane layoutX="-618.0" layoutY="247.0" prefHeight="53.0" prefWidth="715.0" style="-fx-background-color: #4882c3;" />
+                <Pane layoutX="-618.0" layoutY="247.0" prefHeight="53.0" prefWidth="715.0" style="-fx-background-color: #FF5050;" />
             </children>
         </Pane>
-        <Pane prefHeight="300.0" prefWidth="153.0" style="-fx-background-color: #d2d0e6;">
+        <Pane prefHeight="300.0" prefWidth="153.0" style="-fx-background-color: #FF7D87;">
             <children>
                 <Label layoutX="15.0" layoutY="11.0" text="Name:" />
                 <Label layoutX="14.0" layoutY="49.0" text="Location:" />
