@@ -146,6 +146,7 @@ public class ScanTicketViewController implements Initializable {
                             if(isValidTicket) {
                                 scanned=true;
                                 Platform.runLater(() -> {
+                                    //@MANI HERE IS THE PLACE TO CHANGE FOR THE CASE WHEN THE TICKET IS VALID
                                     lblCode.setText(ticketNumber);
                                     TicketType ticketType = null;
                                     try {
@@ -164,6 +165,7 @@ public class ScanTicketViewController implements Initializable {
                                 System.out.println("scanned non valid");
                                 scanned=true;
                                 Platform.runLater(() -> {
+                                    //@MANI HERE IS THE PLACE TO CHANGE FOR THE CASE WHEN THE TICKET IS INVALID
                                     lblCode.setText(ticketNumber);
                                     TicketType ticketType = null;
                                     try {
