@@ -52,7 +52,6 @@ public class WebCamService extends Service<Image> {
                     cam.close();
                 }
             }
-
         };
     }
 
