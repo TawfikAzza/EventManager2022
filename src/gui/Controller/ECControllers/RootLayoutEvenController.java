@@ -5,11 +5,15 @@ import gui.util.FontsAwesomeHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.apache.commons.math3.analysis.function.Add;
 
 import java.io.IOException;
@@ -124,11 +128,27 @@ public class RootLayoutEvenController {
 
     @FXML
     void scanTicket(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
+       /* FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/View/ECViews/ScanTicketView.fxml"));
         GridPane eventOverview = (GridPane) loader.load();
 
         // Set person overview into the center of root layout.
-        topPane.setCenter(eventOverview);
+        topPane.setCenter(eventOverview);*/
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/gui/View/ECViews/ScanTicketView.fxml"));
+            Parent root = loader.load();
+            ScanTicketViewController scanTicketViewController = loader.getController();
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            scanTicketViewController.setPrimaryStage(stage);
+            stage.show();
+        }
+        catch (IOException e) {
+            DisplayError.displayError(e);
+        }
     }
 }

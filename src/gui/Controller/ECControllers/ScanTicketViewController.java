@@ -25,6 +25,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.awt.image.BufferedImage;
 import java.net.URL;
@@ -46,9 +47,13 @@ public class ScanTicketViewController implements Initializable {
     @FXML
     private ComboBox<Webcam> comboCam;
 
+    private boolean flagRunningCam=true;
     private WebCamService service ;
     private Webcam cam;
     private EventModel eventModel;
+    private Stage primaryStage;
+
+
 
     public ScanTicketViewController() {
         try {
@@ -58,9 +63,16 @@ public class ScanTicketViewController implements Initializable {
         }
         // note this is in init as it **must not** be called on the FX Application Thread:
         ObservableList<Webcam> listCam = FXCollections.observableArrayList();
+
+
+
         cam = Webcam.getWebcams().get(0);
 
         service = new WebCamService(cam);
+        //TODO: CHange this FXML to be accessed on a standalone page (not part of the RootLayout Menu, this way the closing and opening of the camera
+        // will be given more control, currently when the camera is on and the user click on another button from the menu, the user exits the scan
+        // page without closing the camera, which makes the camera and scanning thread buggy.... one way to resolve this would be to
+        // open the scanning page on top of the app page and catch the event closing to close the currently running camera to close it.
 
         //setComboCam();
     }
@@ -68,24 +80,29 @@ public class ScanTicketViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         startStop.textProperty().bind(Bindings.
                 when(service.runningProperty()).
                 then("Stop").
                 otherwise("Start"));
 
         startStop.setOnAction(e -> {
+            if(comboCam.getSelectionModel().getSelectedIndex()==-1)
+                return;
             if (service.isRunning()) {
                 service.cancel();
+                flagRunningCam=false;
             } else {
                 service.restart();
             }
         });
+       // ((Stage)lblBenefit.getScene().getWindow()).setOnCloseRequest(e-> {
+
         setComboCam();
-
-
         WebCamView view = new WebCamView(service);
         cameraPane.getChildren().add(view.getView());
         scanQRCode(txtCode);
+
     }
     private void setComboCam() {
         for (Webcam cam:Webcam.getWebcams()) {
@@ -94,18 +111,27 @@ public class ScanTicketViewController implements Initializable {
     }
     @FXML
     void changeCam() {
-        cam.close();
-        if (service.isRunning()) {
-            service.cancel();
-        } else {
-            service.restart();
-        }
+        setClosingWindow();
         cam = comboCam.getSelectionModel().getSelectedItem();
         service = new WebCamService(cam);
         WebCamView view = new WebCamView(service);
+        cameraPane.getChildren().clear();
         cameraPane.getChildren().add(view.getView());
         System.out.println("Camera : "+cam.getName());
         scanQRCode(txtCode);
+    }
+    private void setClosingWindow() {
+        primaryStage.setOnCloseRequest(e-> {
+            System.out.println("Closing");
+            if(cam.isOpen())
+                cam.close();
+            if (service.isRunning()) {
+                service.cancel();
+            }
+        });
+    }
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
     private void scanQRCode(TextField test) {
 
@@ -129,7 +155,7 @@ public class ScanTicketViewController implements Initializable {
                         DisplayError.displayError(e);
                     }
 
-                    if (cam.isOpen()) {
+                    if (cam.isOpen() && flagRunningCam) {
                         if ((image = cam.getImage()) == null) {
                             continue;
                         }
@@ -143,14 +169,15 @@ public class ScanTicketViewController implements Initializable {
                         }
                     }
 
-                    if (result != null) {
+                    if (result != null && flagRunningCam) {
+                        scanned=true;
                         try {
-
                             String ticketNumber = result.getText();
                             isValidTicket = eventModel.validTicketScan(ticketNumber);
 
                             if(isValidTicket) {
                                 scanned=true;
+                                System.out.println("scanned valid");
                                 Platform.runLater(() -> {
                                     lblStatus.setText(FontsAwesomeHelper.getFontAwesomeIconForButtons("check").getText());
                                     lblCode.setText(ticketNumber);
@@ -194,7 +221,8 @@ public class ScanTicketViewController implements Initializable {
                         result=null;
                     }
 
-                } while (true);
+                } while (flagRunningCam);
+
             }
         };
         thread.setDaemon(true);

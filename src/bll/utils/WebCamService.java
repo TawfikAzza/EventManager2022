@@ -40,7 +40,8 @@ public class WebCamService extends Service<Image> {
                     while (!isCancelled()) {
                         if (cam.isImageNew()) {
                             BufferedImage bimg = cam.getImage();
-                            updateValue(SwingFXUtils.toFXImage(bimg, null));
+                            if(bimg!=null)
+                                updateValue(SwingFXUtils.toFXImage(bimg, null));
                         }
                     }
                    // System.out.println("Cancelled, closing cam");
