@@ -2,22 +2,17 @@ package gui.Controller;
 
 import be.Users;
 import bll.MainManager;
-import bll.utils.DisplayError;
-import bll.utils.LogCreator;
-import bll.utils.LoggedInUser;
 import bll.utils.SceneSetter;
+import gui.util.BundleHelper;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
 
 
 public class MainController {
@@ -25,6 +20,12 @@ public class MainController {
     public TextField username;
     public Label loginWrongLabel;
     public MainManager mainManager = new MainManager() ;
+    public BundleHelper bundle = new BundleHelper();
+    Boolean hasEnglish = true;
+
+
+    @FXML
+    private Button btnLanguage;
 
 
     public void openEventMgr() {
@@ -56,4 +57,14 @@ public class MainController {
             loginWrongLabel.setVisible(true);
         }
     }
+
+    @FXML
+    void toDanishEnglish(ActionEvent event) throws IOException {
+        hasEnglish = hasEnglish == true ? false : true;
+        System.out.println("This: " + hasEnglish);
+        bundle.loadView(hasEnglish, "/gui/View/MainWindow.fxml", btnLanguage);
+    }
+
+
+
 }
