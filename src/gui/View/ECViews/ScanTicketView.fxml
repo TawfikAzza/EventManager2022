@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +10,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<?import java.net.URL?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.ECControllers.ScanTicketViewController">
     <stylesheets>
         <URL value="@../CSS/Style.css" />
@@ -42,10 +42,10 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="TicketNumber:" />
-            <Label text="Ticket type:" GridPane.rowIndex="1" />
-            <Label text="Benefit" GridPane.rowIndex="2" />
-            <Label text="Status:" GridPane.rowIndex="3" />
+            <Label text="%ticketNum" />
+            <Label text="%ticketType" GridPane.rowIndex="1" />
+            <Label text="%benefit" GridPane.rowIndex="2" />
+            <Label text="%status" GridPane.rowIndex="3" />
             <Label fx:id="lblCode" GridPane.columnIndex="1" />
             <Label fx:id="lblTicketType" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="lblBenefit" GridPane.columnIndex="1" GridPane.rowIndex="2" />
