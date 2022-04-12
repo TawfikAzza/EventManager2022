@@ -75,7 +75,7 @@
         </VBox>
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="270.0">
             <children>
-                <Label text="%key.unspecified">
+                <Label text="%admins">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
