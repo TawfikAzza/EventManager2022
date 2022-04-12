@@ -21,7 +21,7 @@ public class MainController {
     public Label loginWrongLabel;
     public MainManager mainManager = new MainManager() ;
     public BundleHelper bundle = new BundleHelper();
-    Boolean hasEnglish = true;
+
 
 
     @FXML
@@ -60,9 +60,8 @@ public class MainController {
 
     @FXML
     void toDanishEnglish(ActionEvent event) throws IOException {
-        hasEnglish = hasEnglish == true ? false : true;
-        System.out.println("This: " + hasEnglish);
-        bundle.loadView(hasEnglish, "/gui/View/MainWindow.fxml", btnLanguage);
+        //BundleHelper.hasEnglish = !BundleHelper.hasEnglish;
+        bundle.loadView("/gui/View/MainWindow.fxml", btnLanguage);
     }
 
 

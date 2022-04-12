@@ -12,15 +12,21 @@ import java.util.ResourceBundle;
 
 public class BundleHelper {
 
-    public void loadView (boolean isEnglish, String pathView, Button btnName) throws IOException {
+    public static Boolean hasEnglish = true;
+
+    public void loadView (String pathView, Button btnName) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(pathView));
-
-        if (isEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+        changeBoolean();
+        if (hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
         else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
 
         Parent root = loader.load();
         Stage stage = (Stage) btnName.getScene().getWindow();
         stage.setScene(new Scene(root));
+    }
+
+    private static void changeBoolean() {
+        hasEnglish = !hasEnglish;
     }
 }
