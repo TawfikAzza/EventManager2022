@@ -8,6 +8,7 @@ import bll.exception.AdminLogicException;
 import bll.exception.LoginException;
 import bll.utils.LogCreator;
 import bll.utils.LoggedInUser;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.AdminDAO;
 import dal.interfaces.IAdminDAO;
 
@@ -36,9 +37,11 @@ public class AdminLogic {
             logMessage("added", user);
 
         }
-        catch (SQLException e)
+        catch (SQLServerException e)
         {
-            throw new AdminDAOException("Failed to connect to the database.", e);
+            throw new AdminDAOException("Username already exists.", e);
+        } catch (SQLException e) {
+            throw new AdminDAOException("Cannot connect to database.", e);
         }
     }
 
