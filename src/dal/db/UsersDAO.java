@@ -2,6 +2,7 @@ package dal.db;
 
 import be.Participant;
 import be.Users;
+import bll.utils.DisplayError;
 import dal.ConnectionManager;
 
 import java.sql.Connection;
@@ -14,7 +15,7 @@ public class UsersDAO {
     public UsersDAO() throws Exception {
         cm = new ConnectionManager();
     }
-    public Users compareLogins(String username, String password) throws Exception
+    public Users compareLogins(String username, String password)
     {
         Users users = null;
 
@@ -38,7 +39,7 @@ public class UsersDAO {
         catch (Exception e)
         {
             users =null;
-            e.printStackTrace();
+            DisplayError.displayMessage("Cannot connect to the database");
         }
         return users;
     }
