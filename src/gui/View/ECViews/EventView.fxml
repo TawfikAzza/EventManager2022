@@ -89,7 +89,7 @@
                             </font>
                         </Label>
                         <TextFlow fx:id="lblDescription" layoutX="15.0" layoutY="148.0" maxHeight="-Infinity" prefHeight="51.0" prefWidth="235.0" style="-fx-background-color: #ffffff;" styleClass="shadow" />
-                        <Label fx:id="itineraryLabel" layoutX="12.0" layoutY="210.0" text="%Itinerary">
+                        <Label fx:id="itineraryLabel" layoutX="12.0" layoutY="210.0" text="%itinerary">
                             <font>
                                 <Font size="13.0" />
                             </font>

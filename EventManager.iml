@@ -23,5 +23,6 @@
     <orderEntry type="library" name="de.jensd.fontawesomefx.commons" level="project" />
     <orderEntry type="library" name="de.jensd.fontawesomefx.fontawesome" level="project" />
     <orderEntry type="library" name="de.jensd.fontawesomefx.fontawesome" level="project" />
+    <orderEntry type="library" name="jfoenix" level="project" />
   </component>
 </module>

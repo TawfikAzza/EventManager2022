@@ -20,7 +20,7 @@
 
         <VBox prefHeight="619.0" prefWidth="122.0" styleClass="root-layout" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="btnAdd" contentDisplay="TOP" mnemonicParsing="false" onAction="#addEvent" prefHeight="102.0" prefWidth="102.0" styleClass="rootButton" text="%addEvent">
+                <Button fx:id="btnAdd" contentDisplay="TOP" mnemonicParsing="false" onAction="#addEvent" prefHeight="102.0" prefWidth="102.0" styleClass="rootButton" >
                     <font>
                         <Font size="12.0" />
                     </font>
@@ -32,7 +32,7 @@
                         <Label fx:id="AddEventIcon" styleClass="iconLabel" text="Label" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnManage" contentDisplay="TOP" mnemonicParsing="false" onAction="#manageEvent" prefHeight="102.0" prefWidth="102.0" text="%manageEvent" textOverrun="CLIP">
+                <Button fx:id="btnManage" contentDisplay="TOP" mnemonicParsing="false" onAction="#manageEvent" prefHeight="102.0" prefWidth="102.0"  textOverrun="CLIP">
                     <font>
                         <Font size="12.0" />
                     </font>
@@ -43,7 +43,7 @@
                         <Label fx:id="ManageEventIcon" styleClass="iconLabel" text="Label" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnParticipant" contentDisplay="TOP" mnemonicParsing="false" onAction="#manageParticipants" prefHeight="102.0" prefWidth="102.0" text="%participants">
+                <Button fx:id="btnParticipant" contentDisplay="TOP" mnemonicParsing="false" onAction="#manageParticipants" prefHeight="102.0" prefWidth="102.0" >
                     <font>
                         <Font size="12.0" />
                     </font>
@@ -54,7 +54,7 @@
                         <Label fx:id="ParticipantIcon" styleClass="iconLabel" text="Label" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnSell" contentDisplay="TOP" mnemonicParsing="false" onAction="#sellTicket" prefHeight="102.0" prefWidth="102.0" text="%sellTicket">
+                <Button fx:id="btnSell" contentDisplay="TOP" mnemonicParsing="false" onAction="#sellTicket" prefHeight="102.0" prefWidth="102.0" >
                     <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                     </VBox.margin>
@@ -65,7 +65,7 @@
                         <Label fx:id="SellIcon" styleClass="iconLabel" text="Label" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnScan" contentDisplay="TOP" mnemonicParsing="false" onAction="#scanTicket" prefHeight="102.0" prefWidth="102.0" text="%scanTicket">
+                <Button fx:id="btnScan" contentDisplay="TOP" mnemonicParsing="false" onAction="#scanTicket" prefHeight="102.0" prefWidth="102.0">
                     <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                     </VBox.margin>

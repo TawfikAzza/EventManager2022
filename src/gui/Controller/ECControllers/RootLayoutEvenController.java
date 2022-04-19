@@ -1,6 +1,7 @@
 package gui.Controller.ECControllers;
 
 import bll.utils.DisplayError;
+import gui.util.BundleHelper;
 import gui.util.FontsAwesomeHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,8 @@ import org.apache.commons.math3.analysis.function.Add;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class RootLayoutEvenController {
 
@@ -57,6 +60,8 @@ public class RootLayoutEvenController {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/gui/View/ECViews/NewEventView.fxml"));
+            if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+            else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
             GridPane personOverview = (GridPane) loader.load();
 
             // Set person overview into the center of root layout.
@@ -77,6 +82,8 @@ public class RootLayoutEvenController {
         try {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/View/ECViews/EventView.fxml"));
+        if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+        else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
         GridPane eventOverview = (GridPane) loader.load();
 
         // Set person overview into the center of root layout.
@@ -98,6 +105,8 @@ public class RootLayoutEvenController {
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/gui/View/ECViews/ParticipantView.fxml"));
+            if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+            else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
             GridPane eventOverview = (GridPane) loader.load();
 
             // Set person overview into the center of root layout.
@@ -114,6 +123,8 @@ public class RootLayoutEvenController {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/gui/View/ECViews/SellTicketView.fxml"));
+            if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+            else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
             GridPane eventOverview = (GridPane) loader.load();
 
             // Set person overview into the center of root layout.
@@ -137,6 +148,8 @@ public class RootLayoutEvenController {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/gui/View/ECViews/ScanTicketView.fxml"));
+            if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+            else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
             Parent root = loader.load();
             ScanTicketViewController scanTicketViewController = loader.getController();
 
