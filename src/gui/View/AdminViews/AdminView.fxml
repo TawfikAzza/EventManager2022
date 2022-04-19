@@ -31,21 +31,21 @@
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </GridPane.margin>
             <children>
-                <Label text="Event Coordinators">
+                <Label text="%eventCoordinators">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
                 <TableView fx:id="coordinatorTableView" onMouseClicked="#handleCoordinatorClick" prefHeight="318.0" prefWidth="340.0" styleClass="shadow">
                     <columns>
-                        <TableColumn fx:id="tableColumnFirstName" prefWidth="78.39998948574066" text="First Name" />
-                        <TableColumn fx:id="tableColumnLastName" prefWidth="75.0" text="Last Name" />
+                        <TableColumn fx:id="tableColumnFirstName" prefWidth="78.39998948574066" text="%firstName" />
+                        <TableColumn fx:id="tableColumnLastName" prefWidth="75.0" text="%lastName" />
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                 </TableView>
-                <Button mnemonicParsing="false" onAction="#handleNewClick" text="Create New User">
+                <Button mnemonicParsing="false" onAction="#handleNewClick" text="%buttonNewUser">
                     <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </VBox.margin>
@@ -57,15 +57,15 @@
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </GridPane.margin>
             <children>
-                <Label text="Events">
+                <Label text="%events">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
                 <TableView fx:id="eventTableView" prefHeight="318.0" prefWidth="280.0" styleClass="shadow">
                     <columns>
-                        <TableColumn fx:id="tableColumnEventName" prefWidth="216.79999387264252" text="Event Name" />
-                        <TableColumn fx:id="tableColumnEventDate" prefWidth="63.20001220703125" text="Event Date" />
+                        <TableColumn fx:id="tableColumnEventName" prefWidth="216.79999387264252" text="%eventName" />
+                        <TableColumn fx:id="tableColumnEventDate" prefWidth="63.20001220703125" text="%eventDate" />
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -75,15 +75,15 @@
         </VBox>
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="270.0">
             <children>
-                <Label text="Admins">
+                <Label text="%admins">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
                 <TableView fx:id="adminTableView" onMouseClicked="#handleAdminClick" prefHeight="318.0" prefWidth="340.0" styleClass="shadow">
                     <columns>
-                        <TableColumn fx:id="tableColumnFirstNameAdmin" prefWidth="78.39998948574066" text="First Name" />
-                        <TableColumn fx:id="tableColumnLastNameAdmin" prefWidth="75.0" text="Last Name" />
+                        <TableColumn fx:id="tableColumnFirstNameAdmin" prefWidth="78.39998948574066" text="%firstName" />
+                        <TableColumn fx:id="tableColumnLastNameAdmin" prefWidth="75.0" text="%lastName" />
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

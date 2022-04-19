@@ -33,7 +33,7 @@
       <RowConstraints maxHeight="57.0" minHeight="0.0" prefHeight="57.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Event Name:">
+      <Label text="%eventName">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -41,7 +41,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Event Location:" GridPane.rowIndex="1">
+      <Label text="%eventLocation" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -49,7 +49,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Event's Date:" GridPane.rowIndex="2">
+      <Label text="%eventStartDate" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -57,7 +57,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Event's end Date:" GridPane.rowIndex="4">
+      <Label text="%eventEndDate" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -65,7 +65,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Event's Description:" GridPane.rowIndex="6">
+      <Label text="%eventDesc" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -73,7 +73,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label text="Event's end time:" GridPane.rowIndex="5">
+      <Label text="%eventEndTime" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -81,7 +81,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Event's start time:" GridPane.rowIndex="3">
+      <Label text="%eventStartTime" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -89,7 +89,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Itinerary:" GridPane.rowIndex="7">
+      <Label text="%itinerary" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -97,7 +97,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label text="Ticket's available" GridPane.rowIndex="8">
+      <Label text="%ticketAvailable" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -129,12 +129,12 @@
          <children>
             <VBox>
                <children>
-                  <Label text="Name:">
+                  <Label text="%name">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
                   <TextField fx:id="txtNameTicket" />
-                  <Label text="Benefit:">
+                  <Label text="%benefit">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
@@ -168,14 +168,14 @@
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </GridPane.margin>
       </HBox>
-      <Button fx:id="btnBack" onAction="#goBack" text="⬅ Back" GridPane.columnIndex="1" GridPane.rowIndex="9">
+      <Button fx:id="btnBack" onAction="#goBack" text="%buttonBack" GridPane.columnIndex="1" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets left="15.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="btnCreate" onAction="#createEvent" text="Create Event" GridPane.columnIndex="1" GridPane.rowIndex="9">
+      <Button fx:id="btnCreate" onAction="#createEvent" text="%createEvent" GridPane.columnIndex="1" GridPane.rowIndex="9">
          <GridPane.margin>
-            <Insets left="100.0" />
+            <Insets left="120.0" />
          </GridPane.margin>
       </Button>
       <HBox prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3">

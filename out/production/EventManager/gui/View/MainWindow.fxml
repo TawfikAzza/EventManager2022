@@ -39,12 +39,12 @@
             </ImageView>
             
 
-            <Label prefHeight="18.0" prefWidth="37.0" text="Login">
+            <Label contentDisplay="CENTER" prefHeight="20.0" prefWidth="52.0" text="%login">
                <font>
                   <Font size="14.0" />
                </font></Label>
             <Label fx:id="loginWrongLabel" prefHeight="34.0" prefWidth="204.0" text="Your username or password does not exist" textAlignment="CENTER" textFill="#c12121" textOverrun="WORD_ELLIPSIS" visible="false" wrapText="true" />
-            <TextField fx:id="username" promptText="Username">
+            <TextField fx:id="username" promptText="%username">
                <VBox.margin>
                   <Insets bottom="7.0" top="2.0" />
                </VBox.margin>
@@ -54,7 +54,7 @@
                </styleClass>
             </TextField>
 
-            <PasswordField fx:id="password" promptText="Password">
+            <PasswordField fx:id="password" promptText="%password">
                <VBox.margin>
                   <Insets bottom="11.0" top="16.0" />
                </VBox.margin>
@@ -63,11 +63,12 @@
                   <String fx:value="shadow" />
                </styleClass>
             </PasswordField>
-            <Button fx:id="SubmitButton" mnemonicParsing="false" onAction="#submitLogin" text="Submit">
+            <Button fx:id="SubmitButton" mnemonicParsing="false" onAction="#submitLogin" text="%submit">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
          </children>
       </VBox>
+      <Button fx:id="btnLanguage" layoutX="480.0" layoutY="22.0" mnemonicParsing="false" onAction="#toDanishEnglish" prefHeight="27.0" prefWidth="88.0" text="%language" />
    </children>
 </AnchorPane>

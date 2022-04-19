@@ -30,15 +30,15 @@
     <children>
         <AnchorPane fx:id="topPane" prefHeight="640.0" prefWidth="322.0" styleClass="anchor02" GridPane.columnIndex="1">
             <children>
-                <Button fx:id="btnEdit" layoutX="21.0" layoutY="346.0" onAction="#editEvent" prefHeight="27.0" prefWidth="97.0" text="Edit Event" />
-                <Label layoutX="13.0" layoutY="11.0" text="Type of tickets:">
+                <Button fx:id="btnEdit" layoutX="21.0" layoutY="346.0" onAction="#editEvent" prefHeight="27.0" prefWidth="97.0" text="%editEvent" />
+                <Label layoutX="13.0" layoutY="24.0" text="%ticketAvailable">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </Label>
                 <ListView fx:id="lstTickets" layoutX="13.0" layoutY="52.0" minHeight="120.0" minWidth="98.0" onMouseClicked="#displayTicket" prefHeight="120.0" prefWidth="182.0" styleClass="shadow" />
                 <TextFlow fx:id="lblDescriptionTicket" layoutX="209.0" layoutY="80.0" prefHeight="76.0" prefWidth="111.0" style="-fx-background-color: #ffffff;" styleClass="shadow" />
-                <Label layoutX="209.0" layoutY="52.0" text="Ticket Description">
+                <Label layoutX="209.0" layoutY="52.0" text="%ticketDesc">
                     <font>
                         <Font size="13.0" />
                     </font>
@@ -49,9 +49,9 @@
             <children>
                 <TableView fx:id="tableEvents" onMouseClicked="#displayEvent" prefHeight="286.0" prefWidth="274.0" styleClass="shadow">
                     <columns>
-                        <TableColumn fx:id="eventName" prefWidth="95.20000779628754" text="Event" />
-                        <TableColumn fx:id="eventDate" prefWidth="69.59998321533203" text="Date" />
-                        <TableColumn fx:id="numParticipants" prefWidth="104.80000305175781" text="Participants" />
+                        <TableColumn fx:id="eventName" prefWidth="95.20000779628754" text="%event" />
+                        <TableColumn fx:id="eventDate" prefWidth="69.59998321533203" text="%date" />
+                        <TableColumn fx:id="numParticipants" prefWidth="104.80000305175781" text="%participants" />
                     </columns>
                     <VBox.margin>
                         <Insets left="10.0" right="15.0" top="25.0" />
@@ -59,37 +59,37 @@
                 </TableView>
                 <AnchorPane prefHeight="303.0" prefWidth="270.0">
                     <children>
-                        <Label fx:id="nameLabel" layoutX="18.0" layoutY="21.0" text="Name:">
+                        <Label fx:id="nameLabel" layoutX="18.0" layoutY="21.0" text="%name">
                             <font>
                                 <Font size="13.0" />
                             </font>
                         </Label>
                         <Label fx:id="lblName" layoutX="86.0" layoutY="22.0" prefHeight="18.0" prefWidth="192.0" style="-fx-background-color: #ffffff;" styleClass="shadow" />
-                        <Label fx:id="locationLabel" layoutX="19.0" layoutY="44.0" text="Location:">
+                        <Label fx:id="locationLabel" layoutX="19.0" layoutY="44.0" text="%location">
                             <font>
                                 <Font size="13.0" />
                             </font>
                         </Label>
                         <Label fx:id="lblLocation" layoutX="86.0" layoutY="45.0" prefHeight="18.0" prefWidth="192.0" style="-fx-background-color: #ffffff;" styleClass="shadow" />
-                        <Label fx:id="startDateLabel" layoutX="19.0" layoutY="65.0" text="Date:">
+                        <Label fx:id="startDateLabel" layoutX="19.0" layoutY="65.0" text="%date">
                             <font>
                                 <Font size="13.0" />
                             </font>
                         </Label>
                         <Label fx:id="lblStartDate" layoutX="86.0" layoutY="67.0" prefHeight="18.0" prefWidth="192.0" style="-fx-background-color: #ffffff;" styleClass="shadow" />
-                        <Label fx:id="endDateLabel" layoutX="19.0" layoutY="89.0" text="To:">
+                        <Label fx:id="endDateLabel" layoutX="19.0" layoutY="89.0" text="%to">
                             <font>
                                 <Font size="13.0" />
                             </font>
                         </Label>
                         <Label fx:id="lblEndDate" layoutX="86.0" layoutY="90.0" prefHeight="18.0" prefWidth="192.0" style="-fx-background-color: #ffffff;" styleClass="shadow" />
-                        <Label fx:id="descriptionLabel" layoutX="12.0" layoutY="128.0" text="Description">
+                        <Label fx:id="descriptionLabel" layoutX="12.0" layoutY="128.0" text="%desc">
                             <font>
                                 <Font size="13.0" />
                             </font>
                         </Label>
                         <TextFlow fx:id="lblDescription" layoutX="15.0" layoutY="148.0" maxHeight="-Infinity" prefHeight="51.0" prefWidth="235.0" style="-fx-background-color: #ffffff;" styleClass="shadow" />
-                        <Label fx:id="itineraryLabel" layoutX="12.0" layoutY="210.0" text="Itinerary">
+                        <Label fx:id="itineraryLabel" layoutX="12.0" layoutY="210.0" text="%Itinerary">
                             <font>
                                 <Font size="13.0" />
                             </font>
