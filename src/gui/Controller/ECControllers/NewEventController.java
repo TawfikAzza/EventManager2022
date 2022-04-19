@@ -121,6 +121,8 @@ public class NewEventController implements Initializable {
     }
     @FXML
     private LocalDateTime getEndDate() {
+        if(endComboHour.getValue()==null || endComboMinute.getValue()==null)
+            return null;
         int endHour = Integer.parseInt(endComboHour.getValue());
         int endMinute = Integer.parseInt(endComboMinute.getValue());
         return txtEndDate.getValue().atTime(endHour,endMinute);
