@@ -53,6 +53,7 @@ public class RootLayoutEvenController {
         ParticipantIcon.setText(FontsAwesomeHelper.getFontAwesomeIconForButtons("participants").getText());
         SellIcon.setText(FontsAwesomeHelper.getFontAwesomeIconForButtons("sell").getText());
         ScanIcon.setText(FontsAwesomeHelper.getFontAwesomeIconForButtons("scan").getText());
+
     }
 
     @FXML
@@ -70,6 +71,7 @@ public class RootLayoutEvenController {
             // Give the controller access to the main app.
             NewEventController controller = loader.getController();
             controller.setMainApp(this);
+
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -164,4 +166,5 @@ public class RootLayoutEvenController {
             DisplayError.displayError(e);
         }
     }
+
 }
