@@ -10,6 +10,7 @@ import bll.utils.DateUtil;
 
 import bll.utils.DisplayError;
 import gui.Model.CoordinatorModel;
+import gui.util.BundleHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -239,10 +241,14 @@ public class NewEventController implements Initializable {
         try {
             FXMLLoader loaderPage = new FXMLLoader();
             loaderPage.setLocation(getClass().getResource("/gui/View/ECViews/EventView.fxml"));
+            if (BundleHelper.hasEnglish) loaderPage.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+            else loaderPage.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
             GridPane eventOverview = (GridPane) loaderPage.load();
 
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/RootLayoutEvent.fxml"));
+            if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+            else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
             Parent root = loader.load();
 
             RootLayoutEvenController rootLayoutEvenController = loader.getController();

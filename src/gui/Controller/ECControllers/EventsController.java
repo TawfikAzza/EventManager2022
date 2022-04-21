@@ -9,6 +9,7 @@ import bll.exception.ParticipantManagerException;
 import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.CoordinatorModel;
+import gui.util.BundleHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class EventsController implements Initializable {
@@ -173,6 +175,8 @@ public class EventsController implements Initializable {
         currentEvent=tableEvents.getSelectionModel().getSelectedItem();
         FXMLLoader loaderPage = new FXMLLoader();
         loaderPage.setLocation(getClass().getResource("/gui/View/ECViews/NewEventView.fxml"));
+        if (BundleHelper.hasEnglish) loaderPage.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+        else loaderPage.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
         GridPane eventOverview = null;
         try {
             eventOverview = (GridPane) loaderPage.load();
@@ -182,6 +186,8 @@ public class EventsController implements Initializable {
             newEventController.setValue(currentEvent);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/RootLayoutEvent.fxml"));
+            if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+            else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
             Parent root = loader.load();
 
             RootLayoutEvenController rootLayoutEvenController = loader.getController();

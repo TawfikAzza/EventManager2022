@@ -374,7 +374,8 @@ public class EventDAO implements IEventDAO {
                     "e.id = ep.idEvent AND " +
                     "t.ticketTypeID = tt.id  AND " +
                     "t.id = ep.ticketID AND " +
-                    "e.id = ?";
+                    "e.id = ? AND " +
+                    "p.fname != 'ANONYMOUS'";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, idOfEvent);
             ResultSet rs = pstmt.executeQuery();

@@ -10,6 +10,7 @@ import dal.db.TicketDAO;
 import gui.Model.CoordinatorModel;
 import gui.Model.EventModel;
 import gui.Model.ParticipantModel;
+import gui.util.BundleHelper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -132,6 +133,8 @@ public class ParticipantViewController implements Initializable {
     void printTicket() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/TicketParticipant.fxml"));
+            if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+            else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
             Parent root = loader.load();
             TicketParticipantController ticketParticipantController = loader.getController();
             AnchorPane anchorPane = (AnchorPane) root;
@@ -286,6 +289,8 @@ public class ParticipantViewController implements Initializable {
             if (tableParticipant.getSelectionModel().getSelectedIndex() == -1)
                 return;
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/ECViews/NewParticipantView.fxml"));
+            if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+            else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
             Parent root = loader.load();
             NewParticipantViewController newParticipantViewController = loader.getController();
             newParticipantViewController.setParticipantViewController(this);

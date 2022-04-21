@@ -217,16 +217,14 @@ public class TicketParticipantController implements Initializable {
     {
         String outlook = getOutlook();
         Runtime rt = Runtime.getRuntime();
-
+        System.out.println(outlook);
         try {
-
             String attachment = "resources/TempTickets/"+ticketSold.getTicketNumber()+".png";
             String subject = "Ticket%20Email"; //%20 is used in place of a space
             String email = "cchesberg@gmail.com"; //participant.getEmail();
             String emailSubjectCombined = email+"?subject="+subject;
             File file = new File(attachment);
             rt.exec(new String[]{"cmd.exe","/c", outlook, "/m", emailSubjectCombined, "/a", file.getAbsolutePath()});
-
         } catch (IOException e) {
             // TODO Auto-generated catch block
             DisplayError.displayError(e);
