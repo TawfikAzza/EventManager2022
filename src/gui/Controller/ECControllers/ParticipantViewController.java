@@ -39,7 +39,7 @@ import java.util.*;
 public class ParticipantViewController implements Initializable {
 
     @FXML
-    private Button btnSearch, btnGenerateFile,btnDeleteParticipant,btnDeleteParticicpantFromEvent;
+    private Button  btnGenerateFile;
 
 
     @FXML

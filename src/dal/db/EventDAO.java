@@ -7,7 +7,7 @@ import be.TicketType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.ConnectionManager;
 import dal.interfaces.IEventDAO;
-import org.apache.commons.collections4.list.PredicatedList;
+
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -111,7 +111,6 @@ public class EventDAO implements IEventDAO {
     @Override
     public List<Events> getAllEvents() throws Exception {
         List<Events> allEvents = new ArrayList<>();
-        List<TicketType> ticketList = new ArrayList<>();
         try (Connection con = cm.getConnection()) {
             String sql = "SELECT EVENTS.id,events.name,events.location,events.description,events.startDate,events.endDate," +
                         "events.itinerary FROM EVENTS " +
@@ -360,7 +359,6 @@ public class EventDAO implements IEventDAO {
     }
 
     public String[][] getParticipantsForEventById (int idOfEvent) {
-            //int counter = 1;
             int row = 0;
             int column = 0;
             String[][] finalArray = new String[getNumberOfRow(idOfEvent)][4];
