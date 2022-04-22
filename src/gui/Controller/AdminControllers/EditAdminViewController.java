@@ -7,6 +7,7 @@ import bll.utils.DisplayError;
 import bll.utils.LoggedInUser;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
+import gui.util.BundleHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -61,6 +63,8 @@ public class EditAdminViewController implements Initializable {
     public void backClick(ActionEvent actionEvent) {
         AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
+        if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+        else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
         loader.setController(controller);
         SceneSetter.setScene(firstNameTextField, loader);
     }
@@ -79,6 +83,8 @@ public class EditAdminViewController implements Initializable {
                 adminModel.editUser(admin);
                 AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
+                if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+                else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
                 loader.setController(controller);
                 SceneSetter.setScene(firstNameTextField, loader);
             } catch (AdminDAOException e) {

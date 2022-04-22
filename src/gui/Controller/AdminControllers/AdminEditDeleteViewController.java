@@ -6,6 +6,7 @@ import bll.utils.DisplayError;
 import bll.utils.LoggedInUser;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
+import gui.util.BundleHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -48,12 +50,16 @@ public class AdminEditDeleteViewController implements Initializable {
 
     public void handleBack(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
+        if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+        else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
         SceneSetter.setScene(nameLabel, loader);
     }
 
     public void handleEditClick(ActionEvent actionEvent) {
         EditAdminViewController controller = new EditAdminViewController(admin);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/EditAdminView.fxml"));
+        if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+        else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
         loader.setController(controller);
         SceneSetter.setScene(nameLabel, loader);
     }
@@ -68,6 +74,8 @@ public class AdminEditDeleteViewController implements Initializable {
                 try {
                     adminModel.deleteUser(admin);
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
+                    if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+                    else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
                     SceneSetter.setScene(nameLabel, loader);
                 } catch (AdminDAOException e) {
                     DisplayError.displayError(e);

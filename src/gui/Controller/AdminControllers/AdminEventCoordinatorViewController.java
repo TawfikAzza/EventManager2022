@@ -6,6 +6,7 @@ import bll.utils.DisplayError;
 import bll.utils.LoggedInUser;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
+import gui.util.BundleHelper;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -57,6 +59,8 @@ public class AdminEventCoordinatorViewController implements Initializable {
     public void handleEditClick(ActionEvent actionEvent) {
         EditEventCoordinatorViewController controller = new EditEventCoordinatorViewController(eventCoordinator);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/EditEventCoordinatorView.fxml"));
+        if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+        else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
         loader.setController(controller);
         SceneSetter.setScene(nameLabel, loader);
     }
@@ -71,6 +75,8 @@ public class AdminEventCoordinatorViewController implements Initializable {
                 try {
                     adminModel.deleteUser(eventCoordinator);
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
+                    if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+                    else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
                     SceneSetter.setScene(nameLabel, loader);
                 } catch (AdminDAOException e) {
                    DisplayError.displayError(e);
@@ -83,6 +89,8 @@ public class AdminEventCoordinatorViewController implements Initializable {
 
     public void handleBack(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminView.fxml"));
+        if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+        else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
         SceneSetter.setScene(nameLabel, loader);
     }
 

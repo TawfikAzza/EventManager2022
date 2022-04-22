@@ -10,6 +10,7 @@ import bll.utils.DisplayError;
 import bll.utils.SceneSetter;
 import gui.Model.AdminModel;
 import gui.Model.EventModel;
+import gui.util.BundleHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class AdminViewController implements Initializable {
@@ -72,6 +74,8 @@ public class AdminViewController implements Initializable {
 
     public void handleNewClick(ActionEvent actionEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AddEventCoordinatorView.fxml"));
+        if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+        else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
         SceneSetter.setScene(adminTableView, loader);
     }
 
@@ -82,6 +86,8 @@ public class AdminViewController implements Initializable {
             if(mouseEvent.getClickCount()==2) {
                 AdminEventCoordinatorViewController controller = new AdminEventCoordinatorViewController(coordinator);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEventCoordinatorView.fxml"));
+                if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+                else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
                 loader.setController(controller);
                 SceneSetter.setScene(adminTableView, loader);
             }
@@ -95,6 +101,8 @@ public class AdminViewController implements Initializable {
             if(mouseEvent.getClickCount()==2) {
                 AdminEditDeleteViewController controller = new AdminEditDeleteViewController(admin);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/View/AdminViews/AdminEditDeleteView.fxml"));
+                if (BundleHelper.hasEnglish) loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("DA")));
+                else loader.setResources(ResourceBundle.getBundle("bundle/bundle", new Locale("EN")));
                 loader.setController(controller);
                 SceneSetter.setScene(adminTableView, loader);
             }
